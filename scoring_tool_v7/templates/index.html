@@ -131,7 +131,7 @@
 
     /* ─── Left Panel ─── */
     .prompt-list-panel {
-      flex: 0 0 22%; max-width: 260px;
+      flex: 0 0 18%; max-width: 220px;
       border-right: 1px solid var(--border); background: var(--bg-card);
       display: flex; flex-direction: column; overflow: hidden;
     }
@@ -254,7 +254,7 @@
 
     /* ─── Right Panel ─── */
     .annotations-panel {
-      flex: 0 0 28%; max-width: 360px;
+      flex: 0 0 38%; max-width: 520px;
       border-left: 1px solid var(--border); background: var(--bg-card);
       display: flex; flex-direction: column; overflow: hidden;
     }
@@ -291,9 +291,9 @@
     .annotation-score-badge.negative { background: var(--negative-bg); color: var(--negative); }
     .annotation-score-badge.neutral  { background: var(--neutral-bg);  color: var(--neutral); }
     .annotation-text {
-      font-family: 'Courier New', monospace; font-size: 0.72rem; line-height: 1.5;
+      font-family: 'Courier New', monospace; font-size: 0.75rem; line-height: 1.6;
       color: var(--text-secondary); background: var(--bg-dark);
-      padding: 0.4rem 0.5rem; border-radius: 6px; max-height: 72px;
+      padding: 0.5rem 0.6rem; border-radius: 6px; max-height: 120px;
       overflow-y: auto; white-space: pre-wrap; word-break: break-word;
     }
     .annotation-delete {
@@ -474,6 +474,36 @@
     }
     .popup-note-input:focus { outline: none; border-color: var(--accent); }
 
+    /* ─── Batch Review Mode ─── */
+    .batch-suggestion {
+      display: flex; align-items: flex-start; gap: 0.55rem;
+      padding: 0.55rem 0.6rem; border: 1.5px solid var(--border);
+      border-radius: 8px; margin-bottom: 0.35rem; cursor: pointer;
+      transition: all 0.15s; background: var(--bg-elevated);
+    }
+    .batch-suggestion:hover { border-color: var(--accent); background: rgba(124, 108, 240, 0.06); }
+    .batch-suggestion.unchecked { opacity: 0.35; border-style: dashed; }
+    .batch-checkbox {
+      margin-top: 0.15rem; accent-color: var(--accent);
+      flex-shrink: 0; width: 16px; height: 16px; cursor: pointer;
+    }
+    .batch-suggestion-content { flex: 1; min-width: 0; }
+    .batch-suggestion-header {
+      display: flex; align-items: center; gap: 0.35rem;
+      flex-wrap: wrap; margin-bottom: 0.15rem;
+    }
+    .batch-dim-name { font-size: 0.72rem; color: var(--text-secondary); }
+    .batch-suggestion-note {
+      font-size: 0.68rem; color: var(--text-muted); line-height: 1.4;
+      font-style: italic; max-height: 48px; overflow-y: auto;
+    }
+    #popupBatchMode .popup-section-title { margin-bottom: 0.5rem; }
+    #batchSuggestions { max-height: 300px; overflow-y: auto; margin-bottom: 0.6rem; }
+    .batch-hint {
+      font-size: 0.68rem; color: var(--text-muted); text-align: center;
+      margin-bottom: 0.5rem; font-style: italic;
+    }
+
     .popup-actions { display: flex; gap: 0.4rem; }
     .popup-actions button {
       flex: 1; padding: 0.45rem; border-radius: 8px; font-size: 0.78rem;
@@ -538,6 +568,12 @@
       <span>→</span>
       <input type="number" id="inputEnd" min="1" value="190" />
     </div>
+  </div>
+  <div class="form-group">
+    <label style="display:flex;align-items:center;gap:0.5rem;cursor:pointer;font-size:0.88rem;color:var(--text-primary);">
+      <input type="checkbox" id="inputOnlyAnnotated" style="width:auto;accent-color:var(--accent);" />
+      📌 只显示有预标注的 Prompt（跳过未标注的）
+    </label>
   </div>
   <button class="btn-primary" id="setupStartBtn">🚀 Start Annotation</button>
   <div class="setup-info" id="setupInfo">Loading…</div>
@@ -625,14 +661,25 @@
 <div class="selection-popup" id="selectionPopup">
   <div class="popup-title">📐 Add Span Annotation</div>
   <div class="popup-selected-text" id="popupText"></div>
-  <div class="popup-section-title">Dimension</div>
-  <div class="popup-dim-grid" id="popupDimGrid"></div>
-  <div class="popup-section-title">Score</div>
-  <div class="popup-score-row">
-    <button class="popup-score-btn positive" data-score="1">👍 +1 Good Practice</button>
-    <button class="popup-score-btn negative" data-score="-1">👎 −1 Violation</button>
+  <!-- Single mode (new annotation / single pending) -->
+  <div id="popupSingleMode">
+    <div class="popup-section-title">Dimension</div>
+    <div class="popup-dim-grid" id="popupDimGrid"></div>
+    <div class="popup-section-title">Score</div>
+    <div class="popup-score-row">
+      <button class="popup-score-btn positive" data-score="1">👍 +1 Good Practice</button>
+      <button class="popup-score-btn negative" data-score="-1">👎 −1 Violation</button>
+    </div>
+    <input type="text" class="popup-note-input" id="popupNote" placeholder="Optional note…" />
   </div>
-  <input type="text" class="popup-note-input" id="popupNote" placeholder="Optional note…" />
+
+  <!-- Batch mode (overlapping pending spans) -->
+  <div id="popupBatchMode" style="display:none">
+    <div class="popup-section-title">LLM 标了 <strong id="batchDimCount">0</strong> 个维度，选择最相关的 1–2 个：</div>
+    <div id="batchSuggestions"></div>
+    <div class="batch-hint">💡 取消勾选 = 不相关，会被删除</div>
+  </div>
+
   <div class="popup-actions">
     <button class="popup-cancel" id="popupCancel">Cancel</button>
     <button class="popup-reject" id="popupReject" style="display:none">❌ Not Relevant</button>
@@ -670,11 +717,12 @@ let config = { name: '', start: 1, end: 190 };
 let pendingSelection = { text: '', start: 0, end: 0, dim: null, score: null };
 let activeDimFilter = 'ALL'; // 'ALL', 'PENDING', or 'D1'..'D9'
 let reviewingSpanIdx = null; // index of span being reviewed, or null for new annotation
+let reviewingBatchIndices = []; // indices for batch review mode
 
 // ─── Elements ─────────────────────────────────────
 const $ = id => document.getElementById(id);
 const setupPage = $('setupPage'), appContainer = $('appContainer');
-const inputName = $('inputName'), inputStart = $('inputStart'), inputEnd = $('inputEnd');
+const inputName = $('inputName'), inputStart = $('inputStart'), inputEnd = $('inputEnd'), inputOnlyAnnotated = $('inputOnlyAnnotated');
 const setupStartBtn = $('setupStartBtn'), setupInfo = $('setupInfo');
 const headerBadge = $('headerBadge'), navCounter = $('navCounter');
 const btnPrev = $('btnPrev'), btnNext = $('btnNext');
@@ -948,13 +996,14 @@ function renderAnnotations() {
     filtered = reviewedSpans.filter(s => s.dimension === activeDimFilter);
   }
 
-  // Count display
+  // Count display — group pending by unique text ranges
   const pendingCount = pendingSpans.length;
+  const pendingUniqueRanges = new Set(pendingSpans.map(s => `${s.start}:${s.end}`)).size;
   const reviewedCount = reviewedSpans.length;
   if (activeDimFilter === 'ALL') {
-    annCount.textContent = pendingCount > 0 ? `${reviewedCount} reviewed · ${pendingCount} pending` : currentSpans.length;
+    annCount.textContent = pendingCount > 0 ? `${reviewedCount} reviewed · ${pendingUniqueRanges} spans pending` : currentSpans.length;
   } else if (activeDimFilter === 'PENDING') {
-    annCount.textContent = `${pendingCount} pending`;
+    annCount.textContent = `${pendingUniqueRanges} spans (${pendingCount} dims)`;
   } else {
     annCount.textContent = `${filtered.length}/${reviewedCount}`;
   }
@@ -967,20 +1016,43 @@ function renderAnnotations() {
     return;
   }
 
+  // Group pending spans by same (start, end) for consolidated display
+  const pendingGroups = new Map(); // key "start:end" → [span objects]
+  const renderedPendingKeys = new Set();
+
+  filtered.filter(s => s.source === 'llm' && !s.reviewed).forEach(s => {
+    const key = `${s.start}:${s.end}`;
+    if (!pendingGroups.has(key)) pendingGroups.set(key, []);
+    pendingGroups.get(key).push(s);
+  });
+
   let html = '';
   filtered.forEach((s) => {
     const i = s._idx;
     const isPending = s.source === 'llm' && !s.reviewed;
 
     if (isPending) {
-      // BLIND MODE: show only text, no dimension/score/note
-      html += `<div class="annotation-card pending-review" data-idx="${i}">
-        <button class="annotation-delete" data-idx="${i}" title="Delete">✕</button>
+      // Group overlapping pending spans into one card
+      const groupKey = `${s.start}:${s.end}`;
+      if (renderedPendingKeys.has(groupKey)) return; // already rendered this group
+      renderedPendingKeys.add(groupKey);
+
+      const group = pendingGroups.get(groupKey) || [s];
+      const dimBadges = group.map(g => {
+        const color = dimColor(g.dimension);
+        const scoreIcon = g.score === 1 ? '↑' : g.score === -1 ? '↓' : '·';
+        return `<span class="annotation-dim-badge" style="background:${color};font-size:0.6rem;padding:0.08rem 0.3rem;margin-right:0.2rem;">${g.dimension}${scoreIcon}</span>`;
+      }).join('');
+      const countLabel = group.length > 1 ? `📋 ${group.length} Dimensions` : '📋 Needs Review';
+
+      html += `<div class="annotation-card pending-review" data-idx="${i}" data-group-indices="${group.map(g => g._idx).join(',')}">
+        <button class="annotation-delete" data-idx="${i}" data-group-indices="${group.map(g => g._idx).join(',')}" title="Delete all">✕</button>
         <div class="annotation-card-header">
-          <span class="pending-label">📋 Needs Review</span>
+          <span class="pending-label">${countLabel}</span>
+          <div>${dimBadges}</div>
         </div>
         <div class="annotation-text">${escHtml(s.text)}</div>
-        <button class="btn-review" data-idx="${i}">🏷️ Classify This Span</button>
+        <button class="btn-review" data-idx="${i}">🏷️ Review${group.length > 1 ? ` (${group.length} dims)` : ''}</button>
       </div>`;
     } else {
       // REVIEWED: show full info
@@ -1008,7 +1080,14 @@ function renderAnnotations() {
   annBody.querySelectorAll('.annotation-delete').forEach(btn => {
     btn.addEventListener('click', e => {
       e.stopPropagation();
-      currentSpans.splice(parseInt(btn.dataset.idx), 1);
+      const groupIndices = btn.dataset.groupIndices;
+      if (groupIndices) {
+        // Delete entire group (reverse order to preserve indices)
+        const indices = groupIndices.split(',').map(Number).sort((a, b) => b - a);
+        indices.forEach(idx => currentSpans.splice(idx, 1));
+      } else {
+        currentSpans.splice(parseInt(btn.dataset.idx), 1);
+      }
       renderPromptContent(); renderAnnotations(); autoSave();
     });
   });
@@ -1051,7 +1130,20 @@ function renderAnnotations() {
 function openReviewPopup(spanIdx, x, y) {
   const span = currentSpans[spanIdx];
   if (!span) return;
+
+  // Check for overlapping pending spans at same range → batch mode
+  const overlapping = findOverlappingPendingSpans(spanIdx);
+  if (overlapping.length > 1) {
+    openBatchReviewPopup(overlapping, x, y);
+    return;
+  }
+
+  // Single review mode
   reviewingSpanIdx = spanIdx;
+  reviewingBatchIndices = [];
+  document.getElementById('popupSingleMode').style.display = 'block';
+  document.getElementById('popupBatchMode').style.display = 'none';
+
   pendingSelection.text = span.text;
   pendingSelection.start = span.start;
   pendingSelection.end = span.end;
@@ -1064,7 +1156,83 @@ function openReviewPopup(spanIdx, x, y) {
   popupConfirm.disabled = true;
   popupConfirm.textContent = '✓ Confirm Classification';
   popupReject.style.display = 'inline-flex';
+  popupReject.textContent = '❌ Not Relevant';
   showPopup(x, y);
+}
+
+// ─── Batch Review (overlapping pending spans) ────
+function findOverlappingPendingSpans(spanIdx) {
+  const span = currentSpans[spanIdx];
+  if (!span) return [spanIdx];
+  const indices = [];
+  currentSpans.forEach((s, i) => {
+    if (s.source === 'llm' && !s.reviewed &&
+        s.start === span.start && s.end === span.end) {
+      indices.push(i);
+    }
+  });
+  return indices.length > 0 ? indices : [spanIdx];
+}
+
+function openBatchReviewPopup(indices, x, y) {
+  reviewingBatchIndices = indices;
+  reviewingSpanIdx = null;
+
+  const span = currentSpans[indices[0]];
+  popupText.textContent = span.text.length > 200 ? span.text.slice(0, 200) + '…' : span.text;
+
+  // Switch to batch mode
+  document.getElementById('popupSingleMode').style.display = 'none';
+  document.getElementById('popupBatchMode').style.display = 'block';
+
+  // Render suggestion cards
+  let html = '';
+  indices.forEach((idx, batchIdx) => {
+    const s = currentSpans[idx];
+    const dim = dimensions.find(d => d.key === s.dimension);
+    const color = dimColor(s.dimension);
+    const scoreLabel = s.score === 1 ? '+1 👍' : s.score === -1 ? '−1 👎' : '0 ➖';
+    const scoreCls = s.score === 1 ? 'positive' : s.score === -1 ? 'negative' : 'neutral';
+    const note = s.note || '';
+
+    html += `<label class="batch-suggestion" data-batch-idx="${batchIdx}">
+      <input type="checkbox" class="batch-checkbox" data-batch-idx="${batchIdx}" checked />
+      <div class="batch-suggestion-content">
+        <div class="batch-suggestion-header">
+          <span class="annotation-dim-badge" style="background:${color}">${s.dimension}</span>
+          <span class="batch-dim-name">${dim ? dim.name : s.dimension}</span>
+          <span class="annotation-score-badge ${scoreCls}">${scoreLabel}</span>
+        </div>
+        ${note ? `<div class="batch-suggestion-note">${escHtml(note)}</div>` : ''}
+      </div>
+    </label>`;
+  });
+
+  document.getElementById('batchSuggestions').innerHTML = html;
+  document.getElementById('batchDimCount').textContent = indices.length;
+
+  popupConfirm.disabled = false;
+  popupReject.style.display = 'inline-flex';
+  popupReject.textContent = '❌ Dismiss All';
+
+  // Checkbox toggle styling + confirm count
+  updateBatchConfirmBtn();
+  document.querySelectorAll('.batch-checkbox').forEach(cb => {
+    cb.addEventListener('change', () => {
+      const card = cb.closest('.batch-suggestion');
+      card.classList.toggle('unchecked', !cb.checked);
+      updateBatchConfirmBtn();
+    });
+  });
+
+  showPopup(x, y);
+}
+
+function updateBatchConfirmBtn() {
+  const checked = document.querySelectorAll('.batch-checkbox:checked').length;
+  const total = reviewingBatchIndices.length;
+  popupConfirm.textContent = `✓ Keep ${checked} / ${total} Dimensions`;
+  popupConfirm.disabled = checked === 0;
 }
 
 // ─── Dimension Reference ─────────────────────────
@@ -1201,6 +1369,10 @@ function hidePopup() {
   selectionPopup.classList.remove('show');
   pendingSelection = { text: '', start: 0, end: 0, dim: null, score: null };
   reviewingSpanIdx = null;
+  reviewingBatchIndices = [];
+  // Reset to single mode
+  document.getElementById('popupSingleMode').style.display = 'block';
+  document.getElementById('popupBatchMode').style.display = 'none';
   popupDimGrid.querySelectorAll('.popup-dim-btn').forEach(b => b.classList.remove('selected'));
   document.querySelectorAll('.popup-score-btn').forEach(b => b.classList.remove('selected'));
   popupNote.value = '';
@@ -1212,6 +1384,19 @@ function hidePopup() {
 popupCancel.addEventListener('click', hidePopup);
 
 popupReject.addEventListener('click', () => {
+  // ── BATCH MODE: dismiss all ──
+  if (reviewingBatchIndices.length > 0) {
+    const count = reviewingBatchIndices.length;
+    reviewingBatchIndices.sort((a, b) => b - a).forEach(idx => {
+      currentSpans.splice(idx, 1);
+    });
+    hidePopup();
+    renderPromptContent(); renderAnnotations(); autoSave();
+    showToast(`🗑️ Dismissed all ${count} suggestions`);
+    return;
+  }
+
+  // ── SINGLE MODE ──
   if (reviewingSpanIdx === null) return;
   const removedSpan = currentSpans[reviewingSpanIdx];
   currentSpans.splice(reviewingSpanIdx, 1);
@@ -1221,16 +1406,38 @@ popupReject.addEventListener('click', () => {
 });
 
 popupConfirm.addEventListener('click', () => {
+  // ── BATCH MODE ──
+  if (reviewingBatchIndices.length > 0) {
+    const keepIndices = [];
+    const dismissIndices = [];
+    document.querySelectorAll('.batch-checkbox').forEach((cb, i) => {
+      if (cb.checked) keepIndices.push(reviewingBatchIndices[i]);
+      else dismissIndices.push(reviewingBatchIndices[i]);
+    });
+
+    // Mark kept spans as reviewed
+    keepIndices.forEach(idx => { currentSpans[idx].reviewed = true; });
+
+    // Remove dismissed spans (reverse order to preserve indices)
+    dismissIndices.sort((a, b) => b - a).forEach(idx => {
+      currentSpans.splice(idx, 1);
+    });
+
+    hidePopup();
+    renderPromptContent(); renderAnnotations(); autoSave();
+    showToast(`✓ Kept ${keepIndices.length} dimension${keepIndices.length !== 1 ? 's' : ''}, dismissed ${dismissIndices.length}`);
+    return;
+  }
+
+  // ── SINGLE REVIEW MODE ──
   if (!pendingSelection.dim || pendingSelection.score === null) return;
 
   if (reviewingSpanIdx !== null) {
-    // REVIEW MODE: update existing span with annotator's classification
     const s = currentSpans[reviewingSpanIdx];
     s.dimension = pendingSelection.dim;
     s.score = pendingSelection.score;
     s.note = popupNote.value.trim() || '';
     s.reviewed = true;
-    // Keep source as 'llm' to track origin
     const label = s.score === 1 ? '+1' : s.score === -1 ? '−1' : '0';
     reviewingSpanIdx = null;
     hidePopup();
@@ -1376,6 +1583,10 @@ setupStartBtn.addEventListener('click', async () => {
   }
   config = { name, start, end };
   rangePrompts = allPrompts.slice(start - 1, end);
+  if (inputOnlyAnnotated.checked) {
+    rangePrompts = rangePrompts.filter(p => p.span_count > 0);
+    if (rangePrompts.length === 0) { showToast('该范围内没有已预标注的 Prompt', true); return; }
+  }
   currentIndex = 0;
   headerBadge.textContent = `${name} · ${start}-${end}`;
   promptListTotal.textContent = `(${rangePrompts.length})`;
