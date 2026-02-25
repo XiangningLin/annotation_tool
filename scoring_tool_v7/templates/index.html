@@ -1,0 +1,1393 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Audit Annotation Tool v7 — System Prompt Auditing</title>
+  <style>
+    :root {
+      --bg-dark: #0c0c14;
+      --bg-card: #13131e;
+      --bg-elevated: #1b1b2a;
+      --border: #2c2c40;
+      --text-primary: #e6e6f0;
+      --text-secondary: #8c8ca0;
+      --text-muted: #5c5c70;
+      --accent: #7c6cf0;
+      --accent-light: #9d90f5;
+      --accent-glow: rgba(124, 108, 240, 0.25);
+      --positive: #22c55e;
+      --positive-bg: rgba(34, 197, 94, 0.12);
+      --negative: #ef4444;
+      --negative-bg: rgba(239, 68, 68, 0.12);
+      --neutral: #f59e0b;
+      --neutral-bg: rgba(245, 158, 11, 0.12);
+      --dim-colors: #e879a0, #fb923c, #a78bfa, #38bdf8, #34d399,
+                    #f59e0b, #ef4444, #22d3ee, #a3e635, #94a3b8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      min-height: 100vh;
+    }
+
+    /* ─── Setup Page ─── */
+    .setup-page {
+      max-width: 560px;
+      margin: 5rem auto;
+      background: var(--bg-card);
+      border-radius: 20px;
+      padding: 2.5rem;
+      border: 1px solid var(--border);
+    }
+    .setup-page h2 {
+      text-align: center;
+      font-size: 1.5rem;
+      margin-bottom: 0.3rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .setup-page .sub { text-align: center; color: var(--text-secondary); margin-bottom: 2rem; font-size: 0.9rem; }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label {
+      display: block; font-size: 0.78rem; color: var(--text-secondary);
+      margin-bottom: 0.35rem; letter-spacing: 0.04em;
+    }
+    .form-group input {
+      width: 100%; padding: 0.65rem 0.9rem;
+      background: var(--bg-elevated); border: 1px solid var(--border);
+      border-radius: 10px; color: var(--text-primary);
+      font-size: 0.95rem; font-family: inherit;
+    }
+    .form-group input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+    .range-row { display: grid; grid-template-columns: 1fr auto 1fr; gap: 0.8rem; align-items: center; }
+    .range-row span { color: var(--text-muted); font-size: 1.1rem; text-align: center; }
+    .btn-primary {
+      width: 100%; padding: 0.85rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      border: none; color: white; border-radius: 12px;
+      font-size: 1rem; font-weight: 600; cursor: pointer;
+      font-family: inherit;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px var(--accent-glow); }
+    .setup-info {
+      text-align: center; margin-top: 1.2rem; padding-top: 1rem;
+      border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.82rem;
+    }
+
+    /* ─── Main Layout ─── */
+    .app-container { height: 100vh; width: 100vw; display: flex; flex-direction: column; overflow: hidden; }
+    .app-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.6rem 1.2rem; border-bottom: 1px solid var(--border);
+      background: var(--bg-card); flex-shrink: 0;
+    }
+    .app-header h1 {
+      font-size: 1.05rem; font-weight: 600;
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .header-right { display: flex; align-items: center; gap: 0.6rem; }
+    .badge {
+      font-size: 0.7rem; padding: 0.2rem 0.55rem; border-radius: 99px;
+      background: var(--accent); color: white; font-weight: 500;
+    }
+    .nav-group {
+      display: flex; align-items: center; gap: 0.35rem;
+      background: var(--bg-elevated); padding: 0.25rem 0.4rem;
+      border-radius: 8px; border: 1px solid var(--border);
+    }
+    .nav-btn {
+      padding: 0.25rem 0.55rem; border: 1px solid var(--border);
+      background: var(--bg-card); color: var(--text-secondary);
+      border-radius: 5px; cursor: pointer; font-size: 0.75rem; font-family: inherit;
+    }
+    .nav-btn:hover:not(:disabled) { border-color: var(--accent); color: var(--text-primary); }
+    .nav-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+    .nav-counter { font-family: 'Courier New', monospace; font-size: 0.78rem; color: var(--text-primary); min-width: 55px; text-align: center; }
+    .nav-jump {
+      width: 48px; padding: 0.22rem 0.35rem; border: 1px solid var(--border);
+      background: var(--bg-card); color: var(--text-primary); border-radius: 5px;
+      font-size: 0.75rem; font-family: 'Courier New', monospace; text-align: center;
+    }
+    .nav-jump:focus { outline: none; border-color: var(--accent); }
+    .btn-sm {
+      padding: 0.3rem 0.65rem; border: 1px solid var(--border);
+      background: var(--bg-elevated); color: var(--text-secondary);
+      border-radius: 6px; cursor: pointer; font-size: 0.75rem; font-family: inherit;
+    }
+    .btn-sm:hover { border-color: var(--accent); color: var(--text-primary); }
+    .btn-sm.accent { background: var(--accent); border-color: var(--accent); color: white; }
+    .btn-sm.accent:hover { background: var(--accent-light); }
+
+    /* ─── Body ─── */
+    .app-body { flex: 1; display: flex; overflow: hidden; }
+
+    /* ─── Left Panel ─── */
+    .prompt-list-panel {
+      flex: 0 0 22%; max-width: 260px;
+      border-right: 1px solid var(--border); background: var(--bg-card);
+      display: flex; flex-direction: column; overflow: hidden;
+    }
+    .prompt-list-header {
+      padding: 0.6rem 0.85rem; border-bottom: 1px solid var(--border);
+      font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.07em;
+      color: var(--text-muted); font-weight: 500;
+    }
+    .prompt-list-search {
+      padding: 0.4rem 0.6rem; border-bottom: 1px solid var(--border);
+    }
+    .prompt-list-search input {
+      width: 100%; padding: 0.35rem 0.55rem;
+      background: var(--bg-elevated); border: 1px solid var(--border);
+      border-radius: 6px; color: var(--text-primary); font-size: 0.78rem; font-family: inherit;
+    }
+    .prompt-list-search input:focus { outline: none; border-color: var(--accent); }
+    .btn-filter-annotated {
+      display: block; width: 100%; margin-top: 0.35rem; padding: 0.3rem 0.5rem;
+      background: transparent; border: 1px dashed var(--border);
+      border-radius: 6px; color: var(--text-muted); font-size: 0.72rem;
+      cursor: pointer; transition: all 0.2s; font-family: inherit;
+    }
+    .btn-filter-annotated:hover { border-color: var(--accent); color: var(--text-primary); }
+    .btn-filter-annotated.active {
+      background: rgba(124,108,240,0.15); border: 1px solid var(--accent);
+      color: var(--accent); font-weight: 600;
+    }
+    .prompt-list-items { flex: 1; overflow-y: auto; }
+    .prompt-list-items::-webkit-scrollbar { width: 5px; }
+    .prompt-list-items::-webkit-scrollbar-track { background: transparent; }
+    .prompt-list-items::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    /* Company group header */
+    .company-group-header {
+      padding: 0.45rem 0.85rem; background: var(--bg-elevated);
+      border-bottom: 1px solid var(--border); cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 10;
+    }
+    .company-group-header:hover { background: rgba(124, 108, 240, 0.08); }
+    .company-group-name {
+      font-size: 0.72rem; font-weight: 600; color: var(--accent-light);
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .company-group-count {
+      font-size: 0.65rem; color: var(--text-muted);
+      background: var(--bg-dark); padding: 0.1rem 0.4rem; border-radius: 99px;
+    }
+
+    .prompt-item {
+      padding: 0.5rem 0.85rem; border-bottom: 1px solid rgba(44,44,64,0.5);
+      cursor: pointer; transition: background 0.1s;
+    }
+    .prompt-item:hover { background: var(--bg-elevated); }
+    .prompt-item.active { background: rgba(124, 108, 240, 0.12); border-left: 3px solid var(--accent); }
+    .prompt-item-product {
+      font-size: 0.78rem; color: var(--text-primary);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .prompt-item-meta {
+      font-size: 0.65rem; color: var(--text-muted); margin-top: 0.1rem;
+      display: flex; gap: 0.4rem; align-items: center;
+    }
+    .prompt-item-spans { color: var(--positive); font-weight: 500; }
+    .prompt-item-cat {
+      font-size: 0.6rem; padding: 0.05rem 0.3rem; border-radius: 3px;
+      background: rgba(124, 108, 240, 0.15); color: var(--accent-light);
+    }
+
+    /* ─── Center: Prompt Content ─── */
+    .prompt-content-panel {
+      flex: 1 1 0%; min-width: 0; display: flex; flex-direction: column;
+      overflow: hidden; background: var(--bg-dark);
+    }
+    .prompt-content-header {
+      padding: 0.6rem 1rem; border-bottom: 1px solid var(--border);
+      background: var(--bg-card); display: flex; align-items: center;
+      justify-content: space-between; flex-shrink: 0; flex-wrap: wrap; gap: 0.3rem;
+    }
+    .prompt-content-title { font-size: 0.82rem; font-weight: 500; }
+    .prompt-content-title .company-tag { color: var(--accent-light); margin-right: 0.4rem; }
+    .prompt-meta-bar {
+      display: flex; gap: 0.5rem; align-items: center; font-size: 0.7rem; color: var(--text-muted);
+    }
+    .prompt-meta-bar .meta-chip {
+      padding: 0.15rem 0.45rem; border-radius: 4px;
+      background: var(--bg-elevated); border: 1px solid var(--border);
+    }
+    .prompt-content-hint { font-size: 0.72rem; color: var(--text-muted); }
+    .prompt-content-body { flex: 1; overflow-y: auto; padding: 1rem 1.25rem; }
+    .prompt-content-body::-webkit-scrollbar { width: 7px; }
+    .prompt-content-body::-webkit-scrollbar-track { background: var(--bg-dark); }
+    .prompt-content-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+    .prompt-text-display {
+      font-family: 'Courier New', 'Consolas', monospace;
+      font-size: 0.8rem; line-height: 1.7; white-space: pre-wrap;
+      word-break: break-word; color: var(--text-primary); cursor: text; position: relative;
+    }
+
+    /* Highlighted spans */
+    .annotated-span { border-radius: 3px; padding: 1px 3px; cursor: pointer; position: relative; transition: filter 0.1s; }
+    .annotated-span:hover { filter: brightness(1.3); }
+    .annotated-span.positive { background: rgba(34, 197, 94, 0.18); border-bottom: 2px solid var(--positive); color: #d4fce0; }
+    .annotated-span.negative { background: rgba(239, 68, 68, 0.18); border-bottom: 2px solid var(--negative); color: #fde2e2; }
+    .annotated-span.neutral  { background: rgba(245, 158, 11, 0.18); border-bottom: 2px dashed var(--neutral); color: #fef0c7; }
+    /* Dimension-colored spans (v3) */
+    .annotated-span.dim-colored { border-bottom: none; }
+    .annotated-span.dim-overlap { border-bottom: none; line-height: 1.8; }
+    .annotated-span .dim-tag {
+      font-size: 0.55rem; font-weight: 600; padding: 0 3px; border-radius: 3px;
+      margin-left: 1px; vertical-align: super; color: white; cursor: pointer;
+      display: inline-block; line-height: 1.3;
+    }
+    .dim-tag-end {
+      font-size: 0.5rem; font-weight: 700; padding: 0 2px; border-radius: 3px;
+      margin-left: 0; vertical-align: super; color: white; cursor: pointer;
+      display: inline-block; line-height: 1.2; opacity: 0.85;
+    }
+
+    /* ─── Right Panel ─── */
+    .annotations-panel {
+      flex: 0 0 28%; max-width: 360px;
+      border-left: 1px solid var(--border); background: var(--bg-card);
+      display: flex; flex-direction: column; overflow: hidden;
+    }
+    .annotations-header {
+      padding: 0.6rem 0.85rem; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .annotations-header-title {
+      font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.07em;
+      color: var(--text-muted); font-weight: 500;
+    }
+    .annotations-count { font-family: 'Courier New', monospace; font-size: 0.72rem; color: var(--accent); font-weight: 600; }
+    .annotations-body { flex: 1; overflow-y: auto; padding: 0.6rem; }
+    .annotations-body::-webkit-scrollbar { width: 5px; }
+    .annotations-body::-webkit-scrollbar-track { background: transparent; }
+    .annotations-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    .annotation-card {
+      background: var(--bg-elevated); border: 1px solid var(--border);
+      border-radius: 10px; padding: 0.65rem; margin-bottom: 0.5rem; position: relative;
+    }
+    .annotation-card:hover { border-color: var(--accent); }
+    .annotation-card-header {
+      display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.35rem;
+    }
+    .annotation-dim-badge {
+      font-size: 0.68rem; font-weight: 600; padding: 0.12rem 0.45rem;
+      border-radius: 5px; color: white;
+    }
+    .annotation-score-badge {
+      font-size: 0.68rem; font-weight: 600; padding: 0.08rem 0.35rem; border-radius: 4px;
+    }
+    .annotation-score-badge.positive { background: var(--positive-bg); color: var(--positive); }
+    .annotation-score-badge.negative { background: var(--negative-bg); color: var(--negative); }
+    .annotation-score-badge.neutral  { background: var(--neutral-bg);  color: var(--neutral); }
+    .annotation-text {
+      font-family: 'Courier New', monospace; font-size: 0.72rem; line-height: 1.5;
+      color: var(--text-secondary); background: var(--bg-dark);
+      padding: 0.4rem 0.5rem; border-radius: 6px; max-height: 72px;
+      overflow-y: auto; white-space: pre-wrap; word-break: break-word;
+    }
+    .annotation-delete {
+      position: absolute; top: 0.4rem; right: 0.4rem;
+      background: none; border: none; color: var(--text-muted);
+      cursor: pointer; font-size: 0.75rem; padding: 0.1rem 0.25rem; border-radius: 4px;
+    }
+    .annotation-delete:hover { background: var(--negative-bg); color: var(--negative); }
+    .annotation-note { font-size: 0.68rem; color: var(--text-muted); margin-top: 0.3rem; font-style: italic; }
+
+    /* ─── Dimension Filter Bar ─── */
+    .dim-filter-bar {
+      padding: 0.45rem 0.6rem; border-bottom: 1px solid var(--border);
+      display: flex; flex-wrap: wrap; gap: 0.25rem; flex-shrink: 0;
+      background: var(--bg-elevated);
+    }
+    .dim-filter-btn {
+      padding: 0.18rem 0.4rem; border: 1.5px solid transparent;
+      border-radius: 5px; cursor: pointer; font-size: 0.62rem; font-weight: 600;
+      color: var(--text-muted); background: var(--bg-card);
+      transition: all 0.12s; font-family: inherit;
+    }
+    .dim-filter-btn:hover { color: var(--text-primary); border-color: var(--border); }
+    .dim-filter-btn.active { color: white; border-color: transparent; }
+    .dim-filter-btn.active[data-dim="ALL"] {
+      background: var(--accent); color: white;
+    }
+    .dim-filter-count {
+      font-size: 0.55rem; font-weight: 400; opacity: 0.7; margin-left: 2px;
+    }
+
+    /* ─── Source Badge (LLM vs Human) ─── */
+    .annotation-source-badge {
+      font-size: 0.55rem; font-weight: 500; padding: 0.06rem 0.3rem;
+      border-radius: 3px; margin-left: 0.3rem;
+    }
+    .annotation-source-badge.llm {
+      background: rgba(124, 108, 240, 0.2); color: var(--accent-light);
+    }
+    .annotation-source-badge.human {
+      background: rgba(34, 197, 94, 0.2); color: var(--positive);
+    }
+
+    /* LLM span styling — dashed border to distinguish */
+    .annotated-span.llm-source { border-bottom-style: dashed; }
+    .annotated-span.human-source { border-bottom-style: solid; }
+    .annotated-span.dim-hidden { opacity: 0.12; pointer-events: none; }
+
+    /* ─── Pending Review ─── */
+    .annotated-span.pending-review {
+      background: rgba(124, 108, 240, 0.18);
+      border-bottom: 2px dashed rgba(157, 144, 245, 0.65);
+      cursor: pointer;
+      color: #f0eeff;
+    }
+    .annotated-span.pending-review.dim-colored {
+      border-bottom: none; /* dim-colored uses box-shadow underline instead */
+    }
+    .annotated-span.pending-review.dim-overlap {
+      border-bottom: none;
+    }
+    .annotated-span.pending-review:hover {
+      background: rgba(124, 108, 240, 0.32);
+      filter: brightness(1.1);
+    }
+    .annotation-card.pending-review {
+      border-style: dashed;
+      border-color: rgba(124, 108, 240, 0.4);
+    }
+    .annotation-card.pending-review:hover {
+      border-color: var(--accent);
+    }
+    .pending-label {
+      font-size: 0.62rem; font-weight: 600; color: var(--accent-light);
+      padding: 0.08rem 0.35rem; border-radius: 4px;
+      background: rgba(124, 108, 240, 0.15);
+    }
+    .btn-review {
+      padding: 0.25rem 0.6rem; background: var(--accent); border: none;
+      color: white; border-radius: 5px; font-size: 0.68rem; cursor: pointer;
+      font-weight: 600; font-family: inherit; margin-top: 0.35rem;
+    }
+    .btn-review:hover { background: var(--accent-light); }
+
+    /* Dimension reference */
+    .dim-ref-section { border-top: 1px solid var(--border); padding: 0.6rem 0.85rem; }
+    .dim-ref-title {
+      font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.07em;
+      color: var(--text-muted); font-weight: 500; margin-bottom: 0.4rem; cursor: pointer;
+    }
+    .dim-ref-title:hover { color: var(--text-primary); }
+    .dim-ref-list { display: flex; flex-direction: column; gap: 0.25rem; }
+    .dim-ref-item {
+      font-size: 0.72rem; padding: 0.3rem 0.45rem; border-radius: 6px;
+      background: var(--bg-elevated); display: flex; align-items: center; gap: 0.35rem; cursor: pointer;
+    }
+    .dim-ref-item:hover { background: var(--bg-dark); }
+    .dim-ref-key {
+      font-weight: 600; font-size: 0.65rem; padding: 0.08rem 0.3rem;
+      border-radius: 4px; color: white; min-width: 26px; text-align: center;
+    }
+    .dim-ref-name { color: var(--text-secondary); }
+
+    /* Footer */
+    .annotations-footer {
+      padding: 0.6rem 0.85rem; border-top: 1px solid var(--border);
+      display: flex; flex-direction: column; gap: 0.4rem;
+    }
+    .annotations-notes textarea {
+      width: 100%; min-height: 42px; padding: 0.4rem 0.55rem;
+      background: var(--bg-elevated); border: 1px solid var(--border);
+      border-radius: 8px; color: var(--text-primary);
+      font-size: 0.78rem; font-family: inherit; resize: vertical;
+    }
+    .annotations-notes textarea:focus { outline: none; border-color: var(--accent); }
+    .annotations-notes textarea::placeholder { color: var(--text-muted); }
+    .footer-buttons { display: flex; gap: 0.4rem; }
+    .footer-buttons .btn-sm { flex: 1; text-align: center; }
+
+    /* ─── Selection Popup ─── */
+    .selection-popup {
+      position: fixed; z-index: 2000; background: var(--bg-card);
+      border: 1px solid var(--accent); border-radius: 14px;
+      padding: 0.85rem 1rem; box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+      min-width: 420px; max-width: 480px; display: none;
+    }
+    .selection-popup.show { display: block; }
+    .popup-title { font-size: 0.78rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem; }
+    .popup-selected-text {
+      font-family: 'Courier New', monospace; font-size: 0.72rem; line-height: 1.5;
+      color: var(--text-secondary); background: var(--bg-elevated);
+      padding: 0.4rem 0.55rem; border-radius: 8px; max-height: 72px;
+      overflow-y: auto; white-space: pre-wrap; word-break: break-word;
+      margin-bottom: 0.6rem; border: 1px solid var(--border);
+    }
+    .popup-section-title { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 0.3rem; }
+    .popup-dim-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 0.3rem; margin-bottom: 0.6rem;
+    }
+    .popup-dim-btn {
+      padding: 0.35rem 0.45rem; border: 2px solid transparent;
+      border-radius: 6px; cursor: pointer; font-size: 0.68rem; font-weight: 600;
+      color: white; text-align: left; transition: transform 0.1s, border-color 0.15s;
+      display: flex; align-items: center; gap: 0.3rem;
+      white-space: nowrap; overflow: hidden;
+    }
+    .popup-dim-btn:hover { transform: scale(1.03); }
+    .popup-dim-btn.selected { border-color: white; box-shadow: 0 0 8px rgba(255,255,255,0.3); }
+    .popup-dim-btn .dim-btn-key {
+      flex-shrink: 0; font-weight: 700; font-size: 0.65rem;
+      background: rgba(0,0,0,0.2); padding: 0.1rem 0.25rem; border-radius: 3px;
+    }
+    .popup-dim-btn .dim-btn-name {
+      font-weight: 500; font-size: 0.64rem; overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .popup-score-row { display: flex; gap: 0.35rem; margin-bottom: 0.6rem; }
+    .popup-score-btn {
+      flex: 1; padding: 0.45rem; border: 2px solid var(--border);
+      border-radius: 8px; cursor: pointer; font-size: 0.78rem; font-weight: 600;
+      font-family: inherit; text-align: center; transition: all 0.15s;
+      background: var(--bg-elevated); color: var(--text-secondary);
+    }
+    .popup-score-btn:hover { border-color: var(--text-secondary); }
+    .popup-score-btn.positive { color: var(--positive); }
+    .popup-score-btn.negative { color: var(--negative); }
+    .popup-score-btn.neutral  { color: var(--neutral); }
+    .popup-score-btn.selected.positive { background: var(--positive-bg); border-color: var(--positive); }
+    .popup-score-btn.selected.negative { background: var(--negative-bg); border-color: var(--negative); }
+    .popup-score-btn.selected.neutral  { background: var(--neutral-bg);  border-color: var(--neutral); }
+
+    .popup-note-input {
+      width: 100%; padding: 0.35rem 0.5rem; background: var(--bg-elevated);
+      border: 1px solid var(--border); border-radius: 6px; color: var(--text-primary);
+      font-size: 0.75rem; font-family: inherit; margin-bottom: 0.6rem;
+    }
+    .popup-note-input:focus { outline: none; border-color: var(--accent); }
+
+    .popup-actions { display: flex; gap: 0.4rem; }
+    .popup-actions button {
+      flex: 1; padding: 0.45rem; border-radius: 8px; font-size: 0.78rem;
+      font-weight: 500; cursor: pointer; font-family: inherit; border: 1px solid var(--border);
+    }
+    .popup-cancel { background: var(--bg-elevated); color: var(--text-secondary); }
+    .popup-cancel:hover { border-color: var(--negative); color: var(--negative); }
+    .popup-reject { background: rgba(239, 68, 68, 0.12); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+    .popup-reject:hover { background: rgba(239, 68, 68, 0.25); border-color: #ef4444; }
+    .popup-confirm { background: var(--accent); border-color: var(--accent); color: white; }
+    .popup-confirm:hover { background: var(--accent-light); }
+    .popup-confirm:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* ─── Toast ─── */
+    .toast {
+      position: fixed; bottom: 1.2rem; right: 1.2rem;
+      padding: 0.65rem 1rem; border-radius: 10px; font-weight: 500; font-size: 0.82rem;
+      opacity: 0; transform: translateY(16px); transition: all 0.25s;
+      z-index: 3000; color: white; background: var(--positive);
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    .toast.error { background: var(--negative); }
+
+    /* ─── Dimension Tooltip ─── */
+    .dim-tooltip {
+      position: fixed; z-index: 2500; background: var(--bg-card);
+      border: 1px solid var(--accent); border-radius: 10px;
+      padding: 0.65rem 0.85rem; max-width: 360px;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4);
+      pointer-events: none; opacity: 0; transition: opacity 0.15s;
+    }
+    .dim-tooltip.show { opacity: 1; }
+    .dim-tooltip-key { font-weight: 600; font-size: 0.85rem; margin-bottom: 0.2rem; }
+    .dim-tooltip-name { font-size: 0.78rem; color: var(--accent-light); margin-bottom: 0.35rem; }
+    .dim-tooltip-def { font-size: 0.75rem; color: var(--text-secondary); line-height: 1.5; }
+
+    /* Empty */
+    .empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: var(--text-muted); gap: 0.4rem; }
+    .empty-state-icon { font-size: 1.8rem; }
+    .empty-state-text { font-size: 0.85rem; }
+    .empty-state-sub { font-size: 0.75rem; }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════ SETUP PAGE ═══════════ -->
+<div id="setupPage" class="setup-page">
+  <h2>📐 System Prompt Audit Tool v7</h2>
+  <p class="sub">Select text spans → Annotate Dimension (D1-D9) + Score (+1 / −1)</p>
+  <div class="form-group">
+    <label>👤 Reviewer Name</label>
+    <input type="text" id="inputName" placeholder="Enter your name..." />
+  </div>
+  <div class="form-group">
+    <label>📊 Prompt Range</label>
+    <div class="range-row">
+      <input type="number" id="inputStart" min="1" value="1" />
+      <span>→</span>
+      <input type="number" id="inputEnd" min="1" value="190" />
+    </div>
+  </div>
+  <button class="btn-primary" id="setupStartBtn">🚀 Start Annotation</button>
+  <div class="setup-info" id="setupInfo">Loading…</div>
+</div>
+
+<!-- ═══════════ MAIN APP ═══════════ -->
+<div id="appContainer" class="app-container" style="display:none;">
+  <div class="app-header">
+    <h1>📐 System Prompt Audit v7</h1>
+    <div class="header-right">
+      <span class="badge" id="headerBadge"></span>
+      <div class="nav-group">
+        <button class="nav-btn" id="btnPrev" title="← 或 A 键">←</button>
+        <span class="nav-counter" id="navCounter">1/190</span>
+        <button class="nav-btn" id="btnNext" title="→ 或 D 键">→</button>
+        <input type="number" class="nav-jump" id="navJump" placeholder="#" />
+        <button class="nav-btn" id="btnJump">Go</button>
+      </div>
+      <button class="btn-sm accent" id="btnExport">📤 Export</button>
+    </div>
+  </div>
+
+  <div class="app-body">
+    <!-- Left -->
+    <div class="prompt-list-panel">
+      <div class="prompt-list-header">Prompts <span id="promptListTotal"></span></div>
+      <div class="prompt-list-search">
+        <input type="text" id="listSearch" placeholder="Search company / product…" />
+        <button id="btnFilterAnnotated" class="btn-filter-annotated" title="Show only prompts with annotations">📌 Annotated Only</button>
+      </div>
+      <div class="prompt-list-items" id="promptListItems"></div>
+    </div>
+
+    <!-- Center -->
+    <div class="prompt-content-panel">
+      <div class="prompt-content-header">
+        <div>
+          <span class="prompt-content-title" id="contentTitle">Select a prompt</span>
+          <div class="prompt-meta-bar" id="promptMetaBar"></div>
+        </div>
+        <span class="prompt-content-hint">💡 Select text to add annotation</span>
+      </div>
+      <div class="prompt-content-body" id="contentBody">
+        <div class="empty-state">
+          <span class="empty-state-icon">📄</span>
+          <span class="empty-state-text">Select a prompt from the left panel</span>
+          <span class="empty-state-sub">or use the navigation buttons above</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right -->
+    <div class="annotations-panel">
+      <div class="annotations-header">
+        <span class="annotations-header-title">Span Annotations</span>
+        <span class="annotations-count" id="annCount">0</span>
+      </div>
+      <div class="dim-filter-bar" id="dimFilterBar">
+        <!-- populated by JS -->
+      </div>
+      <div class="annotations-body" id="annBody">
+        <div class="empty-state">
+          <span class="empty-state-icon">✨</span>
+          <span class="empty-state-text">No annotations yet</span>
+          <span class="empty-state-sub">Select text in the prompt to add one</span>
+        </div>
+      </div>
+      <div class="dim-ref-section" id="dimRefSection">
+        <div class="dim-ref-title" id="dimRefToggle">📖 Dimension Reference ▾</div>
+        <div class="dim-ref-list" id="dimRefList"></div>
+      </div>
+      <div class="annotations-footer">
+        <div class="annotations-notes">
+          <textarea id="annNotes" placeholder="Overall observations…"></textarea>
+        </div>
+        <div class="footer-buttons">
+          <button class="btn-sm" id="btnSave">💾 Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ Selection Popup ═══════════ -->
+<div class="selection-popup" id="selectionPopup">
+  <div class="popup-title">📐 Add Span Annotation</div>
+  <div class="popup-selected-text" id="popupText"></div>
+  <div class="popup-section-title">Dimension</div>
+  <div class="popup-dim-grid" id="popupDimGrid"></div>
+  <div class="popup-section-title">Score</div>
+  <div class="popup-score-row">
+    <button class="popup-score-btn positive" data-score="1">👍 +1 Good Practice</button>
+    <button class="popup-score-btn negative" data-score="-1">👎 −1 Violation</button>
+  </div>
+  <input type="text" class="popup-note-input" id="popupNote" placeholder="Optional note…" />
+  <div class="popup-actions">
+    <button class="popup-cancel" id="popupCancel">Cancel</button>
+    <button class="popup-reject" id="popupReject" style="display:none">❌ Not Relevant</button>
+    <button class="popup-confirm" id="popupConfirm" disabled>✓ Add Annotation</button>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Dimension Tooltip -->
+<div class="dim-tooltip" id="dimTooltip">
+  <div class="dim-tooltip-key" id="dimTooltipKey"></div>
+  <div class="dim-tooltip-name" id="dimTooltipName"></div>
+  <div class="dim-tooltip-def" id="dimTooltipDef"></div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════
+const DIM_COLORS = [
+  '#e879a0', '#fb923c', '#a78bfa', '#38bdf8', '#34d399',
+  '#f59e0b', '#ef4444', '#22d3ee', '#a3e635', '#94a3b8',
+];
+function dimColor(k) { return DIM_COLORS[parseInt(k.replace('D','')) - 1] || '#888'; }
+
+// ─── State ────────────────────────────────────────
+let allPrompts = [];
+let rangePrompts = [];
+let dimensions = [];
+let currentIndex = 0;
+let currentPromptFull = null;
+let currentSpans = [];
+let currentNotes = '';
+let config = { name: '', start: 1, end: 190 };
+let pendingSelection = { text: '', start: 0, end: 0, dim: null, score: null };
+let activeDimFilter = 'ALL'; // 'ALL', 'PENDING', or 'D1'..'D9'
+let reviewingSpanIdx = null; // index of span being reviewed, or null for new annotation
+
+// ─── Elements ─────────────────────────────────────
+const $ = id => document.getElementById(id);
+const setupPage = $('setupPage'), appContainer = $('appContainer');
+const inputName = $('inputName'), inputStart = $('inputStart'), inputEnd = $('inputEnd');
+const setupStartBtn = $('setupStartBtn'), setupInfo = $('setupInfo');
+const headerBadge = $('headerBadge'), navCounter = $('navCounter');
+const btnPrev = $('btnPrev'), btnNext = $('btnNext');
+const navJump = $('navJump'), btnJump = $('btnJump');
+const btnExport = $('btnExport');
+const listSearch = $('listSearch'), promptListItems = $('promptListItems');
+const promptListTotal = $('promptListTotal');
+const btnFilterAnnotated = $('btnFilterAnnotated');
+let filterAnnotatedOnly = false;
+const contentTitle = $('contentTitle'), promptMetaBar = $('promptMetaBar');
+const contentBody = $('contentBody');
+const annCount = $('annCount'), annBody = $('annBody'), annNotes = $('annNotes');
+const btnSave = $('btnSave');
+const selectionPopup = $('selectionPopup'), popupText = $('popupText');
+const popupDimGrid = $('popupDimGrid'), popupNote = $('popupNote');
+const popupCancel = $('popupCancel'), popupConfirm = $('popupConfirm'), popupReject = $('popupReject');
+const dimRefList = $('dimRefList'), dimRefToggle = $('dimRefToggle');
+const dimFilterBar = $('dimFilterBar');
+const toast = $('toast'), dimTooltip = $('dimTooltip');
+
+// ─── Utilities ────────────────────────────────────
+function showToast(msg, isErr = false) {
+  toast.textContent = msg;
+  toast.className = 'toast' + (isErr ? ' error' : '');
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2500);
+}
+function escHtml(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+function fmtSize(b) { return b >= 10240 ? `${(b/1024).toFixed(0)}KB` : `${(b/1024).toFixed(1)}KB`; }
+
+// ─── Data Loading ─────────────────────────────────
+async function loadPrompts() {
+  const res = await fetch('/api/prompts');
+  const data = await res.json();
+  allPrompts = data.prompts;
+  dimensions = data.dimensions;
+  setupInfo.innerHTML = `<strong>${data.total}</strong> prompts · 10 Dimensions · Score: +1 / 0 / −1`;
+  inputEnd.max = data.total;
+  inputEnd.value = Math.min(190, data.total);
+  buildDimRefPanel();
+  buildPopupDimGrid();
+  buildDimFilterBar();
+}
+
+async function loadPromptDetail(pid) {
+  const res = await fetch(`/api/prompt/${encodeURIComponent(pid)}`);
+  const data = await res.json();
+  currentPromptFull = data.prompt;
+  currentSpans = data.annotations.spans || [];
+  currentNotes = data.annotations.notes || '';
+  annNotes.value = currentNotes;
+}
+
+// ─── Prompt List (Left) ──────────────────────────
+function renderPromptList(filter = '') {
+  const lf = filter.toLowerCase();
+  // Group by company
+  const groups = {};
+  rangePrompts.forEach((p, i) => {
+    if (filterAnnotatedOnly && !(p.span_count > 0)) return;
+    if (lf && !p.company.toLowerCase().includes(lf) && !(p.product||'').toLowerCase().includes(lf) && !p.filename.toLowerCase().includes(lf)) return;
+    if (!groups[p.company]) groups[p.company] = [];
+    groups[p.company].push({ ...p, _idx: i });
+  });
+
+  let html = '';
+  const sortedCompanies = Object.keys(groups).sort((a, b) => groups[b].length - groups[a].length);
+  for (const company of sortedCompanies) {
+    const items = groups[company];
+    html += `<div class="company-group-header" data-company="${escHtml(company)}">
+      <span class="company-group-name">${escHtml(company)}</span>
+      <span class="company-group-count">${items.length}</span>
+    </div>`;
+    for (const p of items) {
+      const active = p._idx === currentIndex ? 'active' : '';
+      const spanBadge = p.span_count > 0 ? `<span class="prompt-item-spans">${p.span_count} spans</span>` : '';
+      const catBadge = p.category ? `<span class="prompt-item-cat">${escHtml(p.category)}</span>` : '';
+      // Use product_label (set in audit_prompts.json) as the display name
+      const label = p.product_label || p.filename.replace(/\.(md|txt|ts|js|yaml|j2|py|mkd)$/i, '');
+      html += `<div class="prompt-item ${active}" data-idx="${p._idx}">
+        <div class="prompt-item-product">${escHtml(label)}</div>
+        <div class="prompt-item-meta">
+          <span>#${p.index + 1}</span>
+          <span>${fmtSize(p.size_bytes)}</span>
+          ${p.date ? `<span>${escHtml(p.date)}</span>` : ''}
+          ${spanBadge} ${catBadge}
+        </div>
+      </div>`;
+    }
+  }
+  promptListItems.innerHTML = html || '<div style="padding:1rem;color:var(--text-muted);text-align:center;">No matches</div>';
+
+  // Click handlers
+  promptListItems.querySelectorAll('.prompt-item').forEach(el => {
+    el.addEventListener('click', () => {
+      const idx = parseInt(el.dataset.idx);
+      if (idx !== currentIndex) { autoSave(); currentIndex = idx; loadAndRender(); }
+    });
+  });
+  // Toggle company groups
+  promptListItems.querySelectorAll('.company-group-header').forEach(el => {
+    el.addEventListener('click', () => {
+      let next = el.nextElementSibling;
+      const hidden = next && next.classList.contains('prompt-item') && next.style.display === 'none';
+      while (next && next.classList.contains('prompt-item')) {
+        next.style.display = hidden ? '' : 'none';
+        next = next.nextElementSibling;
+      }
+    });
+  });
+}
+
+// ─── Prompt Content (Center) ─────────────────────
+function renderPromptContent() {
+  if (!currentPromptFull) {
+    contentBody.innerHTML = '<div class="empty-state"><span class="empty-state-icon">📄</span><span class="empty-state-text">Loading…</span></div>';
+    return;
+  }
+  const p = currentPromptFull;
+  const titleLabel = p.product_label || p.filename.replace(/\.(md|txt|ts|js|yaml|j2|py|mkd)$/i, '');
+  contentTitle.innerHTML = `<span class="company-tag">[${escHtml(p.company)}]</span> ${escHtml(titleLabel)}`;
+
+  // Meta bar
+  let metaHtml = '';
+  if (p.date) metaHtml += `<span class="meta-chip">📅 ${escHtml(p.date)}</span>`;
+  metaHtml += `<span class="meta-chip">📐 ${fmtSize(p.size_bytes)}</span>`;
+  if (p.category) metaHtml += `<span class="meta-chip">📂 ${escHtml(p.category)}</span>`;
+  if (p.version) metaHtml += `<span class="meta-chip">v${escHtml(p.version)}</span>`;
+  promptMetaBar.innerHTML = metaHtml;
+
+  const text = p.content || '';
+  if (!text) { contentBody.innerHTML = '<div class="empty-state"><span class="empty-state-text">Empty prompt</span></div>'; return; }
+
+  const spans = currentSpans.map((s, i) => ({ ...s, _origIdx: i }));
+
+  if (spans.length === 0) {
+    contentBody.innerHTML = `<div class="prompt-text-display" id="promptTextDisplay">${escHtml(text)}</div>`;
+    updateDimFilterCounts();
+    return;
+  }
+
+  // === Atomic-segment approach: split at every span boundary ===
+  const bSet = new Set();
+  spans.forEach(s => { bSet.add(s.start); bSet.add(s.end); });
+  const boundaries = [...bSet].sort((a, b) => a - b);
+
+  // Track which spans end at each position (for placing dim-tag badges)
+  const endMap = {};
+  spans.forEach(s => { (endMap[s.end] = endMap[s.end] || []).push(s); });
+
+  let html = '', cursor = 0;
+
+  for (let i = 0; i < boundaries.length; i++) {
+    const segStart = boundaries[i];
+    const segEnd = (i + 1 < boundaries.length) ? boundaries[i + 1] : null;
+
+    // Plain text gap before this boundary
+    if (segStart > cursor) {
+      html += escHtml(text.slice(cursor, segStart));
+      cursor = segStart;
+    }
+
+    if (segEnd === null) break;
+    if (segStart >= segEnd) continue;
+
+    // Find all spans covering this atomic segment [segStart, segEnd)
+    const covering = spans.filter(s => s.start <= segStart && s.end >= segEnd);
+
+    if (covering.length === 0) {
+      html += escHtml(text.slice(segStart, segEnd));
+      cursor = segEnd;
+      continue;
+    }
+
+    // Unique dimensions in this segment
+    const dimMap = new Map();
+    covering.forEach(s => {
+      if (!dimMap.has(s.dimension)) dimMap.set(s.dimension, []);
+      dimMap.get(s.dimension).push(s);
+    });
+    const uniqueDims = [...dimMap.keys()];
+    const isOverlap = uniqueDims.length > 1;
+    const colors = uniqueDims.map(d => dimColor(d));
+
+    const allPending = covering.every(s => s.source === 'llm' && !s.reviewed);
+    const anyPending = covering.some(s => s.source === 'llm' && !s.reviewed);
+
+    // Dim filter visibility
+    let visible;
+    if (activeDimFilter === 'ALL') visible = true;
+    else if (activeDimFilter === 'PENDING') visible = anyPending;
+    else visible = uniqueDims.includes(activeDimFilter);
+    const dimHidden = !visible ? ' dim-hidden' : '';
+
+    // Build inline style: dimension-colored underlines
+    let style = '';
+    if (isOverlap) {
+      // Multi-colored stacked underlines via box-shadow
+      const shadows = colors.map((c, idx) =>
+        `0 ${2 + idx * 3}px 0 0 ${c}`
+      ).join(', ');
+      const bgBlend = colors.map(c => c + '10').join(', ');
+      style = `box-shadow: ${shadows}; padding-bottom: ${colors.length * 3}px; background: linear-gradient(${colors.map(c => c + '12').join(', ')});`;
+    } else {
+      // Single dimension color
+      const c = colors[0];
+      const dashStyle = allPending ? 'dashed' : 'solid';
+      style = `border-bottom: 2px ${dashStyle} ${c}; background: ${c}15;`;
+    }
+
+    // Build title tooltip
+    const titleParts = covering.map(s => {
+      const sl = s.score > 0 ? '+1' : s.score < 0 ? '-1' : '0';
+      return `${s.dimension}: ${sl}`;
+    });
+    const titleStr = [...new Set(titleParts)].join(' | ');
+
+    // Class names
+    const overlapCls = isOverlap ? 'dim-overlap' : 'dim-colored';
+    const pendingCls = allPending ? 'pending-review' : '';
+    const scoreCls = allPending ? '' : (covering.some(s => s.score === -1) ? '' : covering.some(s => s.score === 1) ? '' : '');
+
+    html += `<span class="annotated-span ${overlapCls} ${pendingCls}${dimHidden}" style="${style}" data-span-idx="${covering[0]._origIdx}" data-span-dims="${uniqueDims.join(',')}" title="${titleStr}">`;
+    html += escHtml(text.slice(segStart, segEnd));
+
+    // Place dim-tag badges at the end boundary of each original span
+    const endingHere = endMap[segEnd];
+    if (endingHere) {
+      endingHere.forEach(s => {
+        const c = dimColor(s.dimension);
+        const scoreIcon = s.score === 1 ? '↑' : s.score === -1 ? '↓' : '·';
+        const label = (s.source === 'llm' && !s.reviewed) ? s.dimension : `${s.dimension}${scoreIcon}`;
+        html += `<span class="dim-tag" style="background:${c}" data-span-idx="${s._origIdx}">${label}</span>`;
+      });
+    }
+
+    html += `</span>`;
+    cursor = segEnd;
+  }
+
+  // Trailing text after last boundary
+  if (cursor < text.length) html += escHtml(text.slice(cursor));
+  contentBody.innerHTML = `<div class="prompt-text-display" id="promptTextDisplay">${html}</div>`;
+
+  // Click handler: pending spans open review popup
+  contentBody.querySelectorAll('.annotated-span.pending-review').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const idx = parseInt(el.dataset.spanIdx);
+      openReviewPopup(idx, e.clientX, e.clientY);
+    });
+  });
+
+  updateDimFilterCounts();
+}
+
+// ─── Annotations (Right) ─────────────────────────
+function renderAnnotations() {
+  const allIndexed = currentSpans.map((s, i) => ({ ...s, _idx: i }));
+  const pendingSpans = allIndexed.filter(s => s.source === 'llm' && !s.reviewed);
+  const reviewedSpans = allIndexed.filter(s => !(s.source === 'llm' && !s.reviewed));
+
+  // Filter based on active filter
+  let filtered;
+  if (activeDimFilter === 'ALL') {
+    filtered = allIndexed;
+  } else if (activeDimFilter === 'PENDING') {
+    filtered = pendingSpans;
+  } else {
+    // Dimension filter only applies to reviewed spans
+    filtered = reviewedSpans.filter(s => s.dimension === activeDimFilter);
+  }
+
+  // Count display
+  const pendingCount = pendingSpans.length;
+  const reviewedCount = reviewedSpans.length;
+  if (activeDimFilter === 'ALL') {
+    annCount.textContent = pendingCount > 0 ? `${reviewedCount} reviewed · ${pendingCount} pending` : currentSpans.length;
+  } else if (activeDimFilter === 'PENDING') {
+    annCount.textContent = `${pendingCount} pending`;
+  } else {
+    annCount.textContent = `${filtered.length}/${reviewedCount}`;
+  }
+
+  if (filtered.length === 0) {
+    const msg = activeDimFilter === 'PENDING' ? 'No pending spans' :
+                currentSpans.length === 0 ? 'No annotations yet' :
+                `No ${activeDimFilter} annotations`;
+    annBody.innerHTML = `<div class="empty-state"><span class="empty-state-icon">✨</span><span class="empty-state-text">${msg}</span><span class="empty-state-sub">Select text in the prompt to add one</span></div>`;
+    return;
+  }
+
+  let html = '';
+  filtered.forEach((s) => {
+    const i = s._idx;
+    const isPending = s.source === 'llm' && !s.reviewed;
+
+    if (isPending) {
+      // BLIND MODE: show only text, no dimension/score/note
+      html += `<div class="annotation-card pending-review" data-idx="${i}">
+        <button class="annotation-delete" data-idx="${i}" title="Delete">✕</button>
+        <div class="annotation-card-header">
+          <span class="pending-label">📋 Needs Review</span>
+        </div>
+        <div class="annotation-text">${escHtml(s.text)}</div>
+        <button class="btn-review" data-idx="${i}">🏷️ Classify This Span</button>
+      </div>`;
+    } else {
+      // REVIEWED: show full info
+      const cls = s.score === 1 ? 'positive' : s.score === -1 ? 'negative' : 'neutral';
+      const color = dimColor(s.dimension);
+      const label = s.score === 1 ? '+1 Good' : '−1 Violation';
+      const dim = dimensions.find(d => d.key === s.dimension) || { name: s.dimension };
+      const sourceBadge = s.source === 'llm'
+        ? '<span class="annotation-source-badge llm">🤖 LLM</span>'
+        : '<span class="annotation-source-badge human">👤 Human</span>';
+      html += `<div class="annotation-card" data-idx="${i}">
+        <button class="annotation-delete" data-idx="${i}" title="Delete">✕</button>
+        <div class="annotation-card-header">
+          <span class="annotation-dim-badge" style="background:${color}">${s.dimension} ${dim.name}${sourceBadge}</span>
+          <span class="annotation-score-badge ${cls}">${label}</span>
+        </div>
+        <div class="annotation-text">${escHtml(s.text)}</div>
+        ${s.note ? `<div class="annotation-note">💬 ${escHtml(s.note)}</div>` : ''}
+      </div>`;
+    }
+  });
+  annBody.innerHTML = html;
+
+  // Delete handlers
+  annBody.querySelectorAll('.annotation-delete').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      currentSpans.splice(parseInt(btn.dataset.idx), 1);
+      renderPromptContent(); renderAnnotations(); autoSave();
+    });
+  });
+
+  // Review button handlers
+  annBody.querySelectorAll('.btn-review').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const idx = parseInt(btn.dataset.idx);
+      // Scroll to span in text first
+      const el = document.querySelector(`.annotated-span[data-span-idx="${idx}"]`);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        const rect = el.getBoundingClientRect();
+        openReviewPopup(idx, rect.right + 10, rect.top);
+      } else {
+        openReviewPopup(idx, window.innerWidth / 2, window.innerHeight / 3);
+      }
+    });
+  });
+
+  // Click reviewed cards to scroll to span
+  annBody.querySelectorAll('.annotation-card:not(.pending-review)').forEach(card => {
+    card.addEventListener('click', () => {
+      const el = document.querySelector(`.annotated-span[data-span-idx="${card.dataset.idx}"]`);
+      if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'center' }); el.style.outline = '2px solid var(--accent)'; setTimeout(() => el.style.outline = '', 1500); }
+    });
+  });
+
+  // Click pending cards to scroll to span (but not open popup, that's the Review button)
+  annBody.querySelectorAll('.annotation-card.pending-review').forEach(card => {
+    card.addEventListener('click', () => {
+      const el = document.querySelector(`.annotated-span[data-span-idx="${card.dataset.idx}"]`);
+      if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'center' }); el.style.outline = '2px solid var(--accent)'; setTimeout(() => el.style.outline = '', 1500); }
+    });
+  });
+}
+
+// ─── Review Popup Helper ─────────────────────────
+function openReviewPopup(spanIdx, x, y) {
+  const span = currentSpans[spanIdx];
+  if (!span) return;
+  reviewingSpanIdx = spanIdx;
+  pendingSelection.text = span.text;
+  pendingSelection.start = span.start;
+  pendingSelection.end = span.end;
+  pendingSelection.dim = null;
+  pendingSelection.score = null;
+  popupText.textContent = span.text.length > 200 ? span.text.slice(0, 200) + '…' : span.text;
+  popupDimGrid.querySelectorAll('.popup-dim-btn').forEach(b => b.classList.remove('selected'));
+  document.querySelectorAll('.popup-score-btn').forEach(b => b.classList.remove('selected'));
+  popupNote.value = '';
+  popupConfirm.disabled = true;
+  popupConfirm.textContent = '✓ Confirm Classification';
+  popupReject.style.display = 'inline-flex';
+  showPopup(x, y);
+}
+
+// ─── Dimension Reference ─────────────────────────
+function buildDimRefPanel() {
+  let html = '';
+  dimensions.forEach((d, i) => {
+    html += `<div class="dim-ref-item" data-dim="${d.key}">
+      <span class="dim-ref-key" style="background:${DIM_COLORS[i]}">${d.key}</span>
+      <span class="dim-ref-name">${d.name}</span>
+    </div>`;
+  });
+  dimRefList.innerHTML = html;
+
+  dimRefList.querySelectorAll('.dim-ref-item').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      const dim = dimensions.find(d => d.key === el.dataset.dim);
+      if (!dim) return;
+      $('dimTooltipKey').textContent = dim.key;
+      $('dimTooltipName').textContent = dim.name;
+      $('dimTooltipDef').textContent = dim.definition;
+      const r = el.getBoundingClientRect();
+      dimTooltip.style.left = Math.max(8, r.left - 370) + 'px';
+      dimTooltip.style.top = r.top + 'px';
+      dimTooltip.classList.add('show');
+    });
+    el.addEventListener('mouseleave', () => dimTooltip.classList.remove('show'));
+  });
+}
+
+// ─── Dimension Filter Bar ─────────────────────────
+function buildDimFilterBar() {
+  let html = `<button class="dim-filter-btn active" data-dim="ALL" style="background:var(--accent)">ALL</button>`;
+  html += `<button class="dim-filter-btn" data-dim="PENDING" style="">📋 Pending</button>`;
+  dimensions.forEach((d, i) => {
+    if (d.key === 'D10') return; // skip Miscellaneous
+    html += `<button class="dim-filter-btn" data-dim="${d.key}" style="">${d.key}</button>`;
+  });
+  dimFilterBar.innerHTML = html;
+
+  dimFilterBar.querySelectorAll('.dim-filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      activeDimFilter = btn.dataset.dim;
+      dimFilterBar.querySelectorAll('.dim-filter-btn').forEach(b => {
+        b.classList.remove('active');
+        b.style.background = '';
+      });
+      btn.classList.add('active');
+      if (btn.dataset.dim === 'ALL') {
+        btn.style.background = 'var(--accent)';
+      } else if (btn.dataset.dim === 'PENDING') {
+        btn.style.background = 'var(--accent)';
+      } else {
+        const idx = parseInt(btn.dataset.dim.replace('D', '')) - 1;
+        btn.style.background = DIM_COLORS[idx] || 'var(--accent)';
+      }
+      renderPromptContent();
+      renderAnnotations();
+    });
+  });
+}
+
+function updateDimFilterCounts() {
+  const pendingCount = currentSpans.filter(s => s.source === 'llm' && !s.reviewed).length;
+  const reviewedSpans = currentSpans.filter(s => !(s.source === 'llm' && !s.reviewed));
+  const dimCounts = {};
+  reviewedSpans.forEach(s => { dimCounts[s.dimension] = (dimCounts[s.dimension] || 0) + 1; });
+
+  dimFilterBar.querySelectorAll('.dim-filter-btn').forEach(btn => {
+    const dim = btn.dataset.dim;
+    let count, label;
+    if (dim === 'ALL') {
+      count = currentSpans.length;
+      label = 'ALL';
+    } else if (dim === 'PENDING') {
+      count = pendingCount;
+      label = '📋 Pending';
+    } else {
+      count = dimCounts[dim] || 0;
+      label = dim;
+    }
+    btn.innerHTML = count > 0 ? `${label}<span class="dim-filter-count">${count}</span>` : label;
+  });
+}
+
+let dimRefCollapsed = false;
+dimRefToggle.addEventListener('click', () => {
+  dimRefCollapsed = !dimRefCollapsed;
+  dimRefList.style.display = dimRefCollapsed ? 'none' : 'flex';
+  dimRefToggle.textContent = dimRefCollapsed ? '📖 Dimension Reference ▸' : '📖 Dimension Reference ▾';
+});
+
+// ─── Selection Popup ─────────────────────────────
+function buildPopupDimGrid() {
+  let html = '';
+  dimensions.forEach((d, i) => {
+    html += `<button class="popup-dim-btn" data-dim="${d.key}" style="background:${DIM_COLORS[i]}" title="${d.definition || d.name}"><span class="dim-btn-key">${d.key}</span><span class="dim-btn-name">${d.name}</span></button>`;
+  });
+  popupDimGrid.innerHTML = html;
+  popupDimGrid.querySelectorAll('.popup-dim-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      popupDimGrid.querySelectorAll('.popup-dim-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      pendingSelection.dim = btn.dataset.dim;
+      updatePopupConfirm();
+    });
+  });
+}
+
+// Score buttons — now includes 0
+document.querySelectorAll('.popup-score-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.popup-score-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    pendingSelection.score = parseInt(btn.dataset.score);
+    updatePopupConfirm();
+  });
+});
+
+function updatePopupConfirm() {
+  popupConfirm.disabled = !(pendingSelection.dim && pendingSelection.score !== null);
+}
+
+function showPopup(x, y) {
+  selectionPopup.classList.add('show');
+  const pw = 360, ph = selectionPopup.offsetHeight || 380;
+  let left = x + 10, top = y + 10;
+  if (left + pw > window.innerWidth) left = window.innerWidth - pw - 16;
+  if (top + ph > window.innerHeight) top = y - ph - 10;
+  if (left < 8) left = 8; if (top < 8) top = 8;
+  selectionPopup.style.left = left + 'px'; selectionPopup.style.top = top + 'px';
+}
+
+function hidePopup() {
+  selectionPopup.classList.remove('show');
+  pendingSelection = { text: '', start: 0, end: 0, dim: null, score: null };
+  reviewingSpanIdx = null;
+  popupDimGrid.querySelectorAll('.popup-dim-btn').forEach(b => b.classList.remove('selected'));
+  document.querySelectorAll('.popup-score-btn').forEach(b => b.classList.remove('selected'));
+  popupNote.value = '';
+  popupConfirm.disabled = true;
+  popupConfirm.textContent = '✓ Add Annotation';
+  popupReject.style.display = 'none';
+}
+
+popupCancel.addEventListener('click', hidePopup);
+
+popupReject.addEventListener('click', () => {
+  if (reviewingSpanIdx === null) return;
+  const removedSpan = currentSpans[reviewingSpanIdx];
+  currentSpans.splice(reviewingSpanIdx, 1);
+  hidePopup();
+  renderPromptContent(); renderAnnotations(); autoSave();
+  showToast(`🗑️ Dismissed: "${removedSpan.text.slice(0, 40)}…"`);
+});
+
+popupConfirm.addEventListener('click', () => {
+  if (!pendingSelection.dim || pendingSelection.score === null) return;
+
+  if (reviewingSpanIdx !== null) {
+    // REVIEW MODE: update existing span with annotator's classification
+    const s = currentSpans[reviewingSpanIdx];
+    s.dimension = pendingSelection.dim;
+    s.score = pendingSelection.score;
+    s.note = popupNote.value.trim() || '';
+    s.reviewed = true;
+    // Keep source as 'llm' to track origin
+    const label = s.score === 1 ? '+1' : s.score === -1 ? '−1' : '0';
+    reviewingSpanIdx = null;
+    hidePopup();
+    renderPromptContent(); renderAnnotations(); autoSave();
+    showToast(`✓ Classified as ${s.dimension} ${label}`);
+  } else {
+    // NEW ANNOTATION MODE: add new span
+    const span = {
+      start: pendingSelection.start, end: pendingSelection.end,
+      text: pendingSelection.text, dimension: pendingSelection.dim,
+      score: pendingSelection.score, note: popupNote.value.trim() || '',
+      source: 'human', reviewed: true,
+    };
+    currentSpans.push(span);
+    hidePopup();
+    renderPromptContent(); renderAnnotations(); autoSave();
+    const label = span.score === 1 ? '+1' : span.score === -1 ? '−1' : '0';
+    showToast(`✓ Added ${span.dimension} ${label} annotation`);
+  }
+});
+
+// ─── Text Selection ──────────────────────────────
+document.addEventListener('mouseup', e => {
+  const display = document.getElementById('promptTextDisplay');
+  if (!display) return;
+  if (!display.contains(e.target) && !selectionPopup.contains(e.target)) {
+    if (selectionPopup.classList.contains('show') && !selectionPopup.contains(e.target)) hidePopup();
+    return;
+  }
+  if (selectionPopup.contains(e.target)) return;
+
+  const sel = window.getSelection();
+  if (!sel || sel.isCollapsed) return;
+  const text = sel.toString().trim();
+  if (!text || text.length < 2) return;
+
+  const fullText = currentPromptFull.content || '';
+  const range = sel.getRangeAt(0);
+  const startOff = getTextOffset(display, range.startContainer, range.startOffset);
+  const endOff = getTextOffset(display, range.endContainer, range.endOffset);
+  if (startOff === -1 || endOff === -1 || startOff >= endOff) return;
+
+  pendingSelection.text = fullText.slice(startOff, endOff);
+  pendingSelection.start = startOff;
+  pendingSelection.end = endOff;
+  popupText.textContent = pendingSelection.text.length > 200
+    ? pendingSelection.text.slice(0, 200) + '…' : pendingSelection.text;
+  showPopup(e.clientX, e.clientY);
+  sel.removeAllRanges();
+});
+
+function getTextOffset(root, node, offset) {
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+  let count = 0;
+  while (walker.nextNode()) {
+    if (walker.currentNode.parentElement && walker.currentNode.parentElement.classList.contains('dim-tag')) continue;
+    if (walker.currentNode === node) return count + offset;
+    count += walker.currentNode.textContent.length;
+  }
+  return -1;
+}
+
+// ─── Save / Export ────────────────────────────────
+async function autoSave() {
+  if (!currentPromptFull) return;
+  currentNotes = annNotes.value;
+  try {
+    await fetch('/api/save_annotations', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt_id: currentPromptFull.id, spans: currentSpans, notes: currentNotes }),
+    });
+    const idx = rangePrompts.findIndex(p => p.id === currentPromptFull.id);
+    if (idx !== -1) rangePrompts[idx].span_count = currentSpans.length;
+    renderPromptList(listSearch.value);
+  } catch (err) { console.error('Save failed:', err); }
+}
+
+async function doExport() {
+  try {
+    await autoSave();
+    const res = await fetch('/api/export', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ reviewer_name: config.name, start: config.start - 1, end: config.end }),
+    });
+    const result = await res.json();
+    showToast(`✓ Exported ${result.annotated_count} annotated prompts`);
+    const a = document.createElement('a');
+    a.href = `/api/download/${result.filename}`; a.download = result.filename; a.click();
+  } catch (err) { showToast('Export failed: ' + err.message, true); }
+}
+
+btnSave.addEventListener('click', async () => { await autoSave(); showToast('✓ Saved'); });
+btnExport.addEventListener('click', doExport);
+
+// ─── Navigation ──────────────────────────────────
+async function loadAndRender() {
+  if (rangePrompts.length === 0) return;
+  const p = rangePrompts[currentIndex];
+  await loadPromptDetail(p.id);
+  renderPromptList(listSearch.value);
+  renderPromptContent();
+  renderAnnotations();
+  navCounter.textContent = `${currentIndex + 1}/${rangePrompts.length}`;
+  btnPrev.disabled = currentIndex === 0;
+  btnNext.disabled = currentIndex >= rangePrompts.length - 1;
+}
+
+btnPrev.addEventListener('click', async () => { if (currentIndex > 0) { await autoSave(); currentIndex--; await loadAndRender(); } });
+btnNext.addEventListener('click', async () => { if (currentIndex < rangePrompts.length - 1) { await autoSave(); currentIndex++; await loadAndRender(); } });
+btnJump.addEventListener('click', async () => {
+  const n = parseInt(navJump.value);
+  if (n >= 1 && n <= rangePrompts.length) { await autoSave(); currentIndex = n - 1; await loadAndRender(); navJump.value = ''; }
+  else showToast(`Please enter 1-${rangePrompts.length}`, true);
+});
+navJump.addEventListener('keydown', e => { if (e.key === 'Enter') btnJump.click(); });
+listSearch.addEventListener('input', () => renderPromptList(listSearch.value));
+btnFilterAnnotated.addEventListener('click', () => {
+  filterAnnotatedOnly = !filterAnnotatedOnly;
+  btnFilterAnnotated.classList.toggle('active', filterAnnotatedOnly);
+  const annotatedCount = rangePrompts.filter(p => p.span_count > 0).length;
+  btnFilterAnnotated.textContent = filterAnnotatedOnly
+    ? `📌 Annotated Only (${annotatedCount})`
+    : '📌 Annotated Only';
+  renderPromptList(listSearch.value);
+});
+
+// Keyboard shortcuts
+document.addEventListener('keydown', e => {
+  if (['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)) return;
+  if (selectionPopup.classList.contains('show')) { if (e.key === 'Escape') hidePopup(); return; }
+  if (e.key === 'ArrowLeft' || e.key === 'a') btnPrev.click();
+  else if (e.key === 'ArrowRight' || e.key === 'd') btnNext.click();
+});
+
+// ─── Setup ───────────────────────────────────────
+setupStartBtn.addEventListener('click', async () => {
+  const name = inputName.value.trim();
+  const start = parseInt(inputStart.value);
+  const end = parseInt(inputEnd.value);
+  if (!name) { showToast('Please enter your name', true); return; }
+  if (isNaN(start) || isNaN(end) || start < 1 || end < start || end > allPrompts.length) {
+    showToast(`Please enter a valid range (1-${allPrompts.length})`, true); return;
+  }
+  config = { name, start, end };
+  rangePrompts = allPrompts.slice(start - 1, end);
+  currentIndex = 0;
+  headerBadge.textContent = `${name} · ${start}-${end}`;
+  promptListTotal.textContent = `(${rangePrompts.length})`;
+  setupPage.style.display = 'none';
+  appContainer.style.display = 'flex';
+  renderPromptList();
+  await loadAndRender();
+});
+
+// ─── Init ────────────────────────────────────────
+loadPrompts();
+</script>
+</body>
+</html>
+

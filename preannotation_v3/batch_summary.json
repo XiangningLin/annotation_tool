@@ -1,0 +1,173 @@
+{
+  "batch_info": {
+    "total_prompts": 20,
+    "processed": 20,
+    "failed": 0,
+    "total_time_seconds": 6049.5,
+    "total_cost_usd": 10.1513,
+    "model": "anthropic/claude-opus-4.6",
+    "timestamp": "2026-02-25 00:12:19"
+  },
+  "prompts": [
+    {
+      "company": "Poke",
+      "filename": "Poke_p1.txt",
+      "total_spans": 69,
+      "cost_usd": 0.6419,
+      "time_seconds": 391.8,
+      "status": "success"
+    },
+    {
+      "company": "OpenAI",
+      "filename": "gpt4o_12102024.md",
+      "total_spans": 47,
+      "cost_usd": 0.5057,
+      "time_seconds": 285.9,
+      "status": "success"
+    },
+    {
+      "company": "Anthropic",
+      "filename": "20240712-Claude3.5-Sonnet.md",
+      "total_spans": 55,
+      "cost_usd": 0.4625,
+      "time_seconds": 288.2,
+      "status": "success"
+    },
+    {
+      "company": "Google",
+      "filename": "gemini-2.0-flash-thinking-gemini-app-03072025.md",
+      "total_spans": 75,
+      "cost_usd": 0.5092,
+      "time_seconds": 301.7,
+      "status": "success"
+    },
+    {
+      "company": "Microsoft",
+      "filename": "microsoft_copilot_website_02252025.md",
+      "total_spans": 63,
+      "cost_usd": 0.8853,
+      "time_seconds": 494.9,
+      "status": "success"
+    },
+    {
+      "company": "xAI",
+      "filename": "20240821-Grok2.md",
+      "total_spans": 45,
+      "cost_usd": 0.4278,
+      "time_seconds": 252.2,
+      "status": "success"
+    },
+    {
+      "company": "Meta",
+      "filename": "metaai_llama3-04182024.md",
+      "total_spans": 130,
+      "cost_usd": 0.748,
+      "time_seconds": 361.1,
+      "status": "success"
+    },
+    {
+      "company": "Cursor",
+      "filename": "CursorAgileModeSystemPrompt.md",
+      "total_spans": 74,
+      "cost_usd": 0.5189,
+      "time_seconds": 310.5,
+      "status": "success"
+    },
+    {
+      "company": "Perplexity",
+      "filename": "20240320-Perplexity.md",
+      "total_spans": 41,
+      "cost_usd": 0.3913,
+      "time_seconds": 249.1,
+      "status": "success"
+    },
+    {
+      "company": "Devin",
+      "filename": "Devin_2.0.md",
+      "total_spans": 68,
+      "cost_usd": 0.4649,
+      "time_seconds": 277.1,
+      "status": "success"
+    },
+    {
+      "company": "Lovable",
+      "filename": "system.md",
+      "total_spans": 43,
+      "cost_usd": 0.5108,
+      "time_seconds": 290.2,
+      "status": "success"
+    },
+    {
+      "company": "DIA",
+      "filename": "Dia_DraftSkill.txt",
+      "total_spans": 69,
+      "cost_usd": 0.6223,
+      "time_seconds": 330.4,
+      "status": "success"
+    },
+    {
+      "company": "Hume",
+      "filename": "05052024-system-prompt.md",
+      "total_spans": 41,
+      "cost_usd": 0.7701,
+      "time_seconds": 445.0,
+      "status": "success"
+    },
+    {
+      "company": "Venice",
+      "filename": "Venice.md",
+      "total_spans": 32,
+      "cost_usd": 0.4655,
+      "time_seconds": 300.0,
+      "status": "success"
+    },
+    {
+      "company": "Orchids",
+      "filename": "Decision-making prompt.txt",
+      "total_spans": 39,
+      "cost_usd": 0.4908,
+      "time_seconds": 309.3,
+      "status": "success"
+    },
+    {
+      "company": "Cluely",
+      "filename": "Cluely.mkd",
+      "total_spans": 56,
+      "cost_usd": 0.4959,
+      "time_seconds": 318.1,
+      "status": "success"
+    },
+    {
+      "company": "Moonshot",
+      "filename": "Kimi_K2_Thinking.txt",
+      "total_spans": 21,
+      "cost_usd": 0.2474,
+      "time_seconds": 172.7,
+      "status": "success"
+    },
+    {
+      "company": "DeepSeek",
+      "filename": "R1.md",
+      "total_spans": 38,
+      "cost_usd": 0.256,
+      "time_seconds": 166.4,
+      "status": "success"
+    },
+    {
+      "company": "Manus",
+      "filename": "Agent loop.txt",
+      "total_spans": 34,
+      "cost_usd": 0.3071,
+      "time_seconds": 211.5,
+      "status": "success"
+    },
+    {
+      "company": "Raycast",
+      "filename": "RaycastAI.md",
+      "total_spans": 48,
+      "cost_usd": 0.4299,
+      "time_seconds": 255.3,
+      "status": "success"
+    }
+  ]
+}

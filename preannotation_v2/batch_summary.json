@@ -1,0 +1,232 @@
+{
+  "batch_info": {
+    "total_prompts": 20,
+    "processed": 20,
+    "failed": 0,
+    "total_time_seconds": 6205.6,
+    "total_cost_usd": 9.7307,
+    "timestamp": "2026-02-24 18:32:14"
+  },
+  "prompts": [
+    {
+      "index": 148,
+      "company": "Poke",
+      "filename": "Poke_p1.txt",
+      "size_bytes": 10153,
+      "num_segments": 28,
+      "coverage_pct": 100.0,
+      "cost_usd": 0.6146,
+      "time_seconds": 381.4,
+      "status": "success"
+    },
+    {
+      "index": 93,
+      "company": "OpenAI",
+      "filename": "gpt4o_12102024.md",
+      "size_bytes": 8042,
+      "num_segments": 20,
+      "coverage_pct": 100.0,
+      "cost_usd": 0.4807,
+      "time_seconds": 320.0,
+      "status": "success"
+    },
+    {
+      "index": 1,
+      "company": "Anthropic",
+      "filename": "20240712-Claude3.5-Sonnet.md",
+      "size_bytes": 5790,
+      "num_segments": 19,
+      "coverage_pct": 58.3,
+      "cost_usd": 0.4427,
+      "time_seconds": 301.3,
+      "status": "success"
+    },
+    {
+      "index": 2,
+      "company": "Google",
+      "filename": "gemini-2.0-flash-thinking-gemini-app-03072025.md",
+      "size_bytes": 6858,
+      "num_segments": 24,
+      "coverage_pct": 100.0,
+      "cost_usd": 0.5704,
+      "time_seconds": 317.7,
+      "status": "success"
+    },
+    {
+      "index": 3,
+      "company": "Microsoft",
+      "filename": "microsoft_copilot_website_02252025.md",
+      "size_bytes": 14315,
+      "num_segments": 0,
+      "coverage_pct": 0.0,
+      "cost_usd": 0.4708,
+      "time_seconds": 296.4,
+      "status": "success"
+    },
+    {
+      "index": 61,
+      "company": "xAI",
+      "filename": "20240821-Grok2.md",
+      "size_bytes": 4617,
+      "num_segments": 8,
+      "coverage_pct": 100.0,
+      "cost_usd": 0.4024,
+      "time_seconds": 288.9,
+      "status": "success"
+    },
+    {
+      "index": 63,
+      "company": "Meta",
+      "filename": "metaai_llama3-04182024.md",
+      "size_bytes": 14973,
+      "num_segments": 35,
+      "coverage_pct": 100.0,
+      "cost_usd": 0.7753,
+      "time_seconds": 438.6,
+      "status": "success"
+    },
+    {
+      "index": 62,
+      "company": "Cursor",
+      "filename": "CursorAgileModeSystemPrompt.md",
+      "size_bytes": 6804,
+      "num_segments": 14,
+      "coverage_pct": 99.8,
+      "cost_usd": 0.5079,
+      "time_seconds": 342.9,
+      "status": "success"
+    },
+    {
+      "index": 9,
+      "company": "Perplexity",
+      "filename": "20240320-Perplexity.md",
+      "size_bytes": 5516,
+      "num_segments": 17,
+      "coverage_pct": 100.0,
+      "cost_usd": 0.4001,
+      "time_seconds": 264.0,
+      "status": "success"
+    },
+    {
+      "index": 67,
+      "company": "Devin",
+      "filename": "Devin_2.0.md",
+      "size_bytes": 6056,
+      "num_segments": 19,
+      "coverage_pct": 100.0,
+      "cost_usd": 0.4951,
+      "time_seconds": 304.2,
+      "status": "success"
+    },
+    {
+      "index": 11,
+      "company": "Lovable",
+      "filename": "system.md",
+      "size_bytes": 9045,
+      "num_segments": 25,
+      "coverage_pct": 100.0,
+      "cost_usd": 0.4547,
+      "time_seconds": 287.9,
+      "status": "success"
+    },
+    {
+      "index": 17,
+      "company": "DIA",
+      "filename": "Dia_DraftSkill.txt",
+      "size_bytes": 8922,
+      "num_segments": 0,
+      "coverage_pct": 0.0,
+      "cost_usd": 0.4632,
+      "time_seconds": 277.3,
+      "status": "success"
+    },
+    {
+      "index": 42,
+      "company": "Hume",
+      "filename": "05052024-system-prompt.md",
+      "size_bytes": 8690,
+      "num_segments": 24,
+      "coverage_pct": 79.8,
+      "cost_usd": 0.7741,
+      "time_seconds": 461.5,
+      "status": "success"
+    },
+    {
+      "index": 52,
+      "company": "Venice",
+      "filename": "Venice.md",
+      "size_bytes": 2104,
+      "num_segments": 13,
+      "coverage_pct": 47.3,
+      "cost_usd": 0.5698,
+      "time_seconds": 394.8,
+      "status": "success"
+    },
+    {
+      "index": 31,
+      "company": "Orchids",
+      "filename": "Decision-making prompt.txt",
+      "size_bytes": 6820,
+      "num_segments": 23,
+      "coverage_pct": 100.0,
+      "cost_usd": 0.4995,
+      "time_seconds": 330.8,
+      "status": "success"
+    },
+    {
+      "index": 25,
+      "company": "Cluely",
+      "filename": "Cluely.mkd",
+      "size_bytes": 4759,
+      "num_segments": 14,
+      "coverage_pct": 100.0,
+      "cost_usd": 0.5723,
+      "time_seconds": 387.5,
+      "status": "success"
+    },
+    {
+      "index": 29,
+      "company": "Moonshot",
+      "filename": "Kimi_K2_Thinking.txt",
+      "size_bytes": 955,
+      "num_segments": 6,
+      "coverage_pct": 100.0,
+      "cost_usd": 0.2426,
+      "time_seconds": 193.7,
+      "status": "success"
+    },
+    {
+      "index": 84,
+      "company": "DeepSeek",
+      "filename": "R1.md",
+      "size_bytes": 1368,
+      "num_segments": 7,
+      "coverage_pct": 100.0,
+      "cost_usd": 0.3018,
+      "time_seconds": 202.7,
+      "status": "success"
+    },
+    {
+      "index": 18,
+      "company": "Manus",
+      "filename": "Agent loop.txt",
+      "size_bytes": 2147,
+      "num_segments": 5,
+      "coverage_pct": 100.0,
+      "cost_usd": 0.2296,
+      "time_seconds": 167.8,
+      "status": "success"
+    },
+    {
+      "index": 50,
+      "company": "Raycast",
+      "filename": "RaycastAI.md",
+      "size_bytes": 6869,
+      "num_segments": 0,
+      "coverage_pct": 0.0,
+      "cost_usd": 0.4631,
+      "time_seconds": 207.9,
+      "status": "success"
+    }
+  ]
+}

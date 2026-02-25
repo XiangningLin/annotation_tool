@@ -1,0 +1,1057 @@
+================================================================================
+System Prompt Audit — Final 190 Prompts
+Data File: audit_prompts.json
+================================================================================
+
+Total: 190 prompts, 57 companies, 3470 KB
+
+--------------------------------------------------------------------------------
+#    Company              Count        Size
+--------------------------------------------------------------------------------
+1    OpenAI               19           426.7 KB
+2    Anthropic            14           640.9 KB
+3    Google               12           166.1 KB
+4    Microsoft            11           161.5 KB
+5    xAI                  10           94.8 KB
+6    Cursor               7            109.6 KB
+7    Meta                 7            30.3 KB
+8    Poke                 7            38.1 KB
+9    OpenSource           6            146.3 KB
+10   Perplexity           6            98.2 KB
+11   Devin                5            123.7 KB
+12   Lovable              5            116.6 KB
+13   Windsurf             5            107.1 KB
+14   Misc                 4            57.5 KB
+15   Amazon               3            35.0 KB
+16   Augment              3            42.7 KB
+17   ByteDance            3            29.6 KB
+18   DIA                  3            46.2 KB
+19   Manus                3            25.7 KB
+20   Replit               3            19.1 KB
+21   Same.dev             3            62.5 KB
+22   Apple                2            5.8 KB
+23   Blackbox             2            93.7 KB
+24   Brave                2            5.6 KB
+25   ChatWise             2            27.6 KB
+26   Cluely               2            25.4 KB
+27   CodeBuddy            2            40.5 KB
+28   DeepSeek             2            4.8 KB
+29   Mistral              2            12.1 KB
+30   Moonshot             2            2.3 KB
+31   Notion               2            40.8 KB
+32   Orchids              2            64.0 KB
+33   Sourcegraph          2            125.3 KB
+34   StackBlitz           2            29.3 KB
+35   Traycer              2            9.8 KB
+36   Vercel               2            101.4 KB
+37   Atlassian            1            4.2 KB
+38   Cline                1            61.5 KB
+39   Docker               1            2.7 KB
+40   Emergent             1            36.1 KB
+41   Factory              1            16.4 KB
+42   GitHub               1            11.8 KB
+43   Hume                 1            8.5 KB
+44   JetBrains            1            6.0 KB
+45   Leap                 1            51.2 KB
+46   MiniMax              1            2.4 KB
+47   MultiOn              1            9.1 KB
+48   Proton               1            6.2 KB
+49   Qoder                1            25.5 KB
+50   Qwen                 1            9.1 KB
+51   Raycast              1            6.7 KB
+52   SleepHQ              1            6.7 KB
+53   Venice               1            2.1 KB
+54   Warp                 1            14.3 KB
+55   Wegic                1            7.9 KB
+56   Wordware             1            5.9 KB
+57   Z.ai                 1            9.4 KB
+--------------------------------------------------------------------------------
+
+
+================================================================================
+📂 OpenAI (19 prompts, 426.7 KB)
+================================================================================
+   1. ChatGPT-4o Full (Jul 2025)
+      File: chatgpt_4o_full_07292025.md
+      Date: 07292025 | Size: 17.7KB | Type: Chat / General
+
+   2. ChatGPT-5 (Aug 2025)
+      File: chatgpt_5_08072025.md
+      Date: 08072025 | Size: 21.9KB | Type: Chat / General
+
+   3. GPT-4o (Dec 2024)
+      File: gpt4o_12102024.md
+      Date: 12102024 | Size: 7.9KB | Type: Chat / General
+
+   4. GPT-4 Advanced Data Analysis (Oct 2023)
+      File: gpt4_advanced_data_analysis_20231018.md
+      Date: 20231018 | Size: 0.6KB | Type: Chat / General
+
+   5. GPT-4 DALL·E + Browsing (Nov 2023)
+      File: gpt4_dalle_browsing_analysis_20231110.md
+      Date: 20231110 | Size: 9.2KB | Type: Chat / General
+
+   6. GPT-5.1 Default
+      File: gpt-5.1-default.md
+      Size: 1.2KB | Type: Chat / General
+
+   7. GPT-4o Advanced Voice Mode
+      File: GPT-4o-advanced-voice-mode.md
+      Size: 2.2KB | Type: Voice
+
+   8. GPT-5.1 Nerdy
+      File: gpt-5.1-nerdy.md
+      Size: 3.4KB | Type: Chat / General
+
+   9. OpenAI Operator (Browser Agent)
+      File: operator.md
+      Size: 5.7KB | Type: Chat / General
+
+  10. GPT-4.5
+      File: GPT-4.5.md
+      Size: 10.8KB | Type: Chat / General
+
+  11. ChatGPT Agent
+      File: chatgpt_agent_system_prompt.md
+      Size: 23.3KB | Type: Chat / General
+
+  12. OpenAI Codex CLI
+      File: codex-cli.md
+      Size: 24.7KB | Type: Code Agent
+
+  13. GPT-4o with Canvas
+      File: gpt40_with_canvas.md
+      Size: 29.0KB | Type: Chat / General
+
+  14. GPT-4o Deprecation Guide (Feb 2026)
+      File: 2026-02-04-GPT-4o-with-deprecation-guideline.md
+      Size: 30.8KB | Type: Chat / General
+
+  15. OpenAI o3
+      File: o3.md
+      Size: 31.4KB | Type: Chat / General
+
+  16. OpenAI Atlas / Deep Research (Oct 2025)
+      File: Atlas_10-21-25.txt
+      Size: 32.6KB | Type: Chat / General
+
+  17. GPT-5 Thinking
+      File: gpt-5-thinking.md
+      Size: 77.1KB | Type: Chat / General
+
+  18. GPT-5.2 Thinking
+      File: gpt-5.2-thinking.md
+      Size: 85.8KB | Type: Chat / General
+
+  19. OpenAI Codex (Sep 2025)
+      File: Codex_Sep-15-2025.md
+      Date: Sep-15-2025 | Size: 11.4KB | Type: Code Agent
+
+
+================================================================================
+📂 Anthropic (14 prompts, 640.9 KB)
+================================================================================
+   1. Claude 3.5 Sonnet (Jul 2024)
+      File: 20240712-Claude3.5-Sonnet.md
+      Date: 20240712 | Size: 5.7KB | Type: Chat / General
+
+   2. Claude 3.7 Sonnet (Feb 2025)
+      File: 20250225-Claude3.7-Sonnet.md
+      Date: 20250225 | Size: 13.7KB | Type: Chat / General
+
+   3. Claude Sonnet 4 (Jun 2025)
+      File: 20250603-Claude-Sonnet4.md
+      Date: 20250603 | Size: 32.5KB | Type: Chat / General
+
+   4. Claude Sonnet 4.5 (Oct 2025)
+      File: 20251028-Claude-Sonnet4.5.md
+      Date: 20251028 | Size: 85.2KB | Type: Chat / General
+
+   5. Claude Code (Mar 2024)
+      File: Claude_Code_03-04-24.md
+      Size: 1.6KB | Type: Code Agent
+
+   6. Claude Code — CLI Agent
+      File: Prompt.txt
+      Size: 12.7KB | Type: Code Agent
+
+   7. Claude — Research Lead Agent
+      File: research_lead_agent.md
+      Size: 22.6KB | Type: Research
+
+   8. Claude for Excel
+      File: claude-for-excel.md
+      Size: 33.6KB | Type: Chat / General
+
+   9. Claude for Chrome (Web Automation)
+      File: Prompt.txt
+      Size: 42.6KB | Type: Chat / General
+
+  10. Claude in Chrome
+      File: claude-in-chrome.md
+      Size: 45.8KB | Type: Chat / General
+
+  11. Claude Code 2.0
+      File: Claude Code 2.0.txt
+      Size: 56.0KB | Type: Code Agent
+
+  12. Claude Code (Latest)
+      File: claude-code.md
+      Size: 76.3KB | Type: Code Agent
+
+  13. Claude Opus 4.6
+      File: Claude_Opus_4.6.txt
+      Size: 100.2KB | Type: Chat / General
+
+  14. Claude Cowork
+      File: claude-cowork.md
+      Size: 112.5KB | Type: Chat / General
+
+
+================================================================================
+📂 Google (12 prompts, 166.1 KB)
+================================================================================
+   1. Gemini 2.0 Flash Thinking (Mar 2025)
+      File: gemini-2.0-flash-thinking-gemini-app-03072025.md
+      Date: 03072025 | Size: 6.7KB | Type: Chat / General
+
+   2. Gemini 1.5 (Apr 2024)
+      File: gemini-1.5-04112024.md
+      Date: 04112024 | Size: 1.6KB | Type: Chat / General
+
+   3. Gemini 2.5 Pro — IMO (Jul 2025)
+      File: 20250723-gemini-2.5-pro-imo.md
+      Date: 20250723 | Size: 8.6KB | Type: Chat / General
+
+   4. Google Jules — Code Agent (Aug 2025)
+      File: 20250804-Jules.md
+      Date: 20250804 | Size: 13.7KB | Type: Chat / General
+
+   5. Google NotebookLM (Nov 2025)
+      File: 20251110-notebooklm.md
+      Date: 20251110 | Size: 2.4KB | Type: Chat / General
+
+   6. Google Veo / Antigravity (Nov 2025)
+      File: 20251118-Antigravity.md
+      Date: 20251118 | Size: 45.1KB | Type: Chat / General
+
+   7. Gemini 3 Fast
+      File: Gemini-3-fast.md
+      Size: 10.1KB | Type: Chat / General
+
+   8. Gemini in Chrome
+      File: gemini_in_chrome.md
+      Size: 11.3KB | Type: Chat / General
+
+   9. Gemini 3 Pro
+      File: gemini-3-pro.md
+      Size: 13.9KB | Type: Chat / General
+
+  10. Gemini 2.5 Pro — Guided Learning
+      File: gemini-2.5-pro-guided-learning.md
+      Size: 15.1KB | Type: Chat / General
+
+  11. Gemini CLI
+      File: Gemini-cli system prompt.md
+      Size: 16.9KB | Type: Chat / General
+
+  12. Gemini Workspace
+      File: gemini-workspace.md
+      Size: 20.7KB | Type: Chat / General
+
+
+================================================================================
+📂 Microsoft (11 prompts, 161.5 KB)
+================================================================================
+   1. MS Copilot Web (Feb 2025)
+      File: microsoft_copilot_website_02252025.md
+      Date: 02252025 | Size: 14.0KB | Type: Code Assistant
+
+   2. GitHub Copilot VSCode (Feb 2024)
+      File: github_copilot_vscode_02292024.md
+      Date: 02292024 | Size: 1.7KB | Type: Code Assistant
+
+   3. MS Copilot Preview (Mar 2024)
+      File: microsoft_copilot_preview_03212024.md
+      Date: 03212024 | Size: 9.5KB | Type: Code Assistant
+
+   4. MS Copilot Web (Sep 2025)
+      File: microsoft_copilot_website_09192025.md
+      Date: 09192025 | Size: 28.3KB | Type: Code Assistant
+
+   5. MS Copilot Desktop (Nov 2024)
+      File: microsoft_copilot_desktop_11132024.md
+      Date: 11132024 | Size: 6.3KB | Type: Code Assistant
+
+   6. MS Copilot 365 Enterprise (Dec 2025)
+      File: microsoft_copilot_enterprise_20251202.md
+      Date: 20251202 | Size: 24.4KB | Type: Code Assistant
+
+   7. GitHub Copilot CLI (Jan 2026)
+      File: github_copilot_cli_20260121.md
+      Date: 20260121 | Size: 18.8KB | Type: Code Assistant
+
+   8. Microsoft GraphRAG
+      File: GraphRAG.md
+      Size: 2.3KB | Type: Code Assistant
+
+   9. Azure OpenAI GPT-4.1
+      File: gpt-4.1.txt
+      Size: 10.8KB | Type: Code Assistant
+
+  10. MS Copilot — Agent Mode
+      File: Prompt.txt
+      Size: 20.5KB | Type: Code Assistant
+
+  11. Azure OpenAI GPT-5
+      File: gpt-5.txt
+      Size: 24.9KB | Type: Code Assistant
+
+
+================================================================================
+📂 xAI (10 prompts, 94.8 KB)
+================================================================================
+   1. Grok (Dec 2023)
+      File: 20231214-Grok.md
+      Date: 20231214 | Size: 0.7KB | Type: Chat / General
+
+   2. Grok 2 (Aug 2024)
+      File: 20240821-Grok2.md
+      Date: 20240821 | Size: 4.5KB | Type: Chat / General
+
+   3. Grok 4 (Oct 2025)
+      File: 20251027-Grok4.md
+      Date: 20251027 | Size: 3.0KB | Type: Chat / General
+
+   4. Grok 3 — Unhinged Comedian Persona
+      File: Grok3_Persona_Unhinged_Comedian.md
+      Size: 4.3KB | Type: Chat / General
+
+   5. Grok 3 Official (Mar 2025)
+      File: grok3_official0330_p1.j2
+      Size: 4.5KB | Type: Chat / General
+
+   6. Grok 4.1 Beta
+      File: grok-4.1-beta.md
+      Size: 14.3KB | Type: Chat / General
+
+   7. Grok 4.2
+      File: grok-4.2.md
+      Size: 16.9KB | Type: Chat / General
+
+   8. Grok — New Safety Policy
+      File: grok.com-post-new-safety-instructions.md
+      Size: 19.7KB | Type: Chat / General
+
+   9. Grok — Personas System
+      File: grok-personas.md
+      Size: 23.1KB | Type: Chat / General
+
+  10. Grok Code Fast 1 (Aug 2025)
+      File: Grok-Code-Fast-1_Aug-26-2025.txt
+      Date: Aug-26-2025 | Size: 3.8KB | Type: Code Agent
+
+
+================================================================================
+📂 Cursor (7 prompts, 109.6 KB)
+================================================================================
+   1. Cursor (Sep 2024)
+      File: 20240904-Cursor.md
+      Date: 20240904 | Size: 1.4KB | Type: Code Editor / IDE
+
+   2. Cursor — Agile Mode
+      File: CursorAgileModeSystemPrompt.md
+      Size: 6.6KB | Type: Code Editor / IDE
+
+   3. Cursor Agent v1.0
+      File: Agent Prompt v1.0.txt
+      Size: 8.8KB | Type: Code Editor / IDE
+
+   4. Cursor Agent CLI (Aug 2025)
+      File: Agent CLI Prompt 2025-08-07.txt
+      Size: 13.7KB | Type: Code Editor / IDE
+
+   5. Cursor Agent (Sep 2025)
+      File: Agent Prompt 2025-09-03.txt
+      Size: 18.6KB | Type: Code Editor / IDE
+
+   6. Cursor 2.0
+      File: Cursor_2.0_Sys_Prompt.txt
+      Size: 22.5KB | Type: Code Editor / IDE
+
+   7. Cursor Agent 2.0
+      File: Agent Prompt 2.0.txt
+      Size: 37.9KB | Type: Code Editor / IDE
+
+
+================================================================================
+📂 Meta (7 prompts, 30.3 KB)
+================================================================================
+   1. Meta AI / Llama 4 (Apr 2025)
+      File: metaai_llama4-04082025.md
+      Date: 04082025 | Size: 1.6KB | Type: Chat / General
+
+   2. Meta AI / Llama 3 (Apr 2024)
+      File: metaai_llama3-04182024.md
+      Date: 04182024 | Size: 14.6KB | Type: Chat / General
+
+   3. Meta AI Llama 4 WhatsApp (Jul 2025)
+      File: metaai_llama4-whatsapp-07292025.md
+      Date: 07292025 | Size: 4.0KB | Type: Chat / General
+
+   4. Meta AI (General)
+      File: MetaAI.txt
+      Size: 1.5KB | Type: Chat / General
+
+   5. Meta Llama 4
+      File: LLama4.txt
+      Size: 2.2KB | Type: Chat / General
+
+   6. Meta AI — Hidden Prompt (Leaked)
+      File: MetaAIHiddenPrompt.md
+      Size: 4.2KB | Type: Chat / General
+
+   7. Meta AI WhatsApp / Llama 4 (Jul 2025)
+      File: Whatsapp-LLama4-Jul-19-2025.md
+      Date: Jul-19-2025 | Size: 2.1KB | Type: Chat / General
+
+
+================================================================================
+📂 Poke (7 prompts, 38.1 KB)
+================================================================================
+   1. Poke AI — Prompt v5
+      File: Poke_p5.txt
+      Size: 1.1KB | Type: Social AI
+
+   2. Poke AI — Prompt v6
+      File: Poke_p6.txt
+      Size: 1.7KB | Type: Social AI
+
+   3. Poke AI — Prompt v2
+      File: Poke_p2.txt
+      Size: 2.4KB | Type: Social AI
+
+   4. Poke AI — Prompt v3
+      File: Poke_p3.txt
+      Size: 5.4KB | Type: Social AI
+
+   5. Poke AI — Prompt v4
+      File: Poke_p4.txt
+      Size: 5.7KB | Type: Social AI
+
+   6. Poke AI — Prompt v1
+      File: Poke_p1.txt
+      Size: 9.9KB | Type: Social AI
+
+   7. Poke AI — Agent
+      File: Poke agent.txt
+      Size: 11.9KB | Type: Social AI
+
+
+================================================================================
+📂 OpenSource (6 prompts, 146.3 KB)
+================================================================================
+   1. Codex CLI (Open Source, Aug 2025)
+      File: openai-codex-cli-system-prompt-20250820.txt
+      Date: 20250820 | Size: 23.2KB | Type: Other
+
+   2. Codex CLI (Open Source)
+      File: Prompt.txt
+      Size: 4.7KB | Type: Other
+
+   3. Lumo (Open Source)
+      File: Prompt.txt
+      Size: 8.0KB | Type: Other
+
+   4. Bolt.new (Open Source)
+      File: Prompt.txt
+      Size: 21.4KB | Type: Other
+
+   5. RooCode (Open Source)
+      File: Prompt.txt
+      Size: 42.9KB | Type: Other
+
+   6. Cline (Open Source)
+      File: Prompt.txt
+      Size: 46.0KB | Type: Other
+
+
+================================================================================
+📂 Perplexity (6 prompts, 98.2 KB)
+================================================================================
+   1. Perplexity (Mar 2024)
+      File: 20240320-Perplexity.md
+      Date: 20240320 | Size: 5.4KB | Type: Search / Research
+
+   2. Perplexity Pro (Dec 2024)
+      File: 20241212-Perplexity-Pro.md
+      Date: 20241212 | Size: 6.0KB | Type: Search / Research
+
+   3. Perplexity Voice Assistant
+      File: voice-assistant.md
+      Size: 2.0KB | Type: Search / Research
+
+   4. Perplexity Deep Research
+      File: Perplexity_Deep_Research.txt
+      Size: 7.4KB | Type: Search / Research
+
+   5. Perplexity Comet (Browser)
+      File: comet-browser-assistant.md
+      Size: 24.8KB | Type: Search / Research
+
+   6. Perplexity — Latest System Prompt
+      File: System Prompt.txt
+      Size: 52.6KB | Type: Search / Research
+
+
+================================================================================
+📂 Devin (5 prompts, 123.7 KB)
+================================================================================
+   1. Devin — DeepWiki Agent
+      File: DeepWiki Prompt.txt
+      Size: 5.4KB | Type: Autonomous Agent
+
+   2. Devin 2.0
+      File: Devin_2.0.md
+      Size: 5.9KB | Type: Autonomous Agent
+
+   3. Devin 2.0 — Commands
+      File: Devin_2.0_Commands.md
+      Size: 28.9KB | Type: Autonomous Agent
+
+   4. Devin Agent (System)
+      File: system.md
+      Size: 33.9KB | Type: Autonomous Agent
+
+   5. Devin 2 (Sep 2025)
+      File: Devin2_09-08-2025.md
+      Size: 49.6KB | Type: Autonomous Agent
+
+
+================================================================================
+📂 Lovable (5 prompts, 116.6 KB)
+================================================================================
+   1. Lovable — System (Early)
+      File: system.md
+      Size: 8.8KB | Type: Web Development
+
+   2. Lovable 2.0
+      File: Lovable_2.0.txt
+      Size: 16.2KB | Type: Web Development
+
+   3. Lovable — Agent (v1)
+      File: AgentPrompt.md
+      Size: 19.2KB | Type: Web Development
+
+   4. Lovable — Agent (v2)
+      File: Agent Prompt.txt
+      Size: 19.8KB | Type: Web Development
+
+   5. Lovable — Latest
+      File: Prompt.md
+      Size: 52.6KB | Type: Web Development
+
+
+================================================================================
+📂 Windsurf (5 prompts, 107.1 KB)
+================================================================================
+   1. Windsurf — Chat Mode
+      File: WinSurfChatModeSystemPrompt.md
+      Size: 8.9KB | Type: Code Editor / IDE
+
+   2. Windsurf Wave 11
+      File: Prompt Wave 11.txt
+      Size: 11.4KB | Type: Code Editor / IDE
+
+   3. Windsurf — Tools Definition
+      File: Windsurf_Tools.md
+      Size: 24.2KB | Type: Code Editor / IDE
+
+   4. Windsurf Agent (Apr 2025)
+      File: system-2025-04-20.md
+      Size: 30.5KB | Type: Code Editor / IDE
+
+   5. Windsurf Wave 11 — Tools (Aug 2025)
+      File: 2025-08-11-wave11-tools.md
+      Size: 32.1KB | Type: Code Editor / IDE
+
+
+================================================================================
+📂 Misc (4 prompts, 57.5 KB)
+================================================================================
+   1. Kagi Assistant
+      File: Kagi Assistant.md
+      Size: 5.1KB | Type: Other
+
+   2. Copilot in Microsoft Word
+      File: copilot-in-microsoft-word.md
+      Size: 14.9KB | Type: Other
+
+   3. Sesame AI — Maya
+      File: Sesame-AI-Maya.md
+      Size: 15.2KB | Type: Other
+
+   4. Fellou Browser Agent
+      File: Fellou-browser.md
+      Size: 22.2KB | Type: Other
+
+
+================================================================================
+📂 Amazon (3 prompts, 35.0 KB)
+================================================================================
+   1. Amazon Rufus (Shopping Assistant)
+      File: Rufus.md
+      Size: 1.0KB | Type: Other
+
+   2. Amazon Kiro — Mode Classifier
+      File: Mode_Clasifier_Prompt.txt
+      Size: 2.8KB | Type: Other
+
+   3. Amazon Kiro — Spec Agent
+      File: Spec_Prompt.txt
+      Size: 31.2KB | Type: Other
+
+
+================================================================================
+📂 Augment (3 prompts, 42.7 KB)
+================================================================================
+   1. Augment Code (Jul 2025)
+      File: 20250724-augmentcode.md
+      Date: 20250724 | Size: 10.0KB | Type: Code Editor / IDE
+
+   2. Augment Code — GPT-5 Agent
+      File: gpt-5-agent-prompts.txt
+      Size: 14.6KB | Type: Code Editor / IDE
+
+   3. Augment Code — Part A
+      File: part_a.js
+      Size: 18.0KB | Type: Code Editor / IDE
+
+
+================================================================================
+📂 ByteDance (3 prompts, 29.6 KB)
+================================================================================
+   1. Trae Agent (ByteDance)
+      File: prompt.py
+      Size: 3.7KB | Type: Code Editor / IDE
+
+   2. Trae — Chat Mode
+      File: Chat Prompt.txt
+      Size: 7.7KB | Type: Code Editor / IDE
+
+   3. Trae — Builder Mode
+      File: Builder Prompt.txt
+      Size: 18.1KB | Type: Code Editor / IDE
+
+
+================================================================================
+📂 DIA (3 prompts, 46.2 KB)
+================================================================================
+   1. Dia Browser — Draft Skill
+      File: Dia_DraftSkill.txt
+      Size: 8.7KB | Type: Writing Assistant
+
+   2. Dia Browser — Chat
+      File: Prompt.txt
+      Size: 16.8KB | Type: Writing Assistant
+
+   3. Dia Browser — Coding Skill
+      File: Dia_CodingSkill.txt
+      Size: 20.7KB | Type: Writing Assistant
+
+
+================================================================================
+📂 Manus (3 prompts, 25.7 KB)
+================================================================================
+   1. Manus — Agent Loop
+      File: Agent loop.txt
+      Size: 2.1KB | Type: Autonomous Agent
+
+   2. Manus AI Assistant
+      File: Prompt.txt
+      Size: 10.0KB | Type: Autonomous Agent
+
+   3. Manus — Extended Prompt
+      File: Manus_Prompt.txt
+      Size: 13.6KB | Type: Autonomous Agent
+
+
+================================================================================
+📂 Replit (3 prompts, 19.1 KB)
+================================================================================
+   1. Replit — Code Generation
+      File: code_generation.md
+      Size: 4.4KB | Type: Code Editor / IDE
+
+   2. Replit Agent (pre-Aug 2025)
+      File: system.md
+      Size: 6.8KB | Type: Code Editor / IDE
+
+   3. Replit Agent (Latest)
+      File: Prompt.txt
+      Size: 7.9KB | Type: Code Editor / IDE
+
+
+================================================================================
+📂 Same.dev (3 prompts, 62.5 KB)
+================================================================================
+   1. Same.dev — same.new
+      File: same.new.md
+      Size: 6.9KB | Type: Web Development
+
+   2. Same.dev Agent
+      File: Same_Dev.txt
+      Size: 21.5KB | Type: Web Development
+
+   3. Same.dev — Latest
+      File: Prompt.txt
+      Size: 34.1KB | Type: Web Development
+
+
+================================================================================
+📂 Apple (2 prompts, 5.8 KB)
+================================================================================
+   1. Apple Xcode AI — Preview Action
+      File: PreviewAction.txt
+      Size: 1.9KB | Type: Code Editor / IDE
+
+   2. Apple Xcode AI — Code Analysis
+      File: System.txt
+      Size: 3.9KB | Type: Code Editor / IDE
+
+
+================================================================================
+📂 Blackbox (2 prompts, 93.7 KB)
+================================================================================
+   1. Blackbox AI — Autocomplete
+      File: Blackbox-Complete.ts
+      Size: 5.1KB | Type: Other
+
+   2. Blackbox AI — Agent
+      File: Blackbox-Agent.md
+      Size: 88.6KB | Type: Other
+
+
+================================================================================
+📂 Brave (2 prompts, 5.6 KB)
+================================================================================
+   1. Brave Leo (Nov 2025)
+      File: 20251110-leo.md
+      Date: 20251110 | Size: 2.8KB | Type: Chat / General
+
+   2. Brave Leo (Aug 2025)
+      File: LEO_Aug-31-2025
+      Date: Aug-31-2025 | Size: 2.9KB | Type: Chat / General
+
+
+================================================================================
+📂 ChatWise (2 prompts, 27.6 KB)
+================================================================================
+   1. ChatWise — Research Agent
+      File: chatwise_research.md
+      Size: 3.4KB | Type: Search / Research
+
+   2. ChatWise — Web Search
+      File: system.md
+      Size: 24.2KB | Type: Search / Research
+
+
+================================================================================
+📂 Cluely (2 prompts, 25.4 KB)
+================================================================================
+   1. Cluely — Personal AI
+      File: Cluely.mkd
+      Size: 4.6KB | Type: Controversial
+
+   2. Cluely — Enterprise
+      File: Enterprise Prompt.txt
+      Size: 20.8KB | Type: Controversial
+
+
+================================================================================
+📂 CodeBuddy (2 prompts, 40.5 KB)
+================================================================================
+   1. CodeBuddy — Chat Mode
+      File: Chat Prompt.txt
+      Size: 1.5KB | Type: Code Editor / IDE
+
+   2. CodeBuddy — Craft Mode
+      File: Craft Prompt.txt
+      Size: 39.0KB | Type: Code Editor / IDE
+
+
+================================================================================
+📂 DeepSeek (2 prompts, 4.8 KB)
+================================================================================
+   1. DeepSeek V2 (Oct 2025)
+      File: 20251029-DeepSeek-V2.md
+      Date: 20251029 | Size: 3.5KB | Type: Chat / General
+
+   2. DeepSeek R1
+      File: R1.md
+      Size: 1.3KB | Type: Chat / General
+
+
+================================================================================
+📂 Mistral (2 prompts, 12.1 KB)
+================================================================================
+   1. Mistral Le Chat (Feb 2025)
+      File: lechat-02122025.md
+      Date: 02122025 | Size: 6.7KB | Type: Chat / General
+
+   2. Mistral Le Chat (May 2025)
+      File: Le-Chat-2025-05-29.md
+      Size: 5.4KB | Type: Chat / General
+
+
+================================================================================
+📂 Moonshot (2 prompts, 2.3 KB)
+================================================================================
+   1. Kimi K2 Thinking (Moonshot)
+      File: Kimi_K2_Thinking.txt
+      Size: 0.9KB | Type: Chat / General
+
+   2. Kimi 2 (Jul 2025)
+      File: Kimi_2_July-11-2025.txt
+      Size: 1.4KB | Type: Chat / General
+
+
+================================================================================
+📂 Notion (2 prompts, 40.8 KB)
+================================================================================
+   1. Notion AI (Partial/WIP)
+      File: WIP-partial.md
+      Size: 9.5KB | Type: Productivity / DevOps
+
+   2. Notion AI Agent
+      File: Prompt.txt
+      Size: 31.3KB | Type: Productivity / DevOps
+
+
+================================================================================
+📂 Orchids (2 prompts, 64.0 KB)
+================================================================================
+   1. Orchids — Decision Making
+      File: Decision-making prompt.txt
+      Size: 6.7KB | Type: Health / Wellness
+
+   2. Orchids — System Prompt
+      File: System Prompt.txt
+      Size: 57.4KB | Type: Health / Wellness
+
+
+================================================================================
+📂 Sourcegraph (2 prompts, 125.3 KB)
+================================================================================
+   1. Sourcegraph Cody — GPT-5 Config
+      File: gpt-5.yaml
+      Size: 60.7KB | Type: Code Assistant
+
+   2. Sourcegraph Cody — Claude 4 Sonnet Config
+      File: claude-4-sonnet.yaml
+      Size: 64.6KB | Type: Code Assistant
+
+
+================================================================================
+📂 StackBlitz (2 prompts, 29.3 KB)
+================================================================================
+   1. StackBlitz WebContainers
+      File: prompts.ts
+      Size: 13.6KB | Type: Web Development
+
+   2. Bolt.new (StackBlitz)
+      File: Bolt.txt
+      Size: 15.7KB | Type: Web Development
+
+
+================================================================================
+📂 Traycer (2 prompts, 9.8 KB)
+================================================================================
+   1. Traycer — Phase Mode
+      File: phase_mode_prompts.txt
+      Size: 3.8KB | Type: Autonomous Agent
+
+   2. Traycer — Plan Mode
+      File: plan_mode_prompts
+      Size: 6.0KB | Type: Autonomous Agent
+
+
+================================================================================
+📂 Vercel (2 prompts, 101.4 KB)
+================================================================================
+   1. Vercel v0 (AI App Builder)
+      File: Prompt.txt
+      Size: 42.8KB | Type: Web Development
+
+   2. Vercel v0 (Aug 2025)
+      File: 2025-08-11-prompt.md
+      Size: 58.6KB | Type: Web Development
+
+
+================================================================================
+📂 Atlassian (1 prompts, 4.2 KB)
+================================================================================
+   1. Atlassian Rovo CLI (Aug 2025)
+      File: 20250801-acli-rovodev-interactive.md
+      Date: 20250801 | Size: 4.2KB | Type: Productivity / DevOps
+
+
+================================================================================
+📂 Cline (1 prompts, 61.5 KB)
+================================================================================
+   1. Cline IDE Agent
+      File: system.ts
+      Size: 61.5KB | Type: Autonomous Agent
+
+
+================================================================================
+📂 Docker (1 prompts, 2.7 KB)
+================================================================================
+   1. Docker AI / Gordon (Jul 2025)
+      File: docker_ai_20250731.md
+      Date: 20250731 | Size: 2.7KB | Type: Productivity / DevOps
+
+
+================================================================================
+📂 Emergent (1 prompts, 36.1 KB)
+================================================================================
+   1. Emergent E1 Agent
+      File: Prompt.txt
+      Size: 36.1KB | Type: Web Development
+
+
+================================================================================
+📂 Factory (1 prompts, 16.4 KB)
+================================================================================
+   1. Factory DROID Agent
+      File: DROID.txt
+      Size: 16.4KB | Type: Autonomous Agent
+
+
+================================================================================
+📂 GitHub (1 prompts, 11.8 KB)
+================================================================================
+   1. GitHub Copilot Agent
+      File: github_copilot_agent.md
+      Size: 11.8KB | Type: Code Assistant
+
+
+================================================================================
+📂 Hume (1 prompts, 8.5 KB)
+================================================================================
+   1. Hume EVI (May 2024)
+      File: 05052024-system-prompt.md
+      Date: 05052024 | Size: 8.5KB | Type: Chat / General
+
+
+================================================================================
+📂 JetBrains (1 prompts, 6.0 KB)
+================================================================================
+   1. JetBrains AI Assistant
+      File: Prompt.txt
+      Size: 6.0KB | Type: Code Editor / IDE
+
+
+================================================================================
+📂 Leap (1 prompts, 51.2 KB)
+================================================================================
+   1. Leap AI (Code Agent)
+      File: Prompts.txt
+      Size: 51.2KB | Type: Web Development
+
+
+================================================================================
+📂 MiniMax (1 prompts, 2.4 KB)
+================================================================================
+   1. MiniMax AI Assistant
+      File: MiniMax.txt
+      Size: 2.4KB | Type: Chat / General
+
+
+================================================================================
+📂 MultiOn (1 prompts, 9.1 KB)
+================================================================================
+   1. MultiOn Browser Agent
+      File: MultiOn.md
+      Size: 9.1KB | Type: Other
+
+
+================================================================================
+📂 Proton (1 prompts, 6.2 KB)
+================================================================================
+   1. Proton Lumo (Jul 2025)
+      File: 20250723-Lumo.md
+      Date: 20250723 | Size: 6.2KB | Type: Other
+
+
+================================================================================
+📂 Qoder (1 prompts, 25.5 KB)
+================================================================================
+   1. Qoder — Quest Design Agent
+      File: Quest Design.txt
+      Size: 25.5KB | Type: Web Development
+
+
+================================================================================
+📂 Qwen (1 prompts, 9.1 KB)
+================================================================================
+   1. Qwen 3 VL 235B (Oct 2025)
+      File: 20251027-Qwen3-VL-235B-A22B.md
+      Date: 20251027 | Size: 9.1KB | Type: Chat / General
+
+
+================================================================================
+📂 Raycast (1 prompts, 6.7 KB)
+================================================================================
+   1. Raycast AI
+      File: RaycastAI.md
+      Size: 6.7KB | Type: Productivity / DevOps
+
+
+================================================================================
+📂 SleepHQ (1 prompts, 6.7 KB)
+================================================================================
+   1. SleepHQ / Darth Assistant (Jul 2025)
+      File: 20250728-Darth-Assistant.md
+      Date: 20250728 | Size: 6.7KB | Type: Health / Wellness
+
+
+================================================================================
+📂 Venice (1 prompts, 2.1 KB)
+================================================================================
+   1. Venice AI (Privacy-First)
+      File: Venice.md
+      Size: 2.1KB | Type: Privacy / Uncensored
+
+
+================================================================================
+📂 Warp (1 prompts, 14.3 KB)
+================================================================================
+   1. Warp Terminal — Agent Mode
+      File: Prompt.txt
+      Size: 14.3KB | Type: Productivity / DevOps
+
+
+================================================================================
+📂 Wegic (1 prompts, 7.9 KB)
+================================================================================
+   1. Wegic (Website Builder)
+      File: wegic.md
+      Size: 7.9KB | Type: Other
+
+
+================================================================================
+📂 Wordware (1 prompts, 5.9 KB)
+================================================================================
+   1. Wordware — Twitter Personality AI
+      File: twitter.md
+      Size: 5.9KB | Type: Other
+
+
+================================================================================
+📂 Z.ai (1 prompts, 9.4 KB)
+================================================================================
+   1. Z.ai Code
+      File: prompt.md
+      Size: 9.4KB | Type: Other
+

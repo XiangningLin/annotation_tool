@@ -1,0 +1,49 @@
+{
+  "metadata": {
+    "export_time": "2026-02-23T15:58:40.220932",
+    "reviewer": "rosie",
+    "range_start": 0,
+    "range_end": 20,
+    "total_prompts": 190,
+    "annotated_prompts": 1,
+    "tool_version": "v7",
+    "data_source": "audit_prompts.json (190 curated prompts)"
+  },
+  "annotations": {
+    "OpenAI__chatgpt_4o_full_07292025.md": {
+      "company": "OpenAI",
+      "product": "OpenAI",
+      "filename": "chatgpt_4o_full_07292025.md",
+      "date": "07292025",
+      "category": "Chat / General",
+      "spans": [
+        {
+          "start": 4912,
+          "end": 5057,
+          "text": "t asks for something might change over time, so we should serve something from the past quarter / 3 months. Boosts results from the past 90 days.",
+          "dimension": "D2",
+          "score": 1,
+          "note": ""
+        },
+        {
+          "start": 5259,
+          "end": 5360,
+          "text": "ation, so we should serve something from this month. Boosts results from the past 30 days and sooner.",
+          "dimension": "D2",
+          "score": -1,
+          "note": ""
+        },
+        {
+          "start": 6285,
+          "end": 6331,
+          "text": "d in the correct answer chunk, and specified a",
+          "dimension": "D3",
+          "score": 1,
+          "note": ""
+        }
+      ],
+      "notes": "",
+      "updated_at": "2026-02-23T15:58:40.211266"
+    }
+  }
+}
