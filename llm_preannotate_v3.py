@@ -4,7 +4,7 @@ LLM Pre-Annotation v3 — Direct Per-Dimension Span Extraction (No Segmentation)
 ================================================================================
 One-step approach:
   For each dimension D1–D9, ask the LLM to identify relevant text spans directly.
-  Adjacent spans within the same dimension are automatically merged.
+  Each span is kept at its original LLM-output granularity (no merging).
 
 Uses Claude Opus 4.6 via OpenRouter with extended thinking.
 
@@ -27,6 +27,25 @@ import time
 from pathlib import Path
 
 import requests
+
+# ─── Load .env file if present ────────────────────────────────────────────────
+def _load_dotenv():
+    """Load key=value pairs from .env file into os.environ (if not already set)."""
+    env_path = Path(__file__).parent / ".env"
+    if not env_path.exists():
+        return
+    for line in env_path.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line or line.startswith("#"):
+            continue
+        if "=" not in line:
+            continue
+        key, _, value = line.partition("=")
+        key, value = key.strip(), value.strip()
+        if key and key not in os.environ:
+            os.environ[key] = value
+
+_load_dotenv()
 
 # ─── Config ───────────────────────────────────────────────────────────────────
 DATA_FILE = Path(__file__).parent / "audit_prompts.json"
@@ -588,31 +607,24 @@ def extract_dimension_spans(dimension: dict, company: str, product_label: str,
     found_count = sum(1 for s in resolved if s["found"])
     not_found = [s for s in resolved if not s["found"]]
 
-    # Merge adjacent found spans
     found_spans = [s for s in resolved if s["found"]]
-    merged_spans = merge_adjacent_spans(found_spans, content)
-
-    merged_count = len(found_spans) - len(merged_spans)
 
     if verbose:
         print(f"    ✅ Located: {found_count}/{len(resolved)} spans")
         if not_found:
             for nf in not_found:
                 print(f"    ⚠️  Not found: \"{nf['text'][:60]}...\"")
-        if merged_count > 0:
-            print(f"    🔗 Merged {merged_count} adjacent spans → {len(merged_spans)} final")
 
-        for sp in merged_spans:
+        for sp in found_spans:
             label = {1: "+1 👍", -1: "-1 👎", 0: " 0 ➖"}.get(sp["score"], str(sp["score"]))
             text_preview = sp["text"][:80].replace("\n", "\\n")
-            merge_tag = f" [merged×{sp['merged']}]" if sp.get("merged", 1) > 1 else ""
-            print(f"      [{label}] [{sp['start']}:{sp['end']}]{merge_tag} \"{text_preview}{'...' if len(sp['text'])>80 else ''}\"")
+            print(f"      [{label}] [{sp['start']}:{sp['end']}] \"{text_preview}{'...' if len(sp['text'])>80 else ''}\"")
 
     timing = {"seconds": round(elapsed, 1)}
     tokens = {"input": in_tok, "output": out_tok}
 
-    # Return merged spans + not-found spans for reference
-    all_spans = merged_spans + not_found
+    # Return found spans + not-found spans for reference
+    all_spans = found_spans + not_found
     return all_spans, timing, tokens
 
 
@@ -683,8 +695,6 @@ def process_prompt(prompt_data: dict, verbose: bool = True) -> dict:
                 "score": s["score"],
                 "note": s["note"],
             }
-            if s.get("merged", 1) > 1:
-                clean["merged"] = s["merged"]
             clean_spans.append(clean)
 
         dimensions_output[key] = {
