@@ -597,7 +597,7 @@
   <div class="form-group">
     <label style="display:flex;align-items:center;gap:0.5rem;cursor:pointer;font-size:0.88rem;color:var(--text-primary);">
       <input type="checkbox" id="inputOnlyAnnotated" style="width:auto;accent-color:var(--accent);" />
-      📌 只显示有预标注的 Prompt（跳过未标注的）
+      📌 Pre-annotated only (skip unannotated)
     </label>
   </div>
   <button class="btn-primary" id="setupStartBtn">🚀 Start Annotation</button>
@@ -611,9 +611,9 @@
     <div class="header-right">
       <span class="badge" id="headerBadge"></span>
       <div class="nav-group">
-        <button class="nav-btn" id="btnPrev" title="← 或 A 键">←</button>
+        <button class="nav-btn" id="btnPrev" title="← or A key">←</button>
         <span class="nav-counter" id="navCounter">1/190</span>
-        <button class="nav-btn" id="btnNext" title="→ 或 D 键">→</button>
+        <button class="nav-btn" id="btnNext" title="→ or D key">→</button>
         <input type="number" class="nav-jump" id="navJump" placeholder="#" />
         <button class="nav-btn" id="btnJump">Go</button>
       </div>
@@ -1167,14 +1167,14 @@ function renderAnnotations() {
       <div class="annotation-text" data-first-idx="${first._idx}" style="cursor:pointer;">${textPreview}</div>
       <div style="margin-top:0.4rem;">${dimRows}</div>
       <div class="card-extra-dim-section" data-group-key="${key}" style="border-top:1px solid var(--border);margin-top:0.35rem;padding-top:0.3rem;">
-        <div style="font-size:0.62rem;color:var(--accent);margin-bottom:0.3rem;font-weight:600;">📝 此段文字是否还涉及其他维度？（可选）</div>
+        <div style="font-size:0.62rem;color:var(--accent);margin-bottom:0.3rem;font-weight:600;">📝 Does this span relate to any other dimensions? (optional)</div>
         <div style="display:flex;flex-wrap:wrap;gap:0.2rem;margin-bottom:0.3rem;">${addDimBtns}</div>
         <div class="card-add-score-row" data-group-key="${key}" style="display:none;margin-top:0.25rem;gap:0.25rem;">
           <button class="card-add-score-btn positive" data-group-key="${key}" data-score="1" style="font-size:0.6rem;padding:0.12rem 0.4rem;border-radius:4px;cursor:pointer;border:1px solid var(--positive);background:var(--positive-bg);color:var(--positive);">👍 +1</button>
           <button class="card-add-score-btn negative" data-group-key="${key}" data-score="-1" style="font-size:0.6rem;padding:0.12rem 0.4rem;border-radius:4px;cursor:pointer;border:1px solid var(--negative);background:var(--negative-bg);color:var(--negative);">👎 −1</button>
-          <button class="card-add-confirm-btn" data-group-key="${key}" style="font-size:0.6rem;padding:0.12rem 0.5rem;border-radius:4px;cursor:pointer;border:1px solid var(--accent);background:var(--accent);color:#fff;">✓ 添加</button>
+          <button class="card-add-confirm-btn" data-group-key="${key}" style="font-size:0.6rem;padding:0.12rem 0.5rem;border-radius:4px;cursor:pointer;border:1px solid var(--accent);background:var(--accent);color:#fff;">✓ Add</button>
         </div>
-        <button class="btn-finish-card" data-group-key="${key}" style="width:100%;margin-top:0.35rem;padding:0.35rem 0;font-size:0.72rem;border-radius:6px;cursor:pointer;border:1px solid var(--border);background:var(--bg-elevated);color:var(--text-secondary);font-weight:600;">✅ 确认完成（无需再添加维度）</button>
+        <button class="btn-finish-card" data-group-key="${key}" style="width:100%;margin-top:0.35rem;padding:0.35rem 0;font-size:0.72rem;border-radius:6px;cursor:pointer;border:1px solid var(--border);background:var(--bg-elevated);color:var(--text-secondary);font-weight:600;">✅ Done (no more dimensions to add)</button>
       </div>
     </div>`;
   });
@@ -1278,8 +1278,8 @@ function renderAnnotations() {
     const actionRow = row.querySelector('.dim-action-row');
     if (actionRow) {
       actionRow.innerHTML = `<div style="display:flex;align-items:center;gap:0.4rem;">
-        <span style="color:var(--positive);font-size:0.64rem;font-weight:600;">✓ 已接受 ${span.dimension}</span>
-        <button class="btn-revoke" data-idx="${idx}" style="font-size:0.58rem;padding:0.1rem 0.35rem;border-radius:4px;cursor:pointer;border:1px solid var(--border);background:var(--bg-dark);color:var(--text-muted);font-family:inherit;">↩ 撤回</button>
+        <span style="color:var(--positive);font-size:0.64rem;font-weight:600;">✓ Accepted ${span.dimension}</span>
+        <button class="btn-revoke" data-idx="${idx}" style="font-size:0.58rem;padding:0.1rem 0.35rem;border-radius:4px;cursor:pointer;border:1px solid var(--border);background:var(--bg-dark);color:var(--text-muted);font-family:inherit;">↩ Undo</button>
       </div>`;
       actionRow.querySelector('.btn-revoke').addEventListener('click', e => { e.stopPropagation(); revokeDecision(row); });
     }
@@ -1302,8 +1302,8 @@ function renderAnnotations() {
     const actionRow = row.querySelector('.dim-action-row');
     if (actionRow) {
       actionRow.innerHTML = `<div style="display:flex;align-items:center;gap:0.4rem;">
-        <span style="color:var(--negative);font-size:0.64rem;font-weight:600;">✕ 已拒绝 ${span.dimension}</span>
-        <button class="btn-revoke" data-idx="${idx}" style="font-size:0.58rem;padding:0.1rem 0.35rem;border-radius:4px;cursor:pointer;border:1px solid var(--border);background:var(--bg-dark);color:var(--text-muted);font-family:inherit;">↩ 撤回</button>
+        <span style="color:var(--negative);font-size:0.64rem;font-weight:600;">✕ Rejected ${span.dimension}</span>
+        <button class="btn-revoke" data-idx="${idx}" style="font-size:0.58rem;padding:0.1rem 0.35rem;border-radius:4px;cursor:pointer;border:1px solid var(--border);background:var(--bg-dark);color:var(--text-muted);font-family:inherit;">↩ Undo</button>
       </div>`;
       actionRow.querySelector('.btn-revoke').addEventListener('click', e => { e.stopPropagation(); revokeDecision(row); });
     }
@@ -1380,7 +1380,7 @@ function renderAnnotations() {
       const dim = pendingAddDim[gk];
       const score = pendingAddScore[gk];
       if (!dim || score === null || score === undefined) {
-        showToast('请先选择维度和评分', true); return;
+        showToast('Please select a dimension and score first', true); return;
       }
       // Use first span in group as reference for start/end/text
       const card = btn.closest('.annotation-card');
@@ -1416,7 +1416,7 @@ function renderAnnotations() {
       // Check that all LLM dims have been handled
       const unhandled = [...allRows].filter(r => r.dataset.accepted !== 'true' && r.dataset.rejected !== 'true');
       if (unhandled.length > 0) {
-        showToast('请先对所有维度进行 Accept 或 Reject', true);
+        showToast('Please Accept or Reject all dimensions first', true);
         return;
       }
 
@@ -1783,7 +1783,7 @@ setupStartBtn.addEventListener('click', async () => {
   rangePrompts = allPrompts.slice(start - 1, end);
   if (inputOnlyAnnotated.checked) {
     rangePrompts = rangePrompts.filter(p => p.span_count > 0);
-    if (rangePrompts.length === 0) { showToast('该范围内没有已预标注的 Prompt', true); return; }
+    if (rangePrompts.length === 0) { showToast('No pre-annotated prompts in this range', true); return; }
   }
   currentIndex = 0;
   headerBadge.textContent = `${name} · ${start}-${end}`;
