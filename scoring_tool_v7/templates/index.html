@@ -807,7 +807,7 @@ async function loadPrompts() {
   const data = await res.json();
   allPrompts = data.prompts;
   dimensions = data.dimensions;
-  setupInfo.innerHTML = `<strong>${data.total}</strong> prompts · 10 Dimensions · Score: +1 / 0 / −1`;
+  setupInfo.innerHTML = `<strong>${data.total}</strong> prompts · 10 Dimensions · Score: +1 / −1`;
   inputEnd.max = data.total;
   inputEnd.value = Math.min(190, data.total);
   buildDimRefPanel();
@@ -1728,9 +1728,55 @@ function getTextOffset(root, node, offset) {
   return -1;
 }
 
+// ─── Flush pending card decisions before saving ──
+function flushPendingCardDecisions() {
+  // If user accepted/rejected dims in a card but didn't click Done, apply those changes now
+  document.querySelectorAll('.grouped-card').forEach(card => {
+    const allRows = card.querySelectorAll('.group-dim-entry');
+    const hasAnyDecision = [...allRows].some(r => r.dataset.accepted === 'true' || r.dataset.rejected === 'true');
+    if (!hasAnyDecision) return;
+
+    const groupIndices = card.dataset.groupIndices;
+    if (!groupIndices) return;
+    const indices = groupIndices.split(',').map(Number);
+    const refSpan = currentSpans[indices[0]];
+    if (!refSpan) return;
+    const groupStart = refSpan.start, groupEnd = refSpan.end;
+
+    const acceptedDims = new Set();
+    const rejectedDims = new Set();
+    allRows.forEach(r => {
+      const idx = parseInt(r.dataset.idx);
+      const span = currentSpans[idx];
+      if (!span) return;
+      if (r.dataset.accepted === 'true') acceptedDims.add(span.dimension);
+      else if (r.dataset.rejected === 'true') rejectedDims.add(span.dimension);
+    });
+
+    // Apply accepted
+    for (let i = currentSpans.length - 1; i >= 0; i--) {
+      const s = currentSpans[i];
+      if (s.start === groupStart && s.end === groupEnd && s.source === 'llm' && !s.reviewed) {
+        if (acceptedDims.has(s.dimension)) {
+          s.reviewed = true;
+        } else if (rejectedDims.has(s.dimension)) {
+          currentSpans.splice(i, 1);
+        }
+      }
+    }
+    // Mark human-added spans as reviewed
+    currentSpans.forEach(s => {
+      if (s.start === groupStart && s.end === groupEnd && s.source === 'human' && !s.reviewed) {
+        s.reviewed = true;
+      }
+    });
+  });
+}
+
 // ─── Save / Export ────────────────────────────────
 async function autoSave() {
   if (!currentPromptFull) return;
+  flushPendingCardDecisions();
   currentNotes = annNotes.value;
   try {
     await fetch('/api/save_annotations', {

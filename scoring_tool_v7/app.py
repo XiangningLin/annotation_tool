@@ -2,7 +2,7 @@
 Span-level Dimension Annotation Tool — v7
 ==========================================
 Reads from audit_prompts.json (flat array of 190 curated prompts).
-Adds a "0 = Not Mentioned" scoring option alongside +1 / −1.
+Scoring: +1 (good practice) / −1 (violation).
 
 Run:  python app.py          → http://127.0.0.1:5004
 """
