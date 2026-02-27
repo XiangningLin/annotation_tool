@@ -237,7 +237,6 @@
     .annotated-span:hover { filter: brightness(1.3); }
     .annotated-span.positive { background: rgba(34, 197, 94, 0.06); border-bottom: 2px solid rgba(34, 197, 94, 0.6); }
     .annotated-span.negative { background: rgba(239, 68, 68, 0.06); border-bottom: 2px solid rgba(239, 68, 68, 0.6); }
-    .annotated-span.neutral  { background: rgba(245, 158, 11, 0.06); border-bottom: 2px dashed rgba(245, 158, 11, 0.6); }
     /* Dimension-colored spans (v3) */
     .annotated-span.dim-colored { border-bottom: none; }
     .annotated-span.dim-overlap { border-bottom: none; line-height: 1.8; }
@@ -307,7 +306,6 @@
     }
     .annotation-score-badge.positive { background: var(--positive-bg); color: var(--positive); }
     .annotation-score-badge.negative { background: var(--negative-bg); color: var(--negative); }
-    .annotation-score-badge.neutral  { background: var(--neutral-bg);  color: var(--neutral); }
     .annotation-text {
       font-family: 'Courier New', monospace; font-size: 0.75rem; line-height: 1.6;
       color: var(--text-secondary); background: var(--bg-dark);
@@ -332,12 +330,9 @@
     .card-score-btn:hover { border-color: var(--border); color: var(--text-primary); }
     .card-score-btn.positive { border-color: var(--positive); }
     .card-score-btn.negative { border-color: var(--negative); }
-    .card-score-btn.neutral  { border-color: var(--neutral); }
     .card-score-btn.selected.positive { background: rgba(34, 197, 94, 0.45); color: #fff; border-color: var(--positive); border-width: 2px; box-shadow: 0 0 8px rgba(34, 197, 94, 0.4); }
     .card-score-btn.selected.negative { background: rgba(239, 68, 68, 0.45); color: #fff; border-color: var(--negative); border-width: 2px; box-shadow: 0 0 8px rgba(239, 68, 68, 0.4); }
-    .card-score-btn.selected.neutral  { background: rgba(245, 158, 11, 0.45); color: #fff; border-color: var(--neutral);  border-width: 2px; box-shadow: 0 0 8px rgba(245, 158, 11, 0.4); }
     .card-add-score-btn.selected { font-weight: 700; transform: scale(1.1); }
-    /* btn-review class removed — now using dim-accept-btn / dim-reject-btn */
 
     /* ─── Dimension Filter Bar ─── */
     .dim-filter-bar {
@@ -418,7 +413,6 @@
     .group-dim-entry:hover {
       background: rgba(255,255,255,0.06) !important;
     }
-    /* btn-review class removed — now using dim-accept-btn / dim-reject-btn */
     .dim-accept-btn, .dim-reject-btn {
       flex: 1; font-size: 0.68rem; padding: 0.3rem 0; border-radius: 6px;
       cursor: pointer; font-weight: 600; text-align: center;
@@ -517,10 +511,8 @@
     .popup-score-btn:hover { border-color: var(--text-secondary); }
     .popup-score-btn.positive { color: var(--positive); }
     .popup-score-btn.negative { color: var(--negative); }
-    .popup-score-btn.neutral  { color: var(--neutral); }
     .popup-score-btn.selected.positive { background: var(--positive-bg); border-color: var(--positive); }
     .popup-score-btn.selected.negative { background: var(--negative-bg); border-color: var(--negative); }
-    .popup-score-btn.selected.neutral  { background: var(--neutral-bg);  border-color: var(--neutral); }
 
     .popup-note-input {
       width: 100%; padding: 0.35rem 0.5rem; background: var(--bg-elevated);
@@ -536,8 +528,6 @@
     }
     .popup-cancel { background: var(--bg-elevated); color: var(--text-secondary); }
     .popup-cancel:hover { border-color: var(--negative); color: var(--negative); }
-    .popup-reject { background: rgba(239, 68, 68, 0.12); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
-    .popup-reject:hover { background: rgba(239, 68, 68, 0.25); border-color: #ef4444; }
     .popup-confirm { background: var(--accent); border-color: var(--accent); color: white; }
     .popup-confirm:hover { background: var(--accent-light); }
     .popup-confirm:disabled { opacity: 0.4; cursor: not-allowed; }
@@ -689,8 +679,6 @@
 <div class="selection-popup" id="selectionPopup">
   <div class="popup-title">📐 Add Span Annotation</div>
   <div class="popup-selected-text" id="popupText"></div>
-  <!-- New annotation mode (text selection) -->
-  <div id="popupSingleMode">
   <div class="popup-section-title">Dimension</div>
   <div class="popup-dim-grid" id="popupDimGrid"></div>
   <div class="popup-section-title">Score</div>
@@ -699,11 +687,9 @@
     <button class="popup-score-btn negative" data-score="-1">👎 −1 Violation</button>
   </div>
   <input type="text" class="popup-note-input" id="popupNote" placeholder="Optional note…" />
-  </div>
 
   <div class="popup-actions">
     <button class="popup-cancel" id="popupCancel">Cancel</button>
-    <button class="popup-reject" id="popupReject" style="display:none">❌ Not Relevant</button>
     <button class="popup-confirm" id="popupConfirm" disabled>✓ Add Annotation</button>
   </div>
 </div>
@@ -737,7 +723,6 @@ let currentNotes = '';
 let config = { name: '', start: 1, end: 190 };
 let pendingSelection = { text: '', start: 0, end: 0, dim: null, score: null };
 let activeDimFilter = 'ALL'; // 'ALL', 'PENDING', or 'D1'..'D9'
-let reviewingSpanIdx = null; // index of span being reviewed, or null for new annotation
 
 // ─── Elements ─────────────────────────────────────
 const $ = id => document.getElementById(id);
@@ -758,7 +743,7 @@ const annCount = $('annCount'), annBody = $('annBody'), annNotes = $('annNotes')
 const btnSave = $('btnSave');
 const selectionPopup = $('selectionPopup'), popupText = $('popupText');
 const popupDimGrid = $('popupDimGrid'), popupNote = $('popupNote');
-const popupCancel = $('popupCancel'), popupConfirm = $('popupConfirm'), popupReject = $('popupReject');
+const popupCancel = $('popupCancel'), popupConfirm = $('popupConfirm');
 const dimRefList = $('dimRefList'), dimRefToggle = $('dimRefToggle');
 const dimFilterBar = $('dimFilterBar');
 const toast = $('toast'), dimTooltip = $('dimTooltip');
@@ -1505,15 +1490,6 @@ function renderAnnotations() {
   });
 }
 
-// ─── Review Popup Helper (kept only for backward compat, not used for pending) ─────
-function openReviewPopup(spanIdx, x, y) {
-  // No longer used — inline card review handles pending spans
-  return;
-}
-
-function findOverlappingPendingSpans(spanIdx) { return [spanIdx]; }
-function openBatchReviewPopup(indices, x, y) { return; }
-function updateBatchConfirmBtn() { return; }
 // ─── Dimension Reference ─────────────────────────
 function buildDimRefPanel() {
   let html = '';
@@ -1656,19 +1632,14 @@ function showPopup(x, y) {
 function hidePopup() {
   selectionPopup.classList.remove('show');
   pendingSelection = { text: '', start: 0, end: 0, dim: null, score: null };
-  reviewingSpanIdx = null;
-  if (popupDimGrid) popupDimGrid.querySelectorAll('.popup-dim-btn').forEach(b => b.classList.remove('selected'));
+  popupDimGrid.querySelectorAll('.popup-dim-btn').forEach(b => b.classList.remove('selected'));
   document.querySelectorAll('.popup-score-btn').forEach(b => b.classList.remove('selected'));
-  if (popupNote) popupNote.value = '';
-  if (popupConfirm) { popupConfirm.disabled = true; popupConfirm.textContent = '✓ Add Annotation'; }
-  if (popupReject) popupReject.style.display = 'none';
+  popupNote.value = '';
+  popupConfirm.disabled = true;
+  popupConfirm.textContent = '✓ Add Annotation';
 }
 
 popupCancel.addEventListener('click', hidePopup);
-
-popupReject.addEventListener('click', () => {
-  hidePopup();
-});
 
 popupConfirm.addEventListener('click', () => {
   if (!pendingSelection.dim || pendingSelection.score === null) return;
