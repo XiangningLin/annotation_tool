@@ -235,9 +235,9 @@
     /* Highlighted spans */
     .annotated-span { border-radius: 3px; padding: 1px 3px; cursor: pointer; position: relative; transition: filter 0.1s; }
     .annotated-span:hover { filter: brightness(1.3); }
-    .annotated-span.positive { background: rgba(34, 197, 94, 0.18); border-bottom: 2px solid var(--positive); color: #d4fce0; }
-    .annotated-span.negative { background: rgba(239, 68, 68, 0.18); border-bottom: 2px solid var(--negative); color: #fde2e2; }
-    .annotated-span.neutral  { background: rgba(245, 158, 11, 0.18); border-bottom: 2px dashed var(--neutral); color: #fef0c7; }
+    .annotated-span.positive { background: rgba(34, 197, 94, 0.06); border-bottom: 2px solid rgba(34, 197, 94, 0.6); }
+    .annotated-span.negative { background: rgba(239, 68, 68, 0.06); border-bottom: 2px solid rgba(239, 68, 68, 0.6); }
+    .annotated-span.neutral  { background: rgba(245, 158, 11, 0.06); border-bottom: 2px dashed rgba(245, 158, 11, 0.6); }
     /* Dimension-colored spans (v3) */
     .annotated-span.dim-colored { border-bottom: none; }
     .annotated-span.dim-overlap { border-bottom: none; line-height: 1.8; }
@@ -333,16 +333,11 @@
     .card-score-btn.positive { border-color: var(--positive); }
     .card-score-btn.negative { border-color: var(--negative); }
     .card-score-btn.neutral  { border-color: var(--neutral); }
-    .card-score-btn.selected.positive { background: var(--positive-bg); color: var(--positive); border-color: var(--positive); }
-    .card-score-btn.selected.negative { background: var(--negative-bg); color: var(--negative); border-color: var(--negative); }
-    .card-score-btn.selected.neutral  { background: var(--neutral-bg);  color: var(--neutral);  border-color: var(--neutral); }
+    .card-score-btn.selected.positive { background: rgba(34, 197, 94, 0.45); color: #fff; border-color: var(--positive); border-width: 2px; box-shadow: 0 0 8px rgba(34, 197, 94, 0.4); }
+    .card-score-btn.selected.negative { background: rgba(239, 68, 68, 0.45); color: #fff; border-color: var(--negative); border-width: 2px; box-shadow: 0 0 8px rgba(239, 68, 68, 0.4); }
+    .card-score-btn.selected.neutral  { background: rgba(245, 158, 11, 0.45); color: #fff; border-color: var(--neutral);  border-width: 2px; box-shadow: 0 0 8px rgba(245, 158, 11, 0.4); }
     .card-add-score-btn.selected { font-weight: 700; transform: scale(1.1); }
-    .btn-review {
-      padding: 0.35rem 0.7rem; background: var(--accent); color: white;
-      border: none; border-radius: 6px; font-size: 0.75rem; font-weight: 600;
-      cursor: pointer; font-family: inherit; transition: background 0.12s;
-    }
-    .btn-review:hover { background: var(--accent-light); }
+    /* btn-review class removed — now using dim-accept-btn / dim-reject-btn */
 
     /* ─── Dimension Filter Bar ─── */
     .dim-filter-bar {
@@ -384,10 +379,9 @@
 
     /* ─── Pending Review ─── */
     .annotated-span.pending-review {
-      background: rgba(124, 108, 240, 0.18);
-      border-bottom: 2px dashed rgba(157, 144, 245, 0.65);
+      background: rgba(124, 108, 240, 0.06);
+      border-bottom: 2px dashed rgba(157, 144, 245, 0.5);
       cursor: pointer;
-      color: #f0eeff;
     }
     .annotated-span.pending-review.dim-colored {
       border-bottom: none; /* dim-colored uses box-shadow underline instead */
@@ -396,7 +390,7 @@
       border-bottom: none;
     }
     .annotated-span.pending-review:hover {
-      background: rgba(124, 108, 240, 0.32);
+      background: rgba(124, 108, 240, 0.12);
       filter: brightness(1.1);
     }
     .annotation-card.pending-review {
@@ -424,12 +418,20 @@
     .group-dim-entry:hover {
       background: rgba(255,255,255,0.06) !important;
     }
-    .btn-review {
-      padding: 0.25rem 0.6rem; background: var(--accent); border: none;
-      color: white; border-radius: 5px; font-size: 0.68rem; cursor: pointer;
-      font-weight: 600; font-family: inherit; margin-top: 0.35rem;
+    /* btn-review class removed — now using dim-accept-btn / dim-reject-btn */
+    .dim-accept-btn, .dim-reject-btn {
+      flex: 1; font-size: 0.68rem; padding: 0.3rem 0; border-radius: 6px;
+      cursor: pointer; font-weight: 600; text-align: center;
+      font-family: inherit; transition: all 0.12s;
     }
-    .btn-review:hover { background: var(--accent-light); }
+    .dim-accept-btn {
+      border: 1.5px solid var(--positive); background: var(--positive-bg); color: var(--positive);
+    }
+    .dim-accept-btn:hover { background: rgba(34, 197, 94, 0.25); }
+    .dim-reject-btn {
+      border: 1.5px solid var(--negative); background: var(--negative-bg); color: var(--negative);
+    }
+    .dim-reject-btn:hover { background: rgba(239, 68, 68, 0.25); }
 
     /* Dimension reference */
     .dim-ref-section { border-top: 1px solid var(--border); padding: 0.6rem 0.85rem; flex-shrink: 0; }
@@ -966,17 +968,16 @@ function renderPromptContent() {
     // Build inline style: dimension-colored underlines
     let style = '';
     if (isOverlap) {
-      // Multi-colored stacked underlines via box-shadow
+      // Multi-colored stacked underlines via box-shadow — very light background
       const shadows = colors.map((c, idx) =>
-        `0 ${2 + idx * 3}px 0 0 ${c}`
+        `0 ${2 + idx * 3}px 0 0 ${c}88`
       ).join(', ');
-      const bgBlend = colors.map(c => c + '10').join(', ');
-      style = `box-shadow: ${shadows}; padding-bottom: ${colors.length * 3}px; background: linear-gradient(${colors.map(c => c + '12').join(', ')});`;
+      style = `box-shadow: ${shadows}; padding-bottom: ${colors.length * 3}px; background: ${colors[0]}08;`;
     } else {
-      // Single dimension color
+      // Single dimension color — subtle underline, minimal background
       const c = colors[0];
       const dashStyle = allPending ? 'dashed' : 'solid';
-      style = `border-bottom: 2px ${dashStyle} ${c}; background: ${c}15;`;
+      style = `border-bottom: 2px ${dashStyle} ${c}99; background: ${c}08;`;
     }
 
     // Build title tooltip
@@ -1134,7 +1135,6 @@ function renderAnnotations() {
       const scoreOpts = [
         { v: 1, label: '👍 +1', cls: 'positive' },
         { v: -1, label: '👎 −1', cls: 'negative' },
-        { v: 0, label: '➖ 0', cls: 'neutral' },
       ];
       const scoreBtns = scoreOpts.map(o =>
         `<button class="card-score-btn ${o.cls}${s.score === o.v ? ' selected' : ''}" data-idx="${i}" data-score="${o.v}">${o.label}</button>`
@@ -1147,9 +1147,9 @@ function renderAnnotations() {
         </div>
         ${s.note ? `<div style="font-size:0.6rem;color:var(--text-muted);margin-top:0.15rem;font-style:italic;">💬 ${escHtml(s.note)}</div>` : ''}
         <div style="display:flex;gap:0.2rem;margin-top:0.25rem;">${scoreBtns}</div>
-        <div class="dim-action-row" data-idx="${i}" style="display:flex;gap:0.25rem;margin-top:0.25rem;">
-          <button class="btn-review" data-idx="${i}" style="flex:1;font-size:0.66rem;padding:0.22rem 0;border-radius:6px;cursor:pointer;border:1px solid var(--positive);background:var(--positive-bg);color:var(--positive);font-weight:600;">✓ Accept</button>
-          <button class="btn-reject-single" data-idx="${i}" style="flex:1;font-size:0.66rem;padding:0.22rem 0;background:var(--negative-bg);color:var(--negative);border:1px solid var(--negative);border-radius:6px;cursor:pointer;font-weight:600;">✕ Reject</button>
+        <div class="dim-action-row" data-idx="${i}" style="display:flex;gap:0.3rem;margin-top:0.25rem;">
+          <button class="dim-accept-btn" data-idx="${i}">✓ Accept</button>
+          <button class="dim-reject-btn" data-idx="${i}">✕ Reject</button>
         </div>
       </div>`;
     });
@@ -1216,82 +1216,124 @@ function renderAnnotations() {
     });
   });
 
-  // ── Accept (per-dimension row) — mark visually, then show extra-dim prompt ──
-  annBody.querySelectorAll('.btn-review').forEach(btn => {
+  // ── Helper: update finish button state based on whether all dims are handled ──
+  function updateFinishBtnState(card) {
+    const allRows = card.querySelectorAll('.group-dim-entry');
+    const allHandled = [...allRows].every(r => r.dataset.accepted === 'true' || r.dataset.rejected === 'true');
+    const finishBtn = card.querySelector('.btn-finish-card');
+    if (!finishBtn) return;
+    if (allHandled) {
+      finishBtn.style.background = 'var(--positive)';
+      finishBtn.style.color = '#fff';
+      finishBtn.style.borderColor = 'var(--positive)';
+      finishBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    } else {
+      finishBtn.style.background = 'var(--bg-elevated)';
+      finishBtn.style.color = 'var(--text-secondary)';
+      finishBtn.style.borderColor = 'var(--border)';
+    }
+  }
+
+  // ── Helper: revoke accept/reject — restore original buttons ──
+  function revokeDecision(row) {
+    const idx = parseInt(row.dataset.idx);
+    const span = currentSpans[idx];
+    if (!span) return;
+    const color = dimColor(span.dimension);
+
+    // Clear states
+    delete row.dataset.accepted;
+    delete row.dataset.rejected;
+    delete row.dataset.rejectIdx;
+    row.style.background = 'rgba(255,255,255,0.03)';
+    row.style.opacity = '1';
+
+    // Re-enable score buttons
+    row.querySelectorAll('.card-score-btn').forEach(b => { b.disabled = false; b.style.opacity = '1'; });
+
+    // Restore action row with Accept/Reject buttons
+    const actionRow = row.querySelector('.dim-action-row');
+    if (actionRow) {
+      actionRow.innerHTML = `
+        <button class="dim-accept-btn" data-idx="${idx}">✓ Accept</button>
+        <button class="dim-reject-btn" data-idx="${idx}">✕ Reject</button>`;
+      // Re-bind events on new buttons
+      actionRow.querySelector('.dim-accept-btn').addEventListener('click', e => { e.stopPropagation(); handleAccept(row, idx); });
+      actionRow.querySelector('.dim-reject-btn').addEventListener('click', e => { e.stopPropagation(); handleReject(row, idx); });
+    }
+
+    // Update finish button state
+    const card = row.closest('.grouped-card');
+    if (card) updateFinishBtnState(card);
+  }
+
+  // ── Accept handler ──
+  function handleAccept(row, idx) {
+    const span = currentSpans[idx];
+    if (!span) return;
+
+    const actionRow = row.querySelector('.dim-action-row');
+    if (actionRow) {
+      actionRow.innerHTML = `<div style="display:flex;align-items:center;gap:0.4rem;">
+        <span style="color:var(--positive);font-size:0.64rem;font-weight:600;">✓ 已接受 ${span.dimension}</span>
+        <button class="btn-revoke" data-idx="${idx}" style="font-size:0.58rem;padding:0.1rem 0.35rem;border-radius:4px;cursor:pointer;border:1px solid var(--border);background:var(--bg-dark);color:var(--text-muted);font-family:inherit;">↩ 撤回</button>
+      </div>`;
+      actionRow.querySelector('.btn-revoke').addEventListener('click', e => { e.stopPropagation(); revokeDecision(row); });
+    }
+    row.style.background = 'rgba(74,222,128,0.06)';
+    row.dataset.accepted = 'true';
+    delete row.dataset.rejected;
+
+    // Lock score buttons
+    row.querySelectorAll('.card-score-btn').forEach(b => { b.disabled = true; b.style.opacity = '0.5'; });
+
+    const card = row.closest('.grouped-card');
+    if (card) updateFinishBtnState(card);
+  }
+
+  // ── Reject handler ──
+  function handleReject(row, idx) {
+    const span = currentSpans[idx];
+    if (!span) return;
+
+    const actionRow = row.querySelector('.dim-action-row');
+    if (actionRow) {
+      actionRow.innerHTML = `<div style="display:flex;align-items:center;gap:0.4rem;">
+        <span style="color:var(--negative);font-size:0.64rem;font-weight:600;">✕ 已拒绝 ${span.dimension}</span>
+        <button class="btn-revoke" data-idx="${idx}" style="font-size:0.58rem;padding:0.1rem 0.35rem;border-radius:4px;cursor:pointer;border:1px solid var(--border);background:var(--bg-dark);color:var(--text-muted);font-family:inherit;">↩ 撤回</button>
+      </div>`;
+      actionRow.querySelector('.btn-revoke').addEventListener('click', e => { e.stopPropagation(); revokeDecision(row); });
+    }
+    row.style.background = 'rgba(248,113,113,0.06)';
+    row.style.opacity = '0.5';
+    row.dataset.rejected = 'true';
+    row.dataset.rejectIdx = idx;
+    delete row.dataset.accepted;
+
+    // Lock score buttons
+    row.querySelectorAll('.card-score-btn').forEach(b => { b.disabled = true; b.style.opacity = '0.3'; });
+
+    const card = row.closest('.grouped-card');
+    if (card) updateFinishBtnState(card);
+  }
+
+  // ── Bind Accept buttons ──
+  annBody.querySelectorAll('.dim-accept-btn').forEach(btn => {
     btn.addEventListener('click', e => {
       e.stopPropagation();
       const idx = parseInt(btn.dataset.idx);
-      const span = currentSpans[idx];
-      if (!span) return;
-
-      // Visually mark this dimension row as accepted (don't finalize yet)
       const row = btn.closest('.group-dim-entry');
-      const actionRow = row.querySelector('.dim-action-row');
-      if (actionRow) {
-        actionRow.innerHTML = `<span style="color:var(--positive);font-size:0.64rem;font-weight:600;">✓ 已接受 ${span.dimension}</span>`;
-      }
-      row.style.background = 'rgba(74,222,128,0.06)';
-      row.dataset.accepted = 'true';
-
-      // Disable score buttons in this row (lock score)
-      row.querySelectorAll('.card-score-btn').forEach(b => { b.disabled = true; b.style.opacity = '0.5'; });
-
-      // Check if ALL dims in this card are now handled (accepted or rejected)
-      const card = btn.closest('.grouped-card');
-      const allRows = card.querySelectorAll('.group-dim-entry');
-      const allHandled = [...allRows].every(r => r.dataset.accepted === 'true' || r.dataset.rejected === 'true');
-      if (allHandled) {
-        // All dims handled — highlight the finish button
-        const finishBtn = card.querySelector('.btn-finish-card');
-        if (finishBtn) {
-          finishBtn.style.background = 'var(--positive)';
-          finishBtn.style.color = '#fff';
-          finishBtn.style.borderColor = 'var(--positive)';
-          finishBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
-      }
-
-      showToast(`✓ ${span.dimension} 已接受`);
+      handleAccept(row, idx);
     });
   });
 
-  // ── Reject (per-dimension row) — mark visually, show extra-dim prompt ──
-  annBody.querySelectorAll('.btn-reject-single').forEach(btn => {
+  // ── Bind Reject buttons ──
+  annBody.querySelectorAll('.dim-reject-btn').forEach(btn => {
     btn.addEventListener('click', e => {
       e.stopPropagation();
       const idx = parseInt(btn.dataset.idx);
-      const span = currentSpans[idx];
-      if (!span) return;
-
-      // Visually mark as rejected (don't remove yet)
       const row = btn.closest('.group-dim-entry');
-      const actionRow = row.querySelector('.dim-action-row');
-      if (actionRow) {
-        actionRow.innerHTML = `<span style="color:var(--negative);font-size:0.64rem;font-weight:600;">✕ 已拒绝 ${span.dimension}</span>`;
-      }
-      row.style.background = 'rgba(248,113,113,0.06)';
-      row.style.opacity = '0.5';
-      row.dataset.rejected = 'true';
-      row.dataset.rejectIdx = idx;
-
-      // Disable score buttons
-      row.querySelectorAll('.card-score-btn').forEach(b => { b.disabled = true; b.style.opacity = '0.3'; });
-
-      // Check if all handled
-      const card = btn.closest('.grouped-card');
-      const allRows = card.querySelectorAll('.group-dim-entry');
-      const allHandled = [...allRows].every(r => r.dataset.accepted === 'true' || r.dataset.rejected === 'true');
-      if (allHandled) {
-        const finishBtn = card.querySelector('.btn-finish-card');
-        if (finishBtn) {
-          finishBtn.style.background = 'var(--positive)';
-          finishBtn.style.color = '#fff';
-          finishBtn.style.borderColor = 'var(--positive)';
-          finishBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
-      }
-
-      showToast(`✕ ${span.dimension} 已拒绝`);
+      handleReject(row, idx);
     });
   });
 
@@ -1357,7 +1399,7 @@ function renderAnnotations() {
       pendingAddDim[gk] = null;
       pendingAddScore[gk] = null;
 
-      showToast(`✓ 已补充 ${dim} ${dimName(dim)} (${score > 0 ? '+1' : score < 0 ? '-1' : '0'})`);
+      // silently added
     });
   });
 
@@ -1392,7 +1434,7 @@ function renderAnnotations() {
       });
 
       renderPromptContent(); renderAnnotations(); autoSave();
-      showToast('✅ 已完成该段审核');
+      // silently completed
     });
   });
 
