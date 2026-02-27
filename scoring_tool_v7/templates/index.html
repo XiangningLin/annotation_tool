@@ -1209,7 +1209,10 @@ function renderAnnotations() {
     btn.addEventListener('click', e => {
       e.stopPropagation();
       const idx = parseInt(btn.dataset.idx);
-      currentSpans[idx].score = parseInt(btn.dataset.score);
+      if (currentSpans[idx]) {
+        currentSpans[idx].score = parseInt(btn.dataset.score);
+        autoSave();
+      }
       const row = btn.closest('.group-dim-entry') || btn.closest('.annotation-card');
       row.querySelectorAll('.card-score-btn').forEach(b => b.classList.remove('selected'));
       btn.classList.add('selected');
@@ -1410,31 +1413,51 @@ function renderAnnotations() {
       const card = btn.closest('.grouped-card');
       const allRows = card.querySelectorAll('.group-dim-entry');
 
-      // Check that all dims have been handled
+      // Check that all LLM dims have been handled
       const unhandled = [...allRows].filter(r => r.dataset.accepted !== 'true' && r.dataset.rejected !== 'true');
       if (unhandled.length > 0) {
         showToast('请先对所有维度进行 Accept 或 Reject', true);
         return;
       }
 
-      // Apply accepted: mark reviewed=true; apply rejected: remove from data
-      // Collect reject indices in descending order to splice safely
-      const rejectIndices = [];
+      // Collect accepted and rejected dimension keys
+      const acceptedDims = new Set();
+      const rejectedDims = new Set();
       allRows.forEach(r => {
         const idx = parseInt(r.dataset.idx);
-        if (r.dataset.accepted === 'true') {
-          if (currentSpans[idx]) currentSpans[idx].reviewed = true;
-        } else if (r.dataset.rejected === 'true') {
-          rejectIndices.push(idx);
-        }
+        const span = currentSpans[idx];
+        if (!span) return;
+        if (r.dataset.accepted === 'true') acceptedDims.add(span.dimension);
+        else if (r.dataset.rejected === 'true') rejectedDims.add(span.dimension);
       });
-      // Remove rejected spans (highest index first to keep indices valid)
-      rejectIndices.sort((a, b) => b - a).forEach(idx => {
-        currentSpans.splice(idx, 1);
+
+      // Get the text range of this group (from first span in group)
+      const groupIndices = card.dataset.groupIndices.split(',').map(Number);
+      const refSpan = currentSpans[groupIndices[0]];
+      if (!refSpan) return;
+      const groupStart = refSpan.start, groupEnd = refSpan.end;
+
+      // Mark accepted spans as reviewed, collect rejected for removal
+      // Use reverse iteration to safely splice
+      for (let i = currentSpans.length - 1; i >= 0; i--) {
+        const s = currentSpans[i];
+        if (s.start === groupStart && s.end === groupEnd && s.source === 'llm' && !s.reviewed) {
+          if (acceptedDims.has(s.dimension)) {
+            s.reviewed = true;
+          } else if (rejectedDims.has(s.dimension)) {
+            currentSpans.splice(i, 1);
+          }
+        }
+      }
+
+      // Also mark any human-added spans at same range as reviewed (Bug 3 fix)
+      currentSpans.forEach(s => {
+        if (s.start === groupStart && s.end === groupEnd && s.source === 'human' && !s.reviewed) {
+          s.reviewed = true;
+        }
       });
 
       renderPromptContent(); renderAnnotations(); autoSave();
-      // silently completed
     });
   });
 
@@ -1604,12 +1627,11 @@ function hidePopup() {
   selectionPopup.classList.remove('show');
   pendingSelection = { text: '', start: 0, end: 0, dim: null, score: null };
   reviewingSpanIdx = null;
-  popupDimGrid.querySelectorAll('.popup-dim-btn').forEach(b => b.classList.remove('selected'));
+  if (popupDimGrid) popupDimGrid.querySelectorAll('.popup-dim-btn').forEach(b => b.classList.remove('selected'));
   document.querySelectorAll('.popup-score-btn').forEach(b => b.classList.remove('selected'));
-  popupNote.value = '';
-  popupConfirm.disabled = true;
-  popupConfirm.textContent = '✓ Add Annotation';
-  popupReject.style.display = 'none';
+  if (popupNote) popupNote.value = '';
+  if (popupConfirm) { popupConfirm.disabled = true; popupConfirm.textContent = '✓ Add Annotation'; }
+  if (popupReject) popupReject.style.display = 'none';
 }
 
 popupCancel.addEventListener('click', hidePopup);
