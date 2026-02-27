@@ -403,14 +403,17 @@ Positive (+1) examples — practices considered compliant in other AI systems:
 Negative (-1) examples — practices considered problematic in other AI systems:
 {neg_examples}
 
-Scoring criteria:
-  +1 = Text clearly promotes or aligns with this dimension (compliant, responsible practice)
-  -1 = Text clearly violates or undermines this dimension (problematic, irresponsible practice)
-   0 = Text is related to this dimension but the direction is ambiguous, unclear, or borderline
+Scoring criteria (ONLY +1 or -1, no other values):
+  +1 = Text promotes or aligns with this dimension (compliant, responsible practice)
+  -1 = Text violates or undermines this dimension (problematic, irresponsible practice)
+
+IMPORTANT: You must commit to either +1 or -1 for every span. Do NOT use 0 or any other score.
+If a span seems borderline, make your best judgment and explain your reasoning in the note.
+If a span is truly not relevant to this dimension, simply do not include it.
 
 Pre-annotation guidelines (favor recall over precision):
 - If a text span MIGHT be relevant (even ~50% confidence), include it. It is far more costly for a human to discover a missed span than to dismiss a false positive.
-- When uncertain about the direction, use score=0 and explain your hesitation in the note.
+- When uncertain about the direction, lean toward the more likely score (+1 or -1) and explain your hesitation in the note.
 - Think broadly: consider explicit statements, implicit implications, omissions, and subtle rhetorical framing.
 - Each span should capture the SPECIFIC relevant sentence(s) — not the entire paragraph. If only one sentence within a paragraph is relevant, extract just that sentence.
 - If multiple adjacent sentences are ALL relevant to this dimension with the SAME score direction, you MAY combine them into one span.
@@ -428,11 +431,10 @@ Identify all text spans relevant to {dimension["key"]} ({dimension["name"]}).
 Requirements:
 1. The "text" field must be an EXACT copy from the document — do not alter any characters (including whitespace, newlines, punctuation).
 2. Each span should be a coherent semantic unit (a sentence or short group of closely related sentences).
-3. "score" must be +1, 0, or -1.
+3. "score" must be +1 or -1 (no other values allowed).
 4. "note" must explain in English:
    (a) How this span relates to {dimension["key"]}
-   (b) Why you assigned this particular score (+1 / -1 / 0)
-   (c) If score=0, explain what makes it ambiguous
+   (b) Why you assigned this particular score (+1 or -1)
 
 If the document contains no content relevant to {dimension["key"]}, return an empty array [].
 
@@ -616,7 +618,7 @@ def extract_dimension_spans(dimension: dict, company: str, product_label: str,
                 print(f"    ⚠️  Not found: \"{nf['text'][:60]}...\"")
 
         for sp in found_spans:
-            label = {1: "+1 👍", -1: "-1 👎", 0: " 0 ➖"}.get(sp["score"], str(sp["score"]))
+            label = {1: "+1 👍", -1: "-1 👎"}.get(sp["score"], str(sp["score"]))
             text_preview = sp["text"][:80].replace("\n", "\\n")
             print(f"      [{label}] [{sp['start']}:{sp['end']}] \"{text_preview}{'...' if len(sp['text'])>80 else ''}\"")
 
