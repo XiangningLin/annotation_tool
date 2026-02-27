@@ -1146,7 +1146,7 @@ function renderAnnotations() {
           <span style="font-size:0.55rem;color:var(--text-muted);">🤖 LLM</span>
         </div>
         ${s.note ? `<div style="font-size:0.6rem;color:var(--text-muted);margin-top:0.15rem;font-style:italic;">💬 ${escHtml(s.note)}</div>` : ''}
-        ${s.score === 0 ? `<div style="font-size:0.58rem;color:var(--neutral);margin-top:0.2rem;font-weight:600;">⚠️ LLM unsure (score=0) — please select +1 or -1</div>` : ''}
+        ${s.score === 0 ? `<div style="font-size:0.58rem;color:var(--neutral);margin-top:0.2rem;font-weight:600;">⚠️ LLM unsure — please select +1 or -1</div>` : ''}
         <div style="display:flex;gap:0.2rem;margin-top:0.25rem;">${scoreBtns}</div>
         <div class="dim-action-row" data-idx="${i}" style="display:flex;gap:0.3rem;margin-top:0.25rem;">
           <button class="dim-accept-btn" data-idx="${i}">✓ Accept</button>
