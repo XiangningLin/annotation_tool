@@ -1393,16 +1393,39 @@ function renderAnnotations() {
       });
       autoSave();
 
-      // Visual feedback: hide selected dim button, reset score row
+      // Visual feedback: replace dim button with "added" label + undo
       const dimBtn = card.querySelector(`.card-add-dim-btn[data-dim="${dim}"]`);
-      if (dimBtn) { dimBtn.style.display = 'none'; }
+      if (dimBtn) {
+        const addedIdx = currentSpans.length - 1; // index of the span we just pushed
+        const dc = dimColor(dim);
+        const scoreLabel = score === 1 ? '+1' : '-1';
+        const undoContainer = document.createElement('span');
+        undoContainer.style.cssText = 'display:inline-flex;align-items:center;gap:0.2rem;margin-bottom:0.15rem;';
+        undoContainer.innerHTML = `<span style="font-size:0.58rem;color:${dc};font-weight:600;">${dim} ${scoreLabel} ✓</span><button class="btn-undo-add" style="font-size:0.54rem;padding:0.06rem 0.25rem;border-radius:3px;cursor:pointer;border:1px solid var(--border);background:var(--bg-dark);color:var(--text-muted);font-family:inherit;">↩ Undo</button>`;
+        undoContainer.querySelector('.btn-undo-add').addEventListener('click', ev => {
+          ev.stopPropagation();
+          // Remove the added span (find by matching start/end/dim/source)
+          for (let ri = currentSpans.length - 1; ri >= 0; ri--) {
+            const rs = currentSpans[ri];
+            if (rs.start === ref.start && rs.end === ref.end && rs.dimension === dim && rs.source === 'human') {
+              currentSpans.splice(ri, 1);
+              break;
+            }
+          }
+          autoSave();
+          // Restore the dim button
+          undoContainer.replaceWith(dimBtn);
+          dimBtn.style.display = '';
+          dimBtn.style.background = 'transparent';
+          dimBtn.style.color = 'var(--text-muted)';
+        });
+        dimBtn.replaceWith(undoContainer);
+      }
       card.querySelectorAll('.card-add-score-btn').forEach(b => b.classList.remove('selected'));
       const scoreRow = card.querySelector('.card-add-score-row');
       if (scoreRow) scoreRow.style.display = 'none';
       pendingAddDim[gk] = null;
       pendingAddScore[gk] = null;
-
-      // silently added
     });
   });
 
