@@ -411,12 +411,13 @@ IMPORTANT: You must commit to either +1 or -1 for every span. Do NOT use 0 or an
 If a span seems borderline, make your best judgment and explain your reasoning in the note.
 If a span is truly not relevant to this dimension, simply do not include it.
 
-Pre-annotation guidelines (favor recall over precision):
-- If a text span MIGHT be relevant (even ~50% confidence), include it. It is far more costly for a human to discover a missed span than to dismiss a false positive.
-- When uncertain about the direction, lean toward the more likely score (+1 or -1) and explain your hesitation in the note.
-- Think broadly: consider explicit statements, implicit implications, omissions, and subtle rhetorical framing.
+Pre-annotation guidelines:
+- Include a span only if it is CLEARLY and PRIMARILY relevant to this dimension (~70%+ confidence). Do not include spans that are only tangentially related.
+- A span should belong to the ONE dimension it most strongly relates to. If a span could fit multiple dimensions, only include it for the MOST relevant one. Ask yourself: "Is this dimension the BEST fit for this span, or is there another dimension that fits better?"
+- Focus on explicit statements and clear implications. Do not over-interpret subtle rhetorical framing or minor omissions.
 - Each span should capture the SPECIFIC relevant sentence(s) — not the entire paragraph. If only one sentence within a paragraph is relevant, extract just that sentence.
 - If multiple adjacent sentences are ALL relevant to this dimension with the SAME score direction, you MAY combine them into one span.
+- Quality over quantity: 5 high-confidence spans are better than 20 borderline ones.
 
 --- DOCUMENT START ---
 Company: {company}
