@@ -522,7 +522,7 @@ def extract_dimension_spans(dimension: dict, company: str, product_label: str,
 
     if verbose:
         print(f"\n  {'─'*50}")
-        print(f"  🔍 {key} — {dimension['name']} ({dimension['name_zh']})")
+        print(f"  🔍 {key} — {dimension['name']}")
 
     prompt = build_dimension_prompt(dimension, company, product_label, filename, content)
 
