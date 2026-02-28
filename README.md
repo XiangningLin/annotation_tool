@@ -14,25 +14,25 @@ python app.py
 
 Open **http://127.0.0.1:5004** → Enter your name → Check **📌 Pre-annotated only** → Start.
 
-### 2. LLM Pre-Annotation (v4 — recommended)
+### 2. LLM Pre-Annotation (v3 — recommended)
 
 ```bash
 export OPENROUTER_API_KEY="sk-or-..."
 
 # Single prompt
-python llm_preannotate_v4.py --index 1
+python llm_preannotate_v3.py --index 1
 
-# Batch (pilot 20 prompts, 4 parallel workers)
-python llm_preannotate_v4.py --batch --parallel 4
+# Batch (pilot 20 prompts)
+python llm_preannotate_v3.py --batch
 
 # Resume interrupted batch
-python llm_preannotate_v4.py --batch --parallel 4 --resume
+python llm_preannotate_v3.py --batch --resume
 
 # Dry run (show plan, no API calls)
-python llm_preannotate_v4.py --batch --dry-run
+python llm_preannotate_v3.py --batch --dry-run
 
 # Custom prompt indices
-python llm_preannotate_v4.py --indices "1,2,3,93,148" --batch --parallel 4
+python llm_preannotate_v3.py --indices "1,2,3,93,148" --batch
 ```
 
 After pre-annotation, import into the review tool:
@@ -93,8 +93,8 @@ You can also select any text in the prompt to create new annotations manually.
 ├── audit_prompts.json              # 190 curated system prompts
 ├── requirements.txt                # Python dependencies (flask, requests)
 │
-├── llm_preannotate_v4.py           # ✅ V4: segment + all-dimension labeling (recommended)
-├── llm_preannotate_v3.py           # V3: per-dimension span extraction (legacy)
+├── llm_preannotate_v3.py           # ✅ V3: per-dimension span extraction (recommended)
+├── llm_preannotate_v4.py           # V4: segment + all-dimension labeling (experimental)
 ├── llm_preannotate_v2.py           # V2: segment + per-dimension scoring (legacy)
 ├── test_segmentation.py            # Segmentation quality test script
 │
@@ -116,7 +116,7 @@ You can also select any text in the prompt to create new annotations manually.
 audit_prompts.json
         │
         ▼
-llm_preannotate_v4.py  ──→  preannotation_v4/*.json
+llm_preannotate_v3.py  ──→  preannotation_v3/*.json
         │
         ▼  (import API)
 scoring_tool_v7/outputs/span_annotations.json
@@ -124,3 +124,25 @@ scoring_tool_v7/outputs/span_annotations.json
         ▼  (human review in browser)
 scoring_tool_v7/outputs/audit_annotations_{name}_{timestamp}.json  (export)
 ```
+
+## Troubleshooting
+
+### 403 Forbidden from OpenRouter API
+
+Possible causes:
+- **No credits** — Check your balance at https://openrouter.ai/settings/credits
+- **Corporate VPN/network** — Some company networks block third-party AI APIs. Try disconnecting VPN and using personal network.
+- **Key expired or revoked** — Generate a new key at https://openrouter.ai/settings/keys
+- **Model not available** — Check if `anthropic/claude-opus-4.6` is available on your plan
+
+### API key setup
+
+```bash
+# Option 1: Export in terminal
+export OPENROUTER_API_KEY="sk-or-..."
+
+# Option 2: Create .env file (already in .gitignore)
+echo 'OPENROUTER_API_KEY=sk-or-...' > .env
+```
+
+Note: The script reads from the environment variable, not from `.env` directly. You need to export it.
