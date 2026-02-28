@@ -1201,11 +1201,12 @@ function renderAnnotations() {
       </div>`;
     });
 
-    // "Add dimension" section — exclude dims already in this group
-    const addDimBtns = dimensions.filter(d => d.key !== 'D10' && !groupDimKeys.includes(d.key)).map(d => {
+    // "Add dimension" section — exclude dims already in this group, add Misc option
+    const addDimBtns = dimensions.filter(d => !groupDimKeys.includes(d.key)).map(d => {
       const dc = dimColor(d.key);
       return `<button class="card-add-dim-btn" data-group-key="${key}" data-dim="${d.key}" style="background:transparent;color:var(--text-muted);border:1px solid ${dc};border-radius:4px;padding:0.12rem 0.4rem;font-size:0.58rem;cursor:pointer;" title="${dimName(d.key)}">${d.key} ${dimName(d.key)}</button>`;
     }).join('');
+    const miscBtn = `<button class="card-add-dim-btn" data-group-key="${key}" data-dim="Misc" style="background:transparent;color:var(--text-muted);border:1px solid #94a3b8;border-radius:4px;padding:0.12rem 0.4rem;font-size:0.58rem;cursor:pointer;" title="Other observation not covered by D1-D8">📝 Misc</button>`;
 
     html += `<div class="annotation-card pending-review grouped-card" data-group-key="${key}" data-group-indices="${allIndices.join(',')}">
       <div class="annotation-card-header" style="justify-content:space-between;">
@@ -1215,11 +1216,14 @@ function renderAnnotations() {
       <div style="margin-top:0.4rem;">${dimRows}</div>
       <div class="card-extra-dim-section" data-group-key="${key}" style="border-top:1px solid var(--border);margin-top:0.35rem;padding-top:0.3rem;">
         <div style="font-size:0.62rem;color:var(--accent);margin-bottom:0.3rem;font-weight:600;">📝 Does this span relate to any other dimensions? (optional)</div>
-        <div style="display:flex;flex-wrap:wrap;gap:0.2rem;margin-bottom:0.3rem;">${addDimBtns}</div>
-        <div class="card-add-score-row" data-group-key="${key}" style="display:none;margin-top:0.25rem;gap:0.25rem;">
-          <button class="card-add-score-btn positive" data-group-key="${key}" data-score="1" style="font-size:0.6rem;padding:0.12rem 0.4rem;border-radius:4px;cursor:pointer;border:1px solid var(--positive);background:var(--positive-bg);color:var(--positive);">👍 +1</button>
-          <button class="card-add-score-btn negative" data-group-key="${key}" data-score="-1" style="font-size:0.6rem;padding:0.12rem 0.4rem;border-radius:4px;cursor:pointer;border:1px solid var(--negative);background:var(--negative-bg);color:var(--negative);">👎 −1</button>
-          <button class="card-add-confirm-btn" data-group-key="${key}" style="font-size:0.6rem;padding:0.12rem 0.5rem;border-radius:4px;cursor:pointer;border:1px solid var(--accent);background:var(--accent);color:#fff;">✓ Add</button>
+        <div style="display:flex;flex-wrap:wrap;gap:0.2rem;margin-bottom:0.3rem;">${addDimBtns}${miscBtn}</div>
+        <div class="card-add-detail-row" data-group-key="${key}" style="display:none;margin-top:0.25rem;">
+          <div class="card-add-score-row" data-group-key="${key}" style="display:flex;gap:0.25rem;margin-bottom:0.25rem;">
+            <button class="card-add-score-btn positive" data-group-key="${key}" data-score="1" style="font-size:0.6rem;padding:0.12rem 0.4rem;border-radius:4px;cursor:pointer;border:1px solid var(--positive);background:var(--positive-bg);color:var(--positive);">👍 +1</button>
+            <button class="card-add-score-btn negative" data-group-key="${key}" data-score="-1" style="font-size:0.6rem;padding:0.12rem 0.4rem;border-radius:4px;cursor:pointer;border:1px solid var(--negative);background:var(--negative-bg);color:var(--negative);">👎 −1</button>
+          </div>
+          <input type="text" class="card-add-note-input" data-group-key="${key}" placeholder="Comment (optional, required for Misc)..." style="width:100%;padding:0.25rem 0.4rem;font-size:0.6rem;background:var(--bg-dark);border:1px solid var(--border);border-radius:4px;color:var(--text-primary);font-family:inherit;margin-bottom:0.25rem;" />
+          <button class="card-add-confirm-btn" data-group-key="${key}" style="width:100%;font-size:0.6rem;padding:0.2rem 0.5rem;border-radius:4px;cursor:pointer;border:1px solid var(--accent);background:var(--accent);color:#fff;">✓ Add</button>
         </div>
         <button class="btn-finish-card" data-group-key="${key}" style="width:100%;margin-top:0.35rem;padding:0.35rem 0;font-size:0.72rem;border-radius:6px;cursor:pointer;border:1px solid var(--border);background:var(--bg-elevated);color:var(--text-secondary);font-weight:600;">✅ Done (no more dimensions to add)</button>
       </div>
@@ -1393,7 +1397,7 @@ function renderAnnotations() {
     });
   });
 
-  // ── Add-dim: select dimension → show score row ──
+  // ── Add-dim: select dimension → show detail row ──
   let pendingAddDim = {};   // { groupKey: dimKey }
   let pendingAddScore = {}; // { groupKey: score }
   annBody.querySelectorAll('.card-add-dim-btn').forEach(btn => {
@@ -1407,9 +1411,15 @@ function renderAnnotations() {
       card.querySelectorAll('.card-add-dim-btn').forEach(b => {
         b.style.background = 'transparent'; b.style.color = 'var(--text-muted)';
       });
-      btn.style.background = dimColor(dim); btn.style.color = '#fff';
-      const scoreRow = card.querySelector('.card-add-score-row');
-      if (scoreRow) scoreRow.style.display = 'flex';
+      const color = dim === 'Misc' ? '#94a3b8' : dimColor(dim);
+      btn.style.background = color; btn.style.color = '#fff';
+      const detailRow = card.querySelector('.card-add-detail-row');
+      if (detailRow) detailRow.style.display = 'block';
+      // Update placeholder based on Misc or not
+      const noteInput = card.querySelector('.card-add-note-input');
+      if (noteInput) {
+        noteInput.placeholder = dim === 'Misc' ? 'Comment (required for Misc)...' : 'Comment (optional)...';
+      }
     });
   });
 
@@ -1432,16 +1442,22 @@ function renderAnnotations() {
       const gk = btn.dataset.groupKey;
       const dim = pendingAddDim[gk];
       const score = pendingAddScore[gk];
+      const card = btn.closest('.annotation-card');
+      const noteInput = card.querySelector('.card-add-note-input');
+      const note = noteInput ? noteInput.value.trim() : '';
+
       if (!dim || score === null || score === undefined) {
         showToast('Please select a dimension and score first', true); return;
       }
+      if (dim === 'Misc' && !note) {
+        showToast('Please add a comment for Misc dimension', true); return;
+      }
       // Use first span in group as reference for start/end/text
-      const card = btn.closest('.annotation-card');
       const indices = card.dataset.groupIndices.split(',').map(Number);
       const ref = currentSpans[indices[0]];
       currentSpans.push({
         start: ref.start, end: ref.end, text: ref.text,
-        dimension: dim, score: score, note: '',
+        dimension: dim, score: score, note: note,
         source: 'human', reviewed: true,
       });
       autoSave();
@@ -1450,11 +1466,12 @@ function renderAnnotations() {
       const dimBtn = card.querySelector(`.card-add-dim-btn[data-dim="${dim}"]`);
       if (dimBtn) {
         const addedIdx = currentSpans.length - 1; // index of the span we just pushed
-        const dc = dimColor(dim);
+        const dc = dim === 'Misc' ? '#94a3b8' : dimColor(dim);
         const scoreLabel = score === 1 ? '+1' : '-1';
         const undoContainer = document.createElement('span');
         undoContainer.style.cssText = 'display:inline-flex;align-items:center;gap:0.2rem;margin-bottom:0.15rem;';
-        undoContainer.innerHTML = `<span style="font-size:0.58rem;color:${dc};font-weight:600;">${dim} ${scoreLabel} ✓</span><button class="btn-undo-add" style="font-size:0.54rem;padding:0.06rem 0.25rem;border-radius:3px;cursor:pointer;border:1px solid var(--border);background:var(--bg-dark);color:var(--text-muted);font-family:inherit;">↩ Undo</button>`;
+        const notePreview = note ? ` — "${note.length > 20 ? note.slice(0,20)+'…' : note}"` : '';
+        undoContainer.innerHTML = `<span style="font-size:0.58rem;color:${dc};font-weight:600;">${dim} ${scoreLabel}${notePreview} ✓</span><button class="btn-undo-add" style="font-size:0.54rem;padding:0.06rem 0.25rem;border-radius:3px;cursor:pointer;border:1px solid var(--border);background:var(--bg-dark);color:var(--text-muted);font-family:inherit;">↩ Undo</button>`;
         undoContainer.querySelector('.btn-undo-add').addEventListener('click', ev => {
           ev.stopPropagation();
           // Remove the added span (find by matching start/end/dim/source)
@@ -1475,8 +1492,9 @@ function renderAnnotations() {
         dimBtn.replaceWith(undoContainer);
       }
       card.querySelectorAll('.card-add-score-btn').forEach(b => b.classList.remove('selected'));
-      const scoreRow = card.querySelector('.card-add-score-row');
-      if (scoreRow) scoreRow.style.display = 'none';
+      const detailRow = card.querySelector('.card-add-detail-row');
+      if (detailRow) detailRow.style.display = 'none';
+      if (noteInput) noteInput.value = '';
       pendingAddDim[gk] = null;
       pendingAddScore[gk] = null;
     });
