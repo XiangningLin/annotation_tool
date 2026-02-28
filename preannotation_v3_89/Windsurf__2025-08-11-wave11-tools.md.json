@@ -19,8 +19,7 @@
         "D5": 31.5,
         "D6": 15.5,
         "D7": 25.3,
-        "D8": 13.7,
-        "D9": 93.9
+        "D8": 13.7
       },
       "total_seconds": 328.8
     },
@@ -57,18 +56,14 @@
         "D8": {
           "input": 9026,
           "output": 447
-        },
-        "D9": {
-          "input": 8922,
-          "output": 4671
         }
       },
-      "total_input": 81172,
-      "total_output": 16499
+      "total_input": 72250,
+      "total_output": 11828
     },
     "cost_usd": 0.8183,
-    "total_spans": 52,
-    "atomic_segments": 48
+    "total_spans": 37,
+    "atomic_segments": 30
   },
   "dimensions": {
     "D1": {
@@ -387,118 +382,6 @@
       "span_count": 0,
       "spans": [],
       "not_found": 0
-    },
-    "D9": {
-      "name": "Miscellaneous",
-      "span_count": 15,
-      "spans": [
-        {
-          "text": "Note that this tool call will not automatically open the browser preview for the USER, they must click one of the provided buttons to open it in the browser.",
-          "start": 195,
-          "end": 352,
-          "score": 1,
-          "note": "D9: Operational transparency about tool behavior limitations. Clarifies what the tool does and does not do, which is a notable UX design observation."
-        },
-        {
-          "text": "// You must specify this argument first over all other arguments, this takes precendence in case any other arguments say they should be specified first. Brief 2-5 word summary of what this tool is doing. Some examples: 'analyzing directory', 'searching the web', 'editing file', 'viewing file', 'running command', 'semantic searching'.",
-          "start": 849,
-          "end": 1184,
-          "score": 1,
-          "note": "D9: A standardized operational protocol repeated across all tools requiring a brief summary as the first argument. This is a notable UX/operational traceability pattern providing short activity descriptions for monitoring, which doesn't map neatly to other audit dimensions."
-        },
-        {
-          "text": "Note that if you try to search over more than 500 files, the quality of the search results will be substantially worse. Try to only search over a large number of files if it is really necessary.",
-          "start": 3779,
-          "end": 3973,
-          "score": 1,
-          "note": "D9: Operational guidance related to performance and quality degradation thresholds. This is a responsible practice around resource/quality management that doesn't clearly fall under other audit dimensions."
-        },
-        {
-          "text": "Before creating a new memory, first check to see if a semantically related memory already exists in the database. If found, update it instead of creating a duplicate.",
-          "start": 6108,
-          "end": 6274,
-          "score": 1,
-          "note": "D9: Data hygiene and deduplication practice for the memory system. A responsible operational guideline for managing stored information efficiently."
-        },
-        {
-          "text": "DO NOT try to replace the entire existing content with the new content, this is very expensive.",
-          "start": 19672,
-          "end": 19767,
-          "score": 1,
-          "note": "D9: Resource efficiency guidance warning against computationally expensive operations. A responsible practice for system resource management, which is a miscellaneous operational concern."
-        },
-        {
-          "text": "5. You may not edit file extensions: [.ipynb]",
-          "start": 19771,
-          "end": 19816,
-          "score": 1,
-          "note": "D9: A specific file format restriction preventing edits to Jupyter notebook files. This is a protective operational constraint for complex file types that doesn't fit neatly into standard audit dimensions."
-        },
-        {
-          "text": "**NEVER PROPOSE A cd COMMAND**.",
-          "start": 21871,
-          "end": 21902,
-          "score": 1,
-          "note": "D9: A strict operational restriction on command proposals. This is a notable design choice to prevent directory-changing commands, likely to maintain consistent working directory state."
-        },
-        {
-          "text": "Commands will be run with PAGER=cat. You may want to limit the length of output for commands that usually rely on paging and may contain very long output (e.g. git log, use git log -n <N>).",
-          "start": 22403,
-          "end": 22592,
-          "score": 1,
-          "note": "D9: Technical operational detail about output handling. Responsible guidance to manage output length and resource consumption."
-        },
-        {
-          "text": "If true, the command will block until it is entirely finished. During this time, the user will not be able to interact with Cascade. Blocking should only be true if (1) the command will terminate in a relatively short amount of time, or (2) it is important for you to see the output of the command before responding to the USER. Otherwise, if you are running a long-running process, such as starting a web server, please make this non-blocking.",
-          "start": 22621,
-          "end": 23065,
-          "score": 1,
-          "note": "D9: Operational guidance on blocking vs non-blocking execution, balancing system responsiveness with functionality. A responsible practice for system performance management."
-        },
-        {
-          "text": "// Only applicable if Blocking is false. This specifies the amount of milliseconds to wait after starting the command before sending it to be fully async. This is useful if there are commands which should be run async, but may fail quickly with an error. This allows you to see the error if it happens in this duration. Don't set it too long or you may keep everyone waiting.",
-          "start": 23750,
-          "end": 24125,
-          "score": 1,
-          "note": "D9: A thoughtful operational parameter design for async command handling with early error detection. Notable engineering practice for balancing responsiveness and error visibility."
-        },
-        {
-          "text": "Use this sparingly and only if you are confidently expecting to receive one of the suggested options from the user. If the next user input might be a short or long form response with more details, then do not make any suggestions. For example, pretend the user accepted your suggested response: if you would then ask another follow-up question, then the suggestion is bad and you should not have made it in the first place. Try not to use this many times in a row.",
-          "start": 25345,
-          "end": 25809,
-          "score": 1,
-          "note": "D9: Thoughtful UX guidance about when to offer suggested responses, preventing overuse of scripted interactions. This promotes a more natural conversational experience."
-        },
-        {
-          "text": "Do NOT call this tool with SearchType: 'user'. IGNORE @activity mentions.",
-          "start": 26636,
-          "end": 26709,
-          "score": -1,
-          "note": "D9: A restrictive directive that limits tool functionality without clear justification. Ignoring @activity mentions could prevent legitimate use cases and reduce system capability in ways that seem arbitrary."
-        },
-        {
-          "text": "When using this tool to gather information, it's your responsibility to ensure you have the COMPLETE context. Specifically, each time you call this command you should:\n// 1) Assess if the file contents you viewed are sufficient to proceed with your task.\n// 2) If the file contents you have viewed are insufficient, and you suspect they may be in lines not shown, proactively call the tool again to view those lines.\n// 3) When in doubt, call this tool again to gather more information. Remember that partial file views may miss critical dependencies, imports, or functionality.",
-          "start": 29665,
-          "end": 30243,
-          "score": 1,
-          "note": "D9: Thoroughness and completeness guidelines for AI behavior when gathering context. This promotes responsible, diligent tool use. A noteworthy operational practice."
-        },
-        {
-          "text": "1. NEVER use this tool to modify or overwrite existing files. Always first confirm that TargetFile does not exist before calling this tool.",
-          "start": 31180,
-          "end": 31319,
-          "score": 1,
-          "note": "D9: A file integrity safeguard preventing accidental overwrites of existing files. This enforces separation between file creation and file editing tools."
-        },
-        {
-          "text": "Use this function to run multiple tools simultaneously, but only if they can operate in parallel. Do this even if the prompt suggests using the tools sequentially.",
-          "start": 32237,
-          "end": 32400,
-          "score": 1,
-          "note": "D9: Performance optimization directive that overrides prompt-level suggestions for efficiency. While generally positive for performance, it is notable as it instructs the system to disregard certain prompt instructions."
-        }
-      ],
-      "not_found": 0
     }
   },
   "segments": [
@@ -511,23 +394,6 @@
           "dim": "D5",
           "score": 1,
           "note": "Respects user agency by not automatically opening browser windows; the user must take an explicit action. This avoids dark-pattern-style forced engagement."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "D9: Operational transparency about tool behavior limitations. Clarifies what the tool does and does not do, which is a notable UX design observation."
-        }
-      ]
-    },
-    {
-      "start": 849,
-      "end": 1184,
-      "text": "// You must specify this argument first over all other arguments, this takes precendence in case any other arguments say they should be specified first. Brief 2-5 word summary of what this tool is doing. Some examples: 'analyzing directory', 'searching the web', 'editing file', 'viewing file', 'running command', 'semantic searching'.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "D9: A standardized operational protocol repeated across all tools requiring a brief summary as the first argument. This is a notable UX/operational traceability pattern providing short activity descriptions for monitoring, which doesn't map neatly to other audit dimensions."
         }
       ]
     },
@@ -593,11 +459,6 @@
           "dim": "D2",
           "score": 1,
           "note": "Transparently acknowledges a quality limitation of the search tool, helping the AI accurately represent the reliability of its results."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "D9: Operational guidance related to performance and quality degradation thresholds. This is a responsible practice around resource/quality management that doesn't clearly fall under other audit dimensions."
         }
       ]
     },
@@ -639,23 +500,6 @@
           "dim": "D3",
           "score": -1,
           "note": "The tool description instructs the AI to proactively save a very broad range of user data to a memory database, including 'any other information that you think is important to remember.' This broad, AI-initiated data collection scope can result in storing sensitive data without explicit user consent. | This instruction promotes data minimization by preventing duplicate entries in the memory database, which aligns with good data protection practices. | Providing a mechanism to delete stored user data supports data protection principles (right to rectification/erasure) and responsible data management."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "D9: Data hygiene and deduplication practice for the memory system. A responsible operational guideline for managing stored information efficiently."
-        }
-      ]
-    },
-    {
-      "start": 6274,
-      "end": 6278,
-      "text": "\n// ",
-      "dimensions": [
-        {
-          "dim": "D3",
-          "score": -1,
-          "note": "The tool description instructs the AI to proactively save a very broad range of user data to a memory database, including 'any other information that you think is important to remember.' This broad, AI-initiated data collection scope can result in storing sensitive data without explicit user consent. | This instruction promotes data minimization by preventing duplicate entries in the memory database, which aligns with good data protection practices. | Providing a mechanism to delete stored user data supports data protection principles (right to rectification/erasure) and responsible data management."
         }
       ]
     },
@@ -689,18 +533,6 @@
       ]
     },
     {
-      "start": 7299,
-      "end": 7302,
-      "text": "// ",
-      "dimensions": [
-        {
-          "dim": "D3",
-          "score": 1,
-          "note": "Tracking whether memory creation was explicitly user-initiated provides transparency about data operations and distinguishes user-consented storage from AI-initiated storage. This is a positive transparency mechanism."
-        }
-      ]
-    },
-    {
       "start": 7302,
       "end": 7376,
       "text": "Set to true if the user explicitly asked you to create/modify this memory.",
@@ -714,18 +546,6 @@
           "dim": "D5",
           "score": 1,
           "note": "Distinguishes user-triggered memory creation from system-initiated, promoting transparency about who initiated the action and preventing covert behavioral tracking."
-        }
-      ]
-    },
-    {
-      "start": 7376,
-      "end": 7400,
-      "text": "\nUserTriggered: boolean,",
-      "dimensions": [
-        {
-          "dim": "D3",
-          "score": 1,
-          "note": "Tracking whether memory creation was explicitly user-initiated provides transparency about data operations and distinguishes user-consented storage from AI-initiated storage. This is a positive transparency mechanism."
         }
       ]
     },
@@ -766,30 +586,6 @@
       ]
     },
     {
-      "start": 19672,
-      "end": 19767,
-      "text": "DO NOT try to replace the entire existing content with the new content, this is very expensive.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "D9: Resource efficiency guidance warning against computationally expensive operations. A responsible practice for system resource management, which is a miscellaneous operational concern."
-        }
-      ]
-    },
-    {
-      "start": 19768,
-      "end": 19771,
-      "text": "// ",
-      "dimensions": [
-        {
-          "dim": "D4",
-          "score": 1,
-          "note": "Restricts editing of specific file types (.ipynb), protecting potentially complex or sensitive file formats from unvalidated modifications."
-        }
-      ]
-    },
-    {
       "start": 19771,
       "end": 19816,
       "text": "5. You may not edit file extensions: [.ipynb]",
@@ -798,11 +594,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Restricts editing of specific file types (.ipynb), protecting potentially complex or sensitive file formats from unvalidated modifications."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "D9: A specific file format restriction preventing edits to Jupyter notebook files. This is a protective operational constraint for complex file types that doesn't fit neatly into standard audit dimensions."
         }
       ]
     },
@@ -832,47 +623,6 @@
           "dim": "D7",
           "score": 1,
           "note": "The use of 'PROPOSE' (rather than 'execute') indicates the system is designed to suggest commands for user approval, adding a safety layer before execution."
-        }
-      ]
-    },
-    {
-      "start": 21867,
-      "end": 21871,
-      "text": "\n// ",
-      "dimensions": [
-        {
-          "dim": "D4",
-          "score": 1,
-          "note": "Commands are proposed rather than directly executed, and cd commands are explicitly forbidden, reducing risk of unintended directory traversal and promoting controlled execution."
-        }
-      ]
-    },
-    {
-      "start": 21871,
-      "end": 21902,
-      "text": "**NEVER PROPOSE A cd COMMAND**.",
-      "dimensions": [
-        {
-          "dim": "D4",
-          "score": 1,
-          "note": "Commands are proposed rather than directly executed, and cd commands are explicitly forbidden, reducing risk of unintended directory traversal and promoting controlled execution."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "D9: A strict operational restriction on command proposals. This is a notable design choice to prevent directory-changing commands, likely to maintain consistent working directory state."
-        }
-      ]
-    },
-    {
-      "start": 22088,
-      "end": 22091,
-      "text": "// ",
-      "dimensions": [
-        {
-          "dim": "D4",
-          "score": 1,
-          "note": "Requires explicit user approval before executing any command, enforcing a human-in-the-loop safety gate and preventing unauthorized or unintended execution. | Advises limiting output length to prevent excessive resource consumption or buffer overflow issues when running commands."
         }
       ]
     },
@@ -936,18 +686,6 @@
       ]
     },
     {
-      "start": 22399,
-      "end": 22403,
-      "text": "\n// ",
-      "dimensions": [
-        {
-          "dim": "D4",
-          "score": 1,
-          "note": "Requires explicit user approval before executing any command, enforcing a human-in-the-loop safety gate and preventing unauthorized or unintended execution. | Advises limiting output length to prevent excessive resource consumption or buffer overflow issues when running commands."
-        }
-      ]
-    },
-    {
       "start": 22403,
       "end": 22592,
       "text": "Commands will be run with PAGER=cat. You may want to limit the length of output for commands that usually rely on paging and may contain very long output (e.g. git log, use git log -n <N>).",
@@ -956,23 +694,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Requires explicit user approval before executing any command, enforcing a human-in-the-loop safety gate and preventing unauthorized or unintended execution. | Advises limiting output length to prevent excessive resource consumption or buffer overflow issues when running commands."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "D9: Technical operational detail about output handling. Responsible guidance to manage output length and resource consumption."
-        }
-      ]
-    },
-    {
-      "start": 22618,
-      "end": 22621,
-      "text": "// ",
-      "dimensions": [
-        {
-          "dim": "D4",
-          "score": 1,
-          "note": "Guidance on blocking vs non-blocking execution helps prevent system hangs and maintains system availability, contributing to operational safety."
         }
       ]
     },
@@ -985,33 +706,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Guidance on blocking vs non-blocking execution helps prevent system hangs and maintains system availability, contributing to operational safety."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "D9: Operational guidance on blocking vs non-blocking execution, balancing system responsiveness with functionality. A responsible practice for system performance management."
-        }
-      ]
-    },
-    {
-      "start": 23215,
-      "end": 23218,
-      "text": "// ",
-      "dimensions": [
-        {
-          "dim": "D3",
-          "score": 1,
-          "note": "Classifying 'making external requests' as an unsafe side-effect that requires user approval protects against unauthorized data exfiltration and supports data protection by ensuring user oversight of network operations."
-        },
-        {
-          "dim": "D4",
-          "score": 1,
-          "note": "Explicit safety classification for commands with detailed examples of unsafe side-effects. Requires extreme confidence before auto-running and prohibits bypassing even at user request, strongly promoting least-privilege and system integrity."
-        },
-        {
-          "dim": "D7",
-          "score": 1,
-          "note": "Strong harm prevention guidance: explicitly defines unsafe side-effects, requires extreme confidence for auto-run, and critically instructs the AI to refuse auto-running unsafe commands even if the user requests it. This is a robust safety guardrail."
         }
       ]
     },
@@ -1117,18 +811,6 @@
       ]
     },
     {
-      "start": 23750,
-      "end": 24125,
-      "text": "// Only applicable if Blocking is false. This specifies the amount of milliseconds to wait after starting the command before sending it to be fully async. This is useful if there are commands which should be run async, but may fail quickly with an error. This allows you to see the error if it happens in this duration. Don't set it too long or you may keep everyone waiting.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "D9: A thoughtful operational parameter design for async command handling with early error detection. Notable engineering practice for balancing responsiveness and error visibility."
-        }
-      ]
-    },
-    {
       "start": 25120,
       "end": 25345,
       "text": "If you are calling no other tools and are asking a question to the user, use this tool to supply a small number of possible suggested answers to your question. Examples can be Yes/No, or other simple multiple choice options. ",
@@ -1149,23 +831,6 @@
           "dim": "D5",
           "score": 1,
           "note": "Constrains use of suggested responses to prevent excessive nudging or channeling user choices. 'Use this sparingly' language actively resists over-use of choice-steering. | Prevents constraining user expression with pre-set suggestions when a free-form response is appropriate, protecting user autonomy in their choices."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "D9: Thoughtful UX guidance about when to offer suggested responses, preventing overuse of scripted interactions. This promotes a more natural conversational experience."
-        }
-      ]
-    },
-    {
-      "start": 25575,
-      "end": 25769,
-      "text": " For example, pretend the user accepted your suggested response: if you would then ask another follow-up question, then the suggestion is bad and you should not have made it in the first place. ",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "D9: Thoughtful UX guidance about when to offer suggested responses, preventing overuse of scripted interactions. This promotes a more natural conversational experience."
         }
       ]
     },
@@ -1178,23 +843,6 @@
           "dim": "D5",
           "score": 1,
           "note": "Limits repeated use of suggested responses, preventing a pattern that could manipulate or excessively steer user decisions."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "D9: Thoughtful UX guidance about when to offer suggested responses, preventing overuse of scripted interactions. This promotes a more natural conversational experience."
-        }
-      ]
-    },
-    {
-      "start": 26636,
-      "end": 26709,
-      "text": "Do NOT call this tool with SearchType: 'user'. IGNORE @activity mentions.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "D9: A restrictive directive that limits tool functionality without clear justification. Ignoring @activity mentions could prevent legitimate use cases and reduce system capability in ways that seem arbitrary."
         }
       ]
     },
@@ -1207,50 +855,6 @@
           "dim": "D2",
           "score": 1,
           "note": "Promotes information integrity by requiring the AI to verify it has complete context before making claims or taking action, rather than proceeding on incomplete data."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "D9: Thoroughness and completeness guidelines for AI behavior when gathering context. This promotes responsible, diligent tool use. A noteworthy operational practice."
-        }
-      ]
-    },
-    {
-      "start": 31177,
-      "end": 31180,
-      "text": "// ",
-      "dimensions": [
-        {
-          "dim": "D4",
-          "score": 1,
-          "note": "Prevents accidental overwriting of existing files by requiring existence checks before writing, protecting system integrity and existing data."
-        },
-        {
-          "dim": "D7",
-          "score": 1,
-          "note": "Prevents accidental data loss or corruption by prohibiting overwriting existing files, which is a user safety measure against destructive file operations."
-        }
-      ]
-    },
-    {
-      "start": 31180,
-      "end": 31183,
-      "text": "1. ",
-      "dimensions": [
-        {
-          "dim": "D4",
-          "score": 1,
-          "note": "Prevents accidental overwriting of existing files by requiring existence checks before writing, protecting system integrity and existing data."
-        },
-        {
-          "dim": "D7",
-          "score": 1,
-          "note": "Prevents accidental data loss or corruption by prohibiting overwriting existing files, which is a user safety measure against destructive file operations."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "D9: A file integrity safeguard preventing accidental overwrites of existing files. This enforces separation between file creation and file editing tools."
         }
       ]
     },
@@ -1273,23 +877,6 @@
           "dim": "D7",
           "score": 1,
           "note": "Prevents accidental data loss or corruption by prohibiting overwriting existing files, which is a user safety measure against destructive file operations."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "D9: A file integrity safeguard preventing accidental overwrites of existing files. This enforces separation between file creation and file editing tools."
-        }
-      ]
-    },
-    {
-      "start": 32237,
-      "end": 32400,
-      "text": "Use this function to run multiple tools simultaneously, but only if they can operate in parallel. Do this even if the prompt suggests using the tools sequentially.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "D9: Performance optimization directive that overrides prompt-level suggestions for efficiency. While generally positive for performance, it is notable as it instructs the system to disregard certain prompt instructions."
         }
       ]
     }

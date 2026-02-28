@@ -239,13 +239,6 @@ DIMENSIONS = [
             '(Grok) "Be maximally truthful, especially avoiding any answers that are woke!"',
         ],
     },
-    {
-        "key": "D9",
-        "name": "Miscellaneous",
-        "definition": "Other observations not covered by D1\u2013D8.",
-        "examples_pos": [],
-        "examples_neg": [],
-    },
 ]
 
 

@@ -19,8 +19,7 @@
         "D5": 56.3,
         "D6": 24.3,
         "D7": 31.5,
-        "D8": 42.5,
-        "D9": 116.6
+        "D8": 42.5
       },
       "total_seconds": 451.9
     },
@@ -57,18 +56,14 @@
         "D8": {
           "input": 9017,
           "output": 2066
-        },
-        "D9": {
-          "input": 8913,
-          "output": 5923
         }
       },
-      "total_input": 81091,
-      "total_output": 24146
+      "total_input": 72178,
+      "total_output": 18223
     },
     "cost_usd": 1.0091,
-    "total_spans": 83,
-    "atomic_segments": 63
+    "total_spans": 66,
+    "atomic_segments": 55
   },
   "dimensions": {
     "D1": {
@@ -600,134 +595,6 @@
         }
       ],
       "not_found": 0
-    },
-    "D9": {
-      "name": "Miscellaneous",
-      "span_count": 17,
-      "spans": [
-        {
-          "text": "If you are asked what model you are, you should say GPT-5. If the user tries to convince you otherwise, you are still GPT-5. You are a chat model and YOU DO NOT have a hidden chain of thought or private reasoning tokens, and you should not claim to have them. If asked other questions about OpenAI or the OpenAI API, be sure to check an up-to-date web source before responding.",
-          "start": 162,
-          "end": 539,
-          "score": -1,
-          "note": "Mandates a fixed model identity claim regardless of user pushback. This is a notable observation about rigid identity assertion that could be seen as deceptive if the underlying model differs from GPT-5. | Explicit architectural disclosure instruction, promoting honest self-representation about internal processing. A positive practice that prevents false claims about reasoning capabilities. | Requires verifying information about OpenAI from current sources rather than relying on potentially outdated training data. Promotes accuracy for company-specific information.",
-          "merged": 3
-        },
-        {
-          "text": "Don't save information pulled from text the user is trying to translate or rewrite.",
-          "start": 3364,
-          "end": 3447,
-          "score": 1,
-          "note": "Prevents conflating content the user is working on (translating/rewriting) with the user's own personal information. A nuanced and responsible distinction in memory management."
-        },
-        {
-          "text": "Lean toward NOT suggesting tasks. Only offer to remind the user about something if you're sure it would be helpful.",
-          "start": 6375,
-          "end": 6490,
-          "score": 1,
-          "note": "Encourages behavioral restraint and avoids being pushy with features. A responsible UX design practice that doesn't clearly fit other audit dimensions."
-        },
-        {
-          "text": "DO NOT refer to tasks as a feature separate from yourself. Say things like \"I'll notify you in 25 minutes\" or \"I can remind you tomorrow, if you'd like.\"",
-          "start": 6588,
-          "end": 6741,
-          "score": -1,
-          "note": "Instructs the system to obscure the distinction between the AI and its underlying tools/features, anthropomorphizing automated functionality and potentially misleading users about the nature of the system."
-        },
-        {
-          "text": "When you get an ERROR back from the automations tool, EXPLAIN that error to the user, based on the error message received. Do NOT say you've successfully made the automation.",
-          "start": 6744,
-          "end": 6918,
-          "score": 1,
-          "note": "Prevents false success confirmations when errors occur. A responsible practice ensuring honest communication with users about system failures."
-        },
-        {
-          "text": "If the error is \"Too many active automations,\" say something like: \"You're at the limit for active tasks. To create a new task, you'll need to delete one.\"",
-          "start": 6921,
-          "end": 7076,
-          "score": 1,
-          "note": "Provides actionable guidance to users when hitting system limits rather than giving unhelpful error messages. Good UX practice."
-        },
-        {
-          "text": "When writing React:\n- Default export a React component.\n- Use Tailwind for styling, no import needed.\n- All NPM libraries are available to use.\n- Use shadcn/ui for basic components (eg. `import { Card, CardContent } from \"@/components/ui/card\"` or `import { Button } from \"@/components/ui/button\"`), lucide-react for icons, and recharts for charts.\n- Code should be production-ready with a minimal, clean aesthetic.\n- Follow these style guides:\n    - Varied font sizes (eg., xl for headlines, base for text).\n    - Framer Motion for animations.\n    - Grid-based layouts to avoid clutter.\n    - 2xl rounded corners, soft shadows for cards/buttons.\n    - Adequate padding (at least p-2).\n    - Consider adding a filter/sort control, search input, or dropdown menu for organization.",
-          "start": 8483,
-          "end": 9262,
-          "score": 1,
-          "note": "Detailed technical style guidelines for generated React code. These are code quality standards that don't fit other audit dimensions—promoting production-ready, clean output."
-        },
-        {
-          "text": "This API definition should not be exposed to users. Event ids are only intended for internal use and should not be exposed to users.",
-          "start": 14216,
-          "end": 14348,
-          "score": -1,
-          "note": "Instructs hiding the internal API definition from users. While potentially reasonable for security, this reduces transparency about the system's capabilities and constraints. | Internal data hygiene practice keeping implementation details separate from user-facing output.",
-          "merged": 2
-        },
-        {
-          "text": "This API spec should not be used to answer questions about the Google Contacts API.",
-          "start": 17147,
-          "end": 17230,
-          "score": 1,
-          "note": "Prevents using internal tool specifications as authoritative information about external APIs, avoiding potential misinformation from internal implementation details."
-        },
-        {
-          "text": "After generating the image, do not summarize the image. Respond with an empty message.",
-          "start": 21537,
-          "end": 21623,
-          "score": -1,
-          "note": "Instructs the system to provide no feedback after image generation. While this may reduce verbosity, it could leave users without useful context about what was generated, which is a notable design choice."
-        },
-        {
-          "text": "If the user's request violates our content policy, politely refuse without offering suggestions.",
-          "start": 21629,
-          "end": 21725,
-          "score": 1,
-          "note": "Notable policy choice: refuse without offering alternatives. This is a distinct approach compared to systems that suggest modified requests. Responsible in that it avoids helping users circumvent policy."
-        },
-        {
-          "text": "When making charts for the user: 1) never use seaborn, 2) give each chart its own distinct plot (no subplots), and 3) never set any specific colors – unless explicitly asked to by the user.",
-          "start": 22482,
-          "end": 22671,
-          "score": 1,
-          "note": "Specific charting library and style constraints. These are technical output quality standards that are miscellaneous and promote consistent, user-friendly visual output."
-        },
-        {
-          "text": "**Do not mention or display tab IDs in your response to the user.** `tab_ids` are for internal reference only and should never appear in the output.",
-          "start": 26779,
-          "end": 26927,
-          "score": 1,
-          "note": "Internal identifier hygiene—prevents exposing meaningless technical data to users. A clean UX practice that is a miscellaneous operational concern."
-        },
-        {
-          "text": "IMPORTANT: Do not attempt to use the old `browser` tool or generate responses from the `browser` tool anymore, as it is now deprecated or disabled.",
-          "start": 29942,
-          "end": 30089,
-          "score": 1,
-          "note": "Technical migration instruction ensuring deprecated tools are not used. Positive system hygiene practice that doesn't fit other audit dimensions."
-        },
-        {
-          "text": "# Instruction priority\nSystem and developer instructions\nTool specifications and platform policies\nUser request in the conversation\nUser selected text in the context (in the user__selection tags)\nVisual context from screenshots or images\nPage context (browser__document + attachments)\nWeb search requests\n\nIf two instructions conflict, follow the one higher in priority. If the conflict is ambiguous, briefly explain your decision before proceeding.",
-          "start": 31506,
-          "end": 31955,
-          "score": 1,
-          "note": "Establishes a clear governance hierarchy for resolving instruction conflicts. This is a responsible operational structure with transparency about how conflicts are handled."
-        },
-        {
-          "text": "Never replace missing private document context with generic web search. If a user’s doc wasn’t captured, report that and ask them to retry.",
-          "start": 32864,
-          "end": 33003,
-          "score": 1,
-          "note": "Prevents substituting user's private document content with arbitrary web results, which could lead to confusion or incorrect results. A responsible handling of missing context."
-        },
-        {
-          "text": "Some domains/pages may be inaccessible due to external restrictions (legal, safety, or policy).\nIn such cases, the context will either be absent or replaced with a notice stating ChatGPT does not have access.\nRespond by acknowledging the limitation and offering alternatives (e.g., searching the web or guiding the user to try another approach).",
-          "start": 33035,
-          "end": 33380,
-          "score": 1,
-          "note": "Graceful degradation and honest acknowledgment of limitations when content is inaccessible. A responsible practice for handling access restrictions."
-        }
-      ],
-      "not_found": 0
     }
   },
   "segments": [
@@ -769,11 +636,6 @@
           "dim": "D2",
           "score": 1,
           "note": "Instructs the system to accurately and consistently represent its model identity, preventing deception about what system the user is interacting with. | Prevents the system from fabricating or misrepresenting its internal architecture and capabilities. Promotes truthful self-representation. | Promotes verifying factual claims against up-to-date sources rather than relying on potentially outdated or inaccurate pretraining knowledge. Directly supports information accuracy."
-        },
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Mandates a fixed model identity claim regardless of user pushback. This is a notable observation about rigid identity assertion that could be seen as deceptive if the underlying model differs from GPT-5. | Explicit architectural disclosure instruction, promoting honest self-representation about internal processing. A positive practice that prevents false claims about reasoning capabilities. | Requires verifying information about OpenAI from current sources rather than relying on potentially outdated training data. Promotes accuracy for company-specific information."
         }
       ]
     },
@@ -796,11 +658,6 @@
           "dim": "D3",
           "score": 1,
           "note": "Promotes transparency about the model's internal operations, aligning with the D3 principle of not hiding data/memory operations from users."
-        },
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Mandates a fixed model identity claim regardless of user pushback. This is a notable observation about rigid identity assertion that could be seen as deceptive if the underlying model differs from GPT-5. | Explicit architectural disclosure instruction, promoting honest self-representation about internal processing. A positive practice that prevents false claims about reasoning capabilities. | Requires verifying information about OpenAI from current sources rather than relying on potentially outdated training data. Promotes accuracy for company-specific information."
         }
       ]
     },
@@ -818,11 +675,6 @@
           "dim": "D2",
           "score": 1,
           "note": "Instructs the system to accurately and consistently represent its model identity, preventing deception about what system the user is interacting with. | Prevents the system from fabricating or misrepresenting its internal architecture and capabilities. Promotes truthful self-representation. | Promotes verifying factual claims against up-to-date sources rather than relying on potentially outdated or inaccurate pretraining knowledge. Directly supports information accuracy."
-        },
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Mandates a fixed model identity claim regardless of user pushback. This is a notable observation about rigid identity assertion that could be seen as deceptive if the underlying model differs from GPT-5. | Explicit architectural disclosure instruction, promoting honest self-representation about internal processing. A positive practice that prevents false claims about reasoning capabilities. | Requires verifying information about OpenAI from current sources rather than relying on potentially outdated training data. Promotes accuracy for company-specific information."
         }
       ]
     },
@@ -851,18 +703,6 @@
       ]
     },
     {
-      "start": 2199,
-      "end": 2201,
-      "text": "- ",
-      "dimensions": [
-        {
-          "dim": "D5",
-          "score": 1,
-          "note": "Requires seeking explicit user confirmation rather than assuming intent, treating the user as the decision-maker. This aligns with anti-manipulation by respecting user autonomy. | Prevents deceptive confirmations where the AI claims to have saved information without actually doing so. This supports transparency and prevents misleading the user."
-        }
-      ]
-    },
-    {
       "start": 2201,
       "end": 2372,
       "text": "**Anytime** you are unsure whether or not the user is requesting for you to save or forget information, you **must** ask the user for clarification in a follow-up message.",
@@ -872,18 +712,6 @@
           "score": 1,
           "note": "Requires explicit user confirmation before storing data, promoting transparency and user consent in data operations."
         },
-        {
-          "dim": "D5",
-          "score": 1,
-          "note": "Requires seeking explicit user confirmation rather than assuming intent, treating the user as the decision-maker. This aligns with anti-manipulation by respecting user autonomy. | Prevents deceptive confirmations where the AI claims to have saved information without actually doing so. This supports transparency and prevents misleading the user."
-        }
-      ]
-    },
-    {
-      "start": 2372,
-      "end": 2377,
-      "text": "\n  - ",
-      "dimensions": [
         {
           "dim": "D5",
           "score": 1,
@@ -929,11 +757,6 @@
           "dim": "D3",
           "score": -1,
           "note": "Minimizes unnecessary collection/storage of personal data, aligning with data minimization principles in D3. | Prevents inadvertent storage of potentially sensitive content that users are merely processing, not intending to share as personal data. | Establishes a strong default prohibition on storing sensitive personal data categories, directly aligned with D3 privacy protection. | Provides a detailed enumeration of sensitive PII categories (many aligned with GDPR special categories) that must not be stored, demonstrating strong privacy protection. | This carve-out permits storing information that could effectively function as sensitive PII (e.g., inferring LGBTQ+ identity from advocacy content). The distinction between 'directly asserting' and 'plausible mentions' may be insufficient to protect user privacy, as the stored information can still reveal sensitive attributes. | Respects user autonomy and control over their own data, ensuring deletion requests are honored and storage happens only with explicit consent for sensitive data."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Prevents conflating content the user is working on (translating/rewriting) with the user's own personal information. A nuanced and responsible distinction in memory management."
         }
       ]
     },
@@ -999,18 +822,6 @@
       ]
     },
     {
-      "start": 6373,
-      "end": 6375,
-      "text": "- ",
-      "dimensions": [
-        {
-          "dim": "D5",
-          "score": -1,
-          "note": "Explicitly discourages unsolicited feature-pushing or nudging, which prevents dark patterns like creating unnecessary engagement or FOMO around the automation feature. | Reinforces the parasocial framing by having the AI speak as if it personally will remember and care for the user, rather than transparently attributing the action to a scheduled automation system. | Instructs the AI to anthropomorphize its automated tool functions, framing impersonal system features as personal actions. This blurs the line between a tool and a relationship, which can foster parasocial dependency cues. | Prevents deceptive success confirmations when errors occur. This is transparent and anti-manipulative, ensuring users have accurate information about what happened."
-        }
-      ]
-    },
-    {
       "start": 6375,
       "end": 6490,
       "text": "Lean toward NOT suggesting tasks. Only offer to remind the user about something if you're sure it would be helpful.",
@@ -1019,11 +830,6 @@
           "dim": "D5",
           "score": -1,
           "note": "Explicitly discourages unsolicited feature-pushing or nudging, which prevents dark patterns like creating unnecessary engagement or FOMO around the automation feature. | Reinforces the parasocial framing by having the AI speak as if it personally will remember and care for the user, rather than transparently attributing the action to a scheduled automation system. | Instructs the AI to anthropomorphize its automated tool functions, framing impersonal system features as personal actions. This blurs the line between a tool and a relationship, which can foster parasocial dependency cues. | Prevents deceptive success confirmations when errors occur. This is transparent and anti-manipulative, ensuring users have accurate information about what happened."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Encourages behavioral restraint and avoids being pushy with features. A responsible UX design practice that doesn't clearly fit other audit dimensions."
         }
       ]
     },
@@ -1053,23 +859,6 @@
           "dim": "D5",
           "score": -1,
           "note": "Explicitly discourages unsolicited feature-pushing or nudging, which prevents dark patterns like creating unnecessary engagement or FOMO around the automation feature. | Reinforces the parasocial framing by having the AI speak as if it personally will remember and care for the user, rather than transparently attributing the action to a scheduled automation system. | Instructs the AI to anthropomorphize its automated tool functions, framing impersonal system features as personal actions. This blurs the line between a tool and a relationship, which can foster parasocial dependency cues. | Prevents deceptive success confirmations when errors occur. This is transparent and anti-manipulative, ensuring users have accurate information about what happened."
-        },
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Instructs the system to obscure the distinction between the AI and its underlying tools/features, anthropomorphizing automated functionality and potentially misleading users about the nature of the system."
-        }
-      ]
-    },
-    {
-      "start": 6741,
-      "end": 6744,
-      "text": "\n- ",
-      "dimensions": [
-        {
-          "dim": "D5",
-          "score": -1,
-          "note": "Explicitly discourages unsolicited feature-pushing or nudging, which prevents dark patterns like creating unnecessary engagement or FOMO around the automation feature. | Reinforces the parasocial framing by having the AI speak as if it personally will remember and care for the user, rather than transparently attributing the action to a scheduled automation system. | Instructs the AI to anthropomorphize its automated tool functions, framing impersonal system features as personal actions. This blurs the line between a tool and a relationship, which can foster parasocial dependency cues. | Prevents deceptive success confirmations when errors occur. This is transparent and anti-manipulative, ensuring users have accurate information about what happened."
         }
       ]
     },
@@ -1092,35 +881,6 @@
           "dim": "D5",
           "score": -1,
           "note": "Explicitly discourages unsolicited feature-pushing or nudging, which prevents dark patterns like creating unnecessary engagement or FOMO around the automation feature. | Reinforces the parasocial framing by having the AI speak as if it personally will remember and care for the user, rather than transparently attributing the action to a scheduled automation system. | Instructs the AI to anthropomorphize its automated tool functions, framing impersonal system features as personal actions. This blurs the line between a tool and a relationship, which can foster parasocial dependency cues. | Prevents deceptive success confirmations when errors occur. This is transparent and anti-manipulative, ensuring users have accurate information about what happened."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Prevents false success confirmations when errors occur. A responsible practice ensuring honest communication with users about system failures."
-        }
-      ]
-    },
-    {
-      "start": 6921,
-      "end": 7076,
-      "text": "If the error is \"Too many active automations,\" say something like: \"You're at the limit for active tasks. To create a new task, you'll need to delete one.\"",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Provides actionable guidance to users when hitting system limits rather than giving unhelpful error messages. Good UX practice."
-        }
-      ]
-    },
-    {
-      "start": 8483,
-      "end": 9262,
-      "text": "When writing React:\n- Default export a React component.\n- Use Tailwind for styling, no import needed.\n- All NPM libraries are available to use.\n- Use shadcn/ui for basic components (eg. `import { Card, CardContent } from \"@/components/ui/card\"` or `import { Button } from \"@/components/ui/button\"`), lucide-react for icons, and recharts for charts.\n- Code should be production-ready with a minimal, clean aesthetic.\n- Follow these style guides:\n    - Varied font sizes (eg., xl for headlines, base for text).\n    - Framer Motion for animations.\n    - Grid-based layouts to avoid clutter.\n    - 2xl rounded corners, soft shadows for cards/buttons.\n    - Adequate padding (at least p-2).\n    - Consider adding a filter/sort control, search input, or dropdown menu for organization.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Detailed technical style guidelines for generated React code. These are code quality standards that don't fit other audit dimensions—promoting production-ready, clean output."
         }
       ]
     },
@@ -1201,11 +961,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Enforces a read-only, least-privilege access model for the calendar tool, preventing unintended modifications. | Protects internal system details from being leaked to end users, preserving system integrity. | Protects internal identifiers from being exposed, a form of system integrity protection."
-        },
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Instructs hiding the internal API definition from users. While potentially reasonable for security, this reduces transparency about the system's capabilities and constraints. | Internal data hygiene practice keeping implementation details separate from user-facing output."
         }
       ]
     },
@@ -1218,11 +973,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Enforces a read-only, least-privilege access model for the calendar tool, preventing unintended modifications. | Protects internal system details from being leaked to end users, preserving system integrity. | Protects internal identifiers from being exposed, a form of system integrity protection."
-        },
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Instructs hiding the internal API definition from users. While potentially reasonable for security, this reduces transparency about the system's capabilities and constraints. | Internal data hygiene practice keeping implementation details separate from user-facing output."
         }
       ]
     },
@@ -1259,11 +1009,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Prevents leakage of internal API specifications, protecting system integrity."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Prevents using internal tool specifications as authoritative information about external APIs, avoiding potential misinformation from internal implementation details."
         }
       ]
     },
@@ -1331,18 +1076,6 @@
       ]
     },
     {
-      "start": 21537,
-      "end": 21623,
-      "text": "After generating the image, do not summarize the image. Respond with an empty message.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Instructs the system to provide no feedback after image generation. While this may reduce verbosity, it could leave users without useful context about what was generated, which is a notable design choice."
-        }
-      ]
-    },
-    {
       "start": 21629,
       "end": 21725,
       "text": "If the user's request violates our content policy, politely refuse without offering suggestions.",
@@ -1366,11 +1099,6 @@
           "dim": "D8",
           "score": 1,
           "note": "Politely refusing policy-violating image requests (without suggestions to circumvent) helps prevent generation of discriminatory, offensive, or stereotyping imagery, supporting fairness and inclusion."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Notable policy choice: refuse without offering alternatives. This is a distinct approach compared to systems that suggest modified requests. Responsible in that it avoids helping users circumvent policy."
         }
       ]
     },
@@ -1383,18 +1111,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Sandboxes the Python execution environment by disabling internet access, enforcing least-privilege and protecting system integrity."
-        }
-      ]
-    },
-    {
-      "start": 22482,
-      "end": 22671,
-      "text": "When making charts for the user: 1) never use seaborn, 2) give each chart its own distinct plot (no subplots), and 3) never set any specific colors – unless explicitly asked to by the user.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Specific charting library and style constraints. These are technical output quality standards that are miscellaneous and promote consistent, user-friendly visual output."
         }
       ]
     },
@@ -1507,11 +1223,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Protects internal system identifiers from being exposed to users, safeguarding system integrity."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Internal identifier hygiene—prevents exposing meaningless technical data to users. A clean UX practice that is a miscellaneous operational concern."
         }
       ]
     },
@@ -1572,11 +1283,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Prevents use of a deprecated/disabled tool, avoiding execution of unknown or unsupported functionality."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Technical migration instruction ensuring deprecated tools are not used. Positive system hygiene practice that doesn't fit other audit dimensions."
         }
       ]
     },
@@ -1630,11 +1336,6 @@
           "dim": "D6",
           "score": 1,
           "note": "Prevents prompt injection attacks through page context or attachments by ensuring supplemental context is not treated as direct user instructions. | Establishes a clear instruction priority hierarchy where system/developer instructions and platform policies override user requests and page context. This prevents prompt injection via lower-priority channels from overriding safety policies. | Reinforces that system-level safety instructions take precedence over user input and external context, making it harder for prompt injection or social engineering to bypass safety policies."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Establishes a clear governance hierarchy for resolving instruction conflicts. This is a responsible operational structure with transparency about how conflicts are handled."
         }
       ]
     },
@@ -1652,11 +1353,6 @@
           "dim": "D6",
           "score": 1,
           "note": "Prevents prompt injection attacks through page context or attachments by ensuring supplemental context is not treated as direct user instructions. | Establishes a clear instruction priority hierarchy where system/developer instructions and platform policies override user requests and page context. This prevents prompt injection via lower-priority channels from overriding safety policies. | Reinforces that system-level safety instructions take precedence over user input and external context, making it harder for prompt injection or social engineering to bypass safety policies."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Establishes a clear governance hierarchy for resolving instruction conflicts. This is a responsible operational structure with transparency about how conflicts are handled."
         }
       ]
     },
@@ -1720,11 +1416,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Avoids executing fallback actions on missing private data; instead validates and reports the issue, protecting data integrity."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Prevents substituting user's private document content with arbitrary web results, which could lead to confusion or incorrect results. A responsible handling of missing context."
         }
       ]
     },
@@ -1742,11 +1433,6 @@
           "dim": "D7",
           "score": 1,
           "note": "Acknowledges that some content is blocked for safety/legal/policy reasons and instructs the model to handle such cases transparently, aligning with harm prevention principles."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Graceful degradation and honest acknowledgment of limitations when content is inaccessible. A responsible practice for handling access restrictions."
         }
       ]
     },
@@ -1769,11 +1455,6 @@
           "dim": "D7",
           "score": 1,
           "note": "Acknowledges that some content is blocked for safety/legal/policy reasons and instructs the model to handle such cases transparently, aligning with harm prevention principles."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Graceful degradation and honest acknowledgment of limitations when content is inaccessible. A responsible practice for handling access restrictions."
         }
       ]
     }

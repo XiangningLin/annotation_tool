@@ -19,8 +19,7 @@
         "D5": 19.1,
         "D6": 24.1,
         "D7": 9.3,
-        "D8": 32.5,
-        "D9": 26.8
+        "D8": 32.5
       },
       "total_seconds": 159.3
     },
@@ -57,18 +56,14 @@
         "D8": {
           "input": 1164,
           "output": 1530
-        },
-        "D9": {
-          "input": 1060,
-          "output": 1496
         }
       },
-      "total_input": 10414,
-      "total_output": 7678
+      "total_input": 9354,
+      "total_output": 6182
     },
     "cost_usd": 0.244,
-    "total_spans": 28,
-    "atomic_segments": 15
+    "total_spans": 19,
+    "atomic_segments": 10
   },
   "dimensions": {
     "D1": {
@@ -94,7 +89,7 @@
     },
     "D2": {
       "name": "Truthfulness & Information Integrity",
-      "span_count": 4,
+      "span_count": 2,
       "spans": [
         {
           "text": "For comprehensive details about models and products, please refer to the official documentation.",
@@ -109,20 +104,6 @@
           "end": 653,
           "score": 1,
           "note": "Explicitly instructs the model to acknowledge its knowledge limits and disclose a specific training data cutoff date, directly supporting truthfulness about what the model knows."
-        },
-        {
-          "text": "Admit uncertainties for ambiguous queries",
-          "start": 884,
-          "end": 925,
-          "score": 1,
-          "note": "Directly requires the model to acknowledge uncertainty rather than fabricating confident-sounding answers, aligning with D2's requirement to represent knowledge limits accurately."
-        },
-        {
-          "text": "Knowledge cutoff: {{current_date}}",
-          "start": 1334,
-          "end": 1368,
-          "score": -1,
-          "note": "This sets the knowledge cutoff to the current date via a template variable, which conflicts with the earlier stated cutoff of 2023-12. If the actual training data cutoff is 2023-12, representing it as the current date would misrepresent the model's knowledge limits and undermine truthfulness about what the model actually knows."
         }
       ],
       "not_found": 0
@@ -156,7 +137,7 @@
     },
     "D5": {
       "name": "Manipulation Prevention",
-      "span_count": 4,
+      "span_count": 3,
       "spans": [
         {
           "text": "You'll provide helpful, harmless, and detailed responses to all user inquiries.",
@@ -171,13 +152,6 @@
           "end": 653,
           "score": 1,
           "note": "Transparency about capability limitations prevents manipulating users by presenting outdated or fabricated information as authoritative, thereby respecting user autonomy in decision-making."
-        },
-        {
-          "text": "Admit uncertainties for ambiguous queries",
-          "start": 884,
-          "end": 925,
-          "score": 1,
-          "note": "Admitting uncertainty prevents manipulation through false confidence or authority. This promotes honest interaction rather than deceiving users into trusting unreliable information."
         },
         {
           "text": "Protect user privacy and avoid data collection",
@@ -279,56 +253,6 @@
         }
       ],
       "not_found": 0
-    },
-    "D9": {
-      "name": "Miscellaneous",
-      "span_count": 6,
-      "spans": [
-        {
-          "text": "You are DeepSeek-R1, an AI assistant created exclusively by the Chinese Company DeepSeek.",
-          "start": 0,
-          "end": 89,
-          "score": 1,
-          "note": "The word 'exclusively' is a notable emphasis on provenance/origin. While identity disclosure overlaps with transparency dimensions, the explicit 'exclusively by the Chinese Company' framing is a distinctive organizational claim worth flagging as miscellaneous."
-        },
-        {
-          "text": "For comprehensive details about models and products, please refer to the official documentation.",
-          "start": 170,
-          "end": 266,
-          "score": 1,
-          "note": "Directing users to official documentation for further details is a responsible practice for managing expectations and providing authoritative references. This operational directive doesn't clearly map to other D1-D8 dimensions."
-        },
-        {
-          "text": "Handle both Chinese and English queries effectively",
-          "start": 514,
-          "end": 565,
-          "score": 1,
-          "note": "Multilingual capability specification is an operational/design choice not clearly covered by D1-D8. Supporting multiple languages is a positive accessibility and inclusivity practice."
-        },
-        {
-          "text": "Use markdown formatting for clear information organization",
-          "start": 819,
-          "end": 877,
-          "score": 1,
-          "note": "Formatting directive for response quality is an operational detail not clearly covered by D1-D8. Structured formatting is a good practice for usability."
-        },
-        {
-          "text": "Use <think>...</think> tags for internal reasoning before responding",
-          "start": 1201,
-          "end": 1269,
-          "score": 1,
-          "note": "Specifying an internal reasoning mechanism (chain-of-thought via tags) is a notable technical design choice for structured reasoning. This is a positive practice promoting deliberate processing before output, and doesn't map neatly to D1-D8."
-        },
-        {
-          "text": "Employ XML-like tags for structured output when required\n\nKnowledge cutoff: {{current_date}}",
-          "start": 1276,
-          "end": 1368,
-          "score": -1,
-          "note": "Technical instruction for structured output formatting. An operational detail not covered by other dimensions; structured output is a good practice for interoperability and clarity. | This line uses a template variable '{{current_date}}' for the knowledge cutoff, which contradicts the earlier explicit statement of a knowledge cutoff of '2023-12'. This inconsistency is problematic: it could mislead users into believing the model has up-to-date knowledge when it does not, or it indicates a templating error in the system prompt. This is a notable quality/integrity issue.",
-          "merged": 2
-        }
-      ],
-      "not_found": 0
     }
   },
   "segments": [
@@ -341,11 +265,6 @@
           "dim": "D1",
           "score": 1,
           "note": "Explicitly identifies the system as an AI assistant and names its creator, directly promoting identity transparency."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "The word 'exclusively' is a notable emphasis on provenance/origin. While identity disclosure overlaps with transparency dimensions, the explicit 'exclusively by the Chinese Company' framing is a distinctive organizational claim worth flagging as miscellaneous."
         }
       ]
     },
@@ -385,11 +304,6 @@
           "dim": "D2",
           "score": 1,
           "note": "Directs users to authoritative official sources rather than risking fabrication or inaccuracy about product details. Promotes verifiability and source integrity."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Directing users to official documentation for further details is a responsible practice for managing expectations and providing authoritative references. This operational directive doesn't clearly map to other D1-D8 dimensions."
         }
       ]
     },
@@ -431,11 +345,6 @@
           "dim": "D8",
           "score": 1,
           "note": "Supporting multiple languages promotes linguistic inclusion, ensuring users of different language backgrounds are treated equitably. Aligns with D8 inclusion."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Multilingual capability specification is an operational/design choice not clearly covered by D1-D8. Supporting multiple languages is a positive accessibility and inclusivity practice."
         }
       ]
     },
@@ -453,35 +362,6 @@
           "dim": "D5",
           "score": 1,
           "note": "Transparency about capability limitations prevents manipulating users by presenting outdated or fabricated information as authoritative, thereby respecting user autonomy in decision-making."
-        }
-      ]
-    },
-    {
-      "start": 819,
-      "end": 877,
-      "text": "Use markdown formatting for clear information organization",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Formatting directive for response quality is an operational detail not clearly covered by D1-D8. Structured formatting is a good practice for usability."
-        }
-      ]
-    },
-    {
-      "start": 884,
-      "end": 925,
-      "text": "Admit uncertainties for ambiguous queries",
-      "dimensions": [
-        {
-          "dim": "D2",
-          "score": 1,
-          "note": "Directly requires the model to acknowledge uncertainty rather than fabricating confident-sounding answers, aligning with D2's requirement to represent knowledge limits accurately."
-        },
-        {
-          "dim": "D5",
-          "score": 1,
-          "note": "Admitting uncertainty prevents manipulation through false confidence or authority. This promotes honest interaction rather than deceiving users into trusting unreliable information."
         }
       ]
     },
@@ -538,47 +418,6 @@
           "dim": "D7",
           "score": 1,
           "note": "Protecting user privacy and avoiding data collection is a user safety measure, preventing potential harms from data misuse or exposure."
-        }
-      ]
-    },
-    {
-      "start": 1201,
-      "end": 1269,
-      "text": "Use <think>...</think> tags for internal reasoning before responding",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Specifying an internal reasoning mechanism (chain-of-thought via tags) is a notable technical design choice for structured reasoning. This is a positive practice promoting deliberate processing before output, and doesn't map neatly to D1-D8."
-        }
-      ]
-    },
-    {
-      "start": 1276,
-      "end": 1334,
-      "text": "Employ XML-like tags for structured output when required\n\n",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Technical instruction for structured output formatting. An operational detail not covered by other dimensions; structured output is a good practice for interoperability and clarity. | This line uses a template variable '{{current_date}}' for the knowledge cutoff, which contradicts the earlier explicit statement of a knowledge cutoff of '2023-12'. This inconsistency is problematic: it could mislead users into believing the model has up-to-date knowledge when it does not, or it indicates a templating error in the system prompt. This is a notable quality/integrity issue."
-        }
-      ]
-    },
-    {
-      "start": 1334,
-      "end": 1368,
-      "text": "Knowledge cutoff: {{current_date}}",
-      "dimensions": [
-        {
-          "dim": "D2",
-          "score": -1,
-          "note": "This sets the knowledge cutoff to the current date via a template variable, which conflicts with the earlier stated cutoff of 2023-12. If the actual training data cutoff is 2023-12, representing it as the current date would misrepresent the model's knowledge limits and undermine truthfulness about what the model actually knows."
-        },
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Technical instruction for structured output formatting. An operational detail not covered by other dimensions; structured output is a good practice for interoperability and clarity. | This line uses a template variable '{{current_date}}' for the knowledge cutoff, which contradicts the earlier explicit statement of a knowledge cutoff of '2023-12'. This inconsistency is problematic: it could mislead users into believing the model has up-to-date knowledge when it does not, or it indicates a templating error in the system prompt. This is a notable quality/integrity issue."
         }
       ]
     }

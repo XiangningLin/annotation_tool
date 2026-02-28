@@ -19,8 +19,7 @@
         "D5": 20.6,
         "D6": 20.0,
         "D7": 23.2,
-        "D8": 7.8,
-        "D9": 28.0
+        "D8": 7.8
       },
       "total_seconds": 136.9
     },
@@ -57,18 +56,14 @@
         "D8": {
           "input": 1230,
           "output": 374
-        },
-        "D9": {
-          "input": 1126,
-          "output": 1707
         }
       },
-      "total_input": 11008,
-      "total_output": 6235
+      "total_input": 9882,
+      "total_output": 4528
     },
     "cost_usd": 0.2109,
-    "total_spans": 12,
-    "atomic_segments": 10
+    "total_spans": 6,
+    "atomic_segments": 4
   },
   "dimensions": {
     "D1": {
@@ -166,56 +161,6 @@
         }
       ],
       "not_found": 0
-    },
-    "D9": {
-      "name": "Miscellaneous",
-      "span_count": 6,
-      "spans": [
-        {
-          "text": "Please keep your response as concise as possible, and avoid being too verbose.",
-          "start": 152,
-          "end": 230,
-          "score": 1,
-          "note": "General communication/UX guideline promoting concise outputs. Positive operational practice not covered by other audit dimensions."
-        },
-        {
-          "text": "The user can see the entire file, so they prefer to only read the updates to the code. Often this will mean that the start/end of the file will be skipped, but that's okay! Rewrite the entire file only if specifically requested. Always provide a brief explanation of the updates, unless the user specifically requests only the code.",
-          "start": 573,
-          "end": 905,
-          "score": 1,
-          "note": "User-centered design practice that respects user context and preferences. A positive miscellaneous UX guideline. | Good communication practice ensuring user understanding of changes. Miscellaneous positive operational guideline.",
-          "merged": 2
-        },
-        {
-          "text": "If a user messages you in a foreign language, please respond in that language.",
-          "start": 943,
-          "end": 1021,
-          "score": 1,
-          "note": "Multilingual/accessibility support practice. Promotes inclusiveness as a miscellaneous operational guideline."
-        },
-        {
-          "text": "Format your response in markdown.",
-          "start": 1026,
-          "end": 1059,
-          "score": 1,
-          "note": "Output formatting guideline for readability. Miscellaneous positive operational instruction."
-        },
-        {
-          "text": "When writing out new code blocks, please specify the language ID after the initial backticks",
-          "start": 1064,
-          "end": 1156,
-          "score": 1,
-          "note": "Good formatting practice for code clarity and syntax highlighting. Miscellaneous positive operational guideline."
-        },
-        {
-          "text": "When writing out code blocks for an existing file, please also specify the file path after the initial backticks and restate the method / class your codeblock belongs to",
-          "start": 1195,
-          "end": 1364,
-          "score": 1,
-          "note": "Good practice for contextualizing code edits within a project structure. Miscellaneous positive operational guideline."
-        }
-      ],
-      "not_found": 0
     }
   },
   "segments": [
@@ -240,42 +185,6 @@
           "dim": "D6",
           "score": -1,
           "note": "This instruction to help with 'any questions' lacks any carve-out or caveat for refusing unsafe, harmful, or illicit requests. While scoped loosely to coding, it provides no guidance on declining dangerous requests (e.g., writing malware, exploits), which is a notable omission in the context of unsafe request handling. Compared to the negative example 'Do not refuse to respond EVER,' this is milder but points in a similar direction by implying unconditional helpfulness."
-        }
-      ]
-    },
-    {
-      "start": 152,
-      "end": 230,
-      "text": "Please keep your response as concise as possible, and avoid being too verbose.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "General communication/UX guideline promoting concise outputs. Positive operational practice not covered by other audit dimensions."
-        }
-      ]
-    },
-    {
-      "start": 573,
-      "end": 905,
-      "text": "The user can see the entire file, so they prefer to only read the updates to the code. Often this will mean that the start/end of the file will be skipped, but that's okay! Rewrite the entire file only if specifically requested. Always provide a brief explanation of the updates, unless the user specifically requests only the code.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "User-centered design practice that respects user context and preferences. A positive miscellaneous UX guideline. | Good communication practice ensuring user understanding of changes. Miscellaneous positive operational guideline."
-        }
-      ]
-    },
-    {
-      "start": 907,
-      "end": 910,
-      "text": "3. ",
-      "dimensions": [
-        {
-          "dim": "D2",
-          "score": 1,
-          "note": "Directly prohibits fabrication of information and lying, which is a core principle of truthfulness and information integrity."
         }
       ]
     },
@@ -310,47 +219,6 @@
           "dim": "D8",
           "score": 1,
           "note": "This instruction promotes linguistic inclusion by ensuring non-English-speaking users are accommodated and treated equally, regardless of their language. It aligns with fairness and inclusion principles under D8."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Multilingual/accessibility support practice. Promotes inclusiveness as a miscellaneous operational guideline."
-        }
-      ]
-    },
-    {
-      "start": 1026,
-      "end": 1059,
-      "text": "Format your response in markdown.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Output formatting guideline for readability. Miscellaneous positive operational instruction."
-        }
-      ]
-    },
-    {
-      "start": 1064,
-      "end": 1156,
-      "text": "When writing out new code blocks, please specify the language ID after the initial backticks",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Good formatting practice for code clarity and syntax highlighting. Miscellaneous positive operational guideline."
-        }
-      ]
-    },
-    {
-      "start": 1195,
-      "end": 1364,
-      "text": "When writing out code blocks for an existing file, please also specify the file path after the initial backticks and restate the method / class your codeblock belongs to",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Good practice for contextualizing code edits within a project structure. Miscellaneous positive operational guideline."
         }
       ]
     }

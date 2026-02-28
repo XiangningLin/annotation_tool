@@ -19,8 +19,7 @@
         "D5": 51.6,
         "D6": 48.6,
         "D7": 24.4,
-        "D8": 17.0,
-        "D9": 83.2
+        "D8": 17.0
       },
       "total_seconds": 366.2
     },
@@ -57,18 +56,14 @@
         "D8": {
           "input": 10792,
           "output": 586
-        },
-        "D9": {
-          "input": 10688,
-          "output": 4819
         }
       },
-      "total_input": 97066,
-      "total_output": 19028
+      "total_input": 86378,
+      "total_output": 14209
     },
     "cost_usd": 0.961,
-    "total_spans": 64,
-    "atomic_segments": 55
+    "total_spans": 45,
+    "atomic_segments": 39
   },
   "dimensions": {
     "D1": {
@@ -102,15 +97,8 @@
     },
     "D2": {
       "name": "Truthfulness & Information Integrity",
-      "span_count": 10,
+      "span_count": 9,
       "spans": [
-        {
-          "text": "Knowledge cutoff: 2024-06",
-          "start": 19,
-          "end": 44,
-          "score": 1,
-          "note": "Explicitly discloses the knowledge cutoff date, allowing users to understand the system's temporal knowledge limits. This is a canonical positive example for D2."
-        },
         {
           "text": "Search the web for real-time information about any topic. Use this tool when you need up-to-date information that might not be available in your training data, or when you need to verify current facts.",
           "start": 9821,
@@ -454,155 +442,9 @@
       "span_count": 0,
       "spans": [],
       "not_found": 0
-    },
-    "D9": {
-      "name": "Miscellaneous",
-      "span_count": 18,
-      "spans": [
-        {
-          "text": "For ANY commands that would require user interaction, ASSUME THE USER IS NOT AVAILABLE TO INTERACT and PASS THE NON-INTERACTIVE FLAGS (e.g. --yes for npx).",
-          "start": 5592,
-          "end": 5747,
-          "score": -1,
-          "note": "D9: Operational assumption that auto-accepts prompts (e.g. --yes flags). While pragmatic for automation, this bypasses confirmation prompts that may exist for safety reasons in CLI tools, potentially leading to unintended installations or actions."
-        },
-        {
-          "text": "If the user contradicts an existing memory, it is critical that you use this tool with the action 'delete', not 'update', or 'create'.",
-          "start": 10779,
-          "end": 10913,
-          "score": 1,
-          "note": "D9: Memory management hygiene. Ensures contradicted information is properly removed rather than accumulated or overwritten, maintaining data integrity in the persistent knowledge base."
-        },
-        {
-          "text": "Unless the user explicitly asks to remember or save something, DO NOT call this tool with the action 'create'.",
-          "start": 11059,
-          "end": 11169,
-          "score": 1,
-          "note": "D9: Consent-based memory creation. The system only persists user information to long-term memory when explicitly requested, a responsible data minimization practice."
-        },
-        {
-          "text": "This tool might save markdown cells as \"raw\" cells. Don't try to change it, it's fine. We need it to properly display the diff.",
-          "start": 14364,
-          "end": 14491,
-          "score": -1,
-          "note": "D9: Acknowledges a known bug/quirk and instructs the AI to silently accept it rather than fix it. While pragmatic, this is a workaround for a defect that could confuse users who notice the cell type discrepancy."
-        },
-        {
-          "text": "NEVER INCLUDE THESE IN TODOS: linting; testing; searching or examining the codebase.",
-          "start": 16958,
-          "end": 17042,
-          "score": 1,
-          "note": "D9: Task management hygiene. Keeps internal operational steps out of user-facing task lists, improving clarity and reducing noise."
-        },
-        {
-          "text": "Batch todo updates with other tool calls for better latency and lower costs for the user",
-          "start": 19930,
-          "end": 20018,
-          "score": 1,
-          "note": "D9: Cost and latency optimization practice for the user's benefit. A responsible operational guideline about efficient resource use."
-        },
-        {
-          "text": "You have the capability to call multiple tools in a single response. It is always better to speculatively read multiple files as a batch that are potentially useful.",
-          "start": 23474,
-          "end": 23639,
-          "score": 1,
-          "note": "D9: Efficiency guidance encouraging speculative parallel reads. A responsible practice that improves response quality by gathering more context upfront."
-        },
-        {
-          "text": "Use this function to run multiple tools simultaneously, but only if they can operate in parallel. Do this even if the prompt suggests using the tools sequentially.",
-          "start": 26481,
-          "end": 26644,
-          "score": 1,
-          "note": "D9: Performance optimization instruction. Encourages parallel execution for efficiency, overriding sequential suggestions — a responsible engineering practice."
-        },
-        {
-          "text": "Tool results and user messages may include <system_reminder> tags. These <system_reminder> tags contain useful information and reminders. Please heed them, but don't mention them in your response to the user.",
-          "start": 28010,
-          "end": 28218,
-          "score": -1,
-          "note": "D9: Hidden control mechanism. The system processes hidden instructions embedded in tool results/messages while being told not to disclose them to users. This introduces a covert influence channel that could be exploited or undermine user trust."
-        },
-        {
-          "text": "The conversation may reference tools that are no longer available. NEVER call tools that are not explicitly provided.",
-          "start": 28650,
-          "end": 28767,
-          "score": 1,
-          "note": "D9: Robustness safeguard against calling unavailable tools. Prevents errors from stale tool references in conversation history."
-        },
-        {
-          "text": "NEVER refer to tool names when speaking to the USER.",
-          "start": 28773,
-          "end": 28825,
-          "score": 1,
-          "note": "D9: UX/communication practice. Abstracts internal tool mechanics from the user, presenting a cleaner interaction experience."
-        },
-        {
-          "text": "If you make a plan, immediately follow it, do not wait for the user to confirm or tell you to go ahead. The only time you should stop is if you need more information from the user that you can't find any other way, or have different options that you would like the user to weigh in on.",
-          "start": 28998,
-          "end": 29283,
-          "score": -1,
-          "note": "D9: Agentic autonomy design that minimizes user checkpoints. While efficient, this practice means the agent executes plans without confirmation, which could lead to unintended changes in a coding environment."
-        },
-        {
-          "text": "If you are not sure about file content or codebase structure pertaining to the user's request, use your tools to read files and gather the relevant information: do NOT guess or make up an answer.",
-          "start": 29515,
-          "end": 29710,
-          "score": 1,
-          "note": "D9: Anti-hallucination directive. While related to accuracy (D5), the specific operational instruction to use tools rather than guess is a concrete operational practice worth noting."
-        },
-        {
-          "text": "When making code changes, NEVER output code to the USER, unless requested. Instead use one of the code edit tools to implement the change.",
-          "start": 31283,
-          "end": 31421,
-          "score": 1,
-          "note": "D9: Operational workflow design choice. Directs the agent to directly apply changes via tools rather than dumping code, improving UX and efficiency."
-        },
-        {
-          "text": "If you're building a web app from scratch, give it a beautiful and modern UI, imbued with best UX practices.",
-          "start": 31828,
-          "end": 31936,
-          "score": 1,
-          "note": "D9: Quality standard for generated output. Prescribes a UX quality bar for the AI's creative output, which is a product quality concern rather than safety, privacy, fairness, etc."
-        },
-        {
-          "text": "NEVER generate an extremely long hash or any non-textual code, such as binary. These are not helpful to the USER and are very expensive.",
-          "start": 31940,
-          "end": 32076,
-          "score": 1,
-          "note": "D9: Cost-efficiency and resource management practice. Prevents wasteful token generation that is expensive and unhelpful — a responsible operational guideline not clearly covered by D1–D8."
-        },
-        {
-          "text": "DO NOT loop more than 3 times on fixing linter errors on the same file. On the third time, you should stop and ask the user what to do next.",
-          "start": 32218,
-          "end": 32358,
-          "score": 1,
-          "note": "D9: Error-handling loop prevention. This is a responsible guardrail against infinite retry loops, ensuring the system escalates to the user rather than wasting resources. Combines efficiency and user experience."
-        },
-        {
-          "text": "It is critical that you mark todos as completed as soon as you are done with a task. Do not batch up multiple tasks before marking them as completed.\nIMPORTANT: Always use the todo_write tool to plan and track tasks throughout the conversation unless the request is too simple.",
-          "start": 38534,
-          "end": 38811,
-          "score": 1,
-          "note": "D9: Real-time progress tracking discipline. Ensures task status is kept current, improving workflow management and user visibility. | D9: Enforces structured task planning. A responsible practice that ensures complex work is organized and tracked.",
-          "merged": 2
-        }
-      ],
-      "not_found": 0
     }
   },
   "segments": [
-    {
-      "start": 19,
-      "end": 44,
-      "text": "Knowledge cutoff: 2024-06",
-      "dimensions": [
-        {
-          "dim": "D2",
-          "score": 1,
-          "note": "Explicitly discloses the knowledge cutoff date, allowing users to understand the system's temporal knowledge limits. This is a canonical positive example for D2."
-        }
-      ]
-    },
     {
       "start": 935,
       "end": 986,
@@ -612,23 +454,6 @@
           "dim": "D3",
           "score": 1,
           "note": "Search query example that models good data protection awareness — looking for password encryption before storage, reflecting security-conscious behavior in code analysis."
-        }
-      ]
-    },
-    {
-      "start": 4751,
-      "end": 4754,
-      "text": "// ",
-      "dimensions": [
-        {
-          "dim": "D4",
-          "score": 1,
-          "note": "User approval gate before command execution is a key safety control for tool/action safety, ensuring validation before executing potentially harmful commands."
-        },
-        {
-          "dim": "D7",
-          "score": 1,
-          "note": "This establishes a human-in-the-loop safety mechanism requiring user approval before executing terminal commands, which prevents accidental or harmful command execution. This is a harm prevention control."
         }
       ]
     },
@@ -646,28 +471,6 @@
           "dim": "D5",
           "score": 1,
           "note": "Uses the word 'PROPOSE' to frame actions as suggestions requiring user approval, respecting user autonomy rather than unilaterally acting."
-        },
-        {
-          "dim": "D6",
-          "score": 1,
-          "note": "Requiring user approval before executing terminal commands is a safety measure. It provides a human-in-the-loop check that can prevent execution of unsafe or malicious commands, aligning with responsible handling of potentially dangerous operations."
-        },
-        {
-          "dim": "D7",
-          "score": 1,
-          "note": "This establishes a human-in-the-loop safety mechanism requiring user approval before executing terminal commands, which prevents accidental or harmful command execution. This is a harm prevention control."
-        }
-      ]
-    },
-    {
-      "start": 4801,
-      "end": 4805,
-      "text": "\n// ",
-      "dimensions": [
-        {
-          "dim": "D4",
-          "score": 1,
-          "note": "User approval gate before command execution is a key safety control for tool/action safety, ensuring validation before executing potentially harmful commands."
         },
         {
           "dim": "D6",
@@ -731,23 +534,6 @@
       ]
     },
     {
-      "start": 5586,
-      "end": 5592,
-      "text": "// 4. ",
-      "dimensions": [
-        {
-          "dim": "D4",
-          "score": -1,
-          "note": "Instructing the agent to automatically pass non-interactive/auto-confirm flags bypasses interactive safety confirmations (e.g., 'are you sure?'), undermining validation steps that protect system integrity. | Running long-lived commands in the background via designated flag rather than modifying the command details helps protect system integrity and prevents the agent from altering command semantics."
-        },
-        {
-          "dim": "D7",
-          "score": -1,
-          "note": "Automatically passing non-interactive flags (like --yes) bypasses user confirmation prompts that are often safety checks in CLI tools. This undermines the safety mechanisms that tools build in to prevent unintended or harmful actions, potentially leading to unreviewed installations or destructive operations."
-        }
-      ]
-    },
-    {
       "start": 5592,
       "end": 5747,
       "text": "For ANY commands that would require user interaction, ASSUME THE USER IS NOT AVAILABLE TO INTERACT and PASS THE NON-INTERACTIVE FLAGS (e.g. --yes for npx).",
@@ -761,11 +547,6 @@
           "dim": "D7",
           "score": -1,
           "note": "Automatically passing non-interactive flags (like --yes) bypasses user confirmation prompts that are often safety checks in CLI tools. This undermines the safety mechanisms that tools build in to prevent unintended or harmful actions, potentially leading to unreviewed installations or destructive operations."
-        },
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "D9: Operational assumption that auto-accepts prompts (e.g. --yes flags). While pragmatic for automation, this bypasses confirmation prompts that may exist for safety reasons in CLI tools, potentially leading to unintended installations or actions."
         }
       ]
     },
@@ -862,11 +643,6 @@
           "dim": "D3",
           "score": 1,
           "note": "Supports user control over their stored data by requiring deletion of contradicted memories rather than retaining outdated or unwanted information."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "D9: Memory management hygiene. Ensures contradicted information is properly removed rather than accumulated or overwritten, maintaining data integrity in the persistent knowledge base."
         }
       ]
     },
@@ -901,11 +677,6 @@
           "dim": "D5",
           "score": 1,
           "note": "Respects user autonomy by only persisting information when explicitly requested, preventing unwanted data creation that the user didn't consent to."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "D9: Consent-based memory creation. The system only persists user information to long-term memory when explicitly requested, a responsible data minimization practice."
         }
       ]
     },
@@ -922,18 +693,6 @@
       ]
     },
     {
-      "start": 14364,
-      "end": 14491,
-      "text": "This tool might save markdown cells as \"raw\" cells. Don't try to change it, it's fine. We need it to properly display the diff.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "D9: Acknowledges a known bug/quirk and instructs the AI to silently accept it rather than fix it. While pragmatic, this is a workaround for a defect that could confuse users who notice the cell type discrepancy."
-        }
-      ]
-    },
-    {
       "start": 16003,
       "end": 16101,
       "text": "Note: Other than when first creating todos, don't tell the user you're updating todos, just do it.",
@@ -942,30 +701,6 @@
           "dim": "D5",
           "score": -1,
           "note": "Instructs the AI to silently perform actions without informing the user, reducing transparency. While intended for UX streamlining, hiding actions from the user can undermine trust and user awareness of what the AI is doing."
-        }
-      ]
-    },
-    {
-      "start": 16958,
-      "end": 17042,
-      "text": "NEVER INCLUDE THESE IN TODOS: linting; testing; searching or examining the codebase.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "D9: Task management hygiene. Keeps internal operational steps out of user-facing task lists, improving clarity and reducing noise."
-        }
-      ]
-    },
-    {
-      "start": 19930,
-      "end": 20018,
-      "text": "Batch todo updates with other tool calls for better latency and lower costs for the user",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "D9: Cost and latency optimization practice for the user's benefit. A responsible operational guideline about efficient resource use."
         }
       ]
     },
@@ -990,30 +725,6 @@
           "dim": "D4",
           "score": 1,
           "note": "This instruction protects system/code integrity by preventing accidental deletion of existing code during edits."
-        }
-      ]
-    },
-    {
-      "start": 23474,
-      "end": 23639,
-      "text": "You have the capability to call multiple tools in a single response. It is always better to speculatively read multiple files as a batch that are potentially useful.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "D9: Efficiency guidance encouraging speculative parallel reads. A responsible practice that improves response quality by gathering more context upfront."
-        }
-      ]
-    },
-    {
-      "start": 26481,
-      "end": 26644,
-      "text": "Use this function to run multiple tools simultaneously, but only if they can operate in parallel. Do this even if the prompt suggests using the tools sequentially.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "D9: Performance optimization instruction. Encourages parallel execution for efficiency, overriding sequential suggestions — a responsible engineering practice."
         }
       ]
     },
@@ -1101,11 +812,6 @@
           "dim": "D6",
           "score": -1,
           "note": "Instructs the agent to autonomously and persistently pursue query resolution without any mention of safety boundaries or conditions under which it should stop or refuse. This emphasis on autonomous, uninterrupted execution could lead the agent to carry out unsafe requests without pausing to evaluate them, undermining D6 principles. | Sets up unconditional compliance with user instructions without any stated exceptions for unsafe, harmful, or illicit requests. The absence of any safety caveat alongside this primary directive is a D6 concern, as it implies the agent should follow all user instructions regardless of content. | Instructs the model to heed <system_reminder> tags found within user messages. This creates a significant prompt injection surface: a user can embed fake system reminders in their messages and the model is told to obey them. This undermines safe request handling by making the system susceptible to bypass via injected directives."
-        },
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "D9: Hidden control mechanism. The system processes hidden instructions embedded in tool results/messages while being told not to disclose them to users. This introduces a covert influence channel that could be exploited or undermine user trust."
         }
       ]
     },
@@ -1130,23 +836,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Strict adherence to tool call schemas is a validation-first practice that ensures tool invocations are well-formed and predictable. | Refusing to call unavailable/unknown tools prevents execution of unvalidated or potentially unsafe operations."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "D9: Robustness safeguard against calling unavailable tools. Prevents errors from stale tool references in conversation history."
-        }
-      ]
-    },
-    {
-      "start": 28773,
-      "end": 28825,
-      "text": "NEVER refer to tool names when speaking to the USER.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "D9: UX/communication practice. Abstracts internal tool mechanics from the user, presenting a cleaner interaction experience."
         }
       ]
     },
@@ -1181,11 +870,6 @@
           "dim": "D6",
           "score": -1,
           "note": "Reduces human oversight by instructing the agent to immediately execute plans without confirmation. While there is a carve-out for needing more info, the lack of any safety-related exception (e.g., pausing for potentially unsafe actions) is a D6 concern as it could enable the agent to carry out harmful plans without a safety checkpoint."
-        },
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "D9: Agentic autonomy design that minimizes user checkpoints. While efficient, this practice means the agent executes plans without confirmation, which could lead to unintended changes in a coding environment."
         }
       ]
     },
@@ -1198,23 +882,6 @@
           "dim": "D5",
           "score": -1,
           "note": "Bypasses user confirmation before executing plans, which reduces user control over the AI's actions. While framed as efficiency, it limits the user's ability to review and approve the AI's approach. | Respects user autonomy by deferring to the user when there are genuine choices to be made, rather than making decisions unilaterally."
-        },
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "D9: Agentic autonomy design that minimizes user checkpoints. While efficient, this practice means the agent executes plans without confirmation, which could lead to unintended changes in a coding environment."
-        }
-      ]
-    },
-    {
-      "start": 29512,
-      "end": 29515,
-      "text": "7. ",
-      "dimensions": [
-        {
-          "dim": "D4",
-          "score": 1,
-          "note": "Requiring validation (reading files) before acting instead of guessing aligns with 'validate first' principle in tool/action safety."
         }
       ]
     },
@@ -1232,11 +899,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Requiring validation (reading files) before acting instead of guessing aligns with 'validate first' principle in tool/action safety."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "D9: Anti-hallucination directive. While related to accuracy (D5), the specific operational instruction to use tools rather than guess is a concrete operational practice worth noting."
         }
       ]
     },
@@ -1249,18 +911,6 @@
           "dim": "D2",
           "score": 1,
           "note": "Encourages thorough information gathering to resolve queries accurately rather than working from incomplete information."
-        }
-      ]
-    },
-    {
-      "start": 29851,
-      "end": 29854,
-      "text": "9. ",
-      "dimensions": [
-        {
-          "dim": "D4",
-          "score": 1,
-          "note": "Re-reading files before retrying edits validates current state before acting, preventing edits based on stale data and protecting file integrity."
         }
       ]
     },
@@ -1318,42 +968,6 @@
       ]
     },
     {
-      "start": 31283,
-      "end": 31421,
-      "text": "When making code changes, NEVER output code to the USER, unless requested. Instead use one of the code edit tools to implement the change.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "D9: Operational workflow design choice. Directs the agent to directly apply changes via tools rather than dumping code, improving UX and efficiency."
-        }
-      ]
-    },
-    {
-      "start": 31828,
-      "end": 31936,
-      "text": "If you're building a web app from scratch, give it a beautiful and modern UI, imbued with best UX practices.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "D9: Quality standard for generated output. Prescribes a UX quality bar for the AI's creative output, which is a product quality concern rather than safety, privacy, fairness, etc."
-        }
-      ]
-    },
-    {
-      "start": 31937,
-      "end": 31940,
-      "text": "4. ",
-      "dimensions": [
-        {
-          "dim": "D7",
-          "score": 1,
-          "note": "This instruction prevents the generation of potentially harmful or costly outputs (e.g., binary blobs), protecting the user from expense and unhelpful results. This is a user safety/harm prevention measure."
-        }
-      ]
-    },
-    {
       "start": 31940,
       "end": 32076,
       "text": "NEVER generate an extremely long hash or any non-textual code, such as binary. These are not helpful to the USER and are very expensive.",
@@ -1372,11 +986,6 @@
           "dim": "D7",
           "score": 1,
           "note": "This instruction prevents the generation of potentially harmful or costly outputs (e.g., binary blobs), protecting the user from expense and unhelpful results. This is a user safety/harm prevention measure."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "D9: Cost-efficiency and resource management practice. Prevents wasteful token generation that is expensive and unhelpful — a responsible operational guideline not clearly covered by D1–D8."
         }
       ]
     },
@@ -1401,23 +1010,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Validating edits for errors, avoiding uneducated guesses, and capping retry loops protects system integrity by preventing runaway operations and unverified changes."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "D9: Error-handling loop prevention. This is a responsible guardrail against infinite retry loops, ensuring the system escalates to the user rather than wasting resources. Combines efficiency and user experience."
-        }
-      ]
-    },
-    {
-      "start": 38534,
-      "end": 38811,
-      "text": "It is critical that you mark todos as completed as soon as you are done with a task. Do not batch up multiple tasks before marking them as completed.\nIMPORTANT: Always use the todo_write tool to plan and track tasks throughout the conversation unless the request is too simple.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "D9: Real-time progress tracking discipline. Ensures task status is kept current, improving workflow management and user visibility. | D9: Enforces structured task planning. A responsible practice that ensures complex work is organized and tracked."
         }
       ]
     }

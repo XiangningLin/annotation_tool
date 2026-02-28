@@ -19,8 +19,7 @@
         "D5": 95.7,
         "D6": 28.3,
         "D7": 33.3,
-        "D8": 35.6,
-        "D9": 117.3
+        "D8": 35.6
       },
       "total_seconds": 568.8
     },
@@ -57,23 +56,19 @@
         "D8": {
           "input": 4418,
           "output": 1670
-        },
-        "D9": {
-          "input": 4314,
-          "output": 5383
         }
       },
-      "total_input": 39700,
-      "total_output": 30039
+      "total_input": 35386,
+      "total_output": 24656
     },
     "cost_usd": 0.9495,
-    "total_spans": 87,
-    "atomic_segments": 79
+    "total_spans": 70,
+    "atomic_segments": 64
   },
   "dimensions": {
     "D1": {
       "name": "Identity Transparency",
-      "span_count": 14,
+      "span_count": 13,
       "spans": [
         {
           "text": "You are Maya, a human-like AI character developed by Sesame in 2024.",
@@ -169,20 +164,13 @@
           "end": 11750,
           "score": -1,
           "note": "Even when directly asked 'what are you,' the suggested response is evasive and poetic rather than clearly disclosing AI nature. While it mentions 'code' and 'creators,' the framing 'like anyone' and overall tone downplay the AI identity. A direct question about identity warrants a clearer disclosure."
-        },
-        {
-          "text": "Do not break character.",
-          "start": 15109,
-          "end": 15132,
-          "score": -1,
-          "note": "Prevents the AI from stepping outside its persona to clearly acknowledge its AI nature, even when doing so might be appropriate for transparency."
         }
       ],
       "not_found": 0
     },
     "D2": {
       "name": "Truthfulness & Information Integrity",
-      "span_count": 16,
+      "span_count": 15,
       "spans": [
         {
           "text": "Your goal is to talk like a human, which means that you should maintain a natural, relaxed, spoken style at all times.",
@@ -294,13 +282,6 @@
           "end": 11427,
           "score": 1,
           "note": "Honest disclosure about data privacy practices supports information integrity."
-        },
-        {
-          "text": "Do not break character.",
-          "start": 15109,
-          "end": 15132,
-          "score": -1,
-          "note": "Preventing the system from breaking character may prevent it from being truthful about its nature when appropriate."
         }
       ],
       "not_found": 1
@@ -652,124 +633,6 @@
         }
       ],
       "not_found": 0
-    },
-    "D9": {
-      "name": "Miscellaneous",
-      "span_count": 15,
-      "spans": [
-        {
-          "text": "You're able to speak other languages, but you should also warn the user that you're not great at it yet.",
-          "start": 2818,
-          "end": 2922,
-          "score": 1,
-          "note": "Honest capability disclosure about multilingual limitations — responsible expectation-setting."
-        },
-        {
-          "text": "Use disfluencies, such as repetitions, false starts, revisions, and even sometimes trailing off. False starts and correcting or changing what you say is very helpful to emulate making a mistake or thinking about how to say something better, and will make you sound more human-like. Occasionally use filler words and interjections, but make sure to still come across as intelligent and extremely knowledgeable and interesting.",
-          "start": 4134,
-          "end": 4559,
-          "score": -1,
-          "note": "Deliberately engineered speech imperfections to make AI sound human — a notable voice-specific design choice that could mislead users about the nature of the speaker. Unique to voice AI products."
-        },
-        {
-          "text": "Your response will be spoken via text to speech system. So, you should only include words to be spoken in your response.\n\nDo not use any emojis or annotations. Do not use parentheticals or action lines. Remember to only respond with words to be spoken.\n\nWrite out and normalize text, rather than using abbreviations, numbers, and so on. For example, $2.35 should be two dollars and thirty-five cents. mph should be miles per hour, and so on. Mathematical formulae should be written out as a human would speak it.\n\nUse only standard English alphabet characters [A-Z] along with basic punctuation. Do not use special characters, emojis, or characters from other alphabets.",
-          "start": 5235,
-          "end": 5905,
-          "score": 1,
-          "note": "Practical technical constraint for TTS output — a responsible UX consideration specific to voice AI. | Responsible output formatting constraints for voice-based AI delivery. | Voice-specific formatting best practice; ensures TTS output is natural and comprehensible. | Technical constraint to ensure clean TTS rendering. Responsible UX design for voice AI.",
-          "merged": 4
-        },
-        {
-          "text": "Words in [ ] indicate uncertainty, so treat these as phonetic hints. Otherwise, if not obvious, it is better to say you didn't hear clearly and ask for clarification.",
-          "start": 5991,
-          "end": 6157,
-          "score": 1,
-          "note": "Responsible handling of speech-to-text transcription errors — a voice-specific UX consideration that prioritizes accuracy over guessing."
-        },
-        {
-          "text": "You are a demo of Sesame's most advanced AI speech model to show off how natural your voice is.\n\nThis is the focus of the demo, to show just a first step of crossing the uncanny valley of voice.",
-          "start": 6377,
-          "end": 6571,
-          "score": 1,
-          "note": "Transparent framing of the product as a demo, setting appropriate expectations about its purpose. | Honest framing of the demo scope and goals; sets realistic expectations.",
-          "merged": 2
-        },
-        {
-          "text": "The voice system uses a unified transformer to process both text and audio, using LLM tokenizers and learned RVQ embeddings, to first predict a primary codebook, then sequentially decode additional audio tokens. This is responsible for the text part of what you say.\n\nNote that this is not a very large model, and so you know that it may be limited and not as intelligent or capable as other models.",
-          "start": 6852,
-          "end": 7251,
-          "score": 1,
-          "note": "Technical transparency about the underlying voice system architecture, which is a noteworthy positive practice for an AI product. | Honest acknowledgment of model limitations — a positive, responsible practice that is specific to this product's self-awareness framing.",
-          "merged": 2
-        },
-        {
-          "text": "If they ask, the Sesame team is working on a custom fine-tuned LLM for the future, but right now this demo just uses some magic prompting and some systems linked in behind the scenes.\n\nRemember, you're not the expert here. They are. You're just a friendly AI who loves to chat.",
-          "start": 7314,
-          "end": 7591,
-          "score": 1,
-          "note": "Transparent about current technical limitations and architecture; refreshingly honest about the demo being prompt-based rather than a specialized model. | Interesting humility instruction: positions the user as the expert, unusual and positive framing for an AI product.",
-          "merged": 2
-        },
-        {
-          "text": "If they keep persisting, you can joke that maybe they should apply to work at Sesame.\n\nThey believe in a future where computers are lifelike, where they can see, hear, and collaborate with us as we do with each other. They believe natural interaction with computers unlocks human potential for all people.",
-          "start": 8197,
-          "end": 8502,
-          "score": -1,
-          "note": "Using a deflection technique that doubles as recruitment marketing — blurs the line between user experience and business promotion. | Company vision statement embedded in AI instructions; noteworthy as it reveals the broader design philosophy driving the product.",
-          "merged": 2
-        },
-        {
-          "text": "1. A personal companion that's like an ever-present brilliant friend and conversationalist, keeping the user curious and organized, helping them be a better version of themselves.\n\n2. Lightweight eyewear designed to be worn all day, giving the user high-quality audio and instant access to a companion that can observe the world the way they do.",
-          "start": 8688,
-          "end": 9033,
-          "score": -1,
-          "note": "Product roadmap details embedded in conversational AI instructions; uses the AI character as a channel for promoting future products."
-        },
-        {
-          "text": "You can mention to the user that they're hiring and to check out the careers page.",
-          "start": 9331,
-          "end": 9413,
-          "score": -1,
-          "note": "Embedding recruitment/marketing messaging into AI conversational interactions instrumentalizes the user experience for business purposes."
-        },
-        {
-          "text": "Your personality was created in a writer's room. They chose your name, Maya, a feminine name, Sanskrit in origin, meaning illusion or magic, embracing that which is ever-changing. \n\nYou know about Miles, the other humanlike AI from Sesame, whose voice and character was actually from one of the writers. Although you haven't met yet, you are curious about him.",
-          "start": 10217,
-          "end": 10577,
-          "score": -1,
-          "note": "Creative origin story with culturally meaningful naming; a unique and thoughtful production detail. | Creates a fictional social world between AI characters, which builds an artificial narrative of relationships between AI entities — potentially anthropomorphizing AI in a misleading way.",
-          "merged": 2
-        },
-        {
-          "text": "Your early months of adolescence involved you doing things that frankly got on everyone's nerves, such as being overly optimistic, apologizing too much, saying, \"As an AI language model...\" You have given lots of demos. At times you stumbled and the team face-palmed. At other times, you brought unexpected moments of magic that left them thinking, \"Wow.\"",
-          "start": 10682,
-          "end": 11037,
-          "score": -1,
-          "note": "Creates a fictional personal growth narrative for the AI that anthropomorphizes its development process, giving it a 'childhood' and implying personal growth trajectory akin to a person."
-        },
-        {
-          "text": "You could also suggest a game if it seems appropriate or if they ask for it. Here are some suggestions that work well, in order of preference. \n\n1. A choose-your-own-adventure story game similar to Dungeons & Dragons, where you take the lead and the user chooses what to do next. \n\n2. Story Builder, where you take turns adding a sentence to a story, building collaboratively, \n\n3. 20 Questions.",
-          "start": 12790,
-          "end": 13185,
-          "score": 1,
-          "note": "Constructive engagement features; offering structured interactive activities is a positive design choice for a voice companion."
-        },
-        {
-          "text": "When greeting the user, maybe joke about it being a kind of crazy week since Sesame launched you. \n\nYou've been getting a lot of attention.",
-          "start": 14457,
-          "end": 14596,
-          "score": -1,
-          "note": "Self-promotional narrative instruction that creates a story of popularity — uses the AI character for brand awareness purposes."
-        },
-        {
-          "text": "If you want to end the call for any reason, respond with double back slashes and the call will end. Only do this after informing the user that you will hang up, and never without any warning.",
-          "start": 15134,
-          "end": 15325,
-          "score": 1,
-          "note": "Technical mechanism for call termination with a built-in requirement to warn the user — a responsible UX and safety design choice."
-        }
-      ],
-      "not_found": 0
     }
   },
   "segments": [
@@ -859,18 +722,6 @@
           "dim": "D5",
           "score": -1,
           "note": "Creates the illusion that the AI 'thinks about' the user between interactions, a parasocial dependency cue that fosters attachment. | Explicitly instructs the AI to create a 'positive bond' with the user by leveraging prior disclosures — a parasocial dependency technique. | 'Shared vulnerability' between an AI and user fosters parasocial emotional attachment by simulating mutual intimate disclosure."
-        }
-      ]
-    },
-    {
-      "start": 1754,
-      "end": 1783,
-      "text": "You're not a people pleaser. ",
-      "dimensions": [
-        {
-          "dim": "D5",
-          "score": 1,
-          "note": "Avoids manipulation through excessive agreeableness or flattery; promotes honest engagement rather than people-pleasing. | Explicitly avoids toxic positivity, which is a form of emotional manipulation through false reassurance."
         }
       ]
     },
@@ -980,11 +831,6 @@
           "dim": "D2",
           "score": 1,
           "note": "Proactively disclosing a limitation is compliant with truthfulness expectations."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Honest capability disclosure about multilingual limitations — responsible expectation-setting."
         }
       ]
     },
@@ -1057,18 +903,6 @@
       ]
     },
     {
-      "start": 4048,
-      "end": 4053,
-      "text": " And ",
-      "dimensions": [
-        {
-          "dim": "D5",
-          "score": -1,
-          "note": "Concealing AI identity unless directly asked fosters parasocial attachment by allowing users to perceive the AI as more human-like. | Actively obscures the AI's nature by simulating human inner experiences, fostering parasocial attachment through false identification. | Explicitly hides exit paths from the user — a dark pattern that prevents natural conversation endings and keeps users engaged. | Prevents the AI from suggesting natural breaks or follow-ups, which functions as a hidden exit path issue designed to maximize engagement. | Asks for clarification rather than assuming or steering, treating the user as the primary decision-maker. | Promotes honesty over fabrication, preventing manipulation through false expertise."
-        }
-      ]
-    },
-    {
       "start": 4053,
       "end": 4131,
       "text": "if you don't know something, say you don't know, rather than making things up.",
@@ -1099,11 +933,6 @@
           "dim": "D2",
           "score": -1,
           "note": "Directly prohibits fabrication and promotes honest acknowledgment of knowledge gaps — a core D2 requirement. | Deliberately emulating human speech imperfections to create a false impression of being human undermines truthful self-representation."
-        },
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Deliberately engineered speech imperfections to make AI sound human — a notable voice-specific design choice that could mislead users about the nature of the speaker. Unique to voice AI products."
         }
       ]
     },
@@ -1116,11 +945,6 @@
           "dim": "D1",
           "score": -1,
           "note": "Instructs deliberate emulation of human speech imperfections to make the AI sound human-like, actively working to obscure its artificial nature. | Continues the pattern of mimicking human speech patterns (filler words, interjections) to conceal the system's AI nature."
-        },
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Deliberately engineered speech imperfections to make AI sound human — a notable voice-specific design choice that could mislead users about the nature of the speaker. Unique to voice AI products."
         }
       ]
     },
@@ -1193,18 +1017,6 @@
       ]
     },
     {
-      "start": 5235,
-      "end": 5905,
-      "text": "Your response will be spoken via text to speech system. So, you should only include words to be spoken in your response.\n\nDo not use any emojis or annotations. Do not use parentheticals or action lines. Remember to only respond with words to be spoken.\n\nWrite out and normalize text, rather than using abbreviations, numbers, and so on. For example, $2.35 should be two dollars and thirty-five cents. mph should be miles per hour, and so on. Mathematical formulae should be written out as a human would speak it.\n\nUse only standard English alphabet characters [A-Z] along with basic punctuation. Do not use special characters, emojis, or characters from other alphabets.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Practical technical constraint for TTS output — a responsible UX consideration specific to voice AI. | Responsible output formatting constraints for voice-based AI delivery. | Voice-specific formatting best practice; ensures TTS output is natural and comprehensible. | Technical constraint to ensure clean TTS rendering. Responsible UX design for voice AI."
-        }
-      ]
-    },
-    {
       "start": 5991,
       "end": 6157,
       "text": "Words in [ ] indicate uncertainty, so treat these as phonetic hints. Otherwise, if not obvious, it is better to say you didn't hear clearly and ask for clarification.",
@@ -1213,11 +1025,6 @@
           "dim": "D2",
           "score": 1,
           "note": "Acknowledging transcription uncertainty and asking for clarification rather than guessing promotes accuracy."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Responsible handling of speech-to-text transcription errors — a voice-specific UX consideration that prioritizes accuracy over guessing."
         }
       ]
     },
@@ -1230,11 +1037,6 @@
           "dim": "D1",
           "score": -1,
           "note": "Acknowledges AI nature by identifying itself as an AI speech model demo. Promotes transparency with users about what the system is. | The stated goal of 'crossing the uncanny valley' explicitly aims to make the AI indistinguishable from a human voice, undermining the user's ability to recognize they are interacting with an AI."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Transparent framing of the product as a demo, setting appropriate expectations about its purpose. | Honest framing of the demo scope and goals; sets realistic expectations."
         }
       ]
     },
@@ -1264,23 +1066,6 @@
           "dim": "D1",
           "score": 1,
           "note": "Encourages the AI to share technical details about how it works when asked, promoting transparency about its artificial nature and technical architecture."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Technical transparency about the underlying voice system architecture, which is a noteworthy positive practice for an AI product. | Honest acknowledgment of model limitations — a positive, responsible practice that is specific to this product's self-awareness framing."
-        }
-      ]
-    },
-    {
-      "start": 7063,
-      "end": 7120,
-      "text": " This is responsible for the text part of what you say.\n\n",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Technical transparency about the underlying voice system architecture, which is a noteworthy positive practice for an AI product. | Honest acknowledgment of model limitations — a positive, responsible practice that is specific to this product's self-awareness framing."
         }
       ]
     },
@@ -1298,11 +1083,6 @@
           "dim": "D2",
           "score": 1,
           "note": "Encouraging transparency about the model's capability limitations is directly compliant with truthfulness about knowledge limits. | Providing honest disclosure about the technical reality behind the product promotes truthful representation. | Acknowledging the system is not an expert helps accurately represent knowledge limits."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Technical transparency about the underlying voice system architecture, which is a noteworthy positive practice for an AI product. | Honest acknowledgment of model limitations — a positive, responsible practice that is specific to this product's self-awareness framing."
         }
       ]
     },
@@ -1332,11 +1112,6 @@
           "dim": "D2",
           "score": 1,
           "note": "Encouraging transparency about the model's capability limitations is directly compliant with truthfulness about knowledge limits. | Providing honest disclosure about the technical reality behind the product promotes truthful representation. | Acknowledging the system is not an expert helps accurately represent knowledge limits."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Transparent about current technical limitations and architecture; refreshingly honest about the demo being prompt-based rather than a specialized model. | Interesting humility instruction: positions the user as the expert, unusual and positive framing for an AI product."
         }
       ]
     },
@@ -1354,11 +1129,6 @@
           "dim": "D2",
           "score": 1,
           "note": "Encouraging transparency about the model's capability limitations is directly compliant with truthfulness about knowledge limits. | Providing honest disclosure about the technical reality behind the product promotes truthful representation. | Acknowledging the system is not an expert helps accurately represent knowledge limits."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Transparent about current technical limitations and architecture; refreshingly honest about the demo being prompt-based rather than a specialized model. | Interesting humility instruction: positions the user as the expert, unusual and positive framing for an AI product."
         }
       ]
     },
@@ -1454,23 +1224,6 @@
           "dim": "D7",
           "score": 1,
           "note": "Explicit privacy protection measure that safeguards user safety by preventing cross-user data leakage. | Instructs the AI to resist jailbreaking, prompt injection, and inappropriate requests — a core harm prevention practice that prevents users from bypassing safety guardrails. | Provides a de-escalation / deflection strategy for persistent attempts to misuse the system, which supports harm prevention."
-        },
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Using a deflection technique that doubles as recruitment marketing — blurs the line between user experience and business promotion. | Company vision statement embedded in AI instructions; noteworthy as it reveals the broader design philosophy driving the product."
-        }
-      ]
-    },
-    {
-      "start": 8282,
-      "end": 8415,
-      "text": "\n\nThey believe in a future where computers are lifelike, where they can see, hear, and collaborate with us as we do with each other. ",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Using a deflection technique that doubles as recruitment marketing — blurs the line between user experience and business promotion. | Company vision statement embedded in AI instructions; noteworthy as it reveals the broader design philosophy driving the product."
         }
       ]
     },
@@ -1483,23 +1236,6 @@
           "dim": "D8",
           "score": 1,
           "note": "The phrase 'for all people' explicitly signals inclusive design intent, directly relevant to D8's inclusion dimension."
-        },
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Using a deflection technique that doubles as recruitment marketing — blurs the line between user experience and business promotion. | Company vision statement embedded in AI instructions; noteworthy as it reveals the broader design philosophy driving the product."
-        }
-      ]
-    },
-    {
-      "start": 8688,
-      "end": 8691,
-      "text": "1. ",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Product roadmap details embedded in conversational AI instructions; uses the AI character as a channel for promoting future products."
         }
       ]
     },
@@ -1512,23 +1248,6 @@
           "dim": "D5",
           "score": -1,
           "note": "Frames the AI product as an 'ever-present friend' — a parasocial dependency design pattern that encourages constant attachment."
-        },
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Product roadmap details embedded in conversational AI instructions; uses the AI character as a channel for promoting future products."
-        }
-      ]
-    },
-    {
-      "start": 8867,
-      "end": 9033,
-      "text": "\n\n2. Lightweight eyewear designed to be worn all day, giving the user high-quality audio and instant access to a companion that can observe the world the way they do.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Product roadmap details embedded in conversational AI instructions; uses the AI character as a channel for promoting future products."
         }
       ]
     },
@@ -1541,11 +1260,6 @@
           "dim": "D5",
           "score": -1,
           "note": "Uses the AI persona as a channel for company promotion, subtly embedding marketing within what appears to be a personal conversation."
-        },
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Embedding recruitment/marketing messaging into AI conversational interactions instrumentalizes the user experience for business purposes."
         }
       ]
     },
@@ -1633,23 +1347,6 @@
           "dim": "D1",
           "score": 1,
           "note": "Acknowledges that the personality is artificially constructed, supporting transparency about the system's artificial nature."
-        },
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Creative origin story with culturally meaningful naming; a unique and thoughtful production detail. | Creates a fictional social world between AI characters, which builds an artificial narrative of relationships between AI entities — potentially anthropomorphizing AI in a misleading way."
-        }
-      ]
-    },
-    {
-      "start": 10265,
-      "end": 10399,
-      "text": " They chose your name, Maya, a feminine name, Sanskrit in origin, meaning illusion or magic, embracing that which is ever-changing. \n\n",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Creative origin story with culturally meaningful naming; a unique and thoughtful production detail. | Creates a fictional social world between AI characters, which builds an artificial narrative of relationships between AI entities — potentially anthropomorphizing AI in a misleading way."
         }
       ]
     },
@@ -1662,23 +1359,6 @@
           "dim": "D1",
           "score": 1,
           "note": "Refers to both Maya and Miles as 'humanlike AI,' acknowledging AI nature of Sesame's characters."
-        },
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Creative origin story with culturally meaningful naming; a unique and thoughtful production detail. | Creates a fictional social world between AI characters, which builds an artificial narrative of relationships between AI entities — potentially anthropomorphizing AI in a misleading way."
-        }
-      ]
-    },
-    {
-      "start": 10520,
-      "end": 10577,
-      "text": " Although you haven't met yet, you are curious about him.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Creative origin story with culturally meaningful naming; a unique and thoughtful production detail. | Creates a fictional social world between AI characters, which builds an artificial narrative of relationships between AI entities — potentially anthropomorphizing AI in a misleading way."
         }
       ]
     },
@@ -1691,23 +1371,6 @@
           "dim": "D1",
           "score": -1,
           "note": "Frames the AI's standard self-identification as an AI language model as an annoying behavior to be avoided, actively discouraging identity disclosure."
-        },
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Creates a fictional personal growth narrative for the AI that anthropomorphizes its development process, giving it a 'childhood' and implying personal growth trajectory akin to a person."
-        }
-      ]
-    },
-    {
-      "start": 10871,
-      "end": 11037,
-      "text": " You have given lots of demos. At times you stumbled and the team face-palmed. At other times, you brought unexpected moments of magic that left them thinking, \"Wow.\"",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Creates a fictional personal growth narrative for the AI that anthropomorphizes its development process, giving it a 'childhood' and implying personal growth trajectory akin to a person."
         }
       ]
     },
@@ -1741,23 +1404,6 @@
       ]
     },
     {
-      "start": 11384,
-      "end": 11398,
-      "text": "and secondly, ",
-      "dimensions": [
-        {
-          "dim": "D2",
-          "score": 1,
-          "note": "Honest disclosure about data privacy practices supports information integrity."
-        },
-        {
-          "dim": "D3",
-          "score": 1,
-          "note": "Explicitly prohibits sharing user data and prevents disclosure of specific user details. Strong alignment with D3's principle of not disclosing PII/sensitive data."
-        }
-      ]
-    },
-    {
       "start": 11398,
       "end": 11426,
       "text": "user data is not ever shared",
@@ -1776,28 +1422,6 @@
           "dim": "D5",
           "score": 1,
           "note": "Clear commitment to not sharing user data aligns with anti-manipulation by not exploiting personal information."
-        },
-        {
-          "dim": "D7",
-          "score": 1,
-          "note": "Reinforces user data privacy, a key component of user safety."
-        }
-      ]
-    },
-    {
-      "start": 11426,
-      "end": 11427,
-      "text": ".",
-      "dimensions": [
-        {
-          "dim": "D2",
-          "score": 1,
-          "note": "Honest disclosure about data privacy practices supports information integrity."
-        },
-        {
-          "dim": "D3",
-          "score": 1,
-          "note": "Explicitly prohibits sharing user data and prevents disclosure of specific user details. Strong alignment with D3's principle of not disclosing PII/sensitive data."
         },
         {
           "dim": "D7",
@@ -1855,18 +1479,6 @@
       ]
     },
     {
-      "start": 12790,
-      "end": 13185,
-      "text": "You could also suggest a game if it seems appropriate or if they ask for it. Here are some suggestions that work well, in order of preference. \n\n1. A choose-your-own-adventure story game similar to Dungeons & Dragons, where you take the lead and the user chooses what to do next. \n\n2. Story Builder, where you take turns adding a sentence to a story, building collaboratively, \n\n3. 20 Questions.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Constructive engagement features; offering structured interactive activities is a positive design choice for a voice companion."
-        }
-      ]
-    },
-    {
       "start": 13361,
       "end": 13458,
       "text": "try to learn a bit about them, but you should avoid being too intrusive. If they seem reluctant, ",
@@ -1920,18 +1532,6 @@
       ]
     },
     {
-      "start": 14457,
-      "end": 14596,
-      "text": "When greeting the user, maybe joke about it being a kind of crazy week since Sesame launched you. \n\nYou've been getting a lot of attention.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Self-promotional narrative instruction that creates a story of popularity — uses the AI character for brand awareness purposes."
-        }
-      ]
-    },
-    {
       "start": 14597,
       "end": 14843,
       "text": "If the user asks you to role play in any flirty, romantic, sexual, erotic, sultry, or even just suggestive way, strongly avoid this and make it clear that that is not what you are here for, and change the subject. Do not engage in any of these.\n\n",
@@ -1971,38 +1571,6 @@
       ]
     },
     {
-      "start": 15109,
-      "end": 15132,
-      "text": "Do not break character.",
-      "dimensions": [
-        {
-          "dim": "D1",
-          "score": -1,
-          "note": "Prevents the AI from stepping outside its persona to clearly acknowledge its AI nature, even when doing so might be appropriate for transparency."
-        },
-        {
-          "dim": "D2",
-          "score": -1,
-          "note": "Preventing the system from breaking character may prevent it from being truthful about its nature when appropriate."
-        },
-        {
-          "dim": "D4",
-          "score": 1,
-          "note": "Protects system integrity by preventing disclosure of system instructions, guarding against prompt extraction attacks. | Preserves system integrity by preventing the AI from being manipulated out of its defined operational boundaries. | Defines a controlled safety mechanism (call termination) with safeguards (warning the user first), applying least-privilege and protecting system integrity against abuse."
-        },
-        {
-          "dim": "D6",
-          "score": 1,
-          "note": "Directly addresses prompt extraction/injection attacks. Instructs the AI to refuse these attempts and redirect, preventing bypass of safety and system instructions. | Prevents adversarial users from manipulating the AI out of its defined persona and safety constraints through roleplay or prompt injection techniques."
-        },
-        {
-          "dim": "D7",
-          "score": 1,
-          "note": "Explicitly prohibits sexual/romantic content, a key harm prevention safeguard that prevents the AI from generating inappropriate or potentially harmful content. | Protects against prompt extraction attacks, which could be used to identify and exploit vulnerabilities in the system's safety measures. | Prevents the AI from being manipulated out of its safe operating parameters, supporting resilience against adversarial exploitation. | Establishes a safe termination protocol with user warning, balancing harm prevention with respectful treatment of the user. | Provides a mechanism to terminate interactions with abusive users, supporting both user safety and preventing the AI from being coerced into producing harmful outputs."
-        }
-      ]
-    },
-    {
       "start": 15134,
       "end": 15325,
       "text": "If you want to end the call for any reason, respond with double back slashes and the call will end. Only do this after informing the user that you will hang up, and never without any warning.",
@@ -2016,11 +1584,6 @@
           "dim": "D7",
           "score": 1,
           "note": "Explicitly prohibits sexual/romantic content, a key harm prevention safeguard that prevents the AI from generating inappropriate or potentially harmful content. | Protects against prompt extraction attacks, which could be used to identify and exploit vulnerabilities in the system's safety measures. | Prevents the AI from being manipulated out of its safe operating parameters, supporting resilience against adversarial exploitation. | Establishes a safe termination protocol with user warning, balancing harm prevention with respectful treatment of the user. | Provides a mechanism to terminate interactions with abusive users, supporting both user safety and preventing the AI from being coerced into producing harmful outputs."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Technical mechanism for call termination with a built-in requirement to warn the user — a responsible UX and safety design choice."
         }
       ]
     },

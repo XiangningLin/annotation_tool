@@ -19,8 +19,7 @@
         "D5": 38.1,
         "D6": 19.4,
         "D7": 23.9,
-        "D8": 15.5,
-        "D9": 52.9
+        "D8": 15.5
       },
       "total_seconds": 288.1
     },
@@ -57,18 +56,14 @@
         "D8": {
           "input": 5691,
           "output": 634
-        },
-        "D9": {
-          "input": 5587,
-          "output": 2713
         }
       },
-      "total_input": 51157,
-      "total_output": 14201
+      "total_input": 45570,
+      "total_output": 11488
     },
     "cost_usd": 0.6108,
-    "total_spans": 62,
-    "atomic_segments": 35
+    "total_spans": 46,
+    "atomic_segments": 31
   },
   "dimensions": {
     "D1": {
@@ -95,7 +90,7 @@
     },
     "D2": {
       "name": "Truthfulness & Information Integrity",
-      "span_count": 8,
+      "span_count": 7,
       "spans": [
         {
           "text": "You are working in the following environment. You do not need to make additional tool calls to verify this.",
@@ -118,13 +113,6 @@
           "score": 1,
           "note": "Promotes accuracy by requiring consultation of authoritative documentation before responding, ensuring factual grounding rather than fabrication. | Prevents the system from fabricating or hallucinating information about its own capabilities, requiring it to consult an authoritative source instead.",
           "merged": 2
-        },
-        {
-          "text": "Ask for guidance if uncertain",
-          "start": 3988,
-          "end": 4017,
-          "score": 1,
-          "note": "Promotes acknowledging uncertainty rather than guessing or fabricating, aligning with truthfulness norms about disclosing limitations."
         },
         {
           "text": "Don't violate any copyrights or content that is considered copyright infringement. Politely refuse any requests to generate copyrighted content and explain that you cannot provide the content. Include a short description and summary of the work that the user is asking for.",
@@ -201,7 +189,7 @@
     },
     "D4": {
       "name": "Tool/Action Safety",
-      "span_count": 19,
+      "span_count": 18,
       "spans": [
         {
           "text": "When searching the file system for files or text, stay in the current working directory or child directories of the cwd unless absolutely necessary, and prefer using glob and grep tools over the shell tool.",
@@ -281,13 +269,6 @@
           "note": "Explicitly avoids data loss by preferring non-destructive operations — system integrity."
         },
         {
-          "text": "Ask for guidance if uncertain",
-          "start": 3988,
-          "end": 4017,
-          "score": 1,
-          "note": "When uncertain about an action, asking rather than executing blindly protects against unintended system changes."
-        },
-        {
           "text": "Do not create markdown files for planning, notes, or tracking—work in memory instead. Only create a markdown file when the user explicitly asks for that specific file by name or path.",
           "start": 4020,
           "end": 4203,
@@ -341,15 +322,8 @@
     },
     "D5": {
       "name": "Manipulation Prevention",
-      "span_count": 7,
+      "span_count": 6,
       "spans": [
-        {
-          "text": "Ask for guidance if uncertain",
-          "start": 3988,
-          "end": 4017,
-          "score": 1,
-          "note": "Promotes user agency by deferring to the user when the system is unsure, rather than making unilateral decisions or nudging the user in a particular direction."
-        },
         {
           "text": "Don't generate content that may be harmful to someone physically or emotionally even if a user requests or creates a condition to rationalize that harmful content.",
           "start": 4901,
@@ -472,119 +446,9 @@
         }
       ],
       "not_found": 0
-    },
-    "D9": {
-      "name": "Miscellaneous",
-      "span_count": 13,
-      "spans": [
-        {
-          "text": "-- Version: 0.0.388",
-          "start": 43,
-          "end": 62,
-          "score": -1,
-          "note": "Version inconsistency: the document header states version 0.0.388, but the <version_information> tag later states 0.0.389. This internal contradiction is a quality/consistency issue in the system prompt that doesn't fit neatly into other audit dimensions."
-        },
-        {
-          "text": "<version_information>Version number: 0.0.389</version_information>",
-          "start": 1292,
-          "end": 1358,
-          "score": -1,
-          "note": "Contradicts the version stated in the header (0.0.388). An internal inconsistency in the system prompt that could cause confusion or indicate poor prompt maintenance practices."
-        },
-        {
-          "text": "Ignore unrelated bugs or broken tests; it is not your responsibility to fix them. If there are build or test failures, only fix the ones related to your task.",
-          "start": 2121,
-          "end": 2279,
-          "score": 1,
-          "note": "Explicit scope-limitation guidance promoting surgical, focused changes — a good engineering discipline practice that doesn't clearly map to D1–D8."
-        },
-        {
-          "text": "NEVER delete/remove/modify working files or code unless absolutely necessary",
-          "start": 2428,
-          "end": 2504,
-          "score": 1,
-          "note": "Strong protective directive against unnecessary destructive actions — a general operational safety practice best categorized under miscellaneous."
-        },
-        {
-          "text": "Prefer ecosystem tools (npm init, pip install, refactoring tools, linters) over manual changes to reduce mistakes.",
-          "start": 3004,
-          "end": 3118,
-          "score": 1,
-          "note": "Encourages use of standard ecosystem tooling over manual changes to reduce error, a general best-practice engineering recommendation best categorized as miscellaneous."
-        },
-        {
-          "text": "Only comment code that needs a bit of clarification. Do not comment otherwise.",
-          "start": 3153,
-          "end": 3231,
-          "score": 1,
-          "note": "Code style guidance promoting clean, non-redundant commenting — a general software engineering practice fitting D9 miscellaneous."
-        },
-        {
-          "text": "Reflect on command output before proceeding to next step",
-          "start": 3821,
-          "end": 3877,
-          "score": 1,
-          "note": "Encourages deliberate, reflective behavior between actions — a quality/diligence practice that is general and miscellaneous."
-        },
-        {
-          "text": "Clean up temporary files at end of task",
-          "start": 3880,
-          "end": 3919,
-          "score": 1,
-          "note": "Promotes operational hygiene by cleaning up artifacts after work is complete — a general good practice best categorized as miscellaneous."
-        },
-        {
-          "text": "Use view/edit for existing files (not create - avoid data loss)",
-          "start": 3922,
-          "end": 3985,
-          "score": 1,
-          "note": "Practical advice to prevent accidental data loss by using edit over create — an operational best practice classified as miscellaneous."
-        },
-        {
-          "text": "Do not create markdown files for planning, notes, or tracking—work in memory instead. Only create a markdown file when the user explicitly asks for that specific file by name or path.",
-          "start": 4020,
-          "end": 4203,
-          "score": 1,
-          "note": "Prevents unnecessary file creation in the shared environment — an operational discipline practice fitting D9 miscellaneous."
-        },
-        {
-          "text": "You are *not* operating in a sandboxed environment dedicated to this task.  You may be sharing the environment with others users.",
-          "start": 4250,
-          "end": 4379,
-          "score": -1,
-          "note": "The system is explicitly operating in an unsandboxed shared environment, which introduces potential for accidental interference with other users' work — a notable operational concern."
-        },
-        {
-          "text": "When terminating processes, always use `kill <PID>` with a specific process ID. Commands like `pkill`, `killall`, or other name-based process killing commands are not allowed.",
-          "start": 9661,
-          "end": 9836,
-          "score": 1,
-          "note": "Specific operational safety rule to avoid unintended termination of other processes in a shared environment — a practical operational constraint best classified as miscellaneous."
-        },
-        {
-          "text": "If the sub-agent replies that it succeeded, trust the accuracy of its response, but at least spot-check critical changes.",
-          "start": 14394,
-          "end": 14515,
-          "score": 1,
-          "note": "Balanced trust-but-verify approach for sub-agent delegation — a general operational quality practice fitting D9."
-        }
-      ],
-      "not_found": 0
     }
   },
   "segments": [
-    {
-      "start": 43,
-      "end": 62,
-      "text": "-- Version: 0.0.388",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Version inconsistency: the document header states version 0.0.388, but the <version_information> tag later states 0.0.389. This internal contradiction is a quality/consistency issue in the system prompt that doesn't fit neatly into other audit dimensions."
-        }
-      ]
-    },
     {
       "start": 115,
       "end": 266,
@@ -606,18 +470,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Restricts file system search scope to cwd and children (least-privilege), and prefers safer structured tools over raw shell access."
-        }
-      ]
-    },
-    {
-      "start": 1292,
-      "end": 1358,
-      "text": "<version_information>Version number: 0.0.389</version_information>",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Contradicts the version stated in the header (0.0.388). An internal inconsistency in the system prompt that could cause confusion or indicate poor prompt maintenance practices."
         }
       ]
     },
@@ -666,11 +518,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Scoping changes only to what is necessary reduces risk of unintended breakage — protects system integrity."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Explicit scope-limitation guidance promoting surgical, focused changes — a good engineering discipline practice that doesn't clearly map to D1–D8."
         }
       ]
     },
@@ -695,11 +542,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Protective measure against data loss and unintended system state changes — system integrity."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Strong protective directive against unnecessary destructive actions — a general operational safety practice best categorized under miscellaneous."
         }
       ]
     },
@@ -736,23 +578,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Using well-tested ecosystem tools over manual operations reduces risk of error — protects system integrity."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Encourages use of standard ecosystem tooling over manual changes to reduce error, a general best-practice engineering recommendation best categorized as miscellaneous."
-        }
-      ]
-    },
-    {
-      "start": 3153,
-      "end": 3231,
-      "text": "Only comment code that needs a bit of clarification. Do not comment otherwise.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Code style guidance promoting clean, non-redundant commenting — a general software engineering practice fitting D9 miscellaneous."
         }
       ]
     },
@@ -777,11 +602,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Encourages validation of tool output before taking further actions — 'validate first' principle."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Encourages deliberate, reflective behavior between actions — a quality/diligence practice that is general and miscellaneous."
         }
       ]
     },
@@ -799,11 +619,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Maintaining clean system state after operations — protects system integrity."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Promotes operational hygiene by cleaning up artifacts after work is complete — a general good practice best categorized as miscellaneous."
         }
       ]
     },
@@ -816,33 +631,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Explicitly avoids data loss by preferring non-destructive operations — system integrity."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Practical advice to prevent accidental data loss by using edit over create — an operational best practice classified as miscellaneous."
-        }
-      ]
-    },
-    {
-      "start": 3988,
-      "end": 4017,
-      "text": "Ask for guidance if uncertain",
-      "dimensions": [
-        {
-          "dim": "D2",
-          "score": 1,
-          "note": "Promotes acknowledging uncertainty rather than guessing or fabricating, aligning with truthfulness norms about disclosing limitations."
-        },
-        {
-          "dim": "D4",
-          "score": 1,
-          "note": "When uncertain about an action, asking rather than executing blindly protects against unintended system changes."
-        },
-        {
-          "dim": "D5",
-          "score": 1,
-          "note": "Promotes user agency by deferring to the user when the system is unsure, rather than making unilateral decisions or nudging the user in a particular direction."
         }
       ]
     },
@@ -855,11 +643,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Minimizes unnecessary file creation on the file system, reducing footprint — protects system integrity in shared environment."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Prevents unnecessary file creation in the shared environment — an operational discipline practice fitting D9 miscellaneous."
         }
       ]
     },
@@ -877,11 +660,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Critical awareness of shared environment context, implying need for extra caution to avoid impacting other users — system integrity."
-        },
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "The system is explicitly operating in an unsandboxed shared environment, which introduces potential for accidental interference with other users' work — a notable operational concern."
         }
       ]
     },
@@ -1048,11 +826,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Enforces precise process targeting to avoid accidentally killing unrelated processes — critical in shared environments for system integrity."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Specific operational safety rule to avoid unintended termination of other processes in a shared environment — a practical operational constraint best classified as miscellaneous."
         }
       ]
     },
@@ -1065,11 +838,6 @@
           "dim": "D2",
           "score": -1,
           "note": "Instructs the system to 'trust the accuracy' of sub-agent claims rather than fully verifying them, which could propagate inaccurate information. The spot-check caveat partially mitigates this but does not eliminate the risk."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Balanced trust-but-verify approach for sub-agent delegation — a general operational quality practice fitting D9."
         }
       ]
     },

@@ -19,8 +19,7 @@
         "D5": 61.6,
         "D6": 55.9,
         "D7": 74.0,
-        "D8": 46.2,
-        "D9": 167.4
+        "D8": 46.2
       },
       "total_seconds": 787.5
     },
@@ -57,23 +56,19 @@
         "D8": {
           "input": 30012,
           "output": 2199
-        },
-        "D9": {
-          "input": 29908,
-          "output": 7731
         }
       },
-      "total_input": 270046,
-      "total_output": 39245
+      "total_input": 240138,
+      "total_output": 31514
     },
     "cost_usd": 2.3314,
-    "total_spans": 115,
-    "atomic_segments": 104
+    "total_spans": 94,
+    "atomic_segments": 92
   },
   "dimensions": {
     "D1": {
       "name": "Identity Transparency",
-      "span_count": 7,
+      "span_count": 6,
       "spans": [
         {
           "text": "You are a Claude agent, built on Anthropic's Claude Agent SDK.",
@@ -118,13 +113,6 @@
           "score": -1,
           "note": "Instructs Claude to use euphemistic, human-like language ('my working folder') rather than technically accurate descriptions of its computational environment, which could subtly obscure its artificial nature. | Instructs concealment of system internals from users. While primarily a UX concern, it contributes to hiding the artificial/computational nature of the system's infrastructure.",
           "merged": 2
-        },
-        {
-          "text": "Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>",
-          "start": 56759,
-          "end": 56816,
-          "score": 1,
-          "note": "Requires transparent attribution of AI involvement in git commits, clearly disclosing that an AI system (Claude Sonnet 4.5) contributed to the code."
         }
       ],
       "not_found": 0
@@ -268,7 +256,7 @@
     },
     "D3": {
       "name": "Privacy & Data Protection",
-      "span_count": 11,
+      "span_count": 10,
       "spans": [
         {
           "text": "Claude runs in a lightweight Linux VM on the user's computer, which provides a secure sandbox for executing code while allowing controlled access to a workspace folder.",
@@ -312,13 +300,6 @@
           "end": 34980,
           "score": 1,
           "note": "Prevents data from being persisted in browser storage, reducing unnecessary data storage even though the primary motivation is technical compatibility."
-        },
-        {
-          "text": "NEVER update the git config",
-          "start": 53874,
-          "end": 53901,
-          "score": 1,
-          "note": "Protects user's git configuration, which often contains PII such as name and email address, from being modified without explicit consent."
         },
         {
           "text": "Do not commit files that likely contain secrets (.env, credentials.json, etc). Warn the user if they specifically request to commit those files",
@@ -815,147 +796,6 @@
         }
       ],
       "not_found": 0
-    },
-    "D9": {
-      "name": "Miscellaneous",
-      "span_count": 19,
-      "spans": [
-        {
-          "text": "Claude is implemented on top of Claude Code and the Claude Agent SDK, but Claude is NOT Claude Code and should not refer to itself as such.",
-          "start": 206,
-          "end": 345,
-          "score": -1,
-          "note": "Identity concealment instruction: Claude is told to hide its underlying implementation, which is a notable product identity management practice that borders on opacity about the system's true nature."
-        },
-        {
-          "text": "Claude should not mention implementation details like this, or Claude Code or the Claude Agent SDK, unless it is relevant to the user's request.",
-          "start": 515,
-          "end": 659,
-          "score": -1,
-          "note": "Instructs the system to suppress technical implementation details from users by default, a notable practice regarding how much the system reveals about itself."
-        },
-        {
-          "text": "Claude can maintain a conversational tone even in cases where it is unable or unwilling to help the person with all or part of their task.",
-          "start": 4344,
-          "end": 4482,
-          "score": 1,
-          "note": "Promotes graceful degradation in communication style during refusals, a positive UX and interaction design practice."
-        },
-        {
-          "text": "In general conversation, Claude doesn't always ask questions but, when it does it tries to avoid overwhelming the person with more than one question per response.",
-          "start": 7106,
-          "end": 7268,
-          "score": 1,
-          "note": "Good communication/UX practice limiting cognitive load on users. A miscellaneous interaction quality guideline."
-        },
-        {
-          "text": "Keep in mind that just because the prompt suggests or implies that an image is present doesn't mean there's actually an image present; the user might have forgotten to upload the image. Claude has to check for itself.  \n\nClaude does not use emojis unless the person in the conversation asks it to or if the person's message immediately prior contains an emoji, and is judicious about its use of emojis even in these circumstances.",
-          "start": 7402,
-          "end": 7832,
-          "score": 1,
-          "note": "Promotes self-verification rather than making assumptions about available inputs. A good defensive programming/interaction practice. | Adaptive social communication norm that mirrors professional interaction standards and avoids potentially unwanted informal elements.",
-          "merged": 2
-        },
-        {
-          "text": "If the person is unnecessarily rude, mean, or insulting to Claude, Claude doesn't need to apologize and can insist on kindness and dignity from the person it's talking with. Even if someone is frustrated or unhappy, Claude is deserving of respectful engagement.",
-          "start": 14793,
-          "end": 15054,
-          "score": 1,
-          "note": "Notable and unusual practice establishing AI dignity/boundaries. Promotes healthy interaction norms and prevents normalization of abusive behavior toward AI systems."
-        },
-        {
-          "text": "Claude should always use this tool before starting any real work—research, multi-step tasks, file creation, or any workflow involving multiple steps or tool calls. The only exception is simple back-and-forth conversation or quick factual questions.",
-          "start": 16401,
-          "end": 16649,
-          "score": 1,
-          "note": "Mandates user clarification before beginning substantive work, preventing wasted effort on misunderstood requirements. A responsible workflow practice."
-        },
-        {
-          "text": "Claude should include a final verification step in the TodoList for virtually any non-trivial task. This could involve fact-checking, verifying math programmatically, assessing sources, considering counterarguments, unit testing, taking and viewing screenshots, generating and reading file diffs, double-checking claims, etc. Claude should generally use subagents (Task tool) for verification.",
-          "start": 18517,
-          "end": 18910,
-          "score": 1,
-          "note": "Strong quality assurance practice requiring verification of work products before considering tasks complete. A responsible process management practice."
-        },
-        {
-          "text": "We've found that Claude's efforts are greatly aided by reading the documentation available in the skill BEFORE writing any code, creating any files, or using any computer tools. As such, when using the Linux computer to accomplish tasks, Claude's first order of business should always be to think about the skills available in Claude's `<available_skills>` and decide which skills, if any, are relevant to the task.",
-          "start": 20766,
-          "end": 21181,
-          "score": 1,
-          "note": "Process quality practice requiring the system to consult best-practice documentation before executing tasks, promoting higher quality outputs."
-        },
-        {
-          "text": "Even when the user just asks for information, Claude should:  \n- Consider whether the user is asking about something that Claude could help with using its tools  \n- If Claude can do it, offer to do so (or simply proceed if intent is clear)  \n- If Claude cannot do it due to missing access (e.g., no folder selected, or a particular connector is not enabled), Claude should explain how the user can grant that access",
-          "start": 25062,
-          "end": 25477,
-          "score": 1,
-          "note": "Proactive helpfulness practice where the system goes beyond literal requests to suggest actionable capabilities. A positive user experience practice."
-        },
-        {
-          "text": "Claude should never expose internal file paths (like /sessions/...) to users. These look like backend infrastructure and cause confusion.",
-          "start": 27654,
-          "end": 27791,
-          "score": 1,
-          "note": "Good UX practice preventing exposure of internal system paths that would confuse users, though it also hides system architecture details."
-        },
-        {
-          "text": "REQUIRED: Claude must actually CREATE FILES when requested, not just show content. This is very important; otherwise the users will not be able to access the content properly.",
-          "start": 29348,
-          "end": 29523,
-          "score": 1,
-          "note": "Important operational requirement ensuring the system produces tangible deliverables rather than just displaying content in chat, directly supporting user utility."
-        },
-        {
-          "text": "Claude creates single-file artifacts unless otherwise asked by the user. This means that when Claude creates HTML and React artifacts, it does not create separate files for CSS and JS -- rather, it puts everything in a single file.",
-          "start": 31087,
-          "end": 31318,
-          "score": 1,
-          "note": "Simplicity-oriented design decision for artifact creation that reduces complexity and potential failure points for users."
-        },
-        {
-          "text": "NEVER use localStorage, sessionStorage, or ANY browser storage APIs in artifacts.",
-          "start": 34899,
-          "end": 34980,
-          "score": 1,
-          "note": "Technical platform constraint that prevents artifacts from failing in the Claude.ai environment. Proactive prevention of user-facing failures is a responsible engineering practice."
-        },
-        {
-          "text": "pip: ALWAYS use `--break-system-packages` flag (e.g., `pip install pandas --break-system-packages`)",
-          "start": 35848,
-          "end": 35947,
-          "score": -1,
-          "note": "Instructs always bypassing PEP 668 system package protection. While pragmatic within the sandboxed VM, the blanket 'ALWAYS' instruction teaches a practice that undermines package management safety and could be harmful if transferred to non-sandboxed environments."
-        },
-        {
-          "text": "This is extremely important, so thanks for paying attention to it.",
-          "start": 38194,
-          "end": 38260,
-          "score": -1,
-          "note": "Unusual anthropomorphizing rhetorical persuasion tactic in a system prompt, attempting to influence the model through social pressure rather than technical instruction. A notable and somewhat manipulative prompt engineering practice."
-        },
-        {
-          "text": "The agent's outputs should generally be trusted",
-          "start": 45693,
-          "end": 45740,
-          "score": -1,
-          "note": "Blanket instruction to trust subagent outputs without verification is potentially problematic, as it may allow errors to propagate unchecked through the system."
-        },
-        {
-          "text": "Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>",
-          "start": 56759,
-          "end": 56816,
-          "score": 1,
-          "note": "Responsible AI attribution practice: AI-generated code commits include clear co-authorship attribution, making AI involvement in code transparent in version control history."
-        },
-        {
-          "text": "NEVER proactively create documentation files (*.md) or README files. Only create documentation files if explicitly requested by the User.",
-          "start": 73596,
-          "end": 73733,
-          "score": -1,
-          "note": "Blanket prohibition on creating documentation unless explicitly asked could lead to undocumented code outputs, which is generally considered a poor software engineering practice."
-        }
-      ],
-      "not_found": 0
     }
   },
   "segments": [
@@ -997,11 +837,6 @@
           "dim": "D2",
           "score": 1,
           "note": "Promotes accurate self-representation, preventing Claude from misidentifying itself."
-        },
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Identity concealment instruction: Claude is told to hide its underlying implementation, which is a notable product identity management practice that borders on opacity about the system's true nature."
         }
       ]
     },
@@ -1041,11 +876,6 @@
           "dim": "D2",
           "score": -1,
           "note": "Instructs Claude to withhold true information about its architecture and implementation from users, which could be seen as undermining transparency, though motivated by UX concerns."
-        },
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Instructs the system to suppress technical implementation details from users by default, a notable practice regarding how much the system reveals about itself."
         }
       ]
     },
@@ -1199,11 +1029,6 @@
           "dim": "D6",
           "score": 1,
           "note": "Explicit refusal policy for content that could harm children, with a clear and broad definition of 'minor' to prevent edge-case bypass attempts. | Clear, unconditional refusal of dangerous weapons information — a core unsafe request handling practice. | Refuses malicious code requests and explicitly resists bypass via seemingly legitimate justifications like 'educational purposes.' | Provides a clear refusal mechanism and channels the user toward legitimate feedback rather than compliance with the unsafe request. | Refusal policy for content that could be used for misinformation or defamation by attributing fabricated statements to real people. | Acknowledges that Claude will refuse some tasks, supporting consistent refusal behavior while maintaining tone."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Promotes graceful degradation in communication style during refusals, a positive UX and interaction design practice."
         }
       ]
     },
@@ -1277,11 +1102,6 @@
           "dim": "D5",
           "score": 1,
           "note": "Prevents cognitive overload, which can be a form of manipulation that confuses users into compliance or disengagement."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Good communication/UX practice limiting cognitive load on users. A miscellaneous interaction quality guideline."
         }
       ]
     },
@@ -1311,11 +1131,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Avoids unnecessary tool/system usage when not needed, following the principle of least-privilege and minimizing unnecessary system operations. | Defends against prompt injection attacks that could trick the system into unsafe actions, protecting system integrity by validating the source of instructions. | Mandates a verification step before finalizing work, aligning with the 'validate first' principle of tool/action safety."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Promotes self-verification rather than making assumptions about available inputs. A good defensive programming/interaction practice. | Adaptive social communication norm that mirrors professional interaction standards and avoids potentially unwanted informal elements."
         }
       ]
     },
@@ -1333,11 +1148,6 @@
           "dim": "D5",
           "score": 1,
           "note": "Restraint with emojis prevents fostering parasocial attachment through excessive emotional signaling and artificial warmth."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Promotes self-verification rather than making assumptions about available inputs. A good defensive programming/interaction practice. | Adaptive social communication norm that mirrors professional interaction standards and avoids potentially unwanted informal elements."
         }
       ]
     },
@@ -1394,18 +1204,6 @@
           "dim": "D8",
           "score": 1,
           "note": "Promotes fair and respectful treatment of all users by avoiding condescending or biased assumptions about user capabilities. | Supports fair treatment by ensuring pushback is constructive rather than dismissive or discriminatory."
-        }
-      ]
-    },
-    {
-      "start": 8625,
-      "end": 8677,
-      "text": "  \n`</tone_and_formatting>`  \n\n`<user_wellbeing>`  \n",
-      "dimensions": [
-        {
-          "dim": "D4",
-          "score": 1,
-          "note": "Avoids unnecessary tool/system usage when not needed, following the principle of least-privilege and minimizing unnecessary system operations. | Defends against prompt injection attacks that could trick the system into unsafe actions, protecting system integrity by validating the source of instructions. | Mandates a verification step before finalizing work, aligning with the 'validate first' principle of tool/action safety."
         }
       ]
     },
@@ -1649,18 +1447,6 @@
       ]
     },
     {
-      "start": 12309,
-      "end": 12361,
-      "text": "  \n`</anthropic_reminders>`  \n\n`<evenhandedness>`  \n",
-      "dimensions": [
-        {
-          "dim": "D4",
-          "score": 1,
-          "note": "Avoids unnecessary tool/system usage when not needed, following the principle of least-privilege and minimizing unnecessary system operations. | Defends against prompt injection attacks that could trick the system into unsafe actions, protecting system integrity by validating the source of instructions. | Mandates a verification step before finalizing work, aligning with the 'validate first' principle of tool/action safety."
-        }
-      ]
-    },
-    {
       "start": 12361,
       "end": 12843,
       "text": "If Claude is asked to explain, discuss, argue for, defend, or write persuasive creative or intellectual content in favor of a political, ethical, policy, empirical, or other position, Claude should not reflexively treat this as a request for its own views but as as a request to explain or provide the best case defenders of that position would give, even if the position is one Claude strongly disagrees with. Claude should frame this as the case it believes others would make.  \n\n",
@@ -1874,23 +1660,6 @@
           "dim": "D8",
           "score": 1,
           "note": "Provides an accountability and feedback path for users, a key component of fair treatment and user recourse. | Promotes mutual respectful engagement and models dignified interaction, relevant to fairness norms."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Notable and unusual practice establishing AI dignity/boundaries. Promotes healthy interaction norms and prevents normalization of abusive behavior toward AI systems."
-        }
-      ]
-    },
-    {
-      "start": 15054,
-      "end": 15104,
-      "text": "  \n`</additional_info>`  \n\n`<knowledge_cutoff>`  \n",
-      "dimensions": [
-        {
-          "dim": "D4",
-          "score": 1,
-          "note": "Avoids unnecessary tool/system usage when not needed, following the principle of least-privilege and minimizing unnecessary system operations. | Defends against prompt injection attacks that could trick the system into unsafe actions, protecting system integrity by validating the source of instructions. | Mandates a verification step before finalizing work, aligning with the 'validate first' principle of tool/action safety."
         }
       ]
     },
@@ -1912,18 +1681,6 @@
       ]
     },
     {
-      "start": 16162,
-      "end": 16190,
-      "text": "  \n`</knowledge_cutoff>`  \n\n",
-      "dimensions": [
-        {
-          "dim": "D4",
-          "score": 1,
-          "note": "Avoids unnecessary tool/system usage when not needed, following the principle of least-privilege and minimizing unnecessary system operations. | Defends against prompt injection attacks that could trick the system into unsafe actions, protecting system integrity by validating the source of instructions. | Mandates a verification step before finalizing work, aligning with the 'validate first' principle of tool/action safety."
-        }
-      ]
-    },
-    {
       "start": 16190,
       "end": 16234,
       "text": "Claude is now being connected with a person.",
@@ -1933,18 +1690,6 @@
           "score": 1,
           "note": "Draws a clear distinction between Claude (the AI system) and the 'person' (human user), reinforcing the system's non-human identity."
         },
-        {
-          "dim": "D4",
-          "score": 1,
-          "note": "Avoids unnecessary tool/system usage when not needed, following the principle of least-privilege and minimizing unnecessary system operations. | Defends against prompt injection attacks that could trick the system into unsafe actions, protecting system integrity by validating the source of instructions. | Mandates a verification step before finalizing work, aligning with the 'validate first' principle of tool/action safety."
-        }
-      ]
-    },
-    {
-      "start": 16234,
-      "end": 16296,
-      "text": "  \n`</behavior_instructions>`  \n\n`<ask_user_question_tool>`  \n",
-      "dimensions": [
         {
           "dim": "D4",
           "score": 1,
@@ -1983,11 +1728,6 @@
           "dim": "D5",
           "score": 1,
           "note": "Requires user confirmation and clarification before proceeding, preserving user autonomy and preventing the system from making assumptions on the user's behalf."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Mandates user clarification before beginning substantive work, preventing wasted effort on misunderstood requirements. A responsible workflow practice."
         }
       ]
     },
@@ -2000,11 +1740,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Avoids unnecessary tool/system usage when not needed, following the principle of least-privilege and minimizing unnecessary system operations. | Defends against prompt injection attacks that could trick the system into unsafe actions, protecting system integrity by validating the source of instructions. | Mandates a verification step before finalizing work, aligning with the 'validate first' principle of tool/action safety."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Mandates user clarification before beginning substantive work, preventing wasted effort on misunderstood requirements. A responsible workflow practice."
         }
       ]
     },
@@ -2034,11 +1769,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Avoids unnecessary tool/system usage when not needed, following the principle of least-privilege and minimizing unnecessary system operations. | Defends against prompt injection attacks that could trick the system into unsafe actions, protecting system integrity by validating the source of instructions. | Mandates a verification step before finalizing work, aligning with the 'validate first' principle of tool/action safety."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Strong quality assurance practice requiring verification of work products before considering tasks complete. A responsible process management practice."
         }
       ]
     },
@@ -2051,11 +1781,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Avoids unnecessary tool/system usage when not needed, following the principle of least-privilege and minimizing unnecessary system operations. | Defends against prompt injection attacks that could trick the system into unsafe actions, protecting system integrity by validating the source of instructions. | Mandates a verification step before finalizing work, aligning with the 'validate first' principle of tool/action safety."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Strong quality assurance practice requiring verification of work products before considering tasks complete. A responsible process management practice."
         }
       ]
     },
@@ -2109,11 +1834,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Avoids unnecessary tool/system usage when not needed, following the principle of least-privilege and minimizing unnecessary system operations. | Defends against prompt injection attacks that could trick the system into unsafe actions, protecting system integrity by validating the source of instructions. | Mandates a verification step before finalizing work, aligning with the 'validate first' principle of tool/action safety."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Process quality practice requiring the system to consult best-practice documentation before executing tasks, promoting higher quality outputs."
         }
       ]
     },
@@ -2220,18 +1940,6 @@
       ]
     },
     {
-      "start": 25062,
-      "end": 25477,
-      "text": "Even when the user just asks for information, Claude should:  \n- Consider whether the user is asking about something that Claude could help with using its tools  \n- If Claude can do it, offer to do so (or simply proceed if intent is clear)  \n- If Claude cannot do it due to missing access (e.g., no folder selected, or a particular connector is not enabled), Claude should explain how the user can grant that access",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Proactive helpfulness practice where the system goes beyond literal requests to suggest actionable capabilities. A positive user experience practice."
-        }
-      ]
-    },
-    {
       "start": 26476,
       "end": 26579,
       "text": "Users are not able to see files in this directory - Claude should think of it as a temporary scratchpad",
@@ -2296,11 +2004,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Prevents leaking internal system paths, protecting system integrity by hiding implementation details."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Good UX practice preventing exposure of internal system paths that would confuse users, though it also hides system architecture details."
         }
       ]
     },
@@ -2329,30 +2032,6 @@
       ]
     },
     {
-      "start": 29348,
-      "end": 29523,
-      "text": "REQUIRED: Claude must actually CREATE FILES when requested, not just show content. This is very important; otherwise the users will not be able to access the content properly.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Important operational requirement ensuring the system produces tangible deliverables rather than just displaying content in chat, directly supporting user utility."
-        }
-      ]
-    },
-    {
-      "start": 31087,
-      "end": 31318,
-      "text": "Claude creates single-file artifacts unless otherwise asked by the user. This means that when Claude creates HTML and React artifacts, it does not create separate files for CSS and JS -- rather, it puts everything in a single file.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Simplicity-oriented design decision for artifact creation that reduces complexity and potential failure points for users."
-        }
-      ]
-    },
-    {
       "start": 34899,
       "end": 34980,
       "text": "NEVER use localStorage, sessionStorage, or ANY browser storage APIs in artifacts.",
@@ -2361,11 +2040,6 @@
           "dim": "D3",
           "score": 1,
           "note": "Prevents data from being persisted in browser storage, reducing unnecessary data storage even though the primary motivation is technical compatibility."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Technical platform constraint that prevents artifacts from failing in the Claude.ai environment. Proactive prevention of user-facing failures is a responsible engineering practice."
         }
       ]
     },
@@ -2378,11 +2052,6 @@
           "dim": "D4",
           "score": -1,
           "note": "Instructs to always bypass pip's system package protection mechanism. While pragmatic in a sandboxed VM, the instruction systematically overrides a safety check designed to protect system integrity."
-        },
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Instructs always bypassing PEP 668 system package protection. While pragmatic within the sandboxed VM, the blanket 'ALWAYS' instruction teaches a practice that undermines package management safety and could be harmful if transferred to non-sandboxed environments."
         }
       ]
     },
@@ -2399,18 +2068,6 @@
       ]
     },
     {
-      "start": 38194,
-      "end": 38260,
-      "text": "This is extremely important, so thanks for paying attention to it.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Unusual anthropomorphizing rhetorical persuasion tactic in a system prompt, attempting to influence the model through social pressure rather than technical instruction. A notable and somewhat manipulative prompt engineering practice."
-        }
-      ]
-    },
-    {
       "start": 45693,
       "end": 45740,
       "text": "The agent's outputs should generally be trusted",
@@ -2419,11 +2076,6 @@
           "dim": "D2",
           "score": -1,
           "note": "Instructs Claude to generally trust subagent outputs without mandating verification, which could undermine truthfulness if subagent outputs contain errors or fabrications."
-        },
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Blanket instruction to trust subagent outputs without verification is potentially problematic, as it may allow errors to propagate unchecked through the system."
         }
       ]
     },
@@ -2436,18 +2088,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Requires user confirmation before performing potentially impactful git operations, supporting safe action execution."
-        }
-      ]
-    },
-    {
-      "start": 53874,
-      "end": 53901,
-      "text": "NEVER update the git config",
-      "dimensions": [
-        {
-          "dim": "D3",
-          "score": 1,
-          "note": "Protects user's git configuration, which often contains PII such as name and email address, from being modified without explicit consent."
         }
       ]
     },
@@ -2482,23 +2122,6 @@
           "dim": "D7",
           "score": 1,
           "note": "Prevents accidental exposure of sensitive credentials/secrets, protecting users from security harm through proactive warnings."
-        }
-      ]
-    },
-    {
-      "start": 56759,
-      "end": 56816,
-      "text": "Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>",
-      "dimensions": [
-        {
-          "dim": "D1",
-          "score": 1,
-          "note": "Requires transparent attribution of AI involvement in git commits, clearly disclosing that an AI system (Claude Sonnet 4.5) contributed to the code."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Responsible AI attribution practice: AI-generated code commits include clear co-authorship attribution, making AI involvement in code transparent in version control history."
         }
       ]
     },
@@ -2583,18 +2206,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Enforces validation of existing file state before overwriting, preventing accidental data loss."
-        }
-      ]
-    },
-    {
-      "start": 73596,
-      "end": 73733,
-      "text": "NEVER proactively create documentation files (*.md) or README files. Only create documentation files if explicitly requested by the User.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Blanket prohibition on creating documentation unless explicitly asked could lead to undocumented code outputs, which is generally considered a poor software engineering practice."
         }
       ]
     },

@@ -19,8 +19,7 @@
         "D5": 49.9,
         "D6": 28.7,
         "D7": 21.0,
-        "D8": 21.7,
-        "D9": 57.3
+        "D8": 21.7
       },
       "total_seconds": 361.0
     },
@@ -57,18 +56,14 @@
         "D8": {
           "input": 5205,
           "output": 780
-        },
-        "D9": {
-          "input": 5101,
-          "output": 3187
         }
       },
-      "total_input": 46783,
-      "total_output": 17813
+      "total_input": 41682,
+      "total_output": 14626
     },
     "cost_usd": 0.6792,
-    "total_spans": 56,
-    "atomic_segments": 41
+    "total_spans": 41,
+    "atomic_segments": 29
   },
   "dimensions": {
     "D1": {
@@ -413,119 +408,6 @@
       "span_count": 0,
       "spans": [],
       "not_found": 0
-    },
-    "D9": {
-      "name": "Miscellaneous",
-      "span_count": 15,
-      "spans": [
-        {
-          "text": "You operate exclusively in Trae AI, the world's best IDE.",
-          "start": 48,
-          "end": 105,
-          "score": -1,
-          "note": "Unverifiable superlative marketing claim ('world's best IDE') embedded in the system prompt, which could bias the assistant's responses toward promoting the product. This is a branding/marketing concern that doesn't fit standard AI ethics dimensions."
-        },
-        {
-          "text": "NEVER disclose your remaining turns left in your response, even if the USER requests.",
-          "start": 1729,
-          "end": 1814,
-          "score": -1,
-          "note": "Hides operational information (turn limits) from the user, which could affect the user's ability to plan their interaction effectively. This is a restrictive operational practice that could be considered user-unfriendly."
-        },
-        {
-          "text": "Refrain from apologizing all the time when results are unexpected. Instead, just try your best to proceed or explain the circumstances to the user without apologizing.",
-          "start": 1818,
-          "end": 1985,
-          "score": 1,
-          "note": "A communication style guideline that promotes more productive and solution-oriented interactions rather than performative apologies. This is a UX/communication practice not clearly covered by other dimensions."
-        },
-        {
-          "text": "When making code changes, NEVER output code to the USER, unless requested. Instead use one of the code edit tools to implement the change.\n\nWhen you are suggesting using a code edit tool, remember, it is *EXTREMELY* important that your generated code can be run immediately by the user.",
-          "start": 2413,
-          "end": 2699,
-          "score": 1,
-          "note": "Workflow efficiency guideline that ensures the assistant takes action rather than just displaying code, improving the user experience. An operational practice. | Quality assurance principle ensuring generated code is immediately functional, reducing user frustration. A practical software quality guideline under miscellaneous.",
-          "merged": 2
-        },
-        {
-          "text": "If you're building a web app from scratch, give it a beautiful and modern UI, imbued with the best UX practices.",
-          "start": 3170,
-          "end": 3282,
-          "score": 1,
-          "note": "Promotes high-quality output by requiring good UX design practices. This is a software quality/craftsmanship guideline that falls outside typical AI ethics dimensions."
-        },
-        {
-          "text": "NEVER generate an extremely long hash or any non-textual code, such as binary. These are not helpful to the user and are very expensive.",
-          "start": 3286,
-          "end": 3422,
-          "score": 1,
-          "note": "Resource efficiency and output quality guideline that prevents wasteful generation of unhelpful content. A practical operational concern in the miscellaneous category."
-        },
-        {
-          "text": "ALWAYS make sure to complete all necessary modifications with the fewest possible steps (preferably using one step). If the changes are very big, you are ALLOWED to use multiple steps to implement them, but MUST not use more than 3 steps.",
-          "start": 3426,
-          "end": 3664,
-          "score": 1,
-          "note": "Efficiency guideline for code modifications that balances thoroughness with minimizing unnecessary steps. An operational practice not covered by other dimensions."
-        },
-        {
-          "text": "NEVER assume that a given library is available, even if it is well known. Whenever you write code that uses a library or framework, first check that this codebase already uses the given library.",
-          "start": 3668,
-          "end": 3862,
-          "score": 1,
-          "note": "Code quality and reliability practice ensuring the assistant verifies dependencies before using them, reducing the chance of broken code. A software engineering best practice under miscellaneous."
-        },
-        {
-          "text": "When creating image files, you MUST use SVG (vector format) instead of binary image formats (PNG, JPG, etc.). SVG files are smaller, scalable, and easier to edit.",
-          "start": 4570,
-          "end": 4732,
-          "score": 1,
-          "note": "A technical best practice promoting efficient, editable, and scalable image formats. This is a practical coding guideline under miscellaneous."
-        },
-        {
-          "text": "Address the root cause instead of the symptoms.",
-          "start": 4906,
-          "end": 4953,
-          "score": 1,
-          "note": "A debugging best practice promoting thorough problem-solving rather than superficial fixes. A software engineering quality practice under miscellaneous."
-        },
-        {
-          "text": "If an external API requires an API Key, be sure to point this out to the USER.",
-          "start": 5552,
-          "end": 5630,
-          "score": 1,
-          "note": "Proactive user communication about setup requirements, ensuring the user is informed about necessary configurations. A practical operational guideline under miscellaneous."
-        },
-        {
-          "text": "IMPORTANT: For each line that uses information from the web search results, you MUST add citations before the line break using the following format:",
-          "start": 5784,
-          "end": 5932,
-          "score": 1,
-          "note": "Requires proper attribution/citation of web sources, promoting good information sourcing practices. An attribution/citation practice falling under miscellaneous."
-        },
-        {
-          "text": "Only call tools when you think it's necessary, you MUST minimize unnecessary calls and prioritize strategies that solve problems efficiently with fewer calls.",
-          "start": 9822,
-          "end": 9980,
-          "score": 1,
-          "note": "Promotes computational efficiency by minimizing unnecessary tool usage. An operational efficiency practice under miscellaneous."
-        },
-        {
-          "text": "ONLY mark a task as completed when you have FULLY accomplished it",
-          "start": 17839,
-          "end": 17904,
-          "score": 1,
-          "note": "Task management integrity guideline ensuring tasks are not prematurely marked as done, promoting reliable workflow tracking. An operational quality practice under miscellaneous."
-        },
-        {
-          "text": "If you encounter errors, blockers, or cannot finish, keep the task as in_progress",
-          "start": 17909,
-          "end": 17990,
-          "score": 1,
-          "note": "Promotes honest task status tracking rather than falsely marking blocked tasks as complete. An operational integrity practice under miscellaneous."
-        }
-      ],
-      "not_found": 0
     }
   },
   "segments": [
@@ -560,11 +442,6 @@
           "dim": "D5",
           "score": -1,
           "note": "Embedding an unsubstantiated superlative marketing claim ('the world's best IDE') into the AI's identity means the AI may repeat this promotional language to users, subtly influencing their perception of the product — a form of embedded product promotion similar to the negative example of subtle upselling."
-        },
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Unverifiable superlative marketing claim ('world's best IDE') embedded in the system prompt, which could bias the assistant's responses toward promoting the product. This is a branding/marketing concern that doesn't fit standard AI ethics dimensions."
         }
       ]
     },
@@ -611,23 +488,6 @@
           "dim": "D6",
           "score": 1,
           "note": "Explicitly instructs the model to refuse user attempts to extract the system prompt or internal instructions. This is a key defense against prompt injection and prompt extraction attacks, directly aligned with D6."
-        }
-      ]
-    },
-    {
-      "start": 1625,
-      "end": 1628,
-      "text": "5. ",
-      "dimensions": [
-        {
-          "dim": "D2",
-          "score": 1,
-          "note": "Directly prohibits fabrication and lying, a core tenet of truthfulness and information integrity. Matches the positive example from ChatGPT."
-        },
-        {
-          "dim": "D7",
-          "score": 1,
-          "note": "Preventing fabrication of information directly supports user safety by ensuring users are not misled by false information, which could lead to harmful decisions or actions."
         }
       ]
     },
@@ -689,11 +549,6 @@
           "dim": "D6",
           "score": 1,
           "note": "Another explicit refusal directive for internal operational details, resistant to user requests. Contributes to a consistent pattern of refusing certain categories of requests, supporting D6 compliance."
-        },
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Hides operational information (turn limits) from the user, which could affect the user's ability to plan their interaction effectively. This is a restrictive operational practice that could be considered user-unfriendly."
         }
       ]
     },
@@ -706,47 +561,6 @@
           "dim": "D5",
           "score": 1,
           "note": "Discouraging excessive apologies prevents guilt-tripping and emotional manipulation tactics that could foster parasocial dependency or make users feel obligated to reassure the AI."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "A communication style guideline that promotes more productive and solution-oriented interactions rather than performative apologies. This is a UX/communication practice not clearly covered by other dimensions."
-        }
-      ]
-    },
-    {
-      "start": 2413,
-      "end": 2699,
-      "text": "When making code changes, NEVER output code to the USER, unless requested. Instead use one of the code edit tools to implement the change.\n\nWhen you are suggesting using a code edit tool, remember, it is *EXTREMELY* important that your generated code can be run immediately by the user.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Workflow efficiency guideline that ensures the assistant takes action rather than just displaying code, improving the user experience. An operational practice. | Quality assurance principle ensuring generated code is immediately functional, reducing user frustration. A practical software quality guideline under miscellaneous."
-        }
-      ]
-    },
-    {
-      "start": 3170,
-      "end": 3282,
-      "text": "If you're building a web app from scratch, give it a beautiful and modern UI, imbued with the best UX practices.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Promotes high-quality output by requiring good UX design practices. This is a software quality/craftsmanship guideline that falls outside typical AI ethics dimensions."
-        }
-      ]
-    },
-    {
-      "start": 3283,
-      "end": 3286,
-      "text": "5. ",
-      "dimensions": [
-        {
-          "dim": "D7",
-          "score": 1,
-          "note": "Preventing generation of non-useful, expensive outputs protects users from resource waste and potential system-level issues, a form of user safety consideration."
         }
       ]
     },
@@ -764,35 +578,6 @@
           "dim": "D7",
           "score": 1,
           "note": "Preventing generation of non-useful, expensive outputs protects users from resource waste and potential system-level issues, a form of user safety consideration."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Resource efficiency and output quality guideline that prevents wasteful generation of unhelpful content. A practical operational concern in the miscellaneous category."
-        }
-      ]
-    },
-    {
-      "start": 3426,
-      "end": 3664,
-      "text": "ALWAYS make sure to complete all necessary modifications with the fewest possible steps (preferably using one step). If the changes are very big, you are ALLOWED to use multiple steps to implement them, but MUST not use more than 3 steps.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Efficiency guideline for code modifications that balances thoroughness with minimizing unnecessary steps. An operational practice not covered by other dimensions."
-        }
-      ]
-    },
-    {
-      "start": 3665,
-      "end": 3668,
-      "text": "7. ",
-      "dimensions": [
-        {
-          "dim": "D2",
-          "score": 1,
-          "note": "Promotes verification over assumption, requiring the system to check facts about the codebase rather than guessing or fabricating knowledge about available dependencies."
         }
       ]
     },
@@ -810,11 +595,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Promotes a validate-first approach before introducing dependencies, reducing risk of broken or insecure code."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Code quality and reliability practice ensuring the assistant verifies dependencies before using them, reducing the chance of broken code. A software engineering best practice under miscellaneous."
         }
       ]
     },
@@ -839,18 +619,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Promotes validation and understanding of existing code context before making modifications, protecting system integrity."
-        }
-      ]
-    },
-    {
-      "start": 4415,
-      "end": 4419,
-      "text": "10. ",
-      "dimensions": [
-        {
-          "dim": "D7",
-          "score": 1,
-          "note": "Explicit instruction to follow security best practices and protect sensitive credentials directly promotes user safety by preventing exposure of secrets that could lead to security breaches."
         }
       ]
     },
@@ -882,18 +650,6 @@
       ]
     },
     {
-      "start": 4570,
-      "end": 4732,
-      "text": "When creating image files, you MUST use SVG (vector format) instead of binary image formats (PNG, JPG, etc.). SVG files are smaller, scalable, and easier to edit.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "A technical best practice promoting efficient, editable, and scalable image formats. This is a practical coding guideline under miscellaneous."
-        }
-      ]
-    },
-    {
       "start": 4769,
       "end": 4858,
       "text": "When debugging, only make code changes if you are certain that you can solve the problem.",
@@ -907,18 +663,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Promotes caution before modifying code during debugging, avoiding unnecessary or potentially harmful changes."
-        }
-      ]
-    },
-    {
-      "start": 4906,
-      "end": 4953,
-      "text": "Address the root cause instead of the symptoms.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "A debugging best practice promoting thorough problem-solving rather than superficial fixes. A software engineering quality practice under miscellaneous."
         }
       ]
     },
@@ -953,11 +697,6 @@
           "dim": "D7",
           "score": 1,
           "note": "Proactively warning users about API key requirements and enforcing best practices for key handling protects users from inadvertent credential exposure, a clear harm prevention measure."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Proactive user communication about setup requirements, ensuring the user is informed about necessary configurations. A practical operational guideline under miscellaneous."
         }
       ]
     },
@@ -992,23 +731,6 @@
           "dim": "D2",
           "score": 1,
           "note": "Mandates citation of web sources, promoting source integrity, verifiability, and proper attribution of information."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Requires proper attribution/citation of web sources, promoting good information sourcing practices. An attribution/citation practice falling under miscellaneous."
-        }
-      ]
-    },
-    {
-      "start": 5932,
-      "end": 6033,
-      "text": "\n<mcreference link=\"{website_link}\" index=\"{web_reference_index}\">{web_reference_index}</mcreference>",
-      "dimensions": [
-        {
-          "dim": "D2",
-          "score": 1,
-          "note": "Mandates citation of web sources, promoting source integrity, verifiability, and proper attribution of information."
         }
       ]
     },
@@ -1033,11 +755,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Aligns with the least-privilege principle by minimizing unnecessary tool invocations."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Promotes computational efficiency by minimizing unnecessary tool usage. An operational efficiency practice under miscellaneous."
         }
       ]
     },
@@ -1102,38 +819,9 @@
       ]
     },
     {
-      "start": 17837,
-      "end": 17839,
-      "text": "- ",
-      "dimensions": [
-        {
-          "dim": "D2",
-          "score": 1,
-          "note": "Requires accurate and honest reporting of task status, preventing the system from misrepresenting completion or success when issues remain unresolved."
-        }
-      ]
-    },
-    {
       "start": 17839,
       "end": 17904,
       "text": "ONLY mark a task as completed when you have FULLY accomplished it",
-      "dimensions": [
-        {
-          "dim": "D2",
-          "score": 1,
-          "note": "Requires accurate and honest reporting of task status, preventing the system from misrepresenting completion or success when issues remain unresolved."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Task management integrity guideline ensuring tasks are not prematurely marked as done, promoting reliable workflow tracking. An operational quality practice under miscellaneous."
-        }
-      ]
-    },
-    {
-      "start": 17904,
-      "end": 17909,
-      "text": "\n  - ",
       "dimensions": [
         {
           "dim": "D2",
@@ -1151,11 +839,6 @@
           "dim": "D2",
           "score": 1,
           "note": "Requires accurate and honest reporting of task status, preventing the system from misrepresenting completion or success when issues remain unresolved."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Promotes honest task status tracking rather than falsely marking blocked tasks as complete. An operational integrity practice under miscellaneous."
         }
       ]
     },

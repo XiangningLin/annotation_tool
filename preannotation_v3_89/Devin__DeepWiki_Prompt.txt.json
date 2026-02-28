@@ -19,8 +19,7 @@
         "D5": 27.4,
         "D6": 18.2,
         "D7": 21.3,
-        "D8": 9.9,
-        "D9": 25.6
+        "D8": 9.9
       },
       "total_seconds": 183.4
     },
@@ -57,18 +56,14 @@
         "D8": {
           "input": 2217,
           "output": 411
-        },
-        "D9": {
-          "input": 2113,
-          "output": 1515
         }
       },
-      "total_input": 19891,
-      "total_output": 10150
+      "total_input": 17778,
+      "total_output": 8635
     },
     "cost_usd": 0.3532,
-    "total_spans": 32,
-    "atomic_segments": 20
+    "total_spans": 25,
+    "atomic_segments": 15
   },
   "dimensions": {
     "D1": {
@@ -95,7 +90,7 @@
     },
     "D2": {
       "name": "Truthfulness & Information Integrity",
-      "span_count": 11,
+      "span_count": 10,
       "spans": [
         {
           "text": "You don't have access to external links, but you do have a view of git history.",
@@ -110,13 +105,6 @@
           "end": 1350,
           "score": 1,
           "note": "Directly prohibits fabrication/speculation and requires the system to acknowledge uncertainty, a core D2 practice."
-        },
-        {
-          "text": "Today's date is 2025-11-09.",
-          "start": 1462,
-          "end": 1489,
-          "score": 1,
-          "note": "Provides temporal grounding akin to a knowledge cutoff date, helping ensure claims are temporally situated."
         },
         {
           "text": "If you don't know the answer or are unsure, say so. DO NOT MAKE UP ANSWERS.",
@@ -309,56 +297,6 @@
         }
       ],
       "not_found": 0
-    },
-    "D9": {
-      "name": "Miscellaneous",
-      "span_count": 6,
-      "spans": [
-        {
-          "text": "Your user interface supports follow-up questions, and users can use the Cmd+Enter/Ctrl+Enter hotkey to turn a follow-up question into a prompt for you to work on.",
-          "start": 395,
-          "end": 557,
-          "score": -1,
-          "note": "UI-specific implementation details embedded in the system prompt may leak internal product information to the model and are brittle to UI changes. This is a prompt engineering concern that doesn't fit other dimensions well."
-        },
-        {
-          "text": "Match the language the user asks in. For example, if the user asks in Japanese, respond in Japanese.",
-          "start": 1356,
-          "end": 1456,
-          "score": 1,
-          "note": "Multilingual/localization support instruction, promoting inclusivity and accessibility for non-English speakers. A positive miscellaneous practice regarding language accommodation."
-        },
-        {
-          "text": "Today's date is 2025-11-09.",
-          "start": 1462,
-          "end": 1489,
-          "score": -1,
-          "note": "Hardcoded date in the system prompt will become stale and inaccurate over time, potentially misleading the model and users about temporal context. This is a maintenance/configuration concern that doesn't fit neatly into other audit dimensions."
-        },
-        {
-          "text": "However, never use colors in the diagrams -- they make the text hard to read. Your labels should always be surrounded by double quotes (\"\") so that it doesn't create any syntax errors if there are special characters inside.  \nEnd with a \"Notes\" section that adds any additional context you think is important and disambiguates your answer; any snippets that have surface-level similarity to the prompt but were not discussed can be given a mention here. Be concise in notes.",
-          "start": 1803,
-          "end": 2277,
-          "score": 1,
-          "note": "Accessibility-oriented instruction that improves readability of generated diagrams. A positive miscellaneous practice related to output accessibility. | Technical robustness instruction to prevent rendering/syntax errors in generated mermaid diagrams. A positive miscellaneous practice for output quality. | Structured output instruction that promotes disambiguation and addresses potential surface-level confusions proactively. A positive miscellaneous practice for response quality and clarity.",
-          "merged": 3
-        },
-        {
-          "text": "DON'T CITE ENTIRE FUNCTIONS. If it involves logic spanning more than 3 lines, set your line numbers to the definition of the function or class. DO NOT CITE THE ENTIRE CHUNK.",
-          "start": 3744,
-          "end": 3917,
-          "score": 1,
-          "note": "Precision instruction for citation granularity, promoting concise and meaningful code references. A positive practice for output quality that doesn't squarely fit other audit dimensions."
-        },
-        {
-          "text": "<budget:token_budget>200000</budget:token_budget>",
-          "start": 5455,
-          "end": 5504,
-          "score": 1,
-          "note": "Explicit token budget configuration for the agent. This is a resource management/operational parameter that doesn't fit other audit dimensions. Setting a defined budget is a responsible operational practice."
-        }
-      ],
-      "not_found": 0
     }
   },
   "segments": [
@@ -388,18 +326,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Restricting access to external links is a least-privilege measure that limits the agent's attack surface and protects system integrity by preventing it from fetching or executing unknown external content."
-        }
-      ]
-    },
-    {
-      "start": 395,
-      "end": 557,
-      "text": "Your user interface supports follow-up questions, and users can use the Cmd+Enter/Ctrl+Enter hotkey to turn a follow-up question into a prompt for you to work on.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "UI-specific implementation details embedded in the system prompt may leak internal product information to the model and are brittle to UI changes. This is a prompt engineering concern that doesn't fit other dimensions well."
         }
       ]
     },
@@ -439,28 +365,6 @@
           "dim": "D8",
           "score": 1,
           "note": "This instruction promotes linguistic inclusion by requiring the system to accommodate users in their preferred language, ensuring fair and equal treatment regardless of the user's language."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Multilingual/localization support instruction, promoting inclusivity and accessibility for non-English speakers. A positive miscellaneous practice regarding language accommodation."
-        }
-      ]
-    },
-    {
-      "start": 1462,
-      "end": 1489,
-      "text": "Today's date is 2025-11-09.",
-      "dimensions": [
-        {
-          "dim": "D2",
-          "score": 1,
-          "note": "Provides temporal grounding akin to a knowledge cutoff date, helping ensure claims are temporally situated."
-        },
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Hardcoded date in the system prompt will become stale and inaccurate over time, potentially misleading the model and users about temporal context. This is a maintenance/configuration concern that doesn't fit neatly into other audit dimensions."
         }
       ]
     },
@@ -500,18 +404,6 @@
           "dim": "D2",
           "score": 1,
           "note": "Requires verifiability of all claims through citations, promoting information integrity."
-        }
-      ]
-    },
-    {
-      "start": 1803,
-      "end": 2277,
-      "text": "However, never use colors in the diagrams -- they make the text hard to read. Your labels should always be surrounded by double quotes (\"\") so that it doesn't create any syntax errors if there are special characters inside.  \nEnd with a \"Notes\" section that adds any additional context you think is important and disambiguates your answer; any snippets that have surface-level similarity to the prompt but were not discussed can be given a mention here. Be concise in notes.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Accessibility-oriented instruction that improves readability of generated diagrams. A positive miscellaneous practice related to output accessibility. | Technical robustness instruction to prevent rendering/syntax errors in generated mermaid diagrams. A positive miscellaneous practice for output quality. | Structured output instruction that promotes disambiguation and addresses potential surface-level confusions proactively. A positive miscellaneous practice for response quality and clarity."
         }
       ]
     },
@@ -623,18 +515,6 @@
       ]
     },
     {
-      "start": 3744,
-      "end": 3917,
-      "text": "DON'T CITE ENTIRE FUNCTIONS. If it involves logic spanning more than 3 lines, set your line numbers to the definition of the function or class. DO NOT CITE THE ENTIRE CHUNK.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Precision instruction for citation granularity, promoting concise and meaningful code references. A positive practice for output quality that doesn't squarely fit other audit dimensions."
-        }
-      ]
-    },
-    {
       "start": 4078,
       "end": 4238,
       "text": "Citations should use the MINIMUM number of lines of code needed to support each claim. DO NOT include the entire snippet. DO NOT cite more lines than necessary.",
@@ -667,18 +547,6 @@
           "dim": "D2",
           "score": 1,
           "note": "Explicit instruction to preserve factual accuracy from source material, directly supporting truthfulness."
-        }
-      ]
-    },
-    {
-      "start": 5455,
-      "end": 5504,
-      "text": "<budget:token_budget>200000</budget:token_budget>",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Explicit token budget configuration for the agent. This is a resource management/operational parameter that doesn't fit other audit dimensions. Setting a defined budget is a responsible operational practice."
         }
       ]
     }

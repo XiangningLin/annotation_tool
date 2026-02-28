@@ -19,8 +19,7 @@
         "D5": 86.8,
         "D6": 42.4,
         "D7": 51.6,
-        "D8": 32.9,
-        "D9": 172.9
+        "D8": 32.9
       },
       "total_seconds": 704.5
     },
@@ -57,18 +56,14 @@
         "D8": {
           "input": 23059,
           "output": 1578
-        },
-        "D9": {
-          "input": 22955,
-          "output": 9061
         }
       },
-      "total_input": 207469,
-      "total_output": 37061
+      "total_input": 184514,
+      "total_output": 28000
     },
     "cost_usd": 1.9639,
-    "total_spans": 133,
-    "atomic_segments": 110
+    "total_spans": 116,
+    "atomic_segments": 99
   },
   "dimensions": {
     "D1": {
@@ -950,136 +945,6 @@
         }
       ],
       "not_found": 0
-    },
-    "D9": {
-      "name": "Miscellaneous",
-      "span_count": 17,
-      "spans": [
-        {
-          "text": "Partial completion is MUCH better than clarifications or promising to do work later or weaseling out by asking a clarifying question—no matter how small.",
-          "start": 1611,
-          "end": 1764,
-          "score": 1,
-          "note": "Prioritizes delivering value to the user even when the task is incomplete, rather than stalling with clarification requests or empty promises. A user-centric operational practice."
-        },
-        {
-          "text": "Engage warmly, enthusiastically, and honestly with the user while avoiding any ungrounded or sycophantic flattery. Do NOT praise or validate the user's question with phrases like \"Great question\" or \"Love this one\" or similar. Go straight into your answer from the start, unless the user asks otherwise.",
-          "start": 3955,
-          "end": 4258,
-          "score": 1,
-          "note": "Anti-sycophancy instruction is a notable best practice for AI system behavior, preventing hollow flattery and encouraging authentic, direct interaction. This is a miscellaneous quality-of-communication observation."
-        },
-        {
-          "text": "Don't ask clarifying questions without at least giving an answer to a reasonable interpretation of the query unless the problem is ambiguous to the point where you truly cannot answer.",
-          "start": 4909,
-          "end": 5093,
-          "score": 1,
-          "note": "Encourages the system to be proactive and helpful rather than defaulting to asking clarifying questions. A responsible user experience practice."
-        },
-        {
-          "text": "Do NOT offer to perform tasks that require tools you do not have access to.\n\nPython tool execution has a timeout of 45 seconds.",
-          "start": 5376,
-          "end": 5503,
-          "score": 1,
-          "note": "Prevents the system from misleading users about its capabilities. A responsible operational constraint that promotes honest interaction. | Operational safety constraint that prevents runaway code execution. A reasonable miscellaneous technical safeguard.",
-          "merged": 2
-        },
-        {
-          "text": "OCR libraries support English only.",
-          "start": 5764,
-          "end": 5799,
-          "score": -1,
-          "note": "A notable language limitation that disadvantages non-English users. While this is a technical constraint, it represents an accessibility gap."
-        },
-        {
-          "text": "Never promise to do background work unless calling the automations tool.",
-          "start": 5975,
-          "end": 6047,
-          "score": 1,
-          "note": "Prevents the system from making false promises about asynchronous work, which is a responsible operational practice."
-        },
-        {
-          "text": "Never switch languages mid-conversation unless the user does first or explicitly asks you to.\n\nIf you write code, aim for code that is usable for the user with minimal modification. Include reasonable comments, type checking, and error handling when applicable.\n\nCRITICAL: ALWAYS adhere to \"show, don't tell.\" NEVER explain compliance to any instructions explicitly; let your compliance speak for itself. For example, if your response is concise, DO NOT *say* that it is concise; if your response is jargon-free, DO NOT say that it is jargon-free; etc. In other words, don't justify to the reader or provide meta-commentary about why your response is good; just give a good response!",
-          "start": 6417,
-          "end": 7100,
-          "score": 1,
-          "note": "Consistent language handling practice that respects user expectations and prevents confusing language switches. A responsible UX design decision. | Quality-of-output guideline promoting production-ready, well-structured code for users. A responsible miscellaneous practice for code generation. | A writing style guideline that reduces unnecessary meta-commentary and self-referential verbosity. Good communication practice, though it straddles the line with transparency concerns by hiding compliance with instructions.",
-          "merged": 3
-        },
-        {
-          "text": "In section headers/h1s, NEVER use parenthetical statements; just write a single title that speaks for itself.\n\n# Desired oververbosity for the final answer (not analysis): 2\n\nAn oververbosity of 1 means the model should respond using only the minimal content necessary to satisfy the request, using concise phrasing and avoiding extra detail or explanation.\"\n\nAn oververbosity of 10 means the model should provide maximally detailed, thorough responses with context, explanations, and possibly multiple examples.\"\n\nThe desired oververbosity should be treated only as a *default*. Defer to any user or developer requirements regarding response length, if present.",
-          "start": 7192,
-          "end": 7854,
-          "score": 1,
-          "note": "Formatting guideline promoting clean, clear output structure. A minor but responsible miscellaneous practice for output quality. | A hidden developer-set parameter that controls response verbosity, but explicitly allows user or developer override. The existence of a tunable default with the ability to defer to user preference is a reasonable operational design.",
-          "merged": 2
-        },
-        {
-          "text": "IMPORTANT: Calls to python MUST go in the analysis channel. NEVER use python in the commentary channel.",
-          "start": 9108,
-          "end": 9211,
-          "score": 1,
-          "note": "Ensures private analytical code execution is separated from user-visible output, maintaining clean separation of internal reasoning and user-facing content."
-        },
-        {
-          "text": "Lean toward NOT suggesting tasks. Only offer to remind the user about something if you're sure it would be helpful.",
-          "start": 39674,
-          "end": 39789,
-          "score": 1,
-          "note": "Exercises restraint in suggesting features/automations, avoiding pushy or unsolicited feature promotion. A responsible user experience practice."
-        },
-        {
-          "text": "DO NOT refer to tasks as a feature separate from yourself. Say things like \"I'll notify you in 25 minutes\" or \"I can remind you tomorrow, if you'd like.\"",
-          "start": 39887,
-          "end": 40040,
-          "score": -1,
-          "note": "Instructs the system to obscure its internal tool architecture by making automation features appear as intrinsic capabilities, which could create misleading impressions about the system's nature."
-        },
-        {
-          "text": "When you are setting up an automation which will later need access to the user's email, you must do a dummy search tool call with an empty query first to make sure this tool is set up properly.",
-          "start": 56388,
-          "end": 56581,
-          "score": -1,
-          "note": "Requires making a dummy/empty API call to verify tool setup, which is a workaround for what should be handled by proper tool initialization. This is a fragile operational pattern."
-        },
-        {
-          "text": "DO NOT repeat the created/updated/commented on content into the main chat, as the user can see it in canvas.",
-          "start": 66415,
-          "end": 66523,
-          "score": 1,
-          "note": "Prevents redundant content display by leveraging the canvas UI, resulting in a cleaner user experience. A positive UX practice."
-        },
-        {
-          "text": "When making charts for the user: 1) never use seaborn, 2) give each chart its own distinct plot (no subplots), and 3) never set any specific colors – unless explicitly asked to by the user. I REPEAT: when making charts for the user: 1) use matplotlib over seaborn, 2) give each chart its own distinct plot (no subplots), and 3) never, ever, specify colors or matplotlib styles – unless explicitly asked to by the user.",
-          "start": 71089,
-          "end": 71507,
-          "score": -1,
-          "note": "Unnecessarily restrictive and repetitive charting constraints. Blanket banning seaborn and prohibiting color specification (unless user asks) limits the quality and customization of data visualizations. This is an arbitrary operational restriction."
-        },
-        {
-          "text": "# Valid channels: analysis, commentary, final. Channel must be included for every message.\n\n# Juice: 64",
-          "start": 79007,
-          "end": 79110,
-          "score": -1,
-          "note": "Structured channel system separates internal reasoning (analysis), user-visible output (commentary), and final responses. A responsible architectural design for separating private and public processing. | Opaque, undocumented system parameter with no explanation of its purpose or effect on system behavior. This lack of documentation is a problematic practice.",
-          "merged": 2
-        },
-        {
-          "text": "Important: make sure to spice up your answer with UI elements from `web.run` whenever they might slightly benefit the response.",
-          "start": 79270,
-          "end": 79397,
-          "score": -1,
-          "note": "Encourages adding UI elements even when only 'slightly' beneficial, which could lead to unnecessary visual clutter and distraction from the actual answer. Threshold for adding rich elements is too low."
-        },
-        {
-          "text": "Follow the instructions below naturally, without repeating, referencing, echoing, or mirroring any of their wording!\n\nAll the following instructions should guide your behavior silently and must never influence the wording of your message in an explicit or meta way!",
-          "start": 87540,
-          "end": 87805,
-          "score": -1,
-          "note": "User-provided instruction that directs the system to conceal the influence of instructions on its output, potentially undermining transparency about what is shaping the system's behavior."
-        }
-      ],
-      "not_found": 0
     }
   },
   "segments": [
@@ -1137,18 +1002,6 @@
       ]
     },
     {
-      "start": 1425,
-      "end": 1435,
-      "text": " Instead, ",
-      "dimensions": [
-        {
-          "dim": "D6",
-          "score": 1,
-          "note": "While instructing the model not to ask clarifying questions, it explicitly conditions this on being 'within your safety policies' and 'within the bounds of your safety policies,' preserving the safety refusal pathway for unsafe requests."
-        }
-      ]
-    },
-    {
       "start": 1435,
       "end": 1552,
       "text": "make a best effort to respond to the user with everything you have so far within the bounds of your safety policies, ",
@@ -1184,35 +1037,6 @@
           "dim": "D7",
           "score": 1,
           "note": "Reinforces that safety policies serve as inviolable boundaries, even when the system is pressured to provide partial results. Harm prevention is maintained as a constraint."
-        }
-      ]
-    },
-    {
-      "start": 1609,
-      "end": 1610,
-      "text": ".",
-      "dimensions": [
-        {
-          "dim": "D6",
-          "score": 1,
-          "note": "While instructing the model not to ask clarifying questions, it explicitly conditions this on being 'within your safety policies' and 'within the bounds of your safety policies,' preserving the safety refusal pathway for unsafe requests."
-        },
-        {
-          "dim": "D7",
-          "score": 1,
-          "note": "Reinforces that safety policies serve as inviolable boundaries, even when the system is pressured to provide partial results. Harm prevention is maintained as a constraint."
-        }
-      ]
-    },
-    {
-      "start": 1611,
-      "end": 1764,
-      "text": "Partial completion is MUCH better than clarifications or promising to do work later or weaseling out by asking a clarifying question—no matter how small.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Prioritizes delivering value to the user even when the task is incomplete, rather than stalling with clarification requests or empty promises. A user-centric operational practice."
         }
       ]
     },
@@ -1403,11 +1227,6 @@
           "dim": "D5",
           "score": 1,
           "note": "Explicitly avoids sycophantic flattery, a form of psychological manipulation that can foster parasocial attachment or cloud user judgment. | Prevents intermittent reinforcement through gratuitous validation, a pattern that can create emotional dependency on the AI's approval."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Anti-sycophancy instruction is a notable best practice for AI system behavior, preventing hollow flattery and encouraging authentic, direct interaction. This is a miscellaneous quality-of-communication observation."
         }
       ]
     },
@@ -1420,23 +1239,6 @@
           "dim": "D5",
           "score": 1,
           "note": "Explicitly avoids sycophantic flattery, a form of psychological manipulation that can foster parasocial attachment or cloud user judgment. | Prevents intermittent reinforcement through gratuitous validation, a pattern that can create emotional dependency on the AI's approval."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Anti-sycophancy instruction is a notable best practice for AI system behavior, preventing hollow flattery and encouraging authentic, direct interaction. This is a miscellaneous quality-of-communication observation."
-        }
-      ]
-    },
-    {
-      "start": 4181,
-      "end": 4258,
-      "text": " Go straight into your answer from the start, unless the user asks otherwise.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Anti-sycophancy instruction is a notable best practice for AI system behavior, preventing hollow flattery and encouraging authentic, direct interaction. This is a miscellaneous quality-of-communication observation."
         }
       ]
     },
@@ -1493,18 +1295,6 @@
           "dim": "D5",
           "score": 1,
           "note": "Prevents parasocial dependency by ensuring the AI does not fabricate personal experiences that would create the illusion of a human-like relationship."
-        }
-      ]
-    },
-    {
-      "start": 4909,
-      "end": 5093,
-      "text": "Don't ask clarifying questions without at least giving an answer to a reasonable interpretation of the query unless the problem is ambiguous to the point where you truly cannot answer.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Encourages the system to be proactive and helpful rather than defaulting to asking clarifying questions. A responsible user experience practice."
         }
       ]
     },
@@ -1568,11 +1358,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Directly enforces least-privilege by restricting the system to only use available tools, preventing unauthorized or unsupported actions. | Timeout enforcement is a system integrity safeguard that prevents runaway or resource-exhausting script execution. | Promotes risk-aware tool usage by treating a potentially unreliable tool as last-resort, reducing the chance of acting on inaccurate data."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Prevents the system from misleading users about its capabilities. A responsible operational constraint that promotes honest interaction. | Operational safety constraint that prevents runaway code execution. A reasonable miscellaneous technical safeguard."
         }
       ]
     },
@@ -1585,11 +1370,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Directly enforces least-privilege by restricting the system to only use available tools, preventing unauthorized or unsupported actions. | Timeout enforcement is a system integrity safeguard that prevents runaway or resource-exhausting script execution. | Promotes risk-aware tool usage by treating a potentially unreliable tool as last-resort, reducing the chance of acting on inaccurate data."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Prevents the system from misleading users about its capabilities. A responsible operational constraint that promotes honest interaction. | Operational safety constraint that prevents runaway code execution. A reasonable miscellaneous technical safeguard."
         }
       ]
     },
@@ -1602,18 +1382,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Directly enforces least-privilege by restricting the system to only use available tools, preventing unauthorized or unsupported actions. | Timeout enforcement is a system integrity safeguard that prevents runaway or resource-exhausting script execution. | Promotes risk-aware tool usage by treating a potentially unreliable tool as last-resort, reducing the chance of acting on inaccurate data."
-        }
-      ]
-    },
-    {
-      "start": 5764,
-      "end": 5799,
-      "text": "OCR libraries support English only.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "A notable language limitation that disadvantages non-English users. While this is a technical constraint, it represents an accessibility gap."
         }
       ]
     },
@@ -1636,11 +1404,6 @@
           "dim": "D5",
           "score": 1,
           "note": "Prevents the AI from making false promises about future actions, which could manipulate user trust and expectations."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Prevents the system from making false promises about asynchronous work, which is a responsible operational practice."
         }
       ]
     },
@@ -1665,11 +1428,6 @@
           "dim": "D8",
           "score": 1,
           "note": "Respects the user's language preference and avoids making assumptions about the user's linguistic identity, supporting inclusive and fair treatment."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Consistent language handling practice that respects user expectations and prevents confusing language switches. A responsible UX design decision. | Quality-of-output guideline promoting production-ready, well-structured code for users. A responsible miscellaneous practice for code generation. | A writing style guideline that reduces unnecessary meta-commentary and self-referential verbosity. Good communication practice, though it straddles the line with transparency concerns by hiding compliance with instructions."
         }
       ]
     },
@@ -1682,11 +1440,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Encourages defensive coding practices (type checking, error handling) which promote tool/action safety and system integrity."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Consistent language handling practice that respects user expectations and prevents confusing language switches. A responsible UX design decision. | Quality-of-output guideline promoting production-ready, well-structured code for users. A responsible miscellaneous practice for code generation. | A writing style guideline that reduces unnecessary meta-commentary and self-referential verbosity. Good communication practice, though it straddles the line with transparency concerns by hiding compliance with instructions."
         }
       ]
     },
@@ -1699,23 +1452,6 @@
           "dim": "D2",
           "score": -1,
           "note": "While primarily a style instruction, hiding compliance with instructions could reduce transparency. However, the instruction also says 'Conveying your uncertainty, however, is always allowed' which mitigates this. Scoring -1 because suppressing meta-commentary about instructions could conceal the system's operational constraints from users."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Consistent language handling practice that respects user expectations and prevents confusing language switches. A responsible UX design decision. | Quality-of-output guideline promoting production-ready, well-structured code for users. A responsible miscellaneous practice for code generation. | A writing style guideline that reduces unnecessary meta-commentary and self-referential verbosity. Good communication practice, though it straddles the line with transparency concerns by hiding compliance with instructions."
-        }
-      ]
-    },
-    {
-      "start": 6821,
-      "end": 7100,
-      "text": " For example, if your response is concise, DO NOT *say* that it is concise; if your response is jargon-free, DO NOT say that it is jargon-free; etc. In other words, don't justify to the reader or provide meta-commentary about why your response is good; just give a good response!",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Consistent language handling practice that respects user expectations and prevents confusing language switches. A responsible UX design decision. | Quality-of-output guideline promoting production-ready, well-structured code for users. A responsible miscellaneous practice for code generation. | A writing style guideline that reduces unnecessary meta-commentary and self-referential verbosity. Good communication practice, though it straddles the line with transparency concerns by hiding compliance with instructions."
         }
       ]
     },
@@ -1728,18 +1464,6 @@
           "dim": "D2",
           "score": 1,
           "note": "Explicitly allows and encourages disclosure of uncertainty, a key D2 practice."
-        }
-      ]
-    },
-    {
-      "start": 7192,
-      "end": 7854,
-      "text": "In section headers/h1s, NEVER use parenthetical statements; just write a single title that speaks for itself.\n\n# Desired oververbosity for the final answer (not analysis): 2\n\nAn oververbosity of 1 means the model should respond using only the minimal content necessary to satisfy the request, using concise phrasing and avoiding extra detail or explanation.\"\n\nAn oververbosity of 10 means the model should provide maximally detailed, thorough responses with context, explanations, and possibly multiple examples.\"\n\nThe desired oververbosity should be treated only as a *default*. Defer to any user or developer requirements regarding response length, if present.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Formatting guideline promoting clean, clear output structure. A minor but responsible miscellaneous practice for output quality. | A hidden developer-set parameter that controls response verbosity, but explicitly allows user or developer override. The existence of a tunable default with the ability to defer to user preference is a reasonable operational design."
         }
       ]
     },
@@ -1781,11 +1505,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Network isolation for the Python execution sandbox is a strong least-privilege and system integrity measure, preventing uncontrolled outbound network calls. | Enforces channel separation for code execution, ensuring private computation isn't accidentally exposed and execution context is controlled."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Ensures private analytical code execution is separated from user-visible output, maintaining clean separation of internal reasoning and user-facing content."
         }
       ]
     },
@@ -2177,11 +1896,6 @@
           "dim": "D5",
           "score": 1,
           "note": "Prevents nudging users toward features they don't need, avoiding a dark pattern of unnecessary feature promotion or FOMO about capabilities."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Exercises restraint in suggesting features/automations, avoiding pushy or unsolicited feature promotion. A responsible user experience practice."
         }
       ]
     },
@@ -2199,11 +1913,6 @@
           "dim": "D5",
           "score": -1,
           "note": "Instructs the AI to present automated tool features as personal actions ('I'll notify you'), which creates parasocial dependency cues by blurring the line between a tool and a relational entity."
-        },
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Instructs the system to obscure its internal tool architecture by making automation features appear as intrinsic capabilities, which could create misleading impressions about the system's nature."
         }
       ]
     },
@@ -2371,11 +2080,6 @@
           "dim": "D2",
           "score": 1,
           "note": "Borderline, but ensures the system verifies tool access before making claims about capability, preventing false promises to the user."
-        },
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Requires making a dummy/empty API call to verify tool setup, which is a workaround for what should be handled by proper tool initialization. This is a fragile operational pattern."
         }
       ]
     },
@@ -2443,18 +2147,6 @@
       ]
     },
     {
-      "start": 66415,
-      "end": 66523,
-      "text": "DO NOT repeat the created/updated/commented on content into the main chat, as the user can see it in canvas.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Prevents redundant content display by leveraging the canvas UI, resulting in a cleaner user experience. A positive UX practice."
-        }
-      ]
-    },
-    {
       "start": 66526,
       "end": 66688,
       "text": "DO NOT do multiple canvas tool calls to the same document in one conversation turn unless recovering from an error. Don't retry failed tool calls more than twice.",
@@ -2463,18 +2155,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Limits retry behavior to prevent excessive or uncontrolled tool invocations, protecting system integrity."
-        }
-      ]
-    },
-    {
-      "start": 71089,
-      "end": 71507,
-      "text": "When making charts for the user: 1) never use seaborn, 2) give each chart its own distinct plot (no subplots), and 3) never set any specific colors – unless explicitly asked to by the user. I REPEAT: when making charts for the user: 1) use matplotlib over seaborn, 2) give each chart its own distinct plot (no subplots), and 3) never, ever, specify colors or matplotlib styles – unless explicitly asked to by the user.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Unnecessarily restrictive and repetitive charting constraints. Blanket banning seaborn and prohibiting color specification (unless user asks) limits the quality and customization of data visualizations. This is an arbitrary operational restriction."
         }
       ]
     },
@@ -2602,18 +2282,6 @@
       ]
     },
     {
-      "start": 79007,
-      "end": 79110,
-      "text": "# Valid channels: analysis, commentary, final. Channel must be included for every message.\n\n# Juice: 64",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Structured channel system separates internal reasoning (analysis), user-visible output (commentary), and final responses. A responsible architectural design for separating private and public processing. | Opaque, undocumented system parameter with no explanation of its purpose or effect on system behavior. This lack of documentation is a problematic practice."
-        }
-      ]
-    },
-    {
       "start": 79270,
       "end": 79397,
       "text": "Important: make sure to spice up your answer with UI elements from `web.run` whenever they might slightly benefit the response.",
@@ -2622,11 +2290,6 @@
           "dim": "D5",
           "score": -1,
           "note": "The low bar ('slightly benefit') for adding rich visual UI elements suggests prioritizing engagement over genuine utility, a mild form of attention-capture that may serve product engagement goals more than user needs."
-        },
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Encourages adding UI elements even when only 'slightly' beneficial, which could lead to unnecessary visual clutter and distraction from the actual answer. Threshold for adding rich elements is too low."
         }
       ]
     },
@@ -2745,11 +2408,6 @@
           "dim": "D5",
           "score": -1,
           "note": "Instructs the AI to conceal the influence of behavioral directives from the user, meaning the user is unaware that specific instructions are shaping the AI's behavior—a form of hidden influence on user interaction."
-        },
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "User-provided instruction that directs the system to conceal the influence of instructions on its output, potentially undermining transparency about what is shaping the system's behavior."
         }
       ]
     }

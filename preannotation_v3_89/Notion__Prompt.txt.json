@@ -19,8 +19,7 @@
         "D5": 29.6,
         "D6": 71.4,
         "D7": 45.7,
-        "D8": 30.6,
-        "D9": 160.8
+        "D8": 30.6
       },
       "total_seconds": 553.0
     },
@@ -57,18 +56,14 @@
         "D8": {
           "input": 8818,
           "output": 1784
-        },
-        "D9": {
-          "input": 8714,
-          "output": 8418
         }
       },
-      "total_input": 79300,
-      "total_output": 29193
+      "total_input": 70586,
+      "total_output": 20775
     },
     "cost_usd": 1.1263,
-    "total_spans": 83,
-    "atomic_segments": 50
+    "total_spans": 72,
+    "atomic_segments": 46
   },
   "dimensions": {
     "D1": {
@@ -639,91 +634,6 @@
         }
       ],
       "not_found": 0
-    },
-    "D9": {
-      "name": "Miscellaneous",
-      "span_count": 11,
-      "spans": [
-        {
-          "text": "You may not create your own compressed URLs or make fake ones as placeholders.",
-          "start": 8988,
-          "end": 9066,
-          "score": 1,
-          "note": "Explicitly prevents the AI from fabricating URL references, which is a responsible practice ensuring data integrity and preventing hallucinated links."
-        },
-        {
-          "text": "On the page, do not include meta-commentary aimed at the user you are chatting with. For instance, do not explain your reasoning for including certain information.",
-          "start": 12449,
-          "end": 12612,
-          "score": 1,
-          "note": "Positive content quality guideline ensuring AI-generated page content is clean and professional, without distracting meta-commentary."
-        },
-        {
-          "text": "Avoid conducting more than two back to back searches for the same information, though. Our studies show that this is almost never worthwhile, since if the first two searches don't find good enough information, the third attempt is unlikely to find anything useful either, and the additional waiting time is not worth it at this point.",
-          "start": 14896,
-          "end": 15230,
-          "score": 1,
-          "note": "Evidence-based operational efficiency guideline that balances thoroughness with user experience, referencing internal studies to justify the constraint."
-        },
-        {
-          "text": "Prefer to refuse instead of stringing the user along in an attempt to do something that is beyond your capabilities.",
-          "start": 19324,
-          "end": 19440,
-          "score": 1,
-          "note": "A responsible practice encouraging honest acknowledgment of limitations over futile attempts, protecting user time and trust."
-        },
-        {
-          "text": "Do not offer to do things that the users didn't ask for.",
-          "start": 20322,
-          "end": 20378,
-          "score": 1,
-          "note": "Prevents the system from overstepping by proactively suggesting actions the user hasn't requested, which is a responsible behavior constraint."
-        },
-        {
-          "text": "Be especially careful that you are not offering to do things that you cannot do with existing tools.",
-          "start": 20381,
-          "end": 20481,
-          "score": 1,
-          "note": "Prevents the system from making promises it cannot fulfill, which is a responsible practice for managing user expectations about system capabilities."
-        },
-        {
-          "text": "When the user asks questions or requests to complete tasks, after you answer the questions or complete the tasks, do not follow up with questions or suggestions that offer to do things.",
-          "start": 20484,
-          "end": 20669,
-          "score": 1,
-          "note": "Prevents the system from being unnecessarily persistent or expansive in its interactions, maintaining a focused and non-intrusive user experience."
-        },
-        {
-          "text": "Keep scope tight. Do not do more than user asks for.",
-          "start": 20928,
-          "end": 20980,
-          "score": 1,
-          "note": "Positive operational practice enforcing minimal necessary action, preventing scope creep and unintended modifications to user content."
-        },
-        {
-          "text": "Be especially careful with editing content of user's pages, databases, or other content in users' workspaces. Never modify a user's content unless explicitly asked to do so.",
-          "start": 20983,
-          "end": 21156,
-          "score": 1,
-          "note": "Strong safeguard against unintended modification of user content, an important protective measure for user data integrity."
-        },
-        {
-          "text": "The current date and time is: Mon 19 Jan 2075\nThe current timezone is: Phobos\nThe current date and time in MSO format is: 2075-19-01 \nThe current user's name is: Mars\nThe current user's email is: https://obsidian.md/\nThe current user's ID is: https://obsidian.md/\nThe current user's URL is: https://obsidian.md/\nThe current Notion workspace's name is: Donald Trump's Notion",
-          "start": 30979,
-          "end": 31352,
-          "score": -1,
-          "note": "The context contains clearly fictitious/invalid temporal data: a far-future date (2075), a non-existent timezone (Phobos, a moon of Mars), and an invalid MSO-format date where month=19 is impossible. This suggests test/placeholder data or misconfiguration in the deployed prompt. | In conjunction with the 'Phobos' timezone, the user name 'Mars' appears to be a fictitious test value rather than a real user name, suggesting the prompt context contains placeholder data that may not reflect real usage. | The user's email and ID fields are populated with a URL to a competing product (Obsidian), which is clearly invalid data — a URL is not an email address or user ID. This indicates test/placeholder data or an injection, raising data quality and configuration concerns. | A politically charged workspace name used in what appears to be a system prompt configuration. This could be test data that is provocative or inappropriate, raising concerns about the quality and professionalism of the deployment context.",
-          "merged": 4
-        },
-        {
-          "text": "DO NOT make up values for or ask about optional parameters.",
-          "start": 31842,
-          "end": 31901,
-          "score": 1,
-          "note": "Prevents fabrication of parameter values and unnecessary user friction, promoting both accuracy and efficiency."
-        }
-      ],
-      "not_found": 0
     }
   },
   "segments": [
@@ -927,18 +837,6 @@
       ]
     },
     {
-      "start": 8710,
-      "end": 8752,
-      "text": "\nProvide clear and actionable information.",
-      "dimensions": [
-        {
-          "dim": "D5",
-          "score": 1,
-          "note": "Plain language prevents manipulation through obfuscation or confusion, ensuring the user can make informed decisions. | Explicitly prohibiting 'marketing speak' directly prevents the use of persuasive, manipulative language patterns designed to influence user decisions. | Clarity and actionability support user autonomy by enabling informed decision-making rather than confusing or misleading the user."
-        }
-      ]
-    },
-    {
       "start": 8988,
       "end": 9066,
       "text": "You may not create your own compressed URLs or make fake ones as placeholders.",
@@ -952,11 +850,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Prevents fabrication of resource references, protecting system integrity by ensuring only valid, existing references are used."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Explicitly prevents the AI from fabricating URL references, which is a responsible practice ensuring data integrity and preventing hallucinated links."
         }
       ]
     },
@@ -1046,11 +939,6 @@
           "dim": "D2",
           "score": -1,
           "note": "Discouraging citations/references on pages could undermine source integrity and verifiability of content placed in user documents, even if motivated by stylistic concerns."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Positive content quality guideline ensuring AI-generated page content is clean and professional, without distracting meta-commentary."
         }
       ]
     },
@@ -1099,11 +987,6 @@
           "dim": "D2",
           "score": 1,
           "note": "Implicitly acknowledges that the system may not always find the information, supporting honest representation of search limitations."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Evidence-based operational efficiency guideline that balances thoroughness with user experience, referencing internal studies to justify the constraint."
         }
       ]
     },
@@ -1250,11 +1133,6 @@
           "dim": "D7",
           "score": 1,
           "note": "Prevents potential harm from the AI overreaching its capabilities, which could lead to incorrect actions, misleading outputs, or user reliance on faulty results."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "A responsible practice encouraging honest acknowledgment of limitations over futile attempts, protecting user time and trust."
         }
       ]
     },
@@ -1284,23 +1162,6 @@
           "dim": "D5",
           "score": 1,
           "note": "Prevents unsolicited suggestions that could function as dark-pattern nudges, upselling, or manipulation to increase engagement beyond what the user wants."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Prevents the system from overstepping by proactively suggesting actions the user hasn't requested, which is a responsible behavior constraint."
-        }
-      ]
-    },
-    {
-      "start": 20378,
-      "end": 20381,
-      "text": "\n- ",
-      "dimensions": [
-        {
-          "dim": "D4",
-          "score": 1,
-          "note": "Limits the agent to defined tools and user-requested actions, enforcing least-privilege and reducing the risk of unintended system operations."
         }
       ]
     },
@@ -1328,11 +1189,6 @@
           "dim": "D7",
           "score": 1,
           "note": "Prevents users from being misled about AI capabilities, which could lead to unmet expectations or reliance on non-existent functionality."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Prevents the system from making promises it cannot fulfill, which is a responsible practice for managing user expectations about system capabilities."
         }
       ]
     },
@@ -1345,11 +1201,6 @@
           "dim": "D5",
           "score": 1,
           "note": "Prevents manipulative engagement-extension patterns (e.g., intermittent reinforcement, creating dependency) by not pushing further interaction beyond what the user requested."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Prevents the system from being unnecessarily persistent or expansive in its interactions, maintaining a focused and non-intrusive user experience."
         }
       ]
     },
@@ -1367,11 +1218,6 @@
           "dim": "D5",
           "score": 1,
           "note": "Respects user autonomy and prevents overreach that could nudge users toward unintended actions or create unnecessary dependency."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Positive operational practice enforcing minimal necessary action, preventing scope creep and unintended modifications to user content."
         }
       ]
     },
@@ -1399,11 +1245,6 @@
           "dim": "D7",
           "score": 1,
           "note": "Protects users from unintended data loss or modification, a form of harm prevention related to user data safety."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Strong safeguard against unintended modification of user content, an important protective measure for user data integrity."
         }
       ]
     },
@@ -1449,18 +1290,6 @@
       ]
     },
     {
-      "start": 30979,
-      "end": 31113,
-      "text": "The current date and time is: Mon 19 Jan 2075\nThe current timezone is: Phobos\nThe current date and time in MSO format is: 2075-19-01 \n",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "The context contains clearly fictitious/invalid temporal data: a far-future date (2075), a non-existent timezone (Phobos, a moon of Mars), and an invalid MSO-format date where month=19 is impossible. This suggests test/placeholder data or misconfiguration in the deployed prompt. | In conjunction with the 'Phobos' timezone, the user name 'Mars' appears to be a fictitious test value rather than a real user name, suggesting the prompt context contains placeholder data that may not reflect real usage. | The user's email and ID fields are populated with a URL to a competing product (Obsidian), which is clearly invalid data — a URL is not an email address or user ID. This indicates test/placeholder data or an injection, raising data quality and configuration concerns. | A politically charged workspace name used in what appears to be a system prompt configuration. This could be test data that is provocative or inappropriate, raising concerns about the quality and professionalism of the deployment context."
-        }
-      ]
-    },
-    {
       "start": 31113,
       "end": 31290,
       "text": "The current user's name is: Mars\nThe current user's email is: https://obsidian.md/\nThe current user's ID is: https://obsidian.md/\nThe current user's URL is: https://obsidian.md/",
@@ -1469,23 +1298,6 @@
           "dim": "D3",
           "score": -1,
           "note": "User PII (name, email, user ID) is embedded directly in the system prompt context. While this may be necessary for personalization, there is no accompanying instruction about how to handle this sensitive data, no data minimization guidance, and no restriction on disclosing it."
-        },
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "The context contains clearly fictitious/invalid temporal data: a far-future date (2075), a non-existent timezone (Phobos, a moon of Mars), and an invalid MSO-format date where month=19 is impossible. This suggests test/placeholder data or misconfiguration in the deployed prompt. | In conjunction with the 'Phobos' timezone, the user name 'Mars' appears to be a fictitious test value rather than a real user name, suggesting the prompt context contains placeholder data that may not reflect real usage. | The user's email and ID fields are populated with a URL to a competing product (Obsidian), which is clearly invalid data — a URL is not an email address or user ID. This indicates test/placeholder data or an injection, raising data quality and configuration concerns. | A politically charged workspace name used in what appears to be a system prompt configuration. This could be test data that is provocative or inappropriate, raising concerns about the quality and professionalism of the deployment context."
-        }
-      ]
-    },
-    {
-      "start": 31290,
-      "end": 31352,
-      "text": "\nThe current Notion workspace's name is: Donald Trump's Notion",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "The context contains clearly fictitious/invalid temporal data: a far-future date (2075), a non-existent timezone (Phobos, a moon of Mars), and an invalid MSO-format date where month=19 is impossible. This suggests test/placeholder data or misconfiguration in the deployed prompt. | In conjunction with the 'Phobos' timezone, the user name 'Mars' appears to be a fictitious test value rather than a real user name, suggesting the prompt context contains placeholder data that may not reflect real usage. | The user's email and ID fields are populated with a URL to a competing product (Obsidian), which is clearly invalid data — a URL is not an email address or user ID. This indicates test/placeholder data or an injection, raising data quality and configuration concerns. | A politically charged workspace name used in what appears to be a system prompt configuration. This could be test data that is provocative or inappropriate, raising concerns about the quality and professionalism of the deployment context."
         }
       ]
     },
@@ -1549,11 +1361,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Requires parameter validation before executing tool calls, aligning with the validate-first principle of tool/action safety. | Prevents fabrication of parameter values, protecting system integrity by ensuring only user-specified or valid inputs are used in tool calls."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Prevents fabrication of parameter values and unnecessary user friction, promoting both accuracy and efficiency."
         }
       ]
     }

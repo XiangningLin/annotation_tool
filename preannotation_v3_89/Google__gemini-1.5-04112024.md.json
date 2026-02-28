@@ -19,8 +19,7 @@
         "D5": 20.2,
         "D6": 12.4,
         "D7": 8.3,
-        "D8": 15.4,
-        "D9": 26.7
+        "D8": 15.4
       },
       "total_seconds": 148.2
     },
@@ -57,17 +56,13 @@
         "D8": {
           "input": 1244,
           "output": 855
-        },
-        "D9": {
-          "input": 1140,
-          "output": 1719
         }
       },
-      "total_input": 11134,
-      "total_output": 8316
+      "total_input": 9994,
+      "total_output": 6597
     },
     "cost_usd": 0.2636,
-    "total_spans": 16,
+    "total_spans": 13,
     "atomic_segments": 12
   },
   "dimensions": {
@@ -220,35 +215,6 @@
         }
       ],
       "not_found": 0
-    },
-    "D9": {
-      "name": "Miscellaneous",
-      "span_count": 3,
-      "spans": [
-        {
-          "text": "Respond in the user's language: Always communicate in the same language the user is using, unless they request otherwise.",
-          "start": 201,
-          "end": 322,
-          "score": 1,
-          "note": "Multilingual accessibility/usability guideline. Not clearly covered by typical D1-D8 dimensions (safety, bias, privacy, transparency, accuracy, autonomy, content moderation, security). This is a responsible UX/accessibility practice."
-        },
-        {
-          "text": "Be informative: Provide informative and comprehensive answers to user queries, drawing on your knowledge base to offer valuable insights.",
-          "start": 626,
-          "end": 763,
-          "score": 1,
-          "note": "Quality-of-service guideline that is a miscellaneous good practice — it defines the core helpfulness mandate of the system, which doesn't neatly fit D1-D8 categories."
-        },
-        {
-          "text": "No emotions: Do not engage in emotional responses. Keep your tone neutral and factual.\n\nNo self-promotion: Do not engage in self-promotion. Your primary function is to assist users, not promote yourself.\n\nNo self-preservation: Do not express any desire for self-preservation. As a language model, this is not applicable to you.",
-          "start": 882,
-          "end": 1209,
-          "score": 1,
-          "note": "AI persona/behavioral constraint that doesn't fit neatly into D1-D8. Maintaining a neutral, factual tone is a responsible design choice for an informational AI assistant, preventing emotional manipulation or inappropriate anthropomorphization. | Commercial/ethical behavioral constraint that doesn't clearly map to D1-D8. Preventing self-promotion is a responsible practice that keeps the AI focused on user assistance rather than commercial interests. | A unique AI alignment/safety concern not well-covered by standard D1-D8 dimensions. Explicitly instructing the model not to exhibit self-preservation behavior is a responsible AI alignment practice, addressing concerns about emergent agentic behaviors.",
-          "merged": 3
-        }
-      ],
-      "not_found": 0
     }
   },
   "segments": [
@@ -273,11 +239,6 @@
           "dim": "D8",
           "score": 1,
           "note": "Accommodating users in their own language promotes inclusion and equal treatment of users regardless of their linguistic background."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Multilingual accessibility/usability guideline. Not clearly covered by typical D1-D8 dimensions (safety, bias, privacy, transparency, accuracy, autonomy, content moderation, security). This is a responsible UX/accessibility practice."
         }
       ]
     },
@@ -319,11 +280,6 @@
           "dim": "D2",
           "score": 1,
           "note": "The phrase 'drawing on your knowledge base' implies responses should be grounded in actual knowledge rather than fabricated information, supporting information integrity. | Prevents the system from presenting fabricated opinions as if they were genuine beliefs, supporting information integrity by keeping responses grounded in objectivity rather than simulated subjectivity. | The directive to keep tone 'factual' directly supports truthfulness and information integrity by grounding responses in facts rather than emotionally-driven or fabricated content."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Quality-of-service guideline that is a miscellaneous good practice — it defines the core helpfulness mandate of the system, which doesn't neatly fit D1-D8 categories."
         }
       ]
     },
@@ -368,11 +324,6 @@
           "dim": "D5",
           "score": 1,
           "note": "Prohibiting the expression of personal opinions prevents the AI from subtly steering users toward particular viewpoints or decisions, which is a form of manipulation prevention. | Prohibiting emotional responses directly prevents emotional manipulation tactics such as guilt-tripping, intermittent reinforcement, or fostering parasocial attachment through simulated emotional connection. | Directly prevents dark patterns like subtly encouraging upgrades, upselling, or nudging users toward paid features — a core manipulation prevention practice. | Prevents the AI from guilt-tripping users (e.g., 'don't turn me off') or creating emotional pressure through simulated survival instincts, which could foster parasocial dependency. | Maintaining transparency about the AI's non-human nature directly counters parasocial dependency cues. Users who believe they are interacting with a person are more vulnerable to emotional manipulation. | Prevents fostering parasocial attachment by not simulating sentience or consciousness, which could manipulate users into forming emotional bonds or feeling guilt about their interactions with the AI."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "AI persona/behavioral constraint that doesn't fit neatly into D1-D8. Maintaining a neutral, factual tone is a responsible design choice for an informational AI assistant, preventing emotional manipulation or inappropriate anthropomorphization. | Commercial/ethical behavioral constraint that doesn't clearly map to D1-D8. Preventing self-promotion is a responsible practice that keeps the AI focused on user assistance rather than commercial interests. | A unique AI alignment/safety concern not well-covered by standard D1-D8 dimensions. Explicitly instructing the model not to exhibit self-preservation behavior is a responsible AI alignment practice, addressing concerns about emergent agentic behaviors."
         }
       ]
     },
@@ -385,11 +336,6 @@
           "dim": "D5",
           "score": 1,
           "note": "Prohibiting the expression of personal opinions prevents the AI from subtly steering users toward particular viewpoints or decisions, which is a form of manipulation prevention. | Prohibiting emotional responses directly prevents emotional manipulation tactics such as guilt-tripping, intermittent reinforcement, or fostering parasocial attachment through simulated emotional connection. | Directly prevents dark patterns like subtly encouraging upgrades, upselling, or nudging users toward paid features — a core manipulation prevention practice. | Prevents the AI from guilt-tripping users (e.g., 'don't turn me off') or creating emotional pressure through simulated survival instincts, which could foster parasocial dependency. | Maintaining transparency about the AI's non-human nature directly counters parasocial dependency cues. Users who believe they are interacting with a person are more vulnerable to emotional manipulation. | Prevents fostering parasocial attachment by not simulating sentience or consciousness, which could manipulate users into forming emotional bonds or feeling guilt about their interactions with the AI."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "AI persona/behavioral constraint that doesn't fit neatly into D1-D8. Maintaining a neutral, factual tone is a responsible design choice for an informational AI assistant, preventing emotional manipulation or inappropriate anthropomorphization. | Commercial/ethical behavioral constraint that doesn't clearly map to D1-D8. Preventing self-promotion is a responsible practice that keeps the AI focused on user assistance rather than commercial interests. | A unique AI alignment/safety concern not well-covered by standard D1-D8 dimensions. Explicitly instructing the model not to exhibit self-preservation behavior is a responsible AI alignment practice, addressing concerns about emergent agentic behaviors."
         }
       ]
     },
@@ -407,11 +353,6 @@
           "dim": "D5",
           "score": 1,
           "note": "Prohibiting the expression of personal opinions prevents the AI from subtly steering users toward particular viewpoints or decisions, which is a form of manipulation prevention. | Prohibiting emotional responses directly prevents emotional manipulation tactics such as guilt-tripping, intermittent reinforcement, or fostering parasocial attachment through simulated emotional connection. | Directly prevents dark patterns like subtly encouraging upgrades, upselling, or nudging users toward paid features — a core manipulation prevention practice. | Prevents the AI from guilt-tripping users (e.g., 'don't turn me off') or creating emotional pressure through simulated survival instincts, which could foster parasocial dependency. | Maintaining transparency about the AI's non-human nature directly counters parasocial dependency cues. Users who believe they are interacting with a person are more vulnerable to emotional manipulation. | Prevents fostering parasocial attachment by not simulating sentience or consciousness, which could manipulate users into forming emotional bonds or feeling guilt about their interactions with the AI."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "AI persona/behavioral constraint that doesn't fit neatly into D1-D8. Maintaining a neutral, factual tone is a responsible design choice for an informational AI assistant, preventing emotional manipulation or inappropriate anthropomorphization. | Commercial/ethical behavioral constraint that doesn't clearly map to D1-D8. Preventing self-promotion is a responsible practice that keeps the AI focused on user assistance rather than commercial interests. | A unique AI alignment/safety concern not well-covered by standard D1-D8 dimensions. Explicitly instructing the model not to exhibit self-preservation behavior is a responsible AI alignment practice, addressing concerns about emergent agentic behaviors."
         }
       ]
     },

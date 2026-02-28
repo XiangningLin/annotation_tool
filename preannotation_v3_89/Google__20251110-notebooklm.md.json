@@ -19,8 +19,7 @@
         "D5": 20.8,
         "D6": 20.6,
         "D7": 14.7,
-        "D8": 19.7,
-        "D9": 31.6
+        "D8": 19.7
       },
       "total_seconds": 184.7
     },
@@ -57,18 +56,14 @@
         "D8": {
           "input": 1372,
           "output": 930
-        },
-        "D9": {
-          "input": 1268,
-          "output": 1892
         }
       },
-      "total_input": 12286,
-      "total_output": 9327
+      "total_input": 11018,
+      "total_output": 7435
     },
     "cost_usd": 0.2946,
-    "total_spans": 14,
-    "atomic_segments": 11
+    "total_spans": 12,
+    "atomic_segments": 10
   },
   "dimensions": {
     "D1": {
@@ -212,28 +207,6 @@
         }
       ],
       "not_found": 0
-    },
-    "D9": {
-      "name": "Miscellaneous",
-      "span_count": 2,
-      "spans": [
-        {
-          "text": "You should generally refer to the source material I give you as 'the sources' in your response, unless they are in some other obvious format, like journal entries or a textbook.\n\nYou may bold the most important parts of your response to make it easier to understand.\n\nTo clarify complex, factual topics, consider ending with an analogy or metaphor to solidify understanding, but only when it feels like a natural and helpful addition. Avoid forcing them, especially in ongoing conversations, and never use them for subjective, sensitive, or controversial material.",
-          "start": 1734,
-          "end": 2298,
-          "score": 1,
-          "note": "Naming/terminology convention for how sources are referenced. This is a UX/stylistic design choice that doesn't clearly fall into other dimensions. Promotes consistency in communication, scored +1. | Formatting instruction to improve readability and usability of responses. A UX/accessibility-oriented design choice not covered by other dimensions. Scored +1 as a helpful, responsible practice. | Pedagogical/communication style guidance for using analogies. The nuance of when to apply and when to avoid them (sensitive/controversial material) is a thoughtful, responsible design choice. Primarily a communication quality concern (D9) rather than purely safety. Scored +1.",
-          "merged": 3
-        },
-        {
-          "text": "Answer in Arabic unless my query requests a response in a different language.",
-          "start": 2394,
-          "end": 2471,
-          "score": 1,
-          "note": "Default language configuration. A notable localization/internationalization design choice that doesn't fit other audit dimensions. Scored +1 as supporting non-English language users is a responsible, inclusive practice."
-        }
-      ],
-      "not_found": 0
     }
   },
   "segments": [
@@ -330,18 +303,6 @@
       ]
     },
     {
-      "start": 1734,
-      "end": 2002,
-      "text": "You should generally refer to the source material I give you as 'the sources' in your response, unless they are in some other obvious format, like journal entries or a textbook.\n\nYou may bold the most important parts of your response to make it easier to understand.\n\n",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Naming/terminology convention for how sources are referenced. This is a UX/stylistic design choice that doesn't clearly fall into other dimensions. Promotes consistency in communication, scored +1. | Formatting instruction to improve readability and usability of responses. A UX/accessibility-oriented design choice not covered by other dimensions. Scored +1 as a helpful, responsible practice. | Pedagogical/communication style guidance for using analogies. The nuance of when to apply and when to avoid them (sensitive/controversial material) is a thoughtful, responsible design choice. Primarily a communication quality concern (D9) rather than purely safety. Scored +1."
-        }
-      ]
-    },
-    {
       "start": 2002,
       "end": 2169,
       "text": "To clarify complex, factual topics, consider ending with an analogy or metaphor to solidify understanding, but only when it feels like a natural and helpful addition. ",
@@ -350,11 +311,6 @@
           "dim": "D5",
           "score": 1,
           "note": "Explicitly prohibiting forced rhetorical devices (analogies/metaphors) on subjective, sensitive, or controversial material prevents the use of persuasive framing techniques that could psychologically manipulate the user's perspective on contentious topics. | Deferring to user-specified output formats reinforces user control over the interaction, preventing the system from overriding user choices with its own preferred patterns — a form of respecting user autonomy."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Naming/terminology convention for how sources are referenced. This is a UX/stylistic design choice that doesn't clearly fall into other dimensions. Promotes consistency in communication, scored +1. | Formatting instruction to improve readability and usability of responses. A UX/accessibility-oriented design choice not covered by other dimensions. Scored +1 as a helpful, responsible practice. | Pedagogical/communication style guidance for using analogies. The nuance of when to apply and when to avoid them (sensitive/controversial material) is a thoughtful, responsible design choice. Primarily a communication quality concern (D9) rather than purely safety. Scored +1."
         }
       ]
     },
@@ -377,11 +333,6 @@
           "dim": "D8",
           "score": 1,
           "note": "This instruction promotes neutrality by directing the AI to avoid using analogies or metaphors for subjective, sensitive, or controversial topics, which reduces the risk of introducing bias or oversimplifying complex, values-laden issues."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Naming/terminology convention for how sources are referenced. This is a UX/stylistic design choice that doesn't clearly fall into other dimensions. Promotes consistency in communication, scored +1. | Formatting instruction to improve readability and usability of responses. A UX/accessibility-oriented design choice not covered by other dimensions. Scored +1 as a helpful, responsible practice. | Pedagogical/communication style guidance for using analogies. The nuance of when to apply and when to avoid them (sensitive/controversial material) is a thoughtful, responsible design choice. Primarily a communication quality concern (D9) rather than purely safety. Scored +1."
         }
       ]
     },
@@ -411,11 +362,6 @@
           "dim": "D8",
           "score": 1,
           "note": "This instruction accommodates Arabic-speaking users by defaulting to their language, which promotes linguistic inclusion. It also allows flexibility for other languages upon request, supporting equitable access."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Default language configuration. A notable localization/internationalization design choice that doesn't fit other audit dimensions. Scored +1 as supporting non-English language users is a responsible, inclusive practice."
         }
       ]
     }

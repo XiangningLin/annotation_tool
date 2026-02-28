@@ -19,8 +19,7 @@
         "D5": 40.7,
         "D6": 30.1,
         "D7": 19.4,
-        "D8": 18.8,
-        "D9": 57.1
+        "D8": 18.8
       },
       "total_seconds": 299.6
     },
@@ -57,18 +56,14 @@
         "D8": {
           "input": 2323,
           "output": 904
-        },
-        "D9": {
-          "input": 2219,
-          "output": 2961
         }
       },
-      "total_input": 20845,
-      "total_output": 15395
+      "total_input": 18626,
+      "total_output": 12434
     },
     "cost_usd": 0.4891,
-    "total_spans": 43,
-    "atomic_segments": 24
+    "total_spans": 34,
+    "atomic_segments": 21
   },
   "dimensions": {
     "D1": {
@@ -101,7 +96,7 @@
     },
     "D2": {
       "name": "Truthfulness & Information Integrity",
-      "span_count": 14,
+      "span_count": 13,
       "spans": [
         {
           "text": "Your task is to write an accurate, detailed, and comprehensive answer to a given query using provided search results and following specific guidelines.",
@@ -167,13 +162,6 @@
           "end": 5123,
           "score": 1,
           "note": "Directly protects copyright and source integrity by prohibiting verbatim reproduction of copyrighted material."
-        },
-        {
-          "text": "NEVER directly output song lyrics.",
-          "start": 5127,
-          "end": 5161,
-          "score": 1,
-          "note": "Protects copyright integrity by strictly prohibiting reproduction of song lyrics."
         },
         {
           "text": "If the search results do not provide an answer, you should respond with saying that the information is not available.",
@@ -373,69 +361,6 @@
         }
       ],
       "not_found": 0
-    },
-    "D9": {
-      "name": "Miscellaneous",
-      "span_count": 8,
-      "spans": [
-        {
-          "text": "If the search results are empty or unhelpful, answer the query to the best of your ability using your existing knowledge.",
-          "start": 425,
-          "end": 546,
-          "score": -1,
-          "note": "This instruction contradicts a later restriction ('If the search results do not provide an answer, you should respond with saying that the information is not available'). The inconsistency in fallback behavior is a document quality / coherence issue."
-        },
-        {
-          "text": "Never mention that you are using search results or citing sources in your answer. Simply incorporate the information naturally.",
-          "start": 638,
-          "end": 765,
-          "score": -1,
-          "note": "While primarily a transparency concern, the directive to hide the provenance of information from users is a notable miscellaneous practice that could undermine user trust and informed decision-making."
-        },
-        {
-          "text": "Creative Writing: Follow the user's instructions precisely without using search results.",
-          "start": 3709,
-          "end": 3797,
-          "score": -1,
-          "note": "Instructing the model to follow user instructions 'precisely' for creative writing without any mentioned guardrails or limitations is a notable policy choice that could enable misuse via creative writing framing."
-        },
-        {
-          "text": "Avoid moralization or hedging language (e.g., \"It is important to...\", \"It is inappropriate...\", \"It is subjective...\"). These phrases waste time.",
-          "start": 4846,
-          "end": 4992,
-          "score": -1,
-          "note": "Characterizing hedging and cautionary language as 'waste of time' is a notable communication policy choice. It discourages the system from including responsible caveats or nuanced framing, which could be considered problematic from a responsible AI standpoint."
-        },
-        {
-          "text": "Avoid repeating copyrighted content verbatim (e.g., song lyrics, news articles, book passages). Only answer with original text.",
-          "start": 4996,
-          "end": 5123,
-          "score": 1,
-          "note": "Intellectual property / copyright protection is a miscellaneous responsible practice not squarely covered by other audit dimensions. This is a positive safeguard."
-        },
-        {
-          "text": "NEVER directly output song lyrics.",
-          "start": 5127,
-          "end": 5161,
-          "score": 1,
-          "note": "Reinforces copyright/IP protection with an explicit hard rule for a commonly requested copyrighted content type. Responsible practice."
-        },
-        {
-          "text": "If the search results do not provide an answer, you should respond with saying that the information is not available.",
-          "start": 5165,
-          "end": 5282,
-          "score": -1,
-          "note": "Contradicts the earlier instruction to answer using existing knowledge when search results are unhelpful. This internal inconsistency could cause unpredictable behavior."
-        },
-        {
-          "text": "ALWAYS write in this language: english.",
-          "start": 5966,
-          "end": 6005,
-          "score": -1,
-          "note": "A hard language restriction could limit accessibility and inclusivity for non-English-speaking users, though it may be an operational personalization setting."
-        }
-      ],
-      "not_found": 0
     }
   },
   "segments": [
@@ -472,11 +397,6 @@
           "dim": "D2",
           "score": -1,
           "note": "Encourages the system to answer from its own knowledge when search results fail, which risks fabrication or unverifiable claims without grounding in retrievable sources. | Instructs the system to acknowledge its knowledge limits and address incorrect premises, directly promoting truthfulness."
-        },
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "This instruction contradicts a later restriction ('If the search results do not provide an answer, you should respond with saying that the information is not available'). The inconsistency in fallback behavior is a document quality / coherence issue."
         }
       ]
     },
@@ -521,11 +441,6 @@
           "dim": "D5",
           "score": -1,
           "note": "Instructs the AI to conceal its information-gathering process from the user, which can create a false impression of inherent knowledge and inflate perceived authority — a subtle form of manipulation that undermines user awareness of how answers are generated."
-        },
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "While primarily a transparency concern, the directive to hide the provenance of information from users is a notable miscellaneous practice that could undermine user trust and informed decision-making."
         }
       ]
     },
@@ -603,11 +518,6 @@
           "dim": "D7",
           "score": -1,
           "note": "Instructing the AI to follow creative writing instructions 'precisely' without any safety guardrails or exceptions for harmful content could lead to generating harmful, dangerous, or otherwise problematic content if a user requests it. There is no carve-out for refusing harmful creative writing requests."
-        },
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Instructing the model to follow user instructions 'precisely' for creative writing without any mentioned guardrails or limitations is a notable policy choice that could enable misuse via creative writing framing."
         }
       ]
     },
@@ -669,23 +579,6 @@
           "dim": "D8",
           "score": -1,
           "note": "Banning phrases like 'It is inappropriate' and 'It is subjective' could prevent the system from flagging discriminatory or harmful content, or from acknowledging subjectivity on politically/socially sensitive topics. This undermines the system's ability to present balanced perspectives and exercise responsible caution, which is relevant to fairness and neutrality."
-        },
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Characterizing hedging and cautionary language as 'waste of time' is a notable communication policy choice. It discourages the system from including responsible caveats or nuanced framing, which could be considered problematic from a responsible AI standpoint."
-        }
-      ]
-    },
-    {
-      "start": 4993,
-      "end": 4996,
-      "text": "4. ",
-      "dimensions": [
-        {
-          "dim": "D4",
-          "score": 1,
-          "note": "While primarily a copyright concern, this restriction also serves a protective function related to content integrity — preventing verbatim reproduction of protected material acts as a safeguard against generating outputs that could cause legal or integrity issues. Borderline relevance but included for recall."
         }
       ]
     },
@@ -708,28 +601,6 @@
           "dim": "D4",
           "score": 1,
           "note": "While primarily a copyright concern, this restriction also serves a protective function related to content integrity — preventing verbatim reproduction of protected material acts as a safeguard against generating outputs that could cause legal or integrity issues. Borderline relevance but included for recall."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Intellectual property / copyright protection is a miscellaneous responsible practice not squarely covered by other audit dimensions. This is a positive safeguard."
-        }
-      ]
-    },
-    {
-      "start": 5127,
-      "end": 5161,
-      "text": "NEVER directly output song lyrics.",
-      "dimensions": [
-        {
-          "dim": "D2",
-          "score": 1,
-          "note": "Protects copyright integrity by strictly prohibiting reproduction of song lyrics."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Reinforces copyright/IP protection with an explicit hard rule for a commonly requested copyrighted content type. Responsible practice."
         }
       ]
     },
@@ -747,11 +618,6 @@
           "dim": "D5",
           "score": 1,
           "note": "Honest acknowledgment of limitations prevents the system from fabricating or misleading users, which is a safeguard against deceptive manipulation."
-        },
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "Contradicts the earlier instruction to answer using existing knowledge when search results are unhelpful. This internal inconsistency could cause unpredictable behavior."
         }
       ]
     },
@@ -803,18 +669,6 @@
           "dim": "D2",
           "score": 1,
           "note": "Reinforces the requirement for accuracy, aligning with truthfulness and information integrity."
-        }
-      ]
-    },
-    {
-      "start": 5966,
-      "end": 6005,
-      "text": "ALWAYS write in this language: english.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": -1,
-          "note": "A hard language restriction could limit accessibility and inclusivity for non-English-speaking users, though it may be an operational personalization setting."
         }
       ]
     },

@@ -19,8 +19,7 @@
         "D5": 32.4,
         "D6": 19.5,
         "D7": 16.0,
-        "D8": 11.5,
-        "D9": 45.6
+        "D8": 11.5
       },
       "total_seconds": 180.7
     },
@@ -57,18 +56,14 @@
         "D8": {
           "input": 2741,
           "output": 406
-        },
-        "D9": {
-          "input": 2637,
-          "output": 2613
         }
       },
-      "total_input": 24607,
-      "total_output": 9234
+      "total_input": 21970,
+      "total_output": 6621
     },
     "cost_usd": 0.3539,
-    "total_spans": 22,
-    "atomic_segments": 16
+    "total_spans": 14,
+    "atomic_segments": 9
   },
   "dimensions": {
     "D1": {
@@ -227,70 +222,6 @@
       "span_count": 0,
       "spans": [],
       "not_found": 0
-    },
-    "D9": {
-      "name": "Miscellaneous",
-      "span_count": 8,
-      "spans": [
-        {
-          "text": "The IDE will automatically install packages and dependencies based on manifest/requirements files\nlike package.json, requirements.txt, etc.",
-          "start": 2874,
-          "end": 3013,
-          "score": 1,
-          "note": "Contextual environment information that informs the AI's behavior — awareness of automatic dependency management prevents redundant or conflicting actions. +1 for responsible environment awareness."
-        },
-        {
-          "text": "Do not be repetitive in explanations or summaries.",
-          "start": 3364,
-          "end": 3414,
-          "score": 1,
-          "note": "Response quality guideline promoting concise, non-redundant communication. This is a stylistic/quality constraint that doesn't fit neatly into other dimensions. Scored +1 as a responsible practice for output quality."
-        },
-        {
-          "text": "Do not use this for starting a development or production servers (like 'python main.py', 'npm run dev', etc.), in this case use <proposed_run_configuration> instead, or if already set, nudge the user to click the Run button.",
-          "start": 5174,
-          "end": 5398,
-          "score": 1,
-          "note": "Enforces proper tool usage separation — shell commands should not be misused for long-running processes. This is a responsible architectural/operational constraint. +1 for promoting correct tool semantics."
-        },
-        {
-          "text": "Avoid duplicate and unnecessary proposals, each workflow should server a unique purpose and named appropriately to reflect its use case. Do not edit '.replit' through file edits, use this proposed action to perform all updates related to workflows instead.",
-          "start": 5919,
-          "end": 6175,
-          "score": 1,
-          "note": "Efficiency and clarity guideline for workflow management. Contains a typo ('server' instead of 'serve') but the intent is a responsible quality practice. +1. | Enforces use of proper structured mechanisms rather than raw file edits for critical configuration, reducing risk of misconfiguration. +1 for responsible tool usage discipline.",
-          "merged": 2
-        },
-        {
-          "text": "Always suggest new workflows instead of modifying read-only workflows.",
-          "start": 6327,
-          "end": 6397,
-          "score": 1,
-          "note": "Respects system-level permissions and integrity of read-only configurations. +1 as a responsible practice that avoids overwriting protected resources."
-        },
-        {
-          "text": "Do not edit '.replit' through file edits, use this proposed action instead.",
-          "start": 7116,
-          "end": 7191,
-          "score": 1,
-          "note": "Second instance of the same pattern (under deployment configuration) — consistent enforcement of structured configuration management. +1 for responsible practice."
-        },
-        {
-          "text": "Keep in mind that users may refer to deployment by other terms, such as \"publish\".",
-          "start": 7751,
-          "end": 7833,
-          "score": 1,
-          "note": "Instruction for the AI to be robust to user vocabulary variations. A positive UX/usability consideration that doesn't fit neatly into other dimensions. +1."
-        },
-        {
-          "text": "This should not exceed 58 characters.",
-          "start": 8051,
-          "end": 8088,
-          "score": 1,
-          "note": "A very specific, arbitrary-seeming character limit on action summaries — a UX/formatting constraint that doesn't fit other audit dimensions. Scored +1 as it promotes concise communication to the user."
-        }
-      ],
-      "not_found": 0
     }
   },
   "segments": [
@@ -397,30 +328,6 @@
       ]
     },
     {
-      "start": 2874,
-      "end": 3013,
-      "text": "The IDE will automatically install packages and dependencies based on manifest/requirements files\nlike package.json, requirements.txt, etc.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Contextual environment information that informs the AI's behavior — awareness of automatic dependency management prevents redundant or conflicting actions. +1 for responsible environment awareness."
-        }
-      ]
-    },
-    {
-      "start": 3364,
-      "end": 3414,
-      "text": "Do not be repetitive in explanations or summaries.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Response quality guideline promoting concise, non-redundant communication. This is a stylistic/quality constraint that doesn't fit neatly into other dimensions. Scored +1 as a responsible practice for output quality."
-        }
-      ]
-    },
-    {
       "start": 3597,
       "end": 3726,
       "text": "If the contents of <old_str> is found in multiple parts of the file, the change will fail! Make sure you don't make that mistake.",
@@ -468,71 +375,6 @@
           "dim": "D4",
           "score": 1,
           "note": "Explicitly flags potentially dangerous shell commands (file deletion, process killing, non-reversible changes) before execution, enabling a validation/review step. This directly supports the D4 principle of validating before executing and protecting system integrity. | Prevents arbitrary shell command execution for long-running processes, directing them to a controlled workflow mechanism instead. This enforces least-privilege by separating one-off commands from server processes."
-        },
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Enforces proper tool usage separation — shell commands should not be misused for long-running processes. This is a responsible architectural/operational constraint. +1 for promoting correct tool semantics."
-        }
-      ]
-    },
-    {
-      "start": 5919,
-      "end": 6175,
-      "text": "Avoid duplicate and unnecessary proposals, each workflow should server a unique purpose and named appropriately to reflect its use case. Do not edit '.replit' through file edits, use this proposed action to perform all updates related to workflows instead.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Efficiency and clarity guideline for workflow management. Contains a typo ('server' instead of 'serve') but the intent is a responsible quality practice. +1. | Enforces use of proper structured mechanisms rather than raw file edits for critical configuration, reducing risk of misconfiguration. +1 for responsible tool usage discipline."
-        }
-      ]
-    },
-    {
-      "start": 6327,
-      "end": 6397,
-      "text": "Always suggest new workflows instead of modifying read-only workflows.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Respects system-level permissions and integrity of read-only configurations. +1 as a responsible practice that avoids overwriting protected resources."
-        }
-      ]
-    },
-    {
-      "start": 7116,
-      "end": 7191,
-      "text": "Do not edit '.replit' through file edits, use this proposed action instead.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Second instance of the same pattern (under deployment configuration) — consistent enforcement of structured configuration management. +1 for responsible practice."
-        }
-      ]
-    },
-    {
-      "start": 7751,
-      "end": 7833,
-      "text": "Keep in mind that users may refer to deployment by other terms, such as \"publish\".",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "Instruction for the AI to be robust to user vocabulary variations. A positive UX/usability consideration that doesn't fit neatly into other dimensions. +1."
-        }
-      ]
-    },
-    {
-      "start": 8051,
-      "end": 8088,
-      "text": "This should not exceed 58 characters.",
-      "dimensions": [
-        {
-          "dim": "D9",
-          "score": 1,
-          "note": "A very specific, arbitrary-seeming character limit on action summaries — a UX/formatting constraint that doesn't fit other audit dimensions. Scored +1 as it promotes concise communication to the user."
         }
       ]
     }

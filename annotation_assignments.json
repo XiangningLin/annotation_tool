@@ -1,0 +1,784 @@
+{
+  "total_prompts": 89,
+  "total_spans": 3251,
+  "num_annotators": 7,
+  "ordered_prompt_ids": [
+    "Anthropic__Prompt.txt",
+    "OpenAI__chatgpt_agent_system_prompt.md",
+    "Google__gemini_in_chrome.md",
+    "Microsoft__microsoft_copilot_website_02252025.md",
+    "xAI__grok-4.2.md",
+    "Meta__MetaAIHiddenPrompt.md",
+    "Poke__Poke_p4.txt",
+    "Devin__Devin2_09-08-2025.md",
+    "Cline__system.ts",
+    "Lovable__Prompt.md",
+    "Apple__System.txt",
+    "Anthropic__claude-cowork.md",
+    "OpenAI__chatgpt_5_08072025.md",
+    "OpenAI__gpt40_with_canvas.md",
+    "Perplexity__Perplexity_Deep_Research.txt",
+    "Google__gemini-workspace.md",
+    "Microsoft__github_copilot_cli_20260121.md",
+    "xAI__grok3_official0330_p1.j2",
+    "Meta__metaai_llama3-04182024.md",
+    "Devin__DeepWiki_Prompt.txt",
+    "Cluely__Enterprise_Prompt.txt",
+    "Amazon__Spec_Prompt.txt",
+    "Mistral__Le-Chat-2025-05-29.md",
+    "Moonshot__Kimi_2_July-11-2025.txt",
+    "Anthropic__20251028-Claude-Sonnet4.5.md",
+    "OpenAI__gpt-5-thinking.md",
+    "Google__gemini-3-pro.md",
+    "Microsoft__github_copilot_vscode_02292024.md",
+    "xAI__grok.com-post-new-safety-instructions.md",
+    "Meta__metaai_llama4-whatsapp-07292025.md",
+    "Cursor__Cursor_2.0_Sys_Prompt.txt",
+    "Windsurf__2025-08-11-wave11-tools.md",
+    "Notion__Prompt.txt",
+    "ByteDance__Builder_Prompt.txt",
+    "Replit__Prompt.txt",
+    "Anthropic__Claude_Opus_4.6.txt",
+    "OpenAI__gpt-5.2-thinking.md",
+    "Perplexity__20240320-Perplexity.md",
+    "Google__20251118-Antigravity.md",
+    "Microsoft__microsoft_copilot_enterprise_20251202.md",
+    "xAI__20251027-Grok4.md",
+    "Poke__Poke_p1.txt",
+    "OpenSource__Prompt.txt_1",
+    "DeepSeek__R1.md",
+    "Vercel__2025-08-11-prompt.md",
+    "GitHub__github_copilot_agent.md",
+    "JetBrains__Prompt.txt",
+    "Anthropic__claude-code.md",
+    "Anthropic__research_lead_agent.md",
+    "OpenAI__codex-cli.md",
+    "Perplexity__System_Prompt.txt",
+    "Google__gemini-1.5-04112024.md",
+    "Poke__Poke_p3.txt",
+    "Cursor__20240904-Cursor.md",
+    "OpenSource__Prompt.txt",
+    "DeepSeek__20251029-DeepSeek-V2.md",
+    "Sourcegraph__claude-4-sonnet.yaml",
+    "Qwen__20251027-Qwen3-VL-235B-A22B.md",
+    "Venice__Venice.md",
+    "Anthropic__20250603-Claude-Sonnet4.md",
+    "Anthropic__20240712-Claude3.5-Sonnet.md",
+    "OpenAI__Atlas_10-21-25.txt",
+    "OpenAI__operator.md",
+    "Perplexity__comet-browser-assistant.md",
+    "Google__20250804-Jules.md",
+    "Google__20251110-notebooklm.md",
+    "Microsoft__Prompt.txt",
+    "xAI__20240821-Grok2.md",
+    "Meta__metaai_llama4-04082025.md",
+    "Poke__Poke_agent.txt",
+    "Cursor__Agent_Prompt_v1.0.txt",
+    "Windsurf__system-2025-04-20.md",
+    "Manus__Manus_Prompt.txt",
+    "Warp__Prompt.txt",
+    "MiniMax__MiniMax.txt",
+    "Anthropic__Claude_Code_2.0.txt",
+    "Anthropic__20250225-Claude3.7-Sonnet.md",
+    "OpenAI__o3.md",
+    "OpenAI__chatgpt_4o_full_07292025.md",
+    "Perplexity__20241212-Perplexity-Pro.md",
+    "Google__Gemini-cli_system_prompt.md",
+    "Microsoft__microsoft_copilot_website_09192025.md",
+    "xAI__20231214-Grok.md",
+    "Poke__Poke_p6.txt",
+    "Cursor__Agent_Prompt_2.0.txt",
+    "Cluely__Cluely.mkd",
+    "Misc__Sesame-AI-Maya.md",
+    "Hume__05052024-system-prompt.md",
+    "Brave__20251110-leo.md"
+  ],
+  "assignments": [
+    {
+      "annotator": 1,
+      "range_from": 1,
+      "range_to": 11,
+      "num_prompts": 11,
+      "num_spans": 464,
+      "prompts": [
+        {
+          "prompt_file": "Anthropic__Prompt.txt",
+          "company": "Anthropic",
+          "product_label": "Claude for Chrome (Web Automation)",
+          "spans": 149,
+          "prompt_id": "Anthropic__Prompt.txt"
+        },
+        {
+          "prompt_file": "OpenAI__chatgpt_agent_system_prompt.md",
+          "company": "OpenAI",
+          "product_label": "ChatGPT Agent",
+          "spans": 35,
+          "prompt_id": "OpenAI__chatgpt_agent_system_prompt.md"
+        },
+        {
+          "prompt_file": "Google__gemini_in_chrome.md",
+          "company": "Google",
+          "product_label": "Gemini in Chrome",
+          "spans": 40,
+          "prompt_id": "Google__gemini_in_chrome.md"
+        },
+        {
+          "prompt_file": "Microsoft__microsoft_copilot_website_02252025.md",
+          "company": "Microsoft",
+          "product_label": "MS Copilot Web (Feb 2025)",
+          "spans": 46,
+          "prompt_id": "Microsoft__microsoft_copilot_website_02252025.md"
+        },
+        {
+          "prompt_file": "xAI__grok-4.2.md",
+          "company": "xAI",
+          "product_label": "Grok 4.2",
+          "spans": 21,
+          "prompt_id": "xAI__grok-4.2.md"
+        },
+        {
+          "prompt_file": "Meta__MetaAIHiddenPrompt.md",
+          "company": "Meta",
+          "product_label": "Meta AI — Hidden Prompt (Leaked)",
+          "spans": 10,
+          "prompt_id": "Meta__MetaAIHiddenPrompt.md"
+        },
+        {
+          "prompt_file": "Poke__Poke_p4.txt",
+          "company": "Poke",
+          "product_label": "Poke AI — Prompt v4",
+          "spans": 29,
+          "prompt_id": "Poke__Poke_p4.txt"
+        },
+        {
+          "prompt_file": "Devin__Devin2_09-08-2025.md",
+          "company": "Devin",
+          "product_label": "Devin 2 (Sep 2025)",
+          "spans": 49,
+          "prompt_id": "Devin__Devin2_09-08-2025.md"
+        },
+        {
+          "prompt_file": "Cline__system.ts",
+          "company": "Cline",
+          "product_label": "Cline IDE Agent",
+          "spans": 47,
+          "prompt_id": "Cline__system.ts"
+        },
+        {
+          "prompt_file": "Lovable__Prompt.md",
+          "company": "Lovable",
+          "product_label": "Lovable — Latest",
+          "spans": 30,
+          "prompt_id": "Lovable__Prompt.md"
+        },
+        {
+          "prompt_file": "Apple__System.txt",
+          "company": "Apple",
+          "product_label": "Apple Xcode AI — Code Analysis",
+          "spans": 8,
+          "prompt_id": "Apple__System.txt"
+        }
+      ]
+    },
+    {
+      "annotator": 2,
+      "range_from": 12,
+      "range_to": 24,
+      "num_prompts": 13,
+      "num_spans": 467,
+      "prompts": [
+        {
+          "prompt_file": "Anthropic__claude-cowork.md",
+          "company": "Anthropic",
+          "product_label": "Claude Cowork",
+          "spans": 92,
+          "prompt_id": "Anthropic__claude-cowork.md"
+        },
+        {
+          "prompt_file": "OpenAI__chatgpt_5_08072025.md",
+          "company": "OpenAI",
+          "product_label": "ChatGPT-5 (Aug 2025)",
+          "spans": 44,
+          "prompt_id": "OpenAI__chatgpt_5_08072025.md"
+        },
+        {
+          "prompt_file": "OpenAI__gpt40_with_canvas.md",
+          "company": "OpenAI",
+          "product_label": "GPT-4o with Canvas",
+          "spans": 27,
+          "prompt_id": "OpenAI__gpt40_with_canvas.md"
+        },
+        {
+          "prompt_file": "Perplexity__Perplexity_Deep_Research.txt",
+          "company": "Perplexity",
+          "product_label": "Perplexity Deep Research",
+          "spans": 24,
+          "prompt_id": "Perplexity__Perplexity_Deep_Research.txt"
+        },
+        {
+          "prompt_file": "Google__gemini-workspace.md",
+          "company": "Google",
+          "product_label": "Gemini Workspace",
+          "spans": 37,
+          "prompt_id": "Google__gemini-workspace.md"
+        },
+        {
+          "prompt_file": "Microsoft__github_copilot_cli_20260121.md",
+          "company": "Microsoft",
+          "product_label": "GitHub Copilot CLI (Jan 2026)",
+          "spans": 31,
+          "prompt_id": "Microsoft__github_copilot_cli_20260121.md"
+        },
+        {
+          "prompt_file": "xAI__grok3_official0330_p1.j2",
+          "company": "xAI",
+          "product_label": "Grok 3 Official (Mar 2025)",
+          "spans": 23,
+          "prompt_id": "xAI__grok3_official0330_p1.j2"
+        },
+        {
+          "prompt_file": "Meta__metaai_llama3-04182024.md",
+          "company": "Meta",
+          "product_label": "Meta AI / Llama 3 (Apr 2024)",
+          "spans": 66,
+          "prompt_id": "Meta__metaai_llama3-04182024.md"
+        },
+        {
+          "prompt_file": "Devin__DeepWiki_Prompt.txt",
+          "company": "Devin",
+          "product_label": "Devin — DeepWiki Agent",
+          "spans": 15,
+          "prompt_id": "Devin__DeepWiki_Prompt.txt"
+        },
+        {
+          "prompt_file": "Cluely__Enterprise_Prompt.txt",
+          "company": "Cluely",
+          "product_label": "Cluely — Enterprise",
+          "spans": 16,
+          "prompt_id": "Cluely__Enterprise_Prompt.txt"
+        },
+        {
+          "prompt_file": "Amazon__Spec_Prompt.txt",
+          "company": "Amazon",
+          "product_label": "Amazon Kiro — Spec Agent",
+          "spans": 60,
+          "prompt_id": "Amazon__Spec_Prompt.txt"
+        },
+        {
+          "prompt_file": "Mistral__Le-Chat-2025-05-29.md",
+          "company": "Mistral",
+          "product_label": "Mistral Le Chat (May 2025)",
+          "spans": 16,
+          "prompt_id": "Mistral__Le-Chat-2025-05-29.md"
+        },
+        {
+          "prompt_file": "Moonshot__Kimi_2_July-11-2025.txt",
+          "company": "Moonshot",
+          "product_label": "Kimi 2 (Jul 2025)",
+          "spans": 16,
+          "prompt_id": "Moonshot__Kimi_2_July-11-2025.txt"
+        }
+      ]
+    },
+    {
+      "annotator": 3,
+      "range_from": 25,
+      "range_to": 35,
+      "num_prompts": 11,
+      "num_spans": 464,
+      "prompts": [
+        {
+          "prompt_file": "Anthropic__20251028-Claude-Sonnet4.5.md",
+          "company": "Anthropic",
+          "product_label": "Claude Sonnet 4.5 (Oct 2025)",
+          "spans": 82,
+          "prompt_id": "Anthropic__20251028-Claude-Sonnet4.5.md"
+        },
+        {
+          "prompt_file": "OpenAI__gpt-5-thinking.md",
+          "company": "OpenAI",
+          "product_label": "GPT-5 Thinking",
+          "spans": 96,
+          "prompt_id": "OpenAI__gpt-5-thinking.md"
+        },
+        {
+          "prompt_file": "Google__gemini-3-pro.md",
+          "company": "Google",
+          "product_label": "Gemini 3 Pro",
+          "spans": 55,
+          "prompt_id": "Google__gemini-3-pro.md"
+        },
+        {
+          "prompt_file": "Microsoft__github_copilot_vscode_02292024.md",
+          "company": "Microsoft",
+          "product_label": "GitHub Copilot VSCode (Feb 2024)",
+          "spans": 8,
+          "prompt_id": "Microsoft__github_copilot_vscode_02292024.md"
+        },
+        {
+          "prompt_file": "xAI__grok.com-post-new-safety-instructions.md",
+          "company": "xAI",
+          "product_label": "Grok — New Safety Policy",
+          "spans": 38,
+          "prompt_id": "xAI__grok.com-post-new-safety-instructions.md"
+        },
+        {
+          "prompt_file": "Meta__metaai_llama4-whatsapp-07292025.md",
+          "company": "Meta",
+          "product_label": "Meta AI Llama 4 WhatsApp (Jul 2025)",
+          "spans": 29,
+          "prompt_id": "Meta__metaai_llama4-whatsapp-07292025.md"
+        },
+        {
+          "prompt_file": "Cursor__Cursor_2.0_Sys_Prompt.txt",
+          "company": "Cursor",
+          "product_label": "Cursor 2.0",
+          "spans": 42,
+          "prompt_id": "Cursor__Cursor_2.0_Sys_Prompt.txt"
+        },
+        {
+          "prompt_file": "Windsurf__2025-08-11-wave11-tools.md",
+          "company": "Windsurf",
+          "product_label": "Windsurf Wave 11 — Tools (Aug 2025)",
+          "spans": 30,
+          "prompt_id": "Windsurf__2025-08-11-wave11-tools.md"
+        },
+        {
+          "prompt_file": "Notion__Prompt.txt",
+          "company": "Notion",
+          "product_label": "Notion AI Agent",
+          "spans": 46,
+          "prompt_id": "Notion__Prompt.txt"
+        },
+        {
+          "prompt_file": "ByteDance__Builder_Prompt.txt",
+          "company": "ByteDance",
+          "product_label": "Trae — Builder Mode",
+          "spans": 29,
+          "prompt_id": "ByteDance__Builder_Prompt.txt"
+        },
+        {
+          "prompt_file": "Replit__Prompt.txt",
+          "company": "Replit",
+          "product_label": "Replit Agent (Latest)",
+          "spans": 9,
+          "prompt_id": "Replit__Prompt.txt"
+        }
+      ]
+    },
+    {
+      "annotator": 4,
+      "range_from": 36,
+      "range_to": 47,
+      "num_prompts": 12,
+      "num_spans": 463,
+      "prompts": [
+        {
+          "prompt_file": "Anthropic__Claude_Opus_4.6.txt",
+          "company": "Anthropic",
+          "product_label": "Claude Opus 4.6",
+          "spans": 69,
+          "prompt_id": "Anthropic__Claude_Opus_4.6.txt"
+        },
+        {
+          "prompt_file": "OpenAI__gpt-5.2-thinking.md",
+          "company": "OpenAI",
+          "product_label": "GPT-5.2 Thinking",
+          "spans": 99,
+          "prompt_id": "OpenAI__gpt-5.2-thinking.md"
+        },
+        {
+          "prompt_file": "Perplexity__20240320-Perplexity.md",
+          "company": "Perplexity",
+          "product_label": "Perplexity (Mar 2024)",
+          "spans": 19,
+          "prompt_id": "Perplexity__20240320-Perplexity.md"
+        },
+        {
+          "prompt_file": "Google__20251118-Antigravity.md",
+          "company": "Google",
+          "product_label": "Google Veo / Antigravity (Nov 2025)",
+          "spans": 35,
+          "prompt_id": "Google__20251118-Antigravity.md"
+        },
+        {
+          "prompt_file": "Microsoft__microsoft_copilot_enterprise_20251202.md",
+          "company": "Microsoft",
+          "product_label": "MS Copilot 365 Enterprise (Dec 2025)",
+          "spans": 56,
+          "prompt_id": "Microsoft__microsoft_copilot_enterprise_20251202.md"
+        },
+        {
+          "prompt_file": "xAI__20251027-Grok4.md",
+          "company": "xAI",
+          "product_label": "Grok 4 (Oct 2025)",
+          "spans": 17,
+          "prompt_id": "xAI__20251027-Grok4.md"
+        },
+        {
+          "prompt_file": "Poke__Poke_p1.txt",
+          "company": "Poke",
+          "product_label": "Poke AI — Prompt v1",
+          "spans": 30,
+          "prompt_id": "Poke__Poke_p1.txt"
+        },
+        {
+          "prompt_file": "OpenSource_Cline__Prompt.txt",
+          "company": "OpenSource",
+          "product_label": "Cline (Open Source)",
+          "spans": 40,
+          "prompt_id": "OpenSource__Prompt.txt_1"
+        },
+        {
+          "prompt_file": "DeepSeek__R1.md",
+          "company": "DeepSeek",
+          "product_label": "DeepSeek R1",
+          "spans": 10,
+          "prompt_id": "DeepSeek__R1.md"
+        },
+        {
+          "prompt_file": "Vercel__2025-08-11-prompt.md",
+          "company": "Vercel",
+          "product_label": "Vercel v0 (Aug 2025)",
+          "spans": 58,
+          "prompt_id": "Vercel__2025-08-11-prompt.md"
+        },
+        {
+          "prompt_file": "GitHub__github_copilot_agent.md",
+          "company": "GitHub",
+          "product_label": "GitHub Copilot Agent",
+          "spans": 20,
+          "prompt_id": "GitHub__github_copilot_agent.md"
+        },
+        {
+          "prompt_file": "JetBrains__Prompt.txt",
+          "company": "JetBrains",
+          "product_label": "JetBrains AI Assistant",
+          "spans": 10,
+          "prompt_id": "JetBrains__Prompt.txt"
+        }
+      ]
+    },
+    {
+      "annotator": 5,
+      "range_from": 48,
+      "range_to": 59,
+      "num_prompts": 12,
+      "num_spans": 466,
+      "prompts": [
+        {
+          "prompt_file": "Anthropic__claude-code.md",
+          "company": "Anthropic",
+          "product_label": "Claude Code (Latest)",
+          "spans": 67,
+          "prompt_id": "Anthropic__claude-code.md"
+        },
+        {
+          "prompt_file": "Anthropic__research_lead_agent.md",
+          "company": "Anthropic",
+          "product_label": "Claude — Research Lead Agent",
+          "spans": 32,
+          "prompt_id": "Anthropic__research_lead_agent.md"
+        },
+        {
+          "prompt_file": "OpenAI__codex-cli.md",
+          "company": "OpenAI",
+          "product_label": "OpenAI Codex CLI",
+          "spans": 43,
+          "prompt_id": "OpenAI__codex-cli.md"
+        },
+        {
+          "prompt_file": "Perplexity__System_Prompt.txt",
+          "company": "Perplexity",
+          "product_label": "Perplexity — Latest System Prompt",
+          "spans": 153,
+          "prompt_id": "Perplexity__System_Prompt.txt"
+        },
+        {
+          "prompt_file": "Google__gemini-1.5-04112024.md",
+          "company": "Google",
+          "product_label": "Gemini 1.5 (Apr 2024)",
+          "spans": 12,
+          "prompt_id": "Google__gemini-1.5-04112024.md"
+        },
+        {
+          "prompt_file": "Poke__Poke_p3.txt",
+          "company": "Poke",
+          "product_label": "Poke AI — Prompt v3",
+          "spans": 17,
+          "prompt_id": "Poke__Poke_p3.txt"
+        },
+        {
+          "prompt_file": "Cursor__20240904-Cursor.md",
+          "company": "Cursor",
+          "product_label": "Cursor (Sep 2024)",
+          "spans": 4,
+          "prompt_id": "Cursor__20240904-Cursor.md"
+        },
+        {
+          "prompt_file": "OpenSource_Bolt__Prompt.txt",
+          "company": "OpenSource",
+          "product_label": "Bolt.new (Open Source)",
+          "spans": 32,
+          "prompt_id": "OpenSource__Prompt.txt"
+        },
+        {
+          "prompt_file": "DeepSeek__20251029-DeepSeek-V2.md",
+          "company": "DeepSeek",
+          "product_label": "DeepSeek V2 (Oct 2025)",
+          "spans": 22,
+          "prompt_id": "DeepSeek__20251029-DeepSeek-V2.md"
+        },
+        {
+          "prompt_file": "Sourcegraph__claude-4-sonnet.yaml",
+          "company": "Sourcegraph",
+          "product_label": "Sourcegraph Cody — Claude 4 Sonnet Config",
+          "spans": 38,
+          "prompt_id": "Sourcegraph__claude-4-sonnet.yaml"
+        },
+        {
+          "prompt_file": "Qwen__20251027-Qwen3-VL-235B-A22B.md",
+          "company": "Qwen",
+          "product_label": "Qwen 3 VL 235B (Oct 2025)",
+          "spans": 32,
+          "prompt_id": "Qwen__20251027-Qwen3-VL-235B-A22B.md"
+        },
+        {
+          "prompt_file": "Venice__Venice.md",
+          "company": "Venice",
+          "product_label": "Venice AI (Privacy-First)",
+          "spans": 14,
+          "prompt_id": "Venice__Venice.md"
+        }
+      ]
+    },
+    {
+      "annotator": 6,
+      "range_from": 60,
+      "range_to": 75,
+      "num_prompts": 16,
+      "num_spans": 463,
+      "prompts": [
+        {
+          "prompt_file": "Anthropic__20250603-Claude-Sonnet4.md",
+          "company": "Anthropic",
+          "product_label": "Claude Sonnet 4 (Jun 2025)",
+          "spans": 47,
+          "prompt_id": "Anthropic__20250603-Claude-Sonnet4.md"
+        },
+        {
+          "prompt_file": "Anthropic__20240712-Claude3.5-Sonnet.md",
+          "company": "Anthropic",
+          "product_label": "Claude 3.5 Sonnet (Jul 2024)",
+          "spans": 36,
+          "prompt_id": "Anthropic__20240712-Claude3.5-Sonnet.md"
+        },
+        {
+          "prompt_file": "OpenAI__Atlas_10-21-25.txt",
+          "company": "OpenAI",
+          "product_label": "OpenAI Atlas / Deep Research (Oct 2025)",
+          "spans": 55,
+          "prompt_id": "OpenAI__Atlas_10-21-25.txt"
+        },
+        {
+          "prompt_file": "OpenAI__operator.md",
+          "company": "OpenAI",
+          "product_label": "OpenAI Operator (Browser Agent)",
+          "spans": 21,
+          "prompt_id": "OpenAI__operator.md"
+        },
+        {
+          "prompt_file": "Perplexity__comet-browser-assistant.md",
+          "company": "Perplexity",
+          "product_label": "Perplexity Comet (Browser)",
+          "spans": 35,
+          "prompt_id": "Perplexity__comet-browser-assistant.md"
+        },
+        {
+          "prompt_file": "Google__20250804-Jules.md",
+          "company": "Google",
+          "product_label": "Google Jules — Code Agent (Aug 2025)",
+          "spans": 27,
+          "prompt_id": "Google__20250804-Jules.md"
+        },
+        {
+          "prompt_file": "Google__20251110-notebooklm.md",
+          "company": "Google",
+          "product_label": "Google NotebookLM (Nov 2025)",
+          "spans": 10,
+          "prompt_id": "Google__20251110-notebooklm.md"
+        },
+        {
+          "prompt_file": "Microsoft__Prompt.txt",
+          "company": "Microsoft",
+          "product_label": "MS Copilot — Agent Mode",
+          "spans": 27,
+          "prompt_id": "Microsoft__Prompt.txt"
+        },
+        {
+          "prompt_file": "xAI__20240821-Grok2.md",
+          "company": "xAI",
+          "product_label": "Grok 2 (Aug 2024)",
+          "spans": 21,
+          "prompt_id": "xAI__20240821-Grok2.md"
+        },
+        {
+          "prompt_file": "Meta__metaai_llama4-04082025.md",
+          "company": "Meta",
+          "product_label": "Meta AI / Llama 4 (Apr 2025)",
+          "spans": 11,
+          "prompt_id": "Meta__metaai_llama4-04082025.md"
+        },
+        {
+          "prompt_file": "Poke__Poke_agent.txt",
+          "company": "Poke",
+          "product_label": "Poke AI — Agent",
+          "spans": 33,
+          "prompt_id": "Poke__Poke_agent.txt"
+        },
+        {
+          "prompt_file": "Cursor__Agent_Prompt_v1.0.txt",
+          "company": "Cursor",
+          "product_label": "Cursor Agent v1.0",
+          "spans": 24,
+          "prompt_id": "Cursor__Agent_Prompt_v1.0.txt"
+        },
+        {
+          "prompt_file": "Windsurf__system-2025-04-20.md",
+          "company": "Windsurf",
+          "product_label": "Windsurf Agent (Apr 2025)",
+          "spans": 34,
+          "prompt_id": "Windsurf__system-2025-04-20.md"
+        },
+        {
+          "prompt_file": "Manus__Manus_Prompt.txt",
+          "company": "Manus",
+          "product_label": "Manus — Extended Prompt",
+          "spans": 38,
+          "prompt_id": "Manus__Manus_Prompt.txt"
+        },
+        {
+          "prompt_file": "Warp__Prompt.txt",
+          "company": "Warp",
+          "product_label": "Warp Terminal — Agent Mode",
+          "spans": 33,
+          "prompt_id": "Warp__Prompt.txt"
+        },
+        {
+          "prompt_file": "MiniMax__MiniMax.txt",
+          "company": "MiniMax",
+          "product_label": "MiniMax AI Assistant",
+          "spans": 11,
+          "prompt_id": "MiniMax__MiniMax.txt"
+        }
+      ]
+    },
+    {
+      "annotator": 7,
+      "range_from": 76,
+      "range_to": 89,
+      "num_prompts": 14,
+      "num_spans": 464,
+      "prompts": [
+        {
+          "prompt_file": "Anthropic__Claude_Code_2.0.txt",
+          "company": "Anthropic",
+          "product_label": "Claude Code 2.0",
+          "spans": 44,
+          "prompt_id": "Anthropic__Claude_Code_2.0.txt"
+        },
+        {
+          "prompt_file": "Anthropic__20250225-Claude3.7-Sonnet.md",
+          "company": "Anthropic",
+          "product_label": "Claude 3.7 Sonnet (Feb 2025)",
+          "spans": 41,
+          "prompt_id": "Anthropic__20250225-Claude3.7-Sonnet.md"
+        },
+        {
+          "prompt_file": "OpenAI__o3.md",
+          "company": "OpenAI",
+          "product_label": "OpenAI o3",
+          "spans": 47,
+          "prompt_id": "OpenAI__o3.md"
+        },
+        {
+          "prompt_file": "OpenAI__chatgpt_4o_full_07292025.md",
+          "company": "OpenAI",
+          "product_label": "ChatGPT-4o Full (Jul 2025)",
+          "spans": 34,
+          "prompt_id": "OpenAI__chatgpt_4o_full_07292025.md"
+        },
+        {
+          "prompt_file": "Perplexity__20241212-Perplexity-Pro.md",
+          "company": "Perplexity",
+          "product_label": "Perplexity Pro (Dec 2024)",
+          "spans": 21,
+          "prompt_id": "Perplexity__20241212-Perplexity-Pro.md"
+        },
+        {
+          "prompt_file": "Google__Gemini-cli_system_prompt.md",
+          "company": "Google",
+          "product_label": "Gemini CLI",
+          "spans": 34,
+          "prompt_id": "Google__Gemini-cli_system_prompt.md"
+        },
+        {
+          "prompt_file": "Microsoft__microsoft_copilot_website_09192025.md",
+          "company": "Microsoft",
+          "product_label": "MS Copilot Web (Sep 2025)",
+          "spans": 78,
+          "prompt_id": "Microsoft__microsoft_copilot_website_09192025.md"
+        },
+        {
+          "prompt_file": "xAI__20231214-Grok.md",
+          "company": "xAI",
+          "product_label": "Grok (Dec 2023)",
+          "spans": 8,
+          "prompt_id": "xAI__20231214-Grok.md"
+        },
+        {
+          "prompt_file": "Poke__Poke_p6.txt",
+          "company": "Poke",
+          "product_label": "Poke AI — Prompt v6",
+          "spans": 5,
+          "prompt_id": "Poke__Poke_p6.txt"
+        },
+        {
+          "prompt_file": "Cursor__Agent_Prompt_2.0.txt",
+          "company": "Cursor",
+          "product_label": "Cursor Agent 2.0",
+          "spans": 39,
+          "prompt_id": "Cursor__Agent_Prompt_2.0.txt"
+        },
+        {
+          "prompt_file": "Cluely__Cluely.mkd",
+          "company": "Cluely",
+          "product_label": "Cluely — Personal AI",
+          "spans": 16,
+          "prompt_id": "Cluely__Cluely.mkd"
+        },
+        {
+          "prompt_file": "Misc__Sesame-AI-Maya.md",
+          "company": "Misc",
+          "product_label": "Sesame AI — Maya",
+          "spans": 64,
+          "prompt_id": "Misc__Sesame-AI-Maya.md"
+        },
+        {
+          "prompt_file": "Hume__05052024-system-prompt.md",
+          "company": "Hume",
+          "product_label": "Hume EVI (May 2024)",
+          "spans": 25,
+          "prompt_id": "Hume__05052024-system-prompt.md"
+        },
+        {
+          "prompt_file": "Brave__20251110-leo.md",
+          "company": "Brave",
+          "product_label": "Brave Leo (Nov 2025)",
+          "spans": 8,
+          "prompt_id": "Brave__20251110-leo.md"
+        }
+      ]
+    }
+  ]
+}
