@@ -10,12 +10,16 @@ Uses Claude Opus 4.6 via OpenRouter with extended thinking.
 
 Usage:
   export OPENROUTER_API_KEY="sk-or-..."
-  python llm_preannotate_v3.py                       # test with Poke_p1.txt
-  python llm_preannotate_v3.py --index 93            # specific prompt by index
+  python llm_preannotate_v3.py                              # test with Poke_p1.txt
+  python llm_preannotate_v3.py --index 5                    # specific prompt by index
   python llm_preannotate_v3.py --filename gpt4o_12102024.md
-  python llm_preannotate_v3.py --batch               # run on all 20 pilot prompts
-  python llm_preannotate_v3.py --batch --resume      # resume interrupted batch
-  python llm_preannotate_v3.py --batch --dry-run     # show plan only
+  python llm_preannotate_v3.py --batch                      # run on 20 pilot prompts
+  python llm_preannotate_v3.py --batch --all                # run on ALL 89 filtered prompts
+  python llm_preannotate_v3.py --batch --all --resume       # resume interrupted batch
+  python llm_preannotate_v3.py --batch --all --dry-run      # show plan only
+  python llm_preannotate_v3.py --batch --all --use-full     # use full 190 prompts instead
+  python llm_preannotate_v3.py --batch --all --parallel 5   # run 5 prompts in parallel
+  python llm_preannotate_v3.py --batch --all --parallel 5 --parallel-dims  # also parallelize 9 dims
 """
 
 import argparse
@@ -24,7 +28,9 @@ import os
 import re
 import sys
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
+from threading import Lock
 
 import requests
 
@@ -48,7 +54,9 @@ def _load_dotenv():
 _load_dotenv()
 
 # ─── Config ───────────────────────────────────────────────────────────────────
-DATA_FILE = Path(__file__).parent / "audit_prompts.json"
+DATA_FILE_FULL = Path(__file__).parent / "audit_prompts.json"
+DATA_FILE_FILTERED = Path(__file__).parent / "audit_prompts_filtered.json"
+DATA_FILE = DATA_FILE_FILTERED  # default to filtered 89 prompts
 OUTPUT_DIR = Path(__file__).parent / "preannotation_v3"
 
 OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1/chat/completions"
@@ -463,20 +471,20 @@ def resolve_span_offset(content: str, text: str, content_norm: str = None) -> tu
     return -1, -1, text
 
 
-def merge_adjacent_spans(spans: list, content: str) -> list:
+def merge_overlapping_spans(spans: list, content: str) -> list:
     """
-    Merge adjacent spans within the same dimension.
+    Merge overlapping and adjacent spans within the same dimension.
 
-    Two spans are merged if the gap between them (end of A → start of B)
-    contains only whitespace and is ≤ MERGE_GAP_THRESHOLD characters.
+    Two spans are merged if:
+      - They overlap (span B starts before span A ends), OR
+      - The gap between them is ≤ MERGE_GAP_THRESHOLD chars of whitespace only.
 
-    Score logic: if any span is -1 → -1; else if any is +1 → +1; else 0.
+    Score logic: -1 takes priority > +1 > 0.
     Notes are concatenated with " | ".
     """
     if len(spans) <= 1:
         return spans
 
-    # Sort by start offset
     sorted_spans = sorted(spans, key=lambda s: s["start"])
     merged = [sorted_spans[0].copy()]
 
@@ -484,33 +492,33 @@ def merge_adjacent_spans(spans: list, content: str) -> list:
         prev = merged[-1]
         gap = span["start"] - prev["end"]
 
-        # Check if the gap is only whitespace
-        if 0 <= gap <= MERGE_GAP_THRESHOLD:
+        should_merge = False
+        if gap < 0:
+            # True overlap
+            should_merge = True
+        elif gap <= MERGE_GAP_THRESHOLD:
             gap_text = content[prev["end"]:span["start"]]
             if gap_text.strip() == "":
-                # Merge!
-                prev["end"] = span["end"]
-                prev["text"] = content[prev["start"]:prev["end"]]
+                should_merge = True
 
-                # Merge score: -1 takes priority, then +1, then 0
-                scores = [prev["score"], span["score"]]
-                if -1 in scores:
-                    prev["score"] = -1
-                elif 1 in scores:
-                    prev["score"] = 1
-                else:
-                    prev["score"] = 0
+        if should_merge:
+            prev["end"] = max(prev["end"], span["end"])
+            prev["text"] = content[prev["start"]:prev["end"]]
 
-                # Merge notes
-                prev_note = prev.get("note", "")
-                span_note = span.get("note", "")
-                if span_note and span_note != prev_note:
-                    prev["note"] = f"{prev_note} | {span_note}" if prev_note else span_note
+            scores = [prev["score"], span["score"]]
+            if -1 in scores:
+                prev["score"] = -1
+            elif 1 in scores:
+                prev["score"] = 1
 
-                prev["merged"] = prev.get("merged", 1) + 1
-                continue
+            prev_note = prev.get("note", "")
+            span_note = span.get("note", "")
+            if span_note and span_note != prev_note:
+                prev["note"] = f"{prev_note} | {span_note}" if prev_note else span_note
 
-        merged.append(span.copy())
+            prev["merged"] = prev.get("merged", 1) + 1
+        else:
+            merged.append(span.copy())
 
     return merged
 
@@ -605,12 +613,103 @@ def extract_dimension_spans(dimension: dict, company: str, product_label: str,
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
+# Overlap Removal — Atomic Segmentation
+# ═══════════════════════════════════════════════════════════════════════════════
+
+def deoverlap_spans(dimensions_output: dict, content: str, verbose: bool = True) -> list:
+    """Convert per-dimension overlapping spans into non-overlapping atomic segments.
+
+    Each atomic segment carries a list of (dimension, score, note) labels.
+    Segments with identical dimension sets are merged if adjacent.
+
+    Returns flat list of:
+      {"start", "end", "text", "dimensions": [{"dim", "score", "note"}, ...]}
+    """
+    # 1. Collect all found spans across all dimensions
+    all_spans = []
+    for dim_key, dim_data in dimensions_output.items():
+        for sp in dim_data.get("spans", []):
+            if sp.get("start", -1) < 0 or sp["start"] >= sp["end"]:
+                continue
+            all_spans.append({
+                "dim": dim_key,
+                "start": sp["start"],
+                "end": sp["end"],
+                "score": sp["score"],
+                "note": sp.get("note", ""),
+            })
+
+    if not all_spans:
+        return []
+
+    # 2. Collect all boundary points
+    boundaries = sorted(set(
+        [s["start"] for s in all_spans] + [s["end"] for s in all_spans]
+    ))
+
+    # 3. Build atomic segments
+    atoms = []
+    for i in range(len(boundaries) - 1):
+        seg_start, seg_end = boundaries[i], boundaries[i + 1]
+        seg_text = content[seg_start:seg_end]
+        if not seg_text.strip():
+            continue
+
+        dims = []
+        for s in all_spans:
+            if s["start"] <= seg_start and s["end"] >= seg_end:
+                dims.append({
+                    "dim": s["dim"],
+                    "score": s["score"],
+                    "note": s["note"],
+                })
+
+        if dims:
+            atoms.append({
+                "start": seg_start,
+                "end": seg_end,
+                "text": seg_text,
+                "dimensions": dims,
+            })
+
+    # 4. Merge adjacent atoms with identical dimension label sets
+    def _dim_key(dims):
+        return tuple(sorted((d["dim"], d["score"]) for d in dims))
+
+    merged = []
+    for atom in atoms:
+        key = _dim_key(atom["dimensions"])
+        if merged and _dim_key(merged[-1]["dimensions"]) == key \
+                and merged[-1]["end"] == atom["start"]:
+            merged[-1]["end"] = atom["end"]
+            merged[-1]["text"] = content[merged[-1]["start"]:merged[-1]["end"]]
+        else:
+            merged.append(atom.copy())
+
+    if verbose:
+        overlap_before = sum(
+            1 for i in range(len(all_spans))
+            for j in range(i + 1, len(all_spans))
+            if all_spans[j]["start"] < all_spans[i]["end"]
+            and all_spans[i]["start"] < all_spans[j]["end"]
+        )
+        print(f"\n  🔧 De-overlap: {len(all_spans)} raw spans → {len(merged)} atomic segments")
+        print(f"     Overlapping pairs removed: {overlap_before}")
+
+    return merged
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
 # Main Pipeline
 # ═══════════════════════════════════════════════════════════════════════════════
 
-def process_prompt(prompt_data: dict, verbose: bool = True) -> dict:
+def process_prompt(prompt_data: dict, verbose: bool = True,
+                   parallel_dims: bool = False) -> dict:
     """
     Process one prompt: for each dimension, extract spans directly.
+
+    Args:
+        parallel_dims: If True, run all 9 dimensions in parallel via threads.
 
     Returns: result dict with metadata and per-dimension spans.
     """
@@ -625,6 +724,7 @@ def process_prompt(prompt_data: dict, verbose: bool = True) -> dict:
         print(f"📐 Processing: {company} / {product_label}")
         print(f"   File: {filename} | Size: {len(content)/1024:.1f} KB | Index: {index}")
         print(f"   Model: {MODEL} | Reasoning: {REASONING_EFFORT}")
+        print(f"   Parallel dims: {'yes' if parallel_dims else 'no'}")
         print(f"{'='*70}")
 
     total_t0 = time.time()
@@ -635,17 +735,37 @@ def process_prompt(prompt_data: dict, verbose: bool = True) -> dict:
     dim_timings = {}
     dim_tokens = {}
 
-    for dim in DIMENSIONS:
-        key = dim["key"]
-        spans, timing, tokens = extract_dimension_spans(
-            dim, company, product_label, filename, content, content_norm,
-            verbose=verbose
-        )
-        dim_results[key] = spans
-        dim_timings[key] = timing
-        dim_tokens[key] = tokens
-        all_tokens["input"] += tokens["input"]
-        all_tokens["output"] += tokens["output"]
+    if parallel_dims:
+        def _run_dim(dim):
+            return dim["key"], extract_dimension_spans(
+                dim, company, product_label, filename, content, content_norm,
+                verbose=False
+            )
+
+        with ThreadPoolExecutor(max_workers=len(DIMENSIONS)) as pool:
+            futures = {pool.submit(_run_dim, dim): dim for dim in DIMENSIONS}
+            for future in as_completed(futures):
+                key, (spans, timing, tokens) = future.result()
+                dim_results[key] = spans
+                dim_timings[key] = timing
+                dim_tokens[key] = tokens
+                all_tokens["input"] += tokens["input"]
+                all_tokens["output"] += tokens["output"]
+                if verbose:
+                    found = sum(1 for s in spans if s.get("found", False))
+                    print(f"    ✅ {key}: {found} spans ({timing.get('seconds',0):.0f}s)")
+    else:
+        for dim in DIMENSIONS:
+            key = dim["key"]
+            spans, timing, tokens = extract_dimension_spans(
+                dim, company, product_label, filename, content, content_norm,
+                verbose=verbose
+            )
+            dim_results[key] = spans
+            dim_timings[key] = timing
+            dim_tokens[key] = tokens
+            all_tokens["input"] += tokens["input"]
+            all_tokens["output"] += tokens["output"]
 
     total_elapsed = time.time() - total_t0
 
@@ -673,6 +793,12 @@ def process_prompt(prompt_data: dict, verbose: bool = True) -> dict:
             }
             clean_spans.append(clean)
 
+        # Merge overlapping/adjacent spans within this dimension
+        raw_count = len(clean_spans)
+        clean_spans = merge_overlapping_spans(clean_spans, content)
+        if verbose and raw_count > len(clean_spans):
+            print(f"    🔗 {key}: merged {raw_count} → {len(clean_spans)} spans")
+
         dimensions_output[key] = {
             "name": dim["name"],
             "span_count": len(clean_spans),
@@ -680,6 +806,9 @@ def process_prompt(prompt_data: dict, verbose: bool = True) -> dict:
             "not_found": len(not_found),
         }
         total_spans += len(clean_spans)
+
+    # De-overlap: convert to non-overlapping atomic segments
+    atomic_segments = deoverlap_spans(dimensions_output, content, verbose=verbose)
 
     result = {
         "metadata": {
@@ -704,8 +833,10 @@ def process_prompt(prompt_data: dict, verbose: bool = True) -> dict:
             },
             "cost_usd": round(total_cost, 4),
             "total_spans": total_spans,
+            "atomic_segments": len(atomic_segments),
         },
         "dimensions": dimensions_output,
+        "segments": atomic_segments,
     }
 
     # Summary
@@ -713,7 +844,8 @@ def process_prompt(prompt_data: dict, verbose: bool = True) -> dict:
         print(f"\n{'='*70}")
         print(f"📊 SUMMARY — {company} / {product_label}")
         print(f"{'='*70}")
-        print(f"  Total spans:  {total_spans}")
+        print(f"  Raw spans:    {total_spans}")
+        print(f"  Segments:     {len(atomic_segments)} (non-overlapping)")
         print(f"  Time:         {total_elapsed:.0f}s ({total_elapsed/60:.1f} min)")
         print(f"  Tokens:       {all_tokens['input']} input + {all_tokens['output']} output")
         print(f"  Cost:         ${total_cost:.2f}")
@@ -756,13 +888,72 @@ def format_duration(seconds: float) -> str:
         return f"{h}h{m:02d}m"
 
 
-def run_batch(indices: list, resume: bool = False, dry_run: bool = False):
-    """Run batch processing on specified prompt indices."""
-    # Load prompts
+def _process_one_prompt(prompt_data: dict, prompt_num: int, total_num: int,
+                        parallel_dims: bool = False,
+                        print_lock: Lock = None) -> dict:
+    """Process a single prompt and save result. Thread-safe."""
+    company = prompt_data["company"]
+    filename = prompt_data["filename"]
+    size_kb = prompt_data["size_bytes"] / 1024
+    label = prompt_data.get("product_label", filename)
+
+    def _print(msg):
+        if print_lock:
+            with print_lock:
+                print(msg)
+        else:
+            print(msg)
+
+    _print(f"  🚀 [{prompt_num}/{total_num}] {company} / {label} ({size_kb:.0f}KB)")
+
+    t0 = time.time()
+    try:
+        result = process_prompt(prompt_data, verbose=False, parallel_dims=parallel_dims)
+
+        out_path = get_output_path(prompt_data)
+        with open(out_path, "w", encoding="utf-8") as f:
+            json.dump(result, f, ensure_ascii=False, indent=2)
+
+        elapsed = time.time() - t0
+        cost = result["metadata"]["cost_usd"]
+        spans = result["metadata"]["total_spans"]
+        _print(f"  ✅ [{prompt_num}/{total_num}] {company} / {label} — "
+               f"{spans} spans, ${cost:.2f}, {format_duration(elapsed)}")
+
+        return {
+            "company": company,
+            "filename": filename,
+            "product_label": label,
+            "total_spans": spans,
+            "cost_usd": cost,
+            "time_seconds": round(elapsed, 1),
+            "status": "success",
+        }
+
+    except Exception as e:
+        elapsed = time.time() - t0
+        _print(f"  ❌ [{prompt_num}/{total_num}] {company} / {label} — FAILED: {e}")
+        return {
+            "company": company,
+            "filename": filename,
+            "product_label": label,
+            "status": "failed",
+            "error": str(e),
+            "time_seconds": round(elapsed, 1),
+        }
+
+
+def run_batch(indices: list, resume: bool = False, dry_run: bool = False,
+              parallel: int = 1, parallel_dims: bool = False):
+    """Run batch processing on specified prompt indices.
+
+    Args:
+        parallel: Number of prompts to process concurrently.
+        parallel_dims: If True, also parallelize 9 dimensions within each prompt.
+    """
     with open(DATA_FILE, "r", encoding="utf-8") as f:
         all_prompts = json.load(f)
 
-    # Validate indices
     prompts_to_process = []
     for idx in indices:
         if 0 <= idx < len(all_prompts):
@@ -770,7 +961,6 @@ def run_batch(indices: list, resume: bool = False, dry_run: bool = False):
         else:
             print(f"⚠️  Index {idx} out of range, skipping")
 
-    # Check already done
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     already_done = set()
     if resume:
@@ -782,16 +972,26 @@ def run_batch(indices: list, resume: bool = False, dry_run: bool = False):
     to_process = [p for p in prompts_to_process if p["filename"] not in already_done]
     total_kb = sum(p["size_bytes"] / 1024 for p in prompts_to_process)
 
+    # Max concurrent API calls estimate
+    dim_count = len(DIMENSIONS)
+    if parallel_dims:
+        max_concurrent = parallel * dim_count
+    else:
+        max_concurrent = parallel
+
     print(f"{'='*70}")
     print(f"📦 Batch Pre-Annotation v3 — Direct Per-Dimension Extraction")
     print(f"{'='*70}")
-    print(f"  Model:         {MODEL}")
-    print(f"  Reasoning:     {REASONING_EFFORT}")
-    print(f"  Total prompts: {len(prompts_to_process)}")
-    print(f"  Already done:  {len(already_done)}")
-    print(f"  To process:    {len(to_process)}")
-    print(f"  Total size:    {total_kb:.0f} KB")
-    print(f"  Output dir:    {OUTPUT_DIR}")
+    print(f"  Model:            {MODEL}")
+    print(f"  Reasoning:        {REASONING_EFFORT}")
+    print(f"  Total prompts:    {len(prompts_to_process)}")
+    print(f"  Already done:     {len(already_done)}")
+    print(f"  To process:       {len(to_process)}")
+    print(f"  Total size:       {total_kb:.0f} KB")
+    print(f"  Parallel prompts: {parallel}")
+    print(f"  Parallel dims:    {'yes' if parallel_dims else 'no'}")
+    print(f"  Max concurrent:   ~{max_concurrent} API calls")
+    print(f"  Output dir:       {OUTPUT_DIR}")
     print()
 
     print(f"{'#':>3s}  {'Idx':>4s}  {'Company':15s}  {'Filename':42s}  {'Size':>7s}  {'Status'}")
@@ -811,97 +1011,124 @@ def run_batch(indices: list, resume: bool = False, dry_run: bool = False):
         print("✅ All prompts already processed!")
         return
 
-    # Process
     batch_t0 = time.time()
-    results_summary = []
-    total_cost = 0
-    processed = 0
-    failed = 0
+    total_num = len(to_process)
 
-    for i, prompt_data in enumerate(to_process):
-        prompt_num = i + 1
-        total_num = len(to_process)
+    if parallel > 1:
+        # ── Parallel mode ──
+        print(f"🔄 Running {total_num} prompts with {parallel} workers...\n")
+        print_lock = Lock()
+        results_summary = []
 
-        elapsed_so_far = time.time() - batch_t0
-        if processed > 0:
-            avg_time = elapsed_so_far / processed
-            eta = avg_time * (total_num - prompt_num + 1)
-            eta_str = f" | ETA: {format_duration(eta)}"
-        else:
-            eta_str = ""
+        with ThreadPoolExecutor(max_workers=parallel) as pool:
+            futures = {}
+            for i, prompt_data in enumerate(to_process):
+                future = pool.submit(
+                    _process_one_prompt, prompt_data, i + 1, total_num,
+                    parallel_dims, print_lock
+                )
+                futures[future] = prompt_data
 
-        print(f"\n{'▓'*70}")
-        print(f"  [{prompt_num}/{total_num}] {prompt_data['company']} / {prompt_data['filename']}"
-              f"  ({prompt_data['size_bytes']/1024:.1f}KB){eta_str}")
-        print(f"{'▓'*70}")
+            for future in as_completed(futures):
+                results_summary.append(future.result())
+    else:
+        # ── Sequential mode ──
+        results_summary = []
+        for i, prompt_data in enumerate(to_process):
+            prompt_num = i + 1
 
-        try:
-            result = process_prompt(prompt_data, verbose=True)
+            elapsed_so_far = time.time() - batch_t0
+            done_count = sum(1 for r in results_summary if r["status"] == "success")
+            if done_count > 0:
+                avg_time = elapsed_so_far / done_count
+                eta = avg_time * (total_num - prompt_num + 1)
+                eta_str = f" | ETA: {format_duration(eta)}"
+            else:
+                eta_str = ""
 
-            out_path = get_output_path(prompt_data)
-            with open(out_path, "w", encoding="utf-8") as f:
-                json.dump(result, f, ensure_ascii=False, indent=2)
-            print(f"  💾 Saved: {out_path.name}")
+            print(f"\n{'▓'*70}")
+            print(f"  [{prompt_num}/{total_num}] {prompt_data['company']} / {prompt_data['filename']}"
+                  f"  ({prompt_data['size_bytes']/1024:.1f}KB){eta_str}")
+            print(f"{'▓'*70}")
 
-            cost = result["metadata"]["cost_usd"]
-            total_cost += cost
-            processed += 1
+            try:
+                result = process_prompt(prompt_data, verbose=True,
+                                        parallel_dims=parallel_dims)
 
-            results_summary.append({
-                "company": prompt_data["company"],
-                "filename": prompt_data["filename"],
-                "total_spans": result["metadata"]["total_spans"],
-                "cost_usd": cost,
-                "time_seconds": result["metadata"]["timing"]["total_seconds"],
-                "status": "success",
-            })
+                out_path = get_output_path(prompt_data)
+                with open(out_path, "w", encoding="utf-8") as f:
+                    json.dump(result, f, ensure_ascii=False, indent=2)
+                print(f"  💾 Saved: {out_path.name}")
 
-        except Exception as e:
-            print(f"\n  ❌ FAILED: {e}")
-            failed += 1
-            results_summary.append({
-                "company": prompt_data["company"],
-                "filename": prompt_data["filename"],
-                "status": "failed",
-                "error": str(e),
-            })
-            continue
+                cost = result["metadata"]["cost_usd"]
 
-        if prompt_num < total_num:
-            time.sleep(2)
+                results_summary.append({
+                    "company": prompt_data["company"],
+                    "filename": prompt_data["filename"],
+                    "product_label": prompt_data.get("product_label", ""),
+                    "total_spans": result["metadata"]["total_spans"],
+                    "cost_usd": cost,
+                    "time_seconds": result["metadata"]["timing"]["total_seconds"],
+                    "status": "success",
+                })
 
-    # Batch Summary
+            except Exception as e:
+                print(f"\n  ❌ FAILED: {e}")
+                results_summary.append({
+                    "company": prompt_data["company"],
+                    "filename": prompt_data["filename"],
+                    "product_label": prompt_data.get("product_label", ""),
+                    "status": "failed",
+                    "error": str(e),
+                })
+                continue
+
+            if prompt_num < total_num:
+                time.sleep(1)
+
+    # ── Batch Summary ──
     total_elapsed = time.time() - batch_t0
+    processed = sum(1 for r in results_summary if r["status"] == "success")
+    failed_count = sum(1 for r in results_summary if r["status"] == "failed")
+    total_cost = sum(r.get("cost_usd", 0) for r in results_summary)
+
     print(f"\n{'='*70}")
     print(f"📊 BATCH SUMMARY")
     print(f"{'='*70}")
     print(f"  Processed:   {processed}/{len(to_process)}")
-    print(f"  Failed:      {failed}")
-    print(f"  Total time:  {format_duration(total_elapsed)}")
+    print(f"  Failed:      {failed_count}")
+    print(f"  Total time:  {format_duration(total_elapsed)} (wall clock)")
     print(f"  Total cost:  ${total_cost:.2f}")
+    if parallel > 1:
+        serial_time = sum(r.get("time_seconds", 0) for r in results_summary)
+        print(f"  Serial time: {format_duration(serial_time)} (sum of all)")
+        print(f"  Speedup:     {serial_time / max(total_elapsed, 1):.1f}x")
     print()
 
-    print(f"  {'Company':15s}  {'Filename':35s}  {'Spans':>6s}  {'Cost':>6s}  {'Time':>7s}  {'Status'}")
-    print(f"  {'─'*90}")
+    results_summary.sort(key=lambda r: r.get("company", ""))
+    print(f"  {'Company':15s}  {'Product':35s}  {'Spans':>6s}  {'Cost':>6s}  {'Time':>7s}  {'Status'}")
+    print(f"  {'─'*95}")
     for r in results_summary:
+        label = r.get("product_label", r.get("filename", ""))[:35]
         if r["status"] == "success":
-            print(f"  {r['company']:15s}  {r['filename']:35s}  "
+            print(f"  {r['company']:15s}  {label:35s}  "
                   f"{r['total_spans']:6d}  ${r['cost_usd']:.2f}  "
                   f"{format_duration(r['time_seconds']):>7s}  ✅")
         else:
-            print(f"  {r['company']:15s}  {r['filename']:35s}  "
+            print(f"  {r['company']:15s}  {label:35s}  "
                   f"{'—':>6s}  {'—':>6s}  {'—':>7s}  ❌ {r.get('error','')[:30]}")
 
-    # Save batch summary
     summary_path = OUTPUT_DIR / "batch_summary.json"
     summary = {
         "batch_info": {
             "total_prompts": len(to_process),
             "processed": processed,
-            "failed": failed,
+            "failed": failed_count,
             "total_time_seconds": round(total_elapsed, 1),
             "total_cost_usd": round(total_cost, 4),
             "model": MODEL,
+            "parallel": parallel,
+            "parallel_dims": parallel_dims,
             "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
         },
         "prompts": results_summary,
@@ -930,7 +1157,21 @@ def main():
                         help="Show plan without processing")
     parser.add_argument("--indices", type=str, default=None,
                         help="Comma-separated indices (overrides default 20)")
+    parser.add_argument("--all", action="store_true",
+                        help="Run on ALL prompts in the data file (use with --batch)")
+    parser.add_argument("--parallel", type=int, default=1,
+                        help="Number of prompts to process in parallel (default: 1)")
+    parser.add_argument("--parallel-dims", action="store_true",
+                        help="Also parallelize 9 dimensions within each prompt")
+    parser.add_argument("--use-full", action="store_true",
+                        help="Use full audit_prompts.json (190) instead of filtered (89)")
     args = parser.parse_args()
+
+    # Switch data file if requested
+    global DATA_FILE
+    if args.use_full:
+        DATA_FILE = DATA_FILE_FULL
+        print(f"📂 Using full dataset: {DATA_FILE}")
 
     # Check API key (unless dry-run)
     if not OPENROUTER_API_KEY and not args.dry_run:
@@ -939,9 +1180,16 @@ def main():
         sys.exit(1)
 
     if args.batch:
-        indices = [int(x.strip()) for x in args.indices.split(",")] \
-            if args.indices else PILOT_20_INDICES
-        run_batch(indices, resume=args.resume, dry_run=args.dry_run)
+        if args.all:
+            with open(DATA_FILE, "r", encoding="utf-8") as f:
+                all_prompts = json.load(f)
+            indices = list(range(len(all_prompts)))
+        elif args.indices:
+            indices = [int(x.strip()) for x in args.indices.split(",")]
+        else:
+            indices = PILOT_20_INDICES
+        run_batch(indices, resume=args.resume, dry_run=args.dry_run,
+                  parallel=args.parallel, parallel_dims=args.parallel_dims)
         return
 
     # Single-prompt mode

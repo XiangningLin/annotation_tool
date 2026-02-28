@@ -31,6 +31,21 @@ python llm_preannotate_v3.py --batch --resume
 # Dry run (show plan, no API calls)
 python llm_preannotate_v3.py --batch --dry-run
 
+# All 89 filtered prompts
+python llm_preannotate_v3.py --batch --all
+
+# Parallel: 5 prompts at a time
+python llm_preannotate_v3.py --batch --all --parallel 5
+
+# Parallel prompts + parallel dimensions (9 API calls per prompt concurrently)
+python llm_preannotate_v3.py --batch --all --parallel 5 --parallel-dims
+
+# Resume interrupted parallel batch
+python llm_preannotate_v3.py --batch --all --parallel 5 --parallel-dims --resume
+
+# Dry run (show plan, no API calls)
+python llm_preannotate_v3.py --batch --all --dry-run
+
 # Custom prompt indices
 python llm_preannotate_v3.py --indices "1,2,3,93,148" --batch
 ```

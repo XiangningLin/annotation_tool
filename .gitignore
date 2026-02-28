@@ -32,3 +32,5 @@ env/
 # IDE
 .idea/
 .vscode/
+
+/outputs*
