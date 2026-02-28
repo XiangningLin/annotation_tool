@@ -266,19 +266,43 @@ def parse_json_array(text: str) -> list:
     text = re.sub(r'^```(?:json)?\s*\n?', '', text)
     text = re.sub(r'\n?```\s*$', '', text)
     text = text.strip()
+
+    # 1. Direct parse
     try:
         result = json.loads(text)
         if isinstance(result, list):
             return result
     except json.JSONDecodeError:
         pass
-    match = re.search(r'\[[\s\S]*\]', text)
-    if match:
-        try:
-            return json.loads(match.group())
-        except json.JSONDecodeError:
-            pass
-    print("    ⚠️  Failed to parse JSON array")
+
+    # 2. Find outermost [ ... ]
+    start = text.find('[')
+    if start >= 0:
+        end = text.rfind(']')
+        if end > start:
+            try:
+                return json.loads(text[start:end + 1])
+            except json.JSONDecodeError:
+                pass
+
+        # 3. Truncated output: [ ... but no closing ]
+        #    Try to repair by finding the last complete object and closing the array
+        candidate = text[start:]
+        last_brace = candidate.rfind('}')
+        if last_brace > 0:
+            repaired = candidate[:last_brace + 1] + ']'
+            try:
+                result = json.loads(repaired)
+                if isinstance(result, list):
+                    print(f"    ⚠️  JSON was truncated, repaired ({len(result)} items recovered)")
+                    return result
+            except json.JSONDecodeError:
+                pass
+
+    # 4. Diagnostic: show what we received
+    preview = text[:200].replace('\n', '\\n') if text else '(empty)'
+    print(f"    ⚠️  Failed to parse JSON array. Response preview: {preview}...")
+    print(f"    ⚠️  Response length: {len(text)} chars")
     return []
 
 
@@ -379,100 +403,47 @@ Return ONLY a JSON array with no markdown fences or extra text:
 ]"""
 
 
-SEGMENTATION_CHUNK_SIZE = 12000  # characters per chunk (~3K tokens text)
+def _estimate_seg_output_tokens(content_len: int) -> int:
+    """Estimate output tokens needed for segmentation.
 
-
-def _split_into_chunks(content: str, chunk_size: int = SEGMENTATION_CHUNK_SIZE) -> list:
-    """Split content into chunks at paragraph boundaries (\n\n).
-
-    Returns list of (chunk_text, start_offset) tuples.
+    The LLM reproduces the full document text inside JSON strings, plus
+    JSON overhead (~30 chars per segment for id/braces/commas).
+    Rough ratio: 1 token ≈ 3.5 chars for mixed English text.
     """
-    if len(content) <= int(chunk_size * 1.3):
-        return [(content, 0)]
-
-    chunks = []
-    pos = 0
-    while pos < len(content):
-        end = min(pos + chunk_size, len(content))
-        if end < len(content):
-            # Try to break at a paragraph boundary
-            search_start = max(pos + chunk_size // 2, pos)
-            break_at = content.rfind('\n\n', search_start, end + chunk_size // 4)
-            if break_at > pos:
-                end = break_at + 2  # include the \n\n
-            else:
-                # Fall back to single newline
-                break_at = content.rfind('\n', search_start, end + chunk_size // 4)
-                if break_at > pos:
-                    end = break_at + 1
-        chunks.append((content[pos:end], pos))
-        pos = end
-
-    return chunks
+    text_tokens = int(content_len / 3.5)
+    json_overhead = int(content_len / 150 * 30 / 3.5)  # ~1 segment per 150 chars
+    return int((text_tokens + json_overhead) * 1.3)     # 30% safety margin
 
 
-def _segment_one_chunk(chunk_text: str, chunk_idx: int, total_chunks: int,
-                       id_offset: int, verbose: bool = True) -> tuple:
-    """Segment a single chunk. Returns (segments_raw, elapsed, in_tok, out_tok)."""
-    prompt = SEGMENTATION_PROMPT.replace("{content}", chunk_text)
-    output_budget = max(MAX_TOKENS, len(chunk_text) // 2)
+def run_segmentation(content: str, verbose: bool = True) -> tuple:
+    """Step 1: Segment document. Returns (segments, stats, timing, tokens)."""
+    if verbose:
+        print("  📐 Step 1: Segmenting document...")
 
-    if verbose and total_chunks > 1:
-        print(f"    📦 Chunk {chunk_idx+1}/{total_chunks}: {len(chunk_text)/1024:.1f}KB")
+    prompt = SEGMENTATION_PROMPT.replace("{content}", content)
+    output_budget = max(MAX_TOKENS, _estimate_seg_output_tokens(len(content)))
+
+    if verbose:
+        print(f"    Output budget: {output_budget} tokens (doc: {len(content)/1024:.1f}KB)")
 
     t0 = time.time()
     resp_json = call_openrouter(prompt, max_tokens=output_budget)
     elapsed = time.time() - t0
     output, in_tok, out_tok = extract_response(resp_json)
+
+    if verbose:
+        print(f"    ⏱  {elapsed:.1f}s | Tokens: {in_tok} in, {out_tok} out")
+        if out_tok >= output_budget * 0.95:
+            print(f"    ⚠️  Output may have been truncated ({out_tok}/{output_budget} tokens used)")
+
     segments_raw = parse_json_array(output)
 
-    # Re-number segment IDs to avoid collisions across chunks
-    for i, seg in enumerate(segments_raw):
-        seg["id"] = f"S{id_offset + i + 1:03d}"
-
     if verbose:
-        print(f"    ⏱  {elapsed:.1f}s | {len(segments_raw)} segments | Tokens: {in_tok} in, {out_tok} out")
+        print(f"    📊 {len(segments_raw)} raw segments parsed")
 
-    return segments_raw, elapsed, in_tok, out_tok
+    segments, stats = validate_segments(content, segments_raw, verbose=verbose)
 
-
-def run_segmentation(content: str, verbose: bool = True) -> tuple:
-    """Step 1: Segment document (auto-chunks large docs). Returns (segments, stats, timing, tokens)."""
-    if verbose:
-        print("  📐 Step 1: Segmenting document...")
-
-    chunks = _split_into_chunks(content)
-    all_segments_raw = []
-    total_elapsed = 0
-    total_in = 0
-    total_out = 0
-    id_offset = 0
-
-    if verbose and len(chunks) > 1:
-        print(f"  📦 Document too large ({len(content)/1024:.1f}KB), splitting into {len(chunks)} chunks")
-
-    for ci, (chunk_text, chunk_start) in enumerate(chunks):
-        seg_raw, elapsed, in_tok, out_tok = _segment_one_chunk(
-            chunk_text, ci, len(chunks), id_offset, verbose=verbose)
-
-        # Adjust text offsets: the LLM returns text relative to the chunk,
-        # but validate_segments will search in the full content, so we just
-        # pass them through — _find_in_content handles it.
-        all_segments_raw.extend(seg_raw)
-        id_offset += len(seg_raw)
-        total_elapsed += elapsed
-        total_in += in_tok
-        total_out += out_tok
-
-        if len(chunks) > 1 and ci < len(chunks) - 1:
-            time.sleep(1)
-
-    if verbose:
-        print(f"  ⏱  Total: {total_elapsed:.1f}s | {len(all_segments_raw)} raw segments")
-
-    segments, stats = validate_segments(content, all_segments_raw, verbose=verbose)
-
-    return segments, stats, {"seconds": round(total_elapsed, 1)}, {"input": total_in, "output": total_out}
+    return segments, stats, {"seconds": round(elapsed, 1)}, {"input": in_tok, "output": out_tok}
 
 
 MIN_SEGMENT_CHARS = 2  # segments shorter than this (after strip) are dropped
