@@ -332,7 +332,7 @@
     .card-score-btn.negative { border-color: var(--negative); }
     .card-score-btn.selected.positive { background: rgba(34, 197, 94, 0.45); color: #fff; border-color: var(--positive); border-width: 2px; box-shadow: 0 0 8px rgba(34, 197, 94, 0.4); }
     .card-score-btn.selected.negative { background: rgba(239, 68, 68, 0.45); color: #fff; border-color: var(--negative); border-width: 2px; box-shadow: 0 0 8px rgba(239, 68, 68, 0.4); }
-    .card-add-score-btn.selected { font-weight: 700; transform: scale(1.1); }
+    .card-add-score-btn.selected { font-weight: 700; }
     .card-add-score-btn.selected.positive { background: rgba(34, 197, 94, 0.5) !important; color: #fff !important; border-color: var(--positive) !important; box-shadow: 0 0 8px rgba(34, 197, 94, 0.4); }
     .card-add-score-btn.selected.negative { background: rgba(239, 68, 68, 0.5) !important; color: #fff !important; border-color: var(--negative) !important; box-shadow: 0 0 8px rgba(239, 68, 68, 0.4); }
 
@@ -1043,7 +1043,7 @@ function renderPromptContent() {
   const text = p.content || '';
   if (!text) { contentBody.innerHTML = '<div class="empty-state"><span class="empty-state-text">Empty prompt</span></div>'; return; }
 
-  const spans = currentSpans.map((s, i) => ({ ...s, _origIdx: i }));
+  const spans = currentSpans.map((s, i) => ({ ...s, _origIdx: i })).filter(s => !s.rejected);
 
   if (spans.length === 0) {
     contentBody.innerHTML = `<div class="prompt-text-display" id="promptTextDisplay">${escHtml(text)}</div>`;
@@ -1294,14 +1294,12 @@ function renderAnnotations() {
       </div>`;
     });
 
-    // "Add dimension" section — table layout: Dim | +1 | -1
+    // "Add dimension" section — column layout with select-then-add flow
     const availableDims = dimensions.filter(d => !groupDimKeys.includes(d.key) && d.key !== 'D9');
     let dimTableRows = availableDims.map(d => {
       const dc = dimColor(d.key);
-      return `<div class="card-add-dim-row" data-group-key="${key}" data-dim="${d.key}" style="display:flex;align-items:center;gap:0.3rem;padding:0.15rem 0;border-bottom:1px solid rgba(44,44,64,0.3);">
-        <span style="flex:1;font-size:0.6rem;color:var(--text-muted);"><span style="color:${dc};font-weight:600;">${d.key}</span> ${dimName(d.key)}</span>
-        <button class="card-add-quick-btn" data-group-key="${key}" data-dim="${d.key}" data-score="1" style="flex:0 0 32px;padding:0.15rem 0;font-size:0.58rem;border-radius:4px;cursor:pointer;border:1px solid var(--positive);background:var(--positive-bg);color:var(--positive);text-align:center;font-weight:600;">+1</button>
-        <button class="card-add-quick-btn" data-group-key="${key}" data-dim="${d.key}" data-score="-1" style="flex:0 0 32px;padding:0.15rem 0;font-size:0.58rem;border-radius:4px;cursor:pointer;border:1px solid var(--negative);background:var(--negative-bg);color:var(--negative);text-align:center;font-weight:600;">-1</button>
+      return `<div class="card-add-dim-row" data-group-key="${key}" data-dim="${d.key}" style="display:flex;align-items:center;gap:0.3rem;padding:0.2rem 0;border-bottom:1px solid rgba(44,44,64,0.3);cursor:pointer;border-radius:4px;" title="Click to select">
+        <span style="flex:1;font-size:0.62rem;color:var(--text-muted);"><span style="color:${dc};font-weight:600;">${d.key}</span> ${dimName(d.key)}</span>
       </div>`;
     }).join('');
 
@@ -1313,15 +1311,19 @@ function renderAnnotations() {
       <div style="margin-top:0.4rem;">${dimRows}</div>
       <div class="card-extra-dim-section" data-group-key="${key}" style="border-top:1px solid var(--border);margin-top:0.35rem;padding-top:0.3rem;">
         <div style="font-size:0.62rem;color:var(--accent);margin-bottom:0.3rem;font-weight:600;">📝 Add other dimensions? (optional)</div>
-        <div class="card-add-dim-table" data-group-key="${key}" style="margin-bottom:0.3rem;">${dimTableRows}
-          <div style="display:flex;align-items:center;gap:0.3rem;padding:0.2rem 0;">
-            <span style="flex:1;font-size:0.6rem;color:#94a3b8;font-weight:600;">Misc</span>
-            <input type="text" class="card-misc-note" data-group-key="${key}" placeholder="Note (required)..." style="flex:2;padding:0.15rem 0.3rem;font-size:0.58rem;background:var(--bg-dark);border:1px solid var(--border);border-radius:4px;color:var(--text-primary);font-family:inherit;" />
-            <button class="card-add-misc-btn" data-group-key="${key}" style="flex:0 0 auto;padding:0.15rem 0.5rem;font-size:0.58rem;border-radius:4px;cursor:pointer;border:1px solid #94a3b8;background:transparent;color:#94a3b8;font-weight:600;">Add</button>
+        <div class="card-add-dim-list" data-group-key="${key}" style="margin-bottom:0.3rem;">${dimTableRows}
+          <div class="card-add-dim-row" data-group-key="${key}" data-dim="Misc" style="display:flex;align-items:center;gap:0.3rem;padding:0.2rem 0;cursor:pointer;border-radius:4px;" title="Click to select">
+            <span style="flex:1;font-size:0.62rem;color:#94a3b8;font-weight:600;">Misc</span>
           </div>
         </div>
-        <div class="card-add-note-row" data-group-key="${key}" style="display:none;margin-bottom:0.25rem;">
-          <input type="text" class="card-add-note-input" data-group-key="${key}" placeholder="Comment (optional)..." style="width:100%;padding:0.25rem 0.4rem;font-size:0.6rem;background:var(--bg-dark);border:1px solid var(--border);border-radius:4px;color:var(--text-primary);font-family:inherit;" />
+        <div class="card-add-controls" data-group-key="${key}" style="display:none;background:var(--bg-dark);border:1px solid var(--border);border-radius:6px;padding:0.4rem;margin-bottom:0.3rem;">
+          <div style="font-size:0.62rem;color:var(--accent-light);font-weight:600;margin-bottom:0.3rem;" class="card-add-selected-label"></div>
+          <div class="card-add-score-row" style="display:flex;gap:0.3rem;margin-bottom:0.3rem;">
+            <button class="card-add-score-btn positive" data-group-key="${key}" data-score="1" style="flex:1;padding:0.25rem 0;font-size:0.68rem;border-radius:5px;cursor:pointer;border:1.5px solid var(--positive);background:var(--positive-bg);color:var(--positive);font-weight:600;text-align:center;">+1</button>
+            <button class="card-add-score-btn negative" data-group-key="${key}" data-score="-1" style="flex:1;padding:0.25rem 0;font-size:0.68rem;border-radius:5px;cursor:pointer;border:1.5px solid var(--negative);background:var(--negative-bg);color:var(--negative);font-weight:600;text-align:center;">-1</button>
+          </div>
+          <input type="text" class="card-add-note-input" data-group-key="${key}" placeholder="Comment (optional)..." style="width:100%;padding:0.25rem 0.4rem;font-size:0.62rem;background:var(--bg-elevated);border:1px solid var(--border);border-radius:4px;color:var(--text-primary);font-family:inherit;margin-bottom:0.3rem;" />
+          <button class="card-add-confirm-btn" data-group-key="${key}" style="width:100%;font-size:0.68rem;padding:0.25rem 0;border-radius:5px;cursor:pointer;border:1px solid var(--accent);background:var(--accent);color:#fff;font-weight:600;">✓ Add</button>
         </div>
         <button class="btn-finish-card" data-group-key="${key}" style="width:100%;margin-top:0.35rem;padding:0.35rem 0;font-size:0.72rem;border-radius:6px;cursor:pointer;border:1px solid var(--border);background:var(--bg-elevated);color:var(--text-secondary);font-weight:600;">✅ Done</button>
       </div>
@@ -1496,71 +1498,132 @@ function renderAnnotations() {
     });
   });
 
-  // ── Add-dim: quick add via table row (+1/-1 buttons) ──
-  annBody.querySelectorAll('.card-add-quick-btn').forEach(btn => {
-    btn.addEventListener('click', e => {
+  // ── Add-dim: select dimension from list ──
+  let pendingAddDim = {};
+  let pendingAddScore = {};
+  annBody.querySelectorAll('.card-add-dim-row').forEach(row => {
+    row.addEventListener('click', e => {
       e.stopPropagation();
-      const gk = btn.dataset.groupKey;
-      const dim = btn.dataset.dim;
-      const score = parseInt(btn.dataset.score);
-      const card = btn.closest('.annotation-card');
-      const noteRow = card.querySelector('.card-add-note-row');
-      const noteInput = card.querySelector('.card-add-note-input');
-      const note = noteInput ? noteInput.value.trim() : '';
+      if (row.dataset.added === 'true') return;
+      const gk = row.dataset.groupKey;
+      const dim = row.dataset.dim;
+      const card = row.closest('.annotation-card');
+      const controls = card.querySelector('.card-add-controls');
+      const label = controls.querySelector('.card-add-selected-label');
+      const scoreRow = controls.querySelector('.card-add-score-row');
+      const noteInput = controls.querySelector('.card-add-note-input');
 
-      const indices = card.dataset.groupIndices.split(',').map(Number);
-      const ref = currentSpans[indices[0]];
-      currentSpans.push({
-        start: ref.start, end: ref.end, text: ref.text,
-        dimension: dim, score: score, note: note,
-        source: 'human', reviewed: true,
-      });
-      autoSave();
+      // Toggle: click again to deselect
+      if (pendingAddDim[gk] === dim) {
+        pendingAddDim[gk] = null;
+        pendingAddScore[gk] = null;
+        row.style.background = '';
+        controls.style.display = 'none';
+        return;
+      }
 
-      // Replace the row with "added" + undo
-      const row = btn.closest('.card-add-dim-row');
-      const dc = dimColor(dim);
-      const scoreLabel = score === 1 ? '+1' : '-1';
-      const origHtml = row.innerHTML;
-      row.innerHTML = `<span style="flex:1;font-size:0.58rem;color:${dc};font-weight:600;">${dim} ${dimName(dim)} ${scoreLabel} ✓</span><button class="btn-undo-add" style="font-size:0.54rem;padding:0.06rem 0.25rem;border-radius:3px;cursor:pointer;border:1px solid var(--border);background:var(--bg-dark);color:var(--text-muted);font-family:inherit;">↩</button>`;
-      row.querySelector('.btn-undo-add').addEventListener('click', ev => {
-        ev.stopPropagation();
-        for (let ri = currentSpans.length - 1; ri >= 0; ri--) {
-          const rs = currentSpans[ri];
-          if (rs.start === ref.start && rs.end === ref.end && rs.dimension === dim && rs.source === 'human') {
-            currentSpans.splice(ri, 1); break;
-          }
-        }
-        autoSave();
-        renderPromptContent(); renderAnnotations();
-        showToast('↩ Removed ' + dim);
-      });
+      // Deselect previous
+      card.querySelectorAll('.card-add-dim-row').forEach(r => { r.style.background = ''; });
+      pendingAddDim[gk] = dim;
+      pendingAddScore[gk] = null;
+      const dc = dim === 'Misc' ? '#94a3b8' : dimColor(dim);
+      row.style.background = `${dc}18`;
+
+      // Show controls
+      controls.style.display = '';
+      label.textContent = dim === 'Misc' ? 'Misc — note required' : `${dim} ${dimName(dim)}`;
+      label.style.color = dc;
+
+      // Misc: hide score buttons, show only note
+      if (dim === 'Misc') {
+        scoreRow.style.display = 'none';
+        noteInput.placeholder = 'Note (required for Misc)...';
+      } else {
+        scoreRow.style.display = 'flex';
+        noteInput.placeholder = 'Comment (optional)...';
+      }
+      controls.querySelectorAll('.card-add-score-btn').forEach(b => b.classList.remove('selected'));
     });
   });
 
-  // ── Add Misc (note only, no score) ──
-  annBody.querySelectorAll('.card-add-misc-btn').forEach(btn => {
+  // ── Add-dim: select score (+1/-1 toggle) ──
+  annBody.querySelectorAll('.card-add-score-btn').forEach(btn => {
     btn.addEventListener('click', e => {
       e.stopPropagation();
       const gk = btn.dataset.groupKey;
       const card = btn.closest('.annotation-card');
-      const noteInput = card.querySelector('.card-misc-note');
+      if (btn.classList.contains('selected')) {
+        btn.classList.remove('selected');
+        pendingAddScore[gk] = null;
+      } else {
+        card.querySelectorAll('.card-add-score-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        pendingAddScore[gk] = parseInt(btn.dataset.score);
+      }
+    });
+  });
+
+  // ── Add-dim: confirm ──
+  annBody.querySelectorAll('.card-add-confirm-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const gk = btn.dataset.groupKey;
+      const dim = pendingAddDim[gk];
+      const score = pendingAddScore[gk];
+      const card = btn.closest('.annotation-card');
+      const noteInput = card.querySelector('.card-add-note-input');
       const note = noteInput ? noteInput.value.trim() : '';
-      if (!note) { showToast('Please add a note for Misc', true); return; }
+
+      if (!dim) { showToast('Please select a dimension first', true); return; }
+      if (dim === 'Misc') {
+        if (!note) { showToast('Please add a note for Misc', true); return; }
+      } else {
+        if (score === null || score === undefined) { showToast('Please select +1 or -1', true); return; }
+      }
 
       const indices = card.dataset.groupIndices.split(',').map(Number);
       const ref = currentSpans[indices[0]];
       currentSpans.push({
         start: ref.start, end: ref.end, text: ref.text,
-        dimension: 'Misc', score: 0, note: note,
+        dimension: dim, score: dim === 'Misc' ? 0 : score, note: note,
         source: 'human', reviewed: true,
       });
       autoSave();
-      noteInput.value = '';
-      btn.textContent = '✓ Added';
-      btn.style.color = 'var(--positive)';
-      btn.style.borderColor = 'var(--positive)';
-      setTimeout(() => { btn.textContent = 'Add'; btn.style.color = '#94a3b8'; btn.style.borderColor = '#94a3b8'; }, 2000);
+
+      // Mark the row as added
+      const dimRow = card.querySelector(`.card-add-dim-row[data-dim="${dim}"]`);
+      if (dimRow) {
+        const dc = dim === 'Misc' ? '#94a3b8' : dimColor(dim);
+        const sl = dim === 'Misc' ? 'note' : (score === 1 ? '+1' : '-1');
+        const origDimHtml = dimRow.innerHTML;
+        dimRow.innerHTML = `<span style="flex:1;font-size:0.6rem;color:${dc};font-weight:600;">${dim} ${sl} ✓</span><button class="btn-undo-extra" style="font-size:0.54rem;padding:0.08rem 0.3rem;border-radius:3px;cursor:pointer;border:1px solid var(--border);background:var(--bg-dark);color:var(--text-muted);font-family:inherit;">↩</button>`;
+        dimRow.style.background = '';
+        dimRow.style.cursor = 'default';
+        dimRow.dataset.added = 'true';
+        dimRow.querySelector('.btn-undo-extra').addEventListener('click', ev => {
+          ev.stopPropagation();
+          for (let ri = currentSpans.length - 1; ri >= 0; ri--) {
+            const rs = currentSpans[ri];
+            if (rs.start === ref.start && rs.end === ref.end && rs.dimension === dim && rs.source === 'human') {
+              currentSpans.splice(ri, 1); break;
+            }
+          }
+          autoSave();
+          dimRow.innerHTML = origDimHtml;
+          dimRow.style.cursor = 'pointer';
+          delete dimRow.dataset.added;
+          showToast('↩ Removed ' + dim);
+        });
+      }
+
+      // Reset controls
+      const controls = card.querySelector('.card-add-controls');
+      controls.style.display = 'none';
+      card.querySelectorAll('.card-add-score-btn').forEach(b => b.classList.remove('selected'));
+      if (noteInput) noteInput.value = '';
+      pendingAddDim[gk] = null;
+      pendingAddScore[gk] = null;
+      showToast(`✓ Added ${dim}`);
     });
   });
 
@@ -2198,6 +2261,18 @@ function updateGlobalNav() {
   btnNext.disabled = global >= total - 1;
 }
 
+function isCurrentSpanPending() {
+  const cards = getSpanCards();
+  if (cards.length > 0 && currentSpanNavIdx < cards.length) {
+    const card = cards[currentSpanNavIdx];
+    if (card && card.classList.contains('grouped-card')) {
+      const finishBtn = card.querySelector('.btn-finish-card');
+      if (finishBtn && finishBtn.style.display !== 'none') return true;
+    }
+  }
+  return false;
+}
+
 btnPrev.addEventListener('click', async () => {
   if (currentSpanNavIdx > 0) {
     currentSpanNavIdx--;
@@ -2214,6 +2289,10 @@ btnPrev.addEventListener('click', async () => {
   }
 });
 btnNext.addEventListener('click', async () => {
+  if (isCurrentSpanPending()) {
+    showToast('Please click Done first', true);
+    return;
+  }
   const cards = getSpanCards();
   if (currentSpanNavIdx < cards.length - 1) {
     currentSpanNavIdx++;
