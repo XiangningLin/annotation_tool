@@ -35,3 +35,4 @@ env/
 
 /outputs*
 training_tool/outputs/
+training_tool/review_state.json

@@ -2113,28 +2113,38 @@ function showGoldComparison(pid, goldData) {
   $('goldOverlay').style.display = '';
   goldCheckedPrompts.add(pid);
 
+  const nextBtn = $('goldNextBtn');
+  const allReviewed = getUnreviewedSummary().length === 0;
+  if (allReviewed) {
+    nextBtn.textContent = 'All done! Close & Export ↗';
+    nextBtn.style.background = 'var(--positive)';
+    nextBtn.disabled = false;
+  } else if (currentIndex >= rangePrompts.length - 1) {
+    nextBtn.textContent = 'No more prompts — close & review remaining';
+    nextBtn.style.background = 'var(--bg-elevated)';
+    nextBtn.style.color = 'var(--text-muted)';
+    nextBtn.disabled = true;
+  } else {
+    nextBtn.textContent = 'Next Prompt →';
+    nextBtn.style.background = 'var(--accent)';
+    nextBtn.style.color = '#fff';
+    nextBtn.disabled = false;
+  }
+
   trainingResults[pid] = { total, correct: correctCount, accepted, rejected };
 }
 
 $('goldCloseBtn').addEventListener('click', () => { $('goldOverlay').style.display = 'none'; });
 $('goldNextBtn').addEventListener('click', async () => {
   $('goldOverlay').style.display = 'none';
+  const allReviewed = getUnreviewedSummary().length === 0;
+  if (allReviewed) {
+    btnExport.click();
+    return;
+  }
   if (currentIndex < rangePrompts.length - 1) {
     currentIndex++;
     await loadAndRender();
-  } else {
-    await autoSave();
-    updateExportButton();
-    const missing = getUnreviewedSummary();
-    if (missing.length > 0) {
-      alert(
-        `You still have unreviewed spans:\n\n` +
-        missing.join('\n') +
-        `\n\nPlease review all spans before finishing.`
-      );
-      return;
-    }
-    showSummary();
   }
 });
 
