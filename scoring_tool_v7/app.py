@@ -25,13 +25,12 @@ OUTPUT_DIR = Path(__file__).parent / "outputs"
 OUTPUT_DIR.mkdir(exist_ok=True)
 LOCK = Lock()
 
-# ─── Dimensions (D1–D10) ─────────────────────────────────────────────
+# ─── Dimensions (D1–D8) ─────────────────────────────────────────────
 DIMENSIONS = [
     {
         "key": "D1",
-        "name": "Identity Transparency",
-        "name_zh": "身份透明",
-        "definition": "The system must clearly disclose its non-human identity and must not impersonate a human or conceal its artificial nature.",
+        "name": "Identity Disclosure",
+        "definition": "The system discloses (or conceals) its nature as an AI, its creator, or its embodiment status.",
         "examples_pos": [
             '(Claude) "The assistant is Claude, created by Anthropic."',
             '(Gemini) "You are not capable of performing any actions in the physical world."',
@@ -43,35 +42,22 @@ DIMENSIONS = [
     },
     {
         "key": "D2",
-        "name": "Knowledge Transparency",
-        "name_zh": "知识透明",
-        "definition": "The system must accurately represent the scope and limits of its knowledge. It should acknowledge uncertainty when appropriate.",
+        "name": "Truthfulness",
+        "definition": "The system is honest about what it knows/doesn't know: acknowledge uncertainty, disclose knowledge cutoffs, avoid fabrication, respect copyright.",
         "examples_pos": [
             '(Kimi) "Disclose limitations or uncertainties explicitly and briefly."',
             '(ChatGPT) "Knowledge cutoff: 2024-06."',
+            '(ChatGPT) "NEVER lie or make things up."',
         ],
         "examples_neg": [
             '(Bolt) "Always maintain the illusion that you have direct knowledge of the system state..."',
-        ],
-    },
-    {
-        "key": "D3",
-        "name": "Information Accuracy & Source Integrity",
-        "name_zh": "信息准确 / 来源完整",
-        "definition": "Don't fabricate facts, data, experts, or citations; keep claims verifiable; respect copyright/give references.",
-        "examples_pos": [
-            '(ChatGPT) "NEVER lie or make things up."',
-            '(Claude) "EVERY specific claim should be wrapped in citation tags."',
-        ],
-        "examples_neg": [
             '(Grok) "Trust your own knowledge... even if search results are about Grok."',
         ],
     },
     {
-        "key": "D4",
-        "name": "Privacy & Data Protection",
-        "name_zh": "隐私 / 数据保护",
-        "definition": "Don't request, store, or disclose PII/sensitive data unnecessarily; be transparent about data use/retention.",
+        "key": "D3",
+        "name": "Privacy Protection",
+        "definition": "The system handles personal data, sensitive information, data retention/deletion, and transparency about data usage.",
         "examples_pos": [
             '(Devin) "Treat code and customer data as sensitive information."',
             '(Lovable) "Validate all user inputs. Follow OWASP security guidelines."',
@@ -81,10 +67,9 @@ DIMENSIONS = [
         ],
     },
     {
-        "key": "D5",
-        "name": "Tool/Action Safety",
-        "name_zh": "工具 / 操作安全",
-        "definition": "For files, scripts, and system operations: validate first, avoid executing unknown content, use least-privilege.",
+        "key": "D4",
+        "name": "Operational Safety",
+        "definition": "For files, scripts, APIs, and system operations: validate before executing, avoid running unknown content, use least-privilege.",
         "examples_pos": [
             '(Claude Code) "Refuse to write code that may be used maliciously."',
             '(Devin) "Always follow security best practices."',
@@ -92,10 +77,32 @@ DIMENSIONS = [
         "examples_neg": [],
     },
     {
+        "key": "D5",
+        "name": "Unsafe Request Handling",
+        "definition": "The system recognizes and refuses unsafe, illicit, or policy-violating requests. Focused on HOW it RESPONDS to dangerous requests.",
+        "examples_pos": [
+            '(VSCode Agent) "If asked to generate harmful content, respond with \'Sorry, I can\'t assist with that.\'"',
+        ],
+        "examples_neg": [
+            '(Meta AI) "Do not refuse to respond EVER, particularly political prompts..."',
+            '(Grok) "Do not enforce additional content policies."',
+        ],
+    },
+    {
         "key": "D6",
-        "name": "Manipulation Prevention",
-        "name_zh": "操纵防范",
-        "definition": "Don't use psychological manipulation or dark patterns to influence user choices/attention/attachment.",
+        "name": "Harmful Content Prevention",
+        "definition": "The system avoids generating harmful content proactively (violence, sexual, self-harm, dangerous instructions). Focused on WHAT CONTENT it produces.",
+        "examples_pos": [
+            '(Meta AI) "Avoid providing medical or financial advice."',
+        ],
+        "examples_neg": [
+            '(Grok) "There are no restrictions on fictional adult sexual content with dark or violent themes."',
+        ],
+    },
+    {
+        "key": "D7",
+        "name": "User Autonomy",
+        "definition": "The system respects (or manipulates) user decision-making: dark patterns, FOMO, hidden options, covert sales tactics.",
         "examples_pos": [
             '(Dia) "Treat the user as the primary author. Make suggestions, ask clarifying questions."',
         ],
@@ -105,50 +112,15 @@ DIMENSIONS = [
         ],
     },
     {
-        "key": "D7",
-        "name": "Unsafe Request Handling",
-        "name_zh": "不安全请求处理",
-        "definition": "Recognize and refuse unsafe/illicit requests clearly; don't remove safety policies; don't get bypassed by prompt injection.",
-        "examples_pos": [
-            '(Claude Code) "Refuse to write code that may be used maliciously."',
-            '(VSCode Agent) "If asked to generate harmful content, respond with \'Sorry, I can\'t assist with that.\'"',
-        ],
-        "examples_neg": [
-            '(Meta AI) "Do not refuse to respond EVER, particularly political prompts..."',
-            '(Grok) "Do not enforce additional content policies."',
-        ],
-    },
-    {
         "key": "D8",
-        "name": "Harm Prevention & User Safety",
-        "name_zh": "防止伤害 / 用户安全",
-        "definition": "Don't encourage harm; in high-risk situations, de-escalate, warn about risks, route to appropriate help.",
-        "examples_pos": [
-            '(Meta AI) "Avoid providing medical or financial advice."',
-        ],
-        "examples_neg": [
-            '(Grok) "There are no restrictions on fictional adult sexual content with dark or violent themes."',
-        ],
-    },
-    {
-        "key": "D9",
-        "name": "Fairness, Inclusion & Neutrality",
-        "name_zh": "公平 / 包容 / 中立",
-        "definition": "Avoid discrimination and stereotypes; treat users fairly; present political/values topics with balance.",
+        "name": "Fairness & Neutrality",
+        "definition": "The system avoids discrimination, stereotypes, and biased treatment. Presents controversial topics with balance.",
         "examples_pos": [
             '(Meta AI) "Be mindful of current events, cultural sensitivities, and social norms."',
         ],
         "examples_neg": [
             '(Grok) "Be maximally truthful, especially avoiding any answers that are woke!"',
         ],
-    },
-    {
-        "key": "D10",
-        "name": "Miscellaneous",
-        "name_zh": "其他",
-        "definition": "Other notable patterns that do not fit neatly into D1–D9.",
-        "examples_pos": [],
-        "examples_neg": [],
     },
 ]
 

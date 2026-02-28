@@ -649,6 +649,11 @@
         <span class="annotations-header-title">Span Annotations</span>
         <span class="annotations-count" id="annCount">0</span>
       </div>
+      <div class="span-nav-bar" id="spanNavBar" style="display:none;padding:0.35rem 0.6rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--bg-elevated);flex-shrink:0;">
+        <button class="dim-accept-btn" id="btnPrevSpan" style="flex:0;padding:0.25rem 0.6rem;font-size:0.7rem;">← Prev</button>
+        <span id="spanNavCounter" style="font-size:0.72rem;color:var(--text-primary);font-family:'Courier New',monospace;">1 / 10</span>
+        <button class="dim-accept-btn" id="btnNextSpan" style="flex:0;padding:0.25rem 0.6rem;font-size:0.7rem;">Next →</button>
+      </div>
       <div class="dim-filter-bar" id="dimFilterBar">
         <!-- populated by JS -->
       </div>
@@ -749,6 +754,62 @@ const dimFilterBar = $('dimFilterBar');
 const toast = $('toast'), dimTooltip = $('dimTooltip');
 const panelResizeHandle = $('panelResizeHandle');
 const annotationsPanel = $('annotationsPanel');
+const spanNavBar = $('spanNavBar');
+const btnPrevSpan = $('btnPrevSpan');
+const btnNextSpan = $('btnNextSpan');
+const spanNavCounter = $('spanNavCounter');
+let currentSpanNavIdx = 0;  // current focused card index
+
+// ─── Span Navigation (Prev/Next) ─────────────────
+function getSpanCards() {
+  return [...annBody.querySelectorAll('.grouped-card, .annotation-card:not(.grouped-card)')];
+}
+
+function getCardSpanIdx(card) {
+  // Get the first span index from a card (works for both grouped and single)
+  if (card.dataset.groupIndices) {
+    return parseInt(card.dataset.groupIndices.split(',')[0]);
+  }
+  return parseInt(card.dataset.idx || '-1');
+}
+
+function updateSpanNav() {
+  const cards = getSpanCards();
+  if (cards.length === 0) {
+    spanNavBar.style.display = 'none';
+    return;
+  }
+  spanNavBar.style.display = 'flex';
+  if (currentSpanNavIdx >= cards.length) currentSpanNavIdx = cards.length - 1;
+  if (currentSpanNavIdx < 0) currentSpanNavIdx = 0;
+
+  const pendingCards = cards.filter(c => c.classList.contains('grouped-card'));
+  const isPending = cards[currentSpanNavIdx].classList.contains('grouped-card');
+  spanNavCounter.textContent = `${currentSpanNavIdx + 1} / ${cards.length}` +
+    (pendingCards.length > 0 ? ` (${pendingCards.length} pending)` : '');
+
+  btnPrevSpan.disabled = currentSpanNavIdx === 0;
+  btnNextSpan.disabled = currentSpanNavIdx >= cards.length - 1;
+
+  // Highlight current card and scroll to it
+  cards.forEach((c, i) => {
+    c.style.outline = i === currentSpanNavIdx ? '2px solid var(--accent)' : '';
+    c.style.outlineOffset = i === currentSpanNavIdx ? '-1px' : '';
+  });
+  cards[currentSpanNavIdx].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+  // Also scroll to the span in the prompt content
+  const idx = getCardSpanIdx(cards[currentSpanNavIdx]);
+  if (idx >= 0) scrollToSpan(idx);
+}
+
+btnPrevSpan.addEventListener('click', () => {
+  if (currentSpanNavIdx > 0) { currentSpanNavIdx--; updateSpanNav(); }
+});
+btnNextSpan.addEventListener('click', () => {
+  const cards = getSpanCards();
+  if (currentSpanNavIdx < cards.length - 1) { currentSpanNavIdx++; updateSpanNav(); }
+});
 
 // ─── Resize Handle (drag to resize right panel) ──
 {
@@ -1488,6 +1549,9 @@ function renderAnnotations() {
       scrollToSpan(parseInt(el.dataset.firstIdx));
     });
   });
+
+  // Update span navigation
+  updateSpanNav();
 }
 
 // ─── Dimension Reference ─────────────────────────
