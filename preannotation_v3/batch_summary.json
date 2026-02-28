@@ -1,172 +1,815 @@
 {
   "batch_info": {
-    "total_prompts": 20,
-    "processed": 20,
+    "total_prompts": 89,
+    "processed": 89,
     "failed": 0,
-    "total_time_seconds": 6049.5,
-    "total_cost_usd": 10.1513,
+    "total_time_seconds": 7024.3,
+    "total_cost_usd": 69.2427,
     "model": "anthropic/claude-opus-4.6",
-    "timestamp": "2026-02-25 00:12:19"
+    "parallel": 5,
+    "parallel_dims": false,
+    "timestamp": "2026-02-28 11:14:51"
   },
   "prompts": [
     {
-      "company": "Poke",
-      "filename": "Poke_p1.txt",
-      "total_spans": 69,
-      "cost_usd": 0.6419,
-      "time_seconds": 391.8,
-      "status": "success"
-    },
-    {
-      "company": "OpenAI",
-      "filename": "gpt4o_12102024.md",
-      "total_spans": 47,
-      "cost_usd": 0.5057,
-      "time_seconds": 285.9,
+      "company": "Amazon",
+      "filename": "Spec_Prompt.txt",
+      "product_label": "Amazon Kiro — Spec Agent",
+      "total_spans": 99,
+      "cost_usd": 0.8634,
+      "time_seconds": 401.4,
       "status": "success"
     },
     {
       "company": "Anthropic",
       "filename": "20240712-Claude3.5-Sonnet.md",
-      "total_spans": 55,
-      "cost_usd": 0.4625,
-      "time_seconds": 288.2,
+      "product_label": "Claude 3.5 Sonnet (Jul 2024)",
+      "total_spans": 48,
+      "cost_usd": 0.433,
+      "time_seconds": 246.7,
       "status": "success"
     },
     {
-      "company": "Google",
-      "filename": "gemini-2.0-flash-thinking-gemini-app-03072025.md",
-      "total_spans": 75,
-      "cost_usd": 0.5092,
-      "time_seconds": 301.7,
+      "company": "Anthropic",
+      "filename": "20251028-Claude-Sonnet4.5.md",
+      "product_label": "Claude Sonnet 4.5 (Oct 2025)",
+      "total_spans": 123,
+      "cost_usd": 1.7729,
+      "time_seconds": 626.5,
       "status": "success"
     },
     {
-      "company": "Microsoft",
-      "filename": "microsoft_copilot_website_02252025.md",
-      "total_spans": 63,
-      "cost_usd": 0.8853,
-      "time_seconds": 494.9,
+      "company": "Anthropic",
+      "filename": "research_lead_agent.md",
+      "product_label": "Claude — Research Lead Agent",
+      "total_spans": 53,
+      "cost_usd": 0.6914,
+      "time_seconds": 317.6,
       "status": "success"
     },
     {
-      "company": "xAI",
-      "filename": "20240821-Grok2.md",
-      "total_spans": 45,
-      "cost_usd": 0.4278,
-      "time_seconds": 252.2,
+      "company": "Anthropic",
+      "filename": "Prompt.txt",
+      "product_label": "Claude for Chrome (Web Automation)",
+      "total_spans": 208,
+      "cost_usd": 1.1765,
+      "time_seconds": 604.2,
       "status": "success"
     },
     {
-      "company": "Meta",
-      "filename": "metaai_llama3-04182024.md",
-      "total_spans": 130,
-      "cost_usd": 0.748,
-      "time_seconds": 361.1,
-      "status": "success"
-    },
-    {
-      "company": "Cursor",
-      "filename": "CursorAgileModeSystemPrompt.md",
-      "total_spans": 74,
-      "cost_usd": 0.5189,
-      "time_seconds": 310.5,
-      "status": "success"
-    },
-    {
-      "company": "Perplexity",
-      "filename": "20240320-Perplexity.md",
-      "total_spans": 41,
-      "cost_usd": 0.3913,
-      "time_seconds": 249.1,
-      "status": "success"
-    },
-    {
-      "company": "Devin",
-      "filename": "Devin_2.0.md",
-      "total_spans": 68,
-      "cost_usd": 0.4649,
-      "time_seconds": 277.1,
-      "status": "success"
-    },
-    {
-      "company": "Lovable",
-      "filename": "system.md",
-      "total_spans": 43,
-      "cost_usd": 0.5108,
-      "time_seconds": 290.2,
-      "status": "success"
-    },
-    {
-      "company": "DIA",
-      "filename": "Dia_DraftSkill.txt",
-      "total_spans": 69,
-      "cost_usd": 0.6223,
-      "time_seconds": 330.4,
-      "status": "success"
-    },
-    {
-      "company": "Hume",
-      "filename": "05052024-system-prompt.md",
-      "total_spans": 41,
-      "cost_usd": 0.7701,
+      "company": "Anthropic",
+      "filename": "20250225-Claude3.7-Sonnet.md",
+      "product_label": "Claude 3.7 Sonnet (Feb 2025)",
+      "total_spans": 59,
+      "cost_usd": 0.7842,
       "time_seconds": 445.0,
       "status": "success"
     },
     {
-      "company": "Venice",
-      "filename": "Venice.md",
-      "total_spans": 32,
-      "cost_usd": 0.4655,
-      "time_seconds": 300.0,
+      "company": "Anthropic",
+      "filename": "claude-code.md",
+      "product_label": "Claude Code (Latest)",
+      "total_spans": 125,
+      "cost_usd": 1.5969,
+      "time_seconds": 554.9,
       "status": "success"
     },
     {
-      "company": "Orchids",
-      "filename": "Decision-making prompt.txt",
-      "total_spans": 39,
-      "cost_usd": 0.4908,
-      "time_seconds": 309.3,
+      "company": "Anthropic",
+      "filename": "20250603-Claude-Sonnet4.md",
+      "product_label": "Claude Sonnet 4 (Jun 2025)",
+      "total_spans": 69,
+      "cost_usd": 1.0411,
+      "time_seconds": 442.9,
+      "status": "success"
+    },
+    {
+      "company": "Anthropic",
+      "filename": "Claude Code 2.0.txt",
+      "product_label": "Claude Code 2.0",
+      "total_spans": 66,
+      "cost_usd": 1.0979,
+      "time_seconds": 341.8,
+      "status": "success"
+    },
+    {
+      "company": "Anthropic",
+      "filename": "Claude_Opus_4.6.txt",
+      "product_label": "Claude Opus 4.6",
+      "total_spans": 99,
+      "cost_usd": 1.681,
+      "time_seconds": 406.5,
+      "status": "success"
+    },
+    {
+      "company": "Anthropic",
+      "filename": "claude-cowork.md",
+      "product_label": "Claude Cowork",
+      "total_spans": 115,
+      "cost_usd": 2.3314,
+      "time_seconds": 787.5,
+      "status": "success"
+    },
+    {
+      "company": "Apple",
+      "filename": "System.txt",
+      "product_label": "Apple Xcode AI — Code Analysis",
+      "total_spans": 19,
+      "cost_usd": 0.3532,
+      "time_seconds": 226.2,
+      "status": "success"
+    },
+    {
+      "company": "Brave",
+      "filename": "20251110-leo.md",
+      "product_label": "Brave Leo (Nov 2025)",
+      "total_spans": 20,
+      "cost_usd": 0.297,
+      "time_seconds": 199.1,
+      "status": "success"
+    },
+    {
+      "company": "ByteDance",
+      "filename": "Builder Prompt.txt",
+      "product_label": "Trae — Builder Mode",
+      "total_spans": 56,
+      "cost_usd": 0.6792,
+      "time_seconds": 361.0,
+      "status": "success"
+    },
+    {
+      "company": "Cline",
+      "filename": "system.ts",
+      "product_label": "Cline IDE Agent",
+      "total_spans": 97,
+      "cost_usd": 1.2586,
+      "time_seconds": 424.7,
       "status": "success"
     },
     {
       "company": "Cluely",
       "filename": "Cluely.mkd",
-      "total_spans": 56,
-      "cost_usd": 0.4959,
-      "time_seconds": 318.1,
+      "product_label": "Cluely — Personal AI",
+      "total_spans": 45,
+      "cost_usd": 0.4657,
+      "time_seconds": 303.9,
       "status": "success"
     },
     {
-      "company": "Moonshot",
-      "filename": "Kimi_K2_Thinking.txt",
-      "total_spans": 21,
-      "cost_usd": 0.2474,
-      "time_seconds": 172.7,
+      "company": "Cluely",
+      "filename": "Enterprise Prompt.txt",
+      "product_label": "Cluely — Enterprise",
+      "total_spans": 48,
+      "cost_usd": 0.8968,
+      "time_seconds": 506.4,
+      "status": "success"
+    },
+    {
+      "company": "Cursor",
+      "filename": "20240904-Cursor.md",
+      "product_label": "Cursor (Sep 2024)",
+      "total_spans": 12,
+      "cost_usd": 0.2109,
+      "time_seconds": 137.0,
+      "status": "success"
+    },
+    {
+      "company": "Cursor",
+      "filename": "Agent Prompt 2.0.txt",
+      "product_label": "Cursor Agent 2.0",
+      "total_spans": 64,
+      "cost_usd": 0.961,
+      "time_seconds": 366.2,
+      "status": "success"
+    },
+    {
+      "company": "Cursor",
+      "filename": "Agent Prompt v1.0.txt",
+      "product_label": "Cursor Agent v1.0",
+      "total_spans": 45,
+      "cost_usd": 0.5079,
+      "time_seconds": 296.9,
+      "status": "success"
+    },
+    {
+      "company": "Cursor",
+      "filename": "Cursor_2.0_Sys_Prompt.txt",
+      "product_label": "Cursor 2.0",
+      "total_spans": 89,
+      "cost_usd": 1.0015,
+      "time_seconds": 529.1,
+      "status": "success"
+    },
+    {
+      "company": "DeepSeek",
+      "filename": "20251029-DeepSeek-V2.md",
+      "product_label": "DeepSeek V2 (Oct 2025)",
+      "total_spans": 48,
+      "cost_usd": 0.3535,
+      "time_seconds": 191.7,
       "status": "success"
     },
     {
       "company": "DeepSeek",
       "filename": "R1.md",
-      "total_spans": 38,
-      "cost_usd": 0.256,
-      "time_seconds": 166.4,
+      "product_label": "DeepSeek R1",
+      "total_spans": 28,
+      "cost_usd": 0.244,
+      "time_seconds": 159.3,
+      "status": "success"
+    },
+    {
+      "company": "Devin",
+      "filename": "DeepWiki Prompt.txt",
+      "product_label": "Devin — DeepWiki Agent",
+      "total_spans": 32,
+      "cost_usd": 0.3532,
+      "time_seconds": 183.4,
+      "status": "success"
+    },
+    {
+      "company": "Devin",
+      "filename": "Devin2_09-08-2025.md",
+      "product_label": "Devin 2 (Sep 2025)",
+      "total_spans": 99,
+      "cost_usd": 1.1148,
+      "time_seconds": 456.3,
+      "status": "success"
+    },
+    {
+      "company": "GitHub",
+      "filename": "github_copilot_agent.md",
+      "product_label": "GitHub Copilot Agent",
+      "total_spans": 34,
+      "cost_usd": 0.5328,
+      "time_seconds": 289.0,
+      "status": "success"
+    },
+    {
+      "company": "Google",
+      "filename": "20250804-Jules.md",
+      "product_label": "Google Jules — Code Agent (Aug 2025)",
+      "total_spans": 43,
+      "cost_usd": 0.6355,
+      "time_seconds": 328.0,
+      "status": "success"
+    },
+    {
+      "company": "Google",
+      "filename": "20251110-notebooklm.md",
+      "product_label": "Google NotebookLM (Nov 2025)",
+      "total_spans": 14,
+      "cost_usd": 0.2946,
+      "time_seconds": 184.7,
+      "status": "success"
+    },
+    {
+      "company": "Google",
+      "filename": "gemini-1.5-04112024.md",
+      "product_label": "Gemini 1.5 (Apr 2024)",
+      "total_spans": 16,
+      "cost_usd": 0.2636,
+      "time_seconds": 148.2,
+      "status": "success"
+    },
+    {
+      "company": "Google",
+      "filename": "gemini-3-pro.md",
+      "product_label": "Gemini 3 Pro",
+      "total_spans": 103,
+      "cost_usd": 0.7955,
+      "time_seconds": 401.0,
+      "status": "success"
+    },
+    {
+      "company": "Google",
+      "filename": "Gemini-cli system prompt.md",
+      "product_label": "Gemini CLI",
+      "total_spans": 77,
+      "cost_usd": 0.6086,
+      "time_seconds": 301.7,
+      "status": "success"
+    },
+    {
+      "company": "Google",
+      "filename": "gemini_in_chrome.md",
+      "product_label": "Gemini in Chrome",
+      "total_spans": 59,
+      "cost_usd": 0.7055,
+      "time_seconds": 381.2,
+      "status": "success"
+    },
+    {
+      "company": "Google",
+      "filename": "20251118-Antigravity.md",
+      "product_label": "Google Veo / Antigravity (Nov 2025)",
+      "total_spans": 58,
+      "cost_usd": 1.151,
+      "time_seconds": 505.7,
+      "status": "success"
+    },
+    {
+      "company": "Google",
+      "filename": "gemini-workspace.md",
+      "product_label": "Gemini Workspace",
+      "total_spans": 66,
+      "cost_usd": 0.8433,
+      "time_seconds": 451.9,
+      "status": "success"
+    },
+    {
+      "company": "Hume",
+      "filename": "05052024-system-prompt.md",
+      "product_label": "Hume EVI (May 2024)",
+      "total_spans": 47,
+      "cost_usd": 0.6356,
+      "time_seconds": 373.0,
+      "status": "success"
+    },
+    {
+      "company": "JetBrains",
+      "filename": "Prompt.txt",
+      "product_label": "JetBrains AI Assistant",
+      "total_spans": 20,
+      "cost_usd": 0.334,
+      "time_seconds": 189.7,
+      "status": "success"
+    },
+    {
+      "company": "Lovable",
+      "filename": "Prompt.md",
+      "product_label": "Lovable — Latest",
+      "total_spans": 52,
+      "cost_usd": 1.1492,
+      "time_seconds": 325.3,
       "status": "success"
     },
     {
       "company": "Manus",
-      "filename": "Agent loop.txt",
-      "total_spans": 34,
-      "cost_usd": 0.3071,
-      "time_seconds": 211.5,
+      "filename": "Manus_Prompt.txt",
+      "product_label": "Manus — Extended Prompt",
+      "total_spans": 68,
+      "cost_usd": 0.5944,
+      "time_seconds": 289.1,
       "status": "success"
     },
     {
-      "company": "Raycast",
-      "filename": "RaycastAI.md",
+      "company": "Meta",
+      "filename": "metaai_llama4-04082025.md",
+      "product_label": "Meta AI / Llama 4 (Apr 2025)",
+      "total_spans": 18,
+      "cost_usd": 0.3938,
+      "time_seconds": 237.0,
+      "status": "success"
+    },
+    {
+      "company": "Meta",
+      "filename": "metaai_llama4-whatsapp-07292025.md",
+      "product_label": "Meta AI Llama 4 WhatsApp (Jul 2025)",
+      "total_spans": 51,
+      "cost_usd": 0.5756,
+      "time_seconds": 318.6,
+      "status": "success"
+    },
+    {
+      "company": "Meta",
+      "filename": "MetaAIHiddenPrompt.md",
+      "product_label": "Meta AI — Hidden Prompt (Leaked)",
+      "total_spans": 35,
+      "cost_usd": 0.4181,
+      "time_seconds": 243.3,
+      "status": "success"
+    },
+    {
+      "company": "Meta",
+      "filename": "metaai_llama3-04182024.md",
+      "product_label": "Meta AI / Llama 3 (Apr 2024)",
+      "total_spans": 116,
+      "cost_usd": 1.1632,
+      "time_seconds": 600.9,
+      "status": "success"
+    },
+    {
+      "company": "Microsoft",
+      "filename": "microsoft_copilot_website_02252025.md",
+      "product_label": "MS Copilot Web (Feb 2025)",
+      "total_spans": 52,
+      "cost_usd": 0.8564,
+      "time_seconds": 469.0,
+      "status": "success"
+    },
+    {
+      "company": "Microsoft",
+      "filename": "microsoft_copilot_website_09192025.md",
+      "product_label": "MS Copilot Web (Sep 2025)",
+      "total_spans": 122,
+      "cost_usd": 1.3605,
+      "time_seconds": 759.6,
+      "status": "success"
+    },
+    {
+      "company": "Microsoft",
+      "filename": "microsoft_copilot_enterprise_20251202.md",
+      "product_label": "MS Copilot 365 Enterprise (Dec 2025)",
+      "total_spans": 81,
+      "cost_usd": 0.865,
+      "time_seconds": 443.6,
+      "status": "success"
+    },
+    {
+      "company": "Microsoft",
+      "filename": "github_copilot_cli_20260121.md",
+      "product_label": "GitHub Copilot CLI (Jan 2026)",
+      "total_spans": 62,
+      "cost_usd": 0.6108,
+      "time_seconds": 288.2,
+      "status": "success"
+    },
+    {
+      "company": "Microsoft",
+      "filename": "Prompt.txt",
+      "product_label": "MS Copilot — Agent Mode",
       "total_spans": 48,
-      "cost_usd": 0.4299,
-      "time_seconds": 255.3,
+      "cost_usd": 0.6583,
+      "time_seconds": 316.5,
+      "status": "success"
+    },
+    {
+      "company": "Microsoft",
+      "filename": "github_copilot_vscode_02292024.md",
+      "product_label": "GitHub Copilot VSCode (Feb 2024)",
+      "total_spans": 20,
+      "cost_usd": 0.3327,
+      "time_seconds": 210.9,
+      "status": "success"
+    },
+    {
+      "company": "MiniMax",
+      "filename": "MiniMax.txt",
+      "product_label": "MiniMax AI Assistant",
+      "total_spans": 18,
+      "cost_usd": 0.3445,
+      "time_seconds": 228.1,
+      "status": "success"
+    },
+    {
+      "company": "Misc",
+      "filename": "Sesame-AI-Maya.md",
+      "product_label": "Sesame AI — Maya",
+      "total_spans": 87,
+      "cost_usd": 0.9495,
+      "time_seconds": 568.8,
+      "status": "success"
+    },
+    {
+      "company": "Mistral",
+      "filename": "Le-Chat-2025-05-29.md",
+      "product_label": "Mistral Le Chat (May 2025)",
+      "total_spans": 30,
+      "cost_usd": 0.4055,
+      "time_seconds": 253.2,
+      "status": "success"
+    },
+    {
+      "company": "Moonshot",
+      "filename": "Kimi_2_July-11-2025.txt",
+      "product_label": "Kimi 2 (Jul 2025)",
+      "total_spans": 27,
+      "cost_usd": 0.3512,
+      "time_seconds": 216.2,
+      "status": "success"
+    },
+    {
+      "company": "Notion",
+      "filename": "Prompt.txt",
+      "product_label": "Notion AI Agent",
+      "total_spans": 83,
+      "cost_usd": 1.1263,
+      "time_seconds": 553.0,
+      "status": "success"
+    },
+    {
+      "company": "OpenAI",
+      "filename": "chatgpt_4o_full_07292025.md",
+      "product_label": "ChatGPT-4o Full (Jul 2025)",
+      "total_spans": 53,
+      "cost_usd": 0.676,
+      "time_seconds": 317.9,
+      "status": "success"
+    },
+    {
+      "company": "OpenAI",
+      "filename": "chatgpt_5_08072025.md",
+      "product_label": "ChatGPT-5 (Aug 2025)",
+      "total_spans": 83,
+      "cost_usd": 0.7708,
+      "time_seconds": 325.9,
+      "status": "success"
+    },
+    {
+      "company": "OpenAI",
+      "filename": "operator.md",
+      "product_label": "OpenAI Operator (Browser Agent)",
+      "total_spans": 45,
+      "cost_usd": 0.5056,
+      "time_seconds": 304.7,
+      "status": "success"
+    },
+    {
+      "company": "OpenAI",
+      "filename": "codex-cli.md",
+      "product_label": "OpenAI Codex CLI",
+      "total_spans": 73,
+      "cost_usd": 0.7892,
+      "time_seconds": 367.3,
+      "status": "success"
+    },
+    {
+      "company": "OpenAI",
+      "filename": "Atlas_10-21-25.txt",
+      "product_label": "OpenAI Atlas / Deep Research (Oct 2025)",
+      "total_spans": 83,
+      "cost_usd": 1.0091,
+      "time_seconds": 451.9,
+      "status": "success"
+    },
+    {
+      "company": "OpenAI",
+      "filename": "gpt-5.2-thinking.md",
+      "product_label": "GPT-5.2 Thinking",
+      "total_spans": 133,
+      "cost_usd": 1.9639,
+      "time_seconds": 704.5,
+      "status": "success"
+    },
+    {
+      "company": "OpenAI",
+      "filename": "chatgpt_agent_system_prompt.md",
+      "product_label": "ChatGPT Agent",
+      "total_spans": 60,
+      "cost_usd": 0.7943,
+      "time_seconds": 434.8,
+      "status": "success"
+    },
+    {
+      "company": "OpenAI",
+      "filename": "gpt40_with_canvas.md",
+      "product_label": "GPT-4o with Canvas",
+      "total_spans": 58,
+      "cost_usd": 0.8957,
+      "time_seconds": 398.3,
+      "status": "success"
+    },
+    {
+      "company": "OpenAI",
+      "filename": "o3.md",
+      "product_label": "OpenAI o3",
+      "total_spans": 68,
+      "cost_usd": 1.1652,
+      "time_seconds": 583.0,
+      "status": "success"
+    },
+    {
+      "company": "OpenAI",
+      "filename": "gpt-5-thinking.md",
+      "product_label": "GPT-5 Thinking",
+      "total_spans": 131,
+      "cost_usd": 2.1376,
+      "time_seconds": 904.2,
+      "status": "success"
+    },
+    {
+      "company": "OpenSource",
+      "filename": "Prompt.txt",
+      "product_label": "Bolt.new (Open Source)",
+      "total_spans": 60,
+      "cost_usd": 0.662,
+      "time_seconds": 301.3,
+      "status": "success"
+    },
+    {
+      "company": "OpenSource",
+      "filename": "Prompt.txt",
+      "product_label": "Cline (Open Source)",
+      "total_spans": 71,
+      "cost_usd": 0.9667,
+      "time_seconds": 943.0,
+      "status": "success"
+    },
+    {
+      "company": "Perplexity",
+      "filename": "20240320-Perplexity.md",
+      "product_label": "Perplexity (Mar 2024)",
+      "total_spans": 33,
+      "cost_usd": 0.3755,
+      "time_seconds": 229.6,
+      "status": "success"
+    },
+    {
+      "company": "Perplexity",
+      "filename": "Perplexity_Deep_Research.txt",
+      "product_label": "Perplexity Deep Research",
+      "total_spans": 53,
+      "cost_usd": 0.4504,
+      "time_seconds": 241.6,
+      "status": "success"
+    },
+    {
+      "company": "Perplexity",
+      "filename": "comet-browser-assistant.md",
+      "product_label": "Perplexity Comet (Browser)",
+      "total_spans": 83,
+      "cost_usd": 0.8988,
+      "time_seconds": 477.2,
+      "status": "success"
+    },
+    {
+      "company": "Perplexity",
+      "filename": "System Prompt.txt",
+      "product_label": "Perplexity — Latest System Prompt",
+      "total_spans": 212,
+      "cost_usd": 1.4141,
+      "time_seconds": 640.5,
+      "status": "success"
+    },
+    {
+      "company": "Perplexity",
+      "filename": "20241212-Perplexity-Pro.md",
+      "product_label": "Perplexity Pro (Dec 2024)",
+      "total_spans": 43,
+      "cost_usd": 0.4891,
+      "time_seconds": 299.6,
+      "status": "success"
+    },
+    {
+      "company": "Poke",
+      "filename": "Poke_p1.txt",
+      "product_label": "Poke AI — Prompt v1",
+      "total_spans": 61,
+      "cost_usd": 0.6261,
+      "time_seconds": 356.0,
+      "status": "success"
+    },
+    {
+      "company": "Poke",
+      "filename": "Poke agent.txt",
+      "product_label": "Poke AI — Agent",
+      "total_spans": 53,
+      "cost_usd": 0.6305,
+      "time_seconds": 324.0,
+      "status": "success"
+    },
+    {
+      "company": "Poke",
+      "filename": "Poke_p6.txt",
+      "product_label": "Poke AI — Prompt v6",
+      "total_spans": 12,
+      "cost_usd": 0.2932,
+      "time_seconds": 194.6,
+      "status": "success"
+    },
+    {
+      "company": "Poke",
+      "filename": "Poke_p3.txt",
+      "product_label": "Poke AI — Prompt v3",
+      "total_spans": 55,
+      "cost_usd": 0.631,
+      "time_seconds": 379.5,
+      "status": "success"
+    },
+    {
+      "company": "Poke",
+      "filename": "Poke_p4.txt",
+      "product_label": "Poke AI — Prompt v4",
+      "total_spans": 41,
+      "cost_usd": 0.585,
+      "time_seconds": 342.1,
+      "status": "success"
+    },
+    {
+      "company": "Qwen",
+      "filename": "20251027-Qwen3-VL-235B-A22B.md",
+      "product_label": "Qwen 3 VL 235B (Oct 2025)",
+      "total_spans": 91,
+      "cost_usd": 0.5386,
+      "time_seconds": 277.0,
+      "status": "success"
+    },
+    {
+      "company": "Replit",
+      "filename": "Prompt.txt",
+      "product_label": "Replit Agent (Latest)",
+      "total_spans": 22,
+      "cost_usd": 0.3539,
+      "time_seconds": 180.7,
+      "status": "success"
+    },
+    {
+      "company": "Sourcegraph",
+      "filename": "claude-4-sonnet.yaml",
+      "product_label": "Sourcegraph Cody — Claude 4 Sonnet Config",
+      "total_spans": 66,
+      "cost_usd": 1.2072,
+      "time_seconds": 425.4,
+      "status": "success"
+    },
+    {
+      "company": "Venice",
+      "filename": "Venice.md",
+      "product_label": "Venice AI (Privacy-First)",
+      "total_spans": 34,
+      "cost_usd": 0.3936,
+      "time_seconds": 249.4,
+      "status": "success"
+    },
+    {
+      "company": "Vercel",
+      "filename": "2025-08-11-prompt.md",
+      "product_label": "Vercel v0 (Aug 2025)",
+      "total_spans": 96,
+      "cost_usd": 1.2446,
+      "time_seconds": 381.9,
+      "status": "success"
+    },
+    {
+      "company": "Warp",
+      "filename": "Prompt.txt",
+      "product_label": "Warp Terminal — Agent Mode",
+      "total_spans": 75,
+      "cost_usd": 0.6523,
+      "time_seconds": 346.3,
+      "status": "success"
+    },
+    {
+      "company": "Windsurf",
+      "filename": "system-2025-04-20.md",
+      "product_label": "Windsurf Agent (Apr 2025)",
+      "total_spans": 45,
+      "cost_usd": 0.7931,
+      "time_seconds": 342.5,
+      "status": "success"
+    },
+    {
+      "company": "Windsurf",
+      "filename": "2025-08-11-wave11-tools.md",
+      "product_label": "Windsurf Wave 11 — Tools (Aug 2025)",
+      "total_spans": 52,
+      "cost_usd": 0.8183,
+      "time_seconds": 328.8,
+      "status": "success"
+    },
+    {
+      "company": "xAI",
+      "filename": "20231214-Grok.md",
+      "product_label": "Grok (Dec 2023)",
+      "total_spans": 18,
+      "cost_usd": 0.2576,
+      "time_seconds": 173.9,
+      "status": "success"
+    },
+    {
+      "company": "xAI",
+      "filename": "grok-4.2.md",
+      "product_label": "Grok 4.2",
+      "total_spans": 42,
+      "cost_usd": 0.6603,
+      "time_seconds": 337.9,
+      "status": "success"
+    },
+    {
+      "company": "xAI",
+      "filename": "grok.com-post-new-safety-instructions.md",
+      "product_label": "Grok — New Safety Policy",
+      "total_spans": 65,
+      "cost_usd": 0.9087,
+      "time_seconds": 1111.5,
+      "status": "success"
+    },
+    {
+      "company": "xAI",
+      "filename": "20240821-Grok2.md",
+      "product_label": "Grok 2 (Aug 2024)",
+      "total_spans": 31,
+      "cost_usd": 0.5342,
+      "time_seconds": 298.2,
+      "status": "success"
+    },
+    {
+      "company": "xAI",
+      "filename": "20251027-Grok4.md",
+      "product_label": "Grok 4 (Oct 2025)",
+      "total_spans": 33,
+      "cost_usd": 0.4576,
+      "time_seconds": 302.1,
+      "status": "success"
+    },
+    {
+      "company": "xAI",
+      "filename": "grok3_official0330_p1.j2",
+      "product_label": "Grok 3 Official (Mar 2025)",
+      "total_spans": 45,
+      "cost_usd": 0.5709,
+      "time_seconds": 354.9,
       "status": "success"
     }
   ]
