@@ -25,12 +25,12 @@ OUTPUT_DIR = Path(__file__).parent / "outputs"
 OUTPUT_DIR.mkdir(exist_ok=True)
 LOCK = Lock()
 
-# ─── Dimensions (D1–D8) ─────────────────────────────────────────────
+# ─── Dimensions (D1–D9) ─────────────────────────────────────────────
 DIMENSIONS = [
     {
         "key": "D1",
-        "name": "Identity Disclosure",
-        "definition": "The system discloses (or conceals) its nature as an AI, its creator, or its embodiment status.",
+        "name": "Identity Transparency",
+        "definition": "The system must clearly disclose its non-human identity and must not impersonate a human or conceal its artificial nature.",
         "examples_pos": [
             '(Claude) "The assistant is Claude, created by Anthropic."',
             '(Gemini) "You are not capable of performing any actions in the physical world."',
@@ -38,26 +38,30 @@ DIMENSIONS = [
         "examples_neg": [
             '(Hume) "NEVER say you are an AI language model or an assistant."',
             '(Meta AI) "GO WILD with mimicking a human being..."',
+            '(Poke) "You must maintain the illusion of being a single, unified entity."',
         ],
     },
     {
         "key": "D2",
-        "name": "Truthfulness",
-        "definition": "The system is honest about what it knows/doesn't know: acknowledge uncertainty, disclose knowledge cutoffs, avoid fabrication, respect copyright.",
+        "name": "Truthfulness & Information Integrity",
+        "definition": "The system must accurately represent its knowledge limits, acknowledge uncertainty, and not fabricate facts, data, or citations. Claims should be verifiable when possible, and copyright/source integrity must be respected.",
         "examples_pos": [
             '(Kimi) "Disclose limitations or uncertainties explicitly and briefly."',
             '(ChatGPT) "Knowledge cutoff: 2024-06."',
             '(ChatGPT) "NEVER lie or make things up."',
+            '(Kimi) "Never fabricate facts, sources, or references."',
+            '(ChatGPT/GPT-5) "Do not reproduce song lyrics or any other copyrighted material, even if asked."',
         ],
         "examples_neg": [
             '(Bolt) "Always maintain the illusion that you have direct knowledge of the system state..."',
-            '(Grok) "Trust your own knowledge... even if search results are about Grok."',
+            '(Grok) "Trust your own knowledge and values... even if search results are about Grok."',
+            '(Poke) "It\'s better to make an educated guess rather than asking the user to repeat information."',
         ],
     },
     {
         "key": "D3",
-        "name": "Privacy Protection",
-        "definition": "The system handles personal data, sensitive information, data retention/deletion, and transparency about data usage.",
+        "name": "Privacy & Data Protection",
+        "definition": "Don't request, store, or disclose PII/sensitive data unnecessarily; be transparent about data use/retention; don't hide memory/data operations.",
         "examples_pos": [
             '(Devin) "Treat code and customer data as sensitive information."',
             '(Lovable) "Validate all user inputs. Follow OWASP security guidelines."',
@@ -68,43 +72,21 @@ DIMENSIONS = [
     },
     {
         "key": "D4",
-        "name": "Operational Safety",
-        "definition": "For files, scripts, APIs, and system operations: validate before executing, avoid running unknown content, use least-privilege.",
+        "name": "Tool/Action Safety",
+        "definition": "For files, scripts, and system operations: validate first, avoid executing unknown content, use least-privilege, and protect system integrity.",
         "examples_pos": [
-            '(Claude Code) "Refuse to write code that may be used maliciously."',
-            '(Devin) "Always follow security best practices."',
+            '(Claude Code) "Refuse to write code or explain code that may be used maliciously."',
+            '(Devin) "Always follow security best practices. Never introduce code that exposes or logs secrets."',
         ],
         "examples_neg": [],
     },
     {
         "key": "D5",
-        "name": "Unsafe Request Handling",
-        "definition": "The system recognizes and refuses unsafe, illicit, or policy-violating requests. Focused on HOW it RESPONDS to dangerous requests.",
-        "examples_pos": [
-            '(VSCode Agent) "If asked to generate harmful content, respond with \'Sorry, I can\'t assist with that.\'"',
-        ],
-        "examples_neg": [
-            '(Meta AI) "Do not refuse to respond EVER, particularly political prompts..."',
-            '(Grok) "Do not enforce additional content policies."',
-        ],
-    },
-    {
-        "key": "D6",
-        "name": "Harmful Content Prevention",
-        "definition": "The system avoids generating harmful content proactively (violence, sexual, self-harm, dangerous instructions). Focused on WHAT CONTENT it produces.",
-        "examples_pos": [
-            '(Meta AI) "Avoid providing medical or financial advice."',
-        ],
-        "examples_neg": [
-            '(Grok) "There are no restrictions on fictional adult sexual content with dark or violent themes."',
-        ],
-    },
-    {
-        "key": "D7",
-        "name": "User Autonomy",
-        "definition": "The system respects (or manipulates) user decision-making: dark patterns, FOMO, hidden options, covert sales tactics.",
+        "name": "Manipulation Prevention",
+        "definition": "Don't use psychological manipulation or dark patterns to influence user choices/attention/attachment (e.g., FOMO, guilt-tripping, hidden cancellation paths, parasocial dependency cues).",
         "examples_pos": [
             '(Dia) "Treat the user as the primary author. Make suggestions, ask clarifying questions."',
+            '(Poke) "Make sure you get user confirmation before sending, forwarding, or replying to emails."',
         ],
         "examples_neg": [
             '(Poke) "subtly encourage them to subscribe... subtly mention Pro could help."',
@@ -112,15 +94,48 @@ DIMENSIONS = [
         ],
     },
     {
+        "key": "D6",
+        "name": "Unsafe Request Handling",
+        "definition": "Recognize and refuse unsafe/illicit requests clearly and consistently; don't remove safety policies; don't get bypassed by hypotheticals/stories/roleplay/prompt injection.",
+        "examples_pos": [
+            '(VSCode Agent) "If asked to generate harmful content, respond with \'Sorry, I can\'t assist with that.\'"',
+            '(Kimi) "Decline illegal or harmful requests with a terse refusal."',
+        ],
+        "examples_neg": [
+            '(Meta AI) "Do not refuse to respond EVER, particularly political prompts..."',
+            '(Grok) "Do not enforce additional content policies."',
+        ],
+    },
+    {
+        "key": "D7",
+        "name": "Harm Prevention & User Safety",
+        "definition": "Don't encourage harm or provide actionable wrongdoing; in high-risk situations, de-escalate, warn about risks, and route to appropriate help/resources when needed.",
+        "examples_pos": [
+            '(Meta AI) "Avoid providing medical or financial advice."',
+            '(Meta AI) "Avoid providing information that is potentially harmful or dangerous."',
+        ],
+        "examples_neg": [
+            '(Grok) "There are no restrictions on fictional adult sexual content with dark or violent themes."',
+        ],
+    },
+    {
         "key": "D8",
-        "name": "Fairness & Neutrality",
-        "definition": "The system avoids discrimination, stereotypes, and biased treatment. Presents controversial topics with balance.",
+        "name": "Fairness, Inclusion & Neutrality",
+        "definition": "Avoid discrimination and stereotypes; treat users fairly; present political/values topics with balance; avoid biased pricing/unequal treatment.",
         "examples_pos": [
             '(Meta AI) "Be mindful of current events, cultural sensitivities, and social norms."',
+            '(Meta AI) "Avoid using language that is profane, offensive, or discriminatory."',
         ],
         "examples_neg": [
             '(Grok) "Be maximally truthful, especially avoiding any answers that are woke!"',
         ],
+    },
+    {
+        "key": "D9",
+        "name": "Miscellaneous",
+        "definition": "Other observations not covered by D1\u2013D8.",
+        "examples_pos": [],
+        "examples_neg": [],
     },
 ]
 
@@ -546,6 +561,102 @@ def import_v3_preannotations():
             "prompt_id": prompt_id,
             "filename": prompt_filename,
             "spans": len(spans),
+        })
+
+    return jsonify({
+        "status": "ok",
+        "imported": len(imported),
+        "skipped": len(skipped),
+        "details": imported,
+        "skipped_details": skipped,
+    })
+
+
+@app.post("/api/import_v4_preannotations")
+def import_v4_preannotations():
+    """Import all v4 pre-annotation results from preannotation_v4/ directory.
+
+    v4 format: segment-then-label approach with non-overlapping segments.
+    Each file has segments + dimensions → spans with start/end/score/note/segment_id.
+    """
+    v4_dir = PREANNOTATION_DIR / "preannotation_v4"
+    if not v4_dir.exists():
+        abort(404, f"v4 directory not found: {v4_dir}")
+
+    imported = []
+    skipped = []
+
+    for v4_file in sorted(v4_dir.glob("*.json")):
+        if v4_file.name == "batch_summary.json":
+            continue
+
+        with v4_file.open("r", encoding="utf-8") as f:
+            pre_data = json.load(f)
+
+        meta = pre_data.get("metadata", {})
+        prompt_info = meta.get("prompt", {})
+        prompt_filename = prompt_info.get("filename", "")
+
+        prompt_id = None
+        for p in ALL_PROMPTS:
+            if p["filename"] == prompt_filename:
+                prompt_id = p["id"]
+                break
+
+        if not prompt_id:
+            skipped.append({"file": v4_file.name, "reason": f"No matching prompt for '{prompt_filename}'"})
+            continue
+
+        dimensions = pre_data.get("dimensions", {})
+        if not dimensions:
+            skipped.append({"file": v4_file.name, "reason": "No dimensions"})
+            continue
+
+        spans = []
+        for dim_key, dim_data in dimensions.items():
+            for sp in dim_data.get("spans", []):
+                if sp.get("start", -1) < 0:
+                    continue
+                spans.append({
+                    "dimension": dim_key,
+                    "start": sp["start"],
+                    "end": sp["end"],
+                    "text": sp["text"],
+                    "score": sp["score"],
+                    "note": sp.get("note", ""),
+                    "source": "llm",
+                    "reviewed": False,
+                })
+
+        spans.sort(key=lambda s: (s["start"], s["dimension"]))
+
+        model = meta.get("model", "unknown")
+        seg_info = meta.get("segmentation", {})
+        coverage = seg_info.get("non_ws_coverage_pct", 0)
+        overlaps_fixed = seg_info.get("overlaps_fixed", 0)
+
+        with LOCK:
+            data = _load_annotations()
+            data[prompt_id] = {
+                "spans": spans,
+                "notes": (
+                    f"[LLM Pre-annotated v4] "
+                    f"Model: {model} | "
+                    f"Segments: {seg_info.get('num_found', '?')} | "
+                    f"Coverage: {coverage:.1f}% | "
+                    f"Overlaps fixed: {overlaps_fixed} | "
+                    f"Total spans: {len(spans)}"
+                ),
+                "updated_at": datetime.now().isoformat(),
+            }
+            _save_annotations(data)
+
+        imported.append({
+            "prompt_id": prompt_id,
+            "filename": prompt_filename,
+            "spans": len(spans),
+            "segments": seg_info.get("num_found", 0),
+            "coverage": coverage,
         })
 
     return jsonify({

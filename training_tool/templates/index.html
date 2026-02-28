@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>System Prompt Annotation Tool</title>
+  <title>Annotator Training Tool — Review Workflow</title>
   <style>
     :root {
       --bg-dark: #0c0c14;
@@ -593,8 +593,8 @@
 
 <!-- ═══════════ SETUP PAGE ═══════════ -->
 <div id="setupPage" class="setup-page" style="max-width:780px;max-height:95vh;overflow-y:auto;">
-  <h2 style="text-align:center;font-size:1.5rem;margin-bottom:0.3rem;background:linear-gradient(135deg,var(--accent),var(--accent-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">System Prompt Annotation Tool</h2>
-  <p class="sub">Review LLM pre-annotations → Annotate Dimension (D1-D9) + Score (+1 / −1)</p>
+  <h2 style="text-align:center;font-size:1.5rem;margin-bottom:0.3rem;background:linear-gradient(135deg,var(--accent),var(--accent-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Annotator Training Tool</h2>
+  <p class="sub">Practice the annotation workflow — Review LLM pre-annotations, then compare against gold standard</p>
 
   <!-- Section 1: What is a System Prompt -->
   <div style="background:var(--bg-elevated);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.4rem;margin-bottom:1rem;line-height:1.7;font-size:0.86rem;color:var(--text-secondary);">
@@ -654,57 +654,43 @@ You should be helpful, harmless, and honest.
     </div>
   </div>
 
-  <!-- Section 4: How Annotation Works -->
+  <!-- Section 4: How Training Works -->
   <div style="background:var(--bg-elevated);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.4rem;margin-bottom:1.2rem;line-height:1.7;font-size:0.86rem;color:var(--text-secondary);">
-    <h3 style="color:var(--text-primary);font-size:0.95rem;margin-bottom:0.6rem;display:flex;align-items:center;gap:0.5rem;"><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--accent);color:white;font-size:0.72rem;font-weight:700;flex-shrink:0;">4</span> How This Annotation Works</h3>
-    <p>You will review LLM pre-annotated spans across the assigned system prompts. For each prompt:</p>
+    <h3 style="color:var(--text-primary);font-size:0.95rem;margin-bottom:0.6rem;display:flex;align-items:center;gap:0.5rem;"><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--accent);color:white;font-size:0.72rem;font-weight:700;flex-shrink:0;">4</span> How This Training Works</h3>
+    <p>You will review <strong style="color:var(--accent-light);">20 representative spans</strong> across 16 real system prompts. For each prompt:</p>
     <ol style="margin:0.4rem 0 0.6rem 1.2rem;">
       <li><strong>Read</strong> the highlighted spans in the context of the full system prompt (center panel)</li>
       <li><strong>Review</strong> each LLM annotation in the right panel — Accept or Reject, adjust scores if needed</li>
-      <li><strong>Add dimensions</strong> if you think a span relates to additional categories beyond what the LLM suggested</li>
-      <li><strong>Finish</strong> by clicking "Done" on each span group, then navigate to the next span</li>
+      <li><strong>Finish</strong> by clicking "Done" on each span group, then <strong>"Check Results"</strong> to see the gold standard</li>
     </ol>
-    <p>You can also <strong>select text</strong> in the prompt to create entirely new annotations that the LLM missed.</p>
-    <p>When you have finished all your assigned prompts, click <strong>"Export"</strong> to download your annotations.</p>
-    <p style="color:var(--text-muted);font-size:0.8rem;margin-top:0.4rem;">Keyboard: <code style="background:var(--bg-dark);padding:0.1rem 0.3rem;border-radius:4px;font-size:0.8rem;color:var(--accent-light);">←/→</code> navigate between spans</p>
+    <p>This is the <strong>exact same interface</strong> as the real annotation tool. At the end, you'll see a summary of your accuracy.</p>
+    <div style="margin-top:0.6rem;padding:0.5rem 0.8rem;background:rgba(124,108,240,0.08);border:1px solid rgba(124,108,240,0.3);border-radius:8px;">
+      <p style="margin:0;font-size:0.84rem;"><strong style="color:var(--accent-light);">Keyboard shortcut:</strong> Use <code style="background:var(--bg-dark);padding:0.15rem 0.4rem;border-radius:4px;font-size:0.85rem;color:var(--accent-light);font-weight:600;">←</code> and <code style="background:var(--bg-dark);padding:0.15rem 0.4rem;border-radius:4px;font-size:0.85rem;color:var(--accent-light);font-weight:600;">→</code> arrow keys to navigate between spans at any time.</p>
+    </div>
   </div>
 
   <div class="form-group">
-    <label>Reviewer Name</label>
+    <label>Your Name</label>
     <input type="text" id="inputName" placeholder="Enter your name..." />
   </div>
-  <div class="form-group">
-    <label>Prompt Range</label>
-    <div class="range-row">
-      <input type="number" id="inputStart" min="1" value="1" />
-      <span>→</span>
-      <input type="number" id="inputEnd" min="1" value="190" />
-    </div>
-  </div>
-  <div class="form-group">
-    <label style="display:flex;align-items:center;gap:0.5rem;cursor:pointer;font-size:0.88rem;color:var(--text-primary);">
-      <input type="checkbox" id="inputOnlyAnnotated" style="width:auto;accent-color:var(--accent);" />
-      Pre-annotated only (skip unannotated)
-    </label>
-  </div>
-  <button class="btn-primary" id="setupStartBtn">Start Annotation</button>
+  <button class="btn-primary" id="setupStartBtn">Start Training</button>
   <div class="setup-info" id="setupInfo">Loading…</div>
 </div>
 
 <!-- ═══════════ MAIN APP ═══════════ -->
 <div id="appContainer" class="app-container" style="display:none;">
   <div class="app-header">
-    <h1>System Prompt Annotation</h1>
+    <h1>Annotator Training</h1>
     <div class="header-right">
       <span class="badge" id="headerBadge"></span>
       <div class="nav-group">
         <button class="nav-btn" id="btnPrev" title="← or A key">← Prev</button>
-        <span class="nav-counter" id="navCounter">1/190</span>
+        <span class="nav-counter" id="navCounter">1/10</span>
         <button class="nav-btn" id="btnNext" title="→ or D key">Next →</button>
         <input type="number" class="nav-jump" id="navJump" placeholder="#" />
         <button class="nav-btn" id="btnJump">Go</button>
       </div>
-      <button class="btn-sm" id="btnExport" style="opacity:0.6;cursor:pointer;">Export (0/0)</button>
+      <button class="btn-sm" id="btnExport" style="opacity:0.5;cursor:not-allowed;">Export (0/20)</button>
     </div>
   </div>
 
@@ -748,7 +734,7 @@ You should be helpful, harmless, and honest.
       </div>
       <div class="span-nav-bar" id="spanNavBar">
         <button class="span-nav-btn" id="btnPrevSpan">← Prev</button>
-        <span class="span-nav-counter" id="spanNavCounter">1 / 10</span>
+        <span class="span-nav-counter" id="spanNavCounter">1 / 20</span>
         <button class="span-nav-btn" id="btnNextSpan">Next →</button>
       </div>
       <div class="dim-filter-bar" id="dimFilterBar">
@@ -796,6 +782,28 @@ You should be helpful, harmless, and honest.
   </div>
 </div>
 
+<!-- ═══════════ GOLD COMPARISON OVERLAY ═══════════ -->
+<div id="goldOverlay" style="display:none;position:fixed;inset:0;z-index:5000;background:rgba(0,0,0,0.7);overflow-y:auto;">
+  <div style="max-width:700px;margin:2rem auto;background:var(--bg-card);border:1px solid var(--accent);border-radius:16px;padding:2rem;">
+    <h2 style="text-align:center;font-size:1.2rem;margin-bottom:0.3rem;color:var(--accent-light);">Gold Standard Comparison</h2>
+    <p style="text-align:center;color:var(--text-muted);font-size:0.82rem;margin-bottom:1.2rem;" id="goldPromptLabel"></p>
+    <div id="goldResults"></div>
+    <div style="display:flex;gap:0.6rem;margin-top:1.2rem;">
+      <button id="goldNextBtn" style="flex:1;padding:0.7rem;background:var(--accent);border:none;color:#fff;border-radius:10px;font-size:0.92rem;font-weight:600;cursor:pointer;font-family:inherit;">Next Prompt →</button>
+      <button id="goldCloseBtn" style="flex:0 0 auto;padding:0.7rem 1.2rem;background:var(--bg-elevated);border:1px solid var(--border);color:var(--text-secondary);border-radius:10px;font-size:0.92rem;cursor:pointer;font-family:inherit;">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SUMMARY PAGE ═══════════ -->
+<div id="summaryPage" style="display:none;max-width:700px;margin:2rem auto;background:var(--bg-card);border-radius:20px;padding:2.5rem;border:1px solid var(--border);">
+  <h1 style="text-align:center;font-size:1.5rem;margin-bottom:0.3rem;background:linear-gradient(135deg,var(--accent),var(--accent-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Training Complete!</h1>
+  <p style="text-align:center;color:var(--text-secondary);margin-bottom:1.5rem;" id="summarySub"></p>
+  <div id="summaryStats" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.5rem;"></div>
+  <div id="summaryDetail" style="background:var(--bg-elevated);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:1rem;"></div>
+  <button id="btnRestart" class="btn-primary" style="margin-top:1rem;">Restart Training</button>
+</div>
+
 <!-- Toast -->
 <div class="toast" id="toast"></div>
 
@@ -829,7 +837,7 @@ let activeDimFilter = 'ALL'; // 'ALL', 'PENDING', or 'D1'..'D9'
 // ─── Elements ─────────────────────────────────────
 const $ = id => document.getElementById(id);
 const setupPage = $('setupPage'), appContainer = $('appContainer');
-const inputName = $('inputName'), inputStart = $('inputStart'), inputEnd = $('inputEnd'), inputOnlyAnnotated = $('inputOnlyAnnotated');
+const inputName = $('inputName');
 const setupStartBtn = $('setupStartBtn'), setupInfo = $('setupInfo');
 const headerBadge = $('headerBadge'), navCounter = $('navCounter');
 const btnPrev = $('btnPrev'), btnNext = $('btnNext');
@@ -932,14 +940,15 @@ function escHtml(s) { const d = document.createElement('div'); d.textContent = s
 function fmtSize(b) { return b >= 10240 ? `${(b/1024).toFixed(0)}KB` : `${(b/1024).toFixed(1)}KB`; }
 
 // ─── Data Loading ─────────────────────────────────
+// ─── Training State ───────────────────────────────
+let trainingResults = {};  // { promptId: { spans_accepted, spans_rejected, ... } }
+
 async function loadPrompts() {
   const res = await fetch('/api/prompts');
   const data = await res.json();
   allPrompts = data.prompts;
   dimensions = data.dimensions;
-  setupInfo.innerHTML = `<strong>${data.total}</strong> prompts · 9 Dimensions · Review LLM annotations`;
-  inputEnd.max = data.total;
-  inputEnd.value = Math.min(190, data.total);
+  setupInfo.innerHTML = `<strong>${data.total}</strong> training prompts · 9 Dimensions · Review LLM annotations`;
   buildDimRefPanel();
   buildPopupDimGrid();
   buildDimFilterBar();
@@ -1493,6 +1502,7 @@ function renderAnnotations() {
       const card = btn.closest('.annotation-card');
       const detailRow = card.querySelector('.card-add-detail-row');
 
+      // Toggle: click again to deselect
       if (pendingAddDim[gk] === dim) {
         pendingAddDim[gk] = null;
         pendingAddScore[gk] = null;
@@ -1667,22 +1677,20 @@ function renderAnnotations() {
         ev.stopPropagation();
         btnNext.click();
       });
-      doneRow.querySelector('.btn-inline-undo').addEventListener('click', ev => {
+      doneRow.querySelector('.btn-inline-undo').addEventListener('click', async ev => {
         ev.stopPropagation();
-        // Revert: set accepted spans back to unreviewed
-        currentSpans.forEach(s => {
-          if (s.start === groupStart && s.end === groupEnd && s.reviewed) {
-            s.reviewed = false;
-          }
-        });
-        renderPromptContent(); renderAnnotations(); autoSave();
+        if (!currentPromptFull) return;
+        await fetch(`/api/reset_prompt/${encodeURIComponent(currentPromptFull.id)}`, { method: 'POST' });
+        await loadPromptDetail(currentPromptFull.id);
+        renderPromptContent(); renderAnnotations(); updateExportButton();
         showToast('↩ Reset to unreviewed');
       });
 
+      // Disable further interaction on dim rows
       allRows.forEach(r => { r.style.pointerEvents = 'none'; r.style.opacity = '0.6'; });
 
       renderPromptContent();
-      autoSave();
+      autoSave(); updateExportButton();
     });
   });
 
@@ -1691,16 +1699,17 @@ function renderAnnotations() {
     btn.addEventListener('click', e => { e.stopPropagation(); btnNext.click(); });
   });
 
-  // ── Undo reviewed card → set spans back to unreviewed ──
+  // ── Undo reviewed card → reset prompt to unreviewed ──
   annBody.querySelectorAll('.btn-card-undo').forEach(btn => {
-    btn.addEventListener('click', e => {
+    btn.addEventListener('click', async e => {
       e.stopPropagation();
-      const idx = parseInt(btn.dataset.idx);
-      const span = currentSpans[idx];
-      if (!span) return;
-      span.reviewed = false;
-      renderPromptContent(); renderAnnotations(); autoSave();
-      showToast('↩ Reset to unreviewed');
+      if (!currentPromptFull) return;
+      try {
+        await fetch(`/api/reset_prompt/${encodeURIComponent(currentPromptFull.id)}`, { method: 'POST' });
+        await loadPromptDetail(currentPromptFull.id);
+        renderPromptContent(); renderAnnotations(); updateExportButton();
+        showToast('↩ Reset to unreviewed');
+      } catch (err) { showToast('Undo failed', true); }
     });
   });
 
@@ -1976,13 +1985,112 @@ function flushPendingCardDecisions() {
 }
 
 // ─── Save / Export ────────────────────────────────
-let reviewedSpanCounts = {};
+async function autoSave() {
+  if (!currentPromptFull) return;
+  flushPendingCardDecisions();
+  currentNotes = annNotes.value;
+  try {
+    await fetch('/api/save_annotations', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt_id: currentPromptFull.id, spans: currentSpans, notes: currentNotes }),
+    });
+    const idx = rangePrompts.findIndex(p => p.id === currentPromptFull.id);
+    if (idx !== -1) rangePrompts[idx].span_count = currentSpans.length;
+    renderPromptList(listSearch.value);
+    updateExportButton();
+  } catch (err) { console.error('Save failed:', err); }
+}
+
+// ─── Gold Comparison ──────────────────────────────
+async function checkGold() {
+  if (!currentPromptFull) return;
+  const pid = currentPromptFull.id;
+  try {
+    const res = await fetch(`/api/gold/${encodeURIComponent(pid)}`);
+    const data = await res.json();
+    showGoldComparison(pid, data.gold);
+  } catch (err) { showToast('Failed to load gold standard: ' + err.message, true); }
+}
+
+function showGoldComparison(pid, goldData) {
+  const dimName = k => { const d = dimensions.find(x => x.key === k); return d ? d.name : k; };
+  const p = currentPromptFull;
+  const label = p.product_label || p.filename;
+  $('goldPromptLabel').textContent = `[${p.company}] ${label}`;
+
+  let accepted = 0, rejected = 0, total = 0;
+  let html = '';
+  goldData.forEach((g, gi) => {
+    const textPreview = g.span_text.length > 120 ? g.span_text.slice(0, 120) + '…' : g.span_text;
+    g.gold.forEach(gold => {
+      total++;
+      const userSpan = currentSpans.find(s =>
+        s.start === g.span_start && s.end === g.span_end && s.dimension === gold.dimension
+      );
+      const wasAccepted = userSpan && userSpan.reviewed;
+      const wasRejected = !userSpan;
+      const scoreMatch = userSpan && userSpan.score === gold.score;
+      const correct = wasAccepted && scoreMatch;
+      if (wasAccepted) accepted++; else rejected++;
+
+      const statusColor = correct ? 'var(--positive)' : 'var(--negative)';
+      const statusIcon = correct ? '✓' : '✗';
+      const statusText = wasRejected ? 'You rejected this (gold says it\'s correct)'
+                       : !scoreMatch ? `Score mismatch: you gave ${userSpan.score > 0 ? '+1' : '-1'}, gold is ${gold.score > 0 ? '+1' : '-1'}`
+                       : 'Correct!';
+      const color = dimColor(gold.dimension);
+      html += `<div style="background:var(--bg-elevated);border:1px solid var(--border);border-radius:10px;padding:0.7rem;margin-bottom:0.5rem;border-left:3px solid ${statusColor};">
+        <div style="display:flex;align-items:center;gap:0.4rem;margin-bottom:0.3rem;">
+          <span style="color:${statusColor};font-weight:700;font-size:0.9rem;">${statusIcon}</span>
+          <span style="background:${color};color:#fff;padding:0.1rem 0.4rem;border-radius:4px;font-size:0.68rem;font-weight:600;">${gold.dimension} ${dimName(gold.dimension)}</span>
+          <span style="font-size:0.72rem;color:${gold.score === 1 ? 'var(--positive)' : 'var(--negative)'};font-weight:600;">${gold.score === 1 ? '+1 Good' : '-1 Violation'}</span>
+        </div>
+        <div style="font-family:monospace;font-size:0.72rem;color:var(--text-muted);background:var(--bg-dark);padding:0.3rem 0.5rem;border-radius:6px;margin-bottom:0.3rem;max-height:60px;overflow:hidden;">${escHtml(textPreview)}</div>
+        <div style="font-size:0.72rem;color:${statusColor};font-weight:500;">${statusText}</div>
+        ${gold.explanation ? `<div style="font-size:0.7rem;color:var(--text-muted);margin-top:0.2rem;font-style:italic;">${escHtml(gold.explanation)}</div>` : ''}
+      </div>`;
+    });
+  });
+
+  const correctCount = goldData.reduce((acc, g) => {
+    return acc + g.gold.filter(gold => {
+      const s = currentSpans.find(s => s.start === g.span_start && s.end === g.span_end && s.dimension === gold.dimension);
+      return s && s.reviewed && s.score === gold.score;
+    }).length;
+  }, 0);
+
+  html = `<div style="text-align:center;margin-bottom:1rem;padding:0.8rem;border-radius:10px;background:${correctCount === total ? 'rgba(34,197,94,0.1)' : correctCount > total/2 ? 'rgba(245,158,11,0.1)' : 'rgba(239,68,68,0.1)'};border:1px solid ${correctCount === total ? 'var(--positive)' : correctCount > total/2 ? 'var(--neutral)' : 'var(--negative)'};">
+    <div style="font-size:1.8rem;">${correctCount === total ? '🎉' : correctCount > total/2 ? '👍' : '📚'}</div>
+    <div style="font-size:1.1rem;font-weight:700;color:${correctCount === total ? 'var(--positive)' : correctCount > total/2 ? 'var(--neutral)' : 'var(--negative)'};">${correctCount} / ${total} correct</div>
+  </div>` + html;
+
+  $('goldResults').innerHTML = html;
+  $('goldOverlay').style.display = '';
+  goldCheckedPrompts.add(pid);
+
+  trainingResults[pid] = { total, correct: correctCount, accepted, rejected };
+}
+
+$('goldCloseBtn').addEventListener('click', () => { $('goldOverlay').style.display = 'none'; });
+$('goldNextBtn').addEventListener('click', async () => {
+  $('goldOverlay').style.display = 'none';
+  if (currentIndex < rangePrompts.length - 1) {
+    currentIndex++;
+    await loadAndRender();
+  } else {
+    showSummary();
+  }
+});
+
+// Track reviewed span count across all prompts (updated on save)
+let reviewedSpanCounts = {}; // { promptId: reviewedCount }
 
 function getReviewedTotal() {
   return Object.values(reviewedSpanCounts).reduce((a, b) => a + b, 0);
 }
 
 function updateExportButton() {
+  // Count reviewed in current prompt
   if (currentPromptFull) {
     const reviewed = currentSpans.filter(s => s.reviewed || (s.source === 'human')).length;
     reviewedSpanCounts[currentPromptFull.id] = reviewed;
@@ -2006,6 +2114,7 @@ function updateExportButton() {
 }
 
 function getUnreviewedSummary() {
+  // Build list of unreviewed spans per prompt
   const missing = [];
   for (const p of rangePrompts) {
     const reviewedInPrompt = reviewedSpanCounts[p.id] || 0;
@@ -2018,50 +2127,73 @@ function getUnreviewedSummary() {
   return missing;
 }
 
-async function autoSave() {
-  if (!currentPromptFull) return;
-  flushPendingCardDecisions();
-  currentNotes = annNotes.value;
-  try {
-    await fetch('/api/save_annotations', {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ prompt_id: currentPromptFull.id, spans: currentSpans, notes: currentNotes }),
-    });
-    const idx = rangePrompts.findIndex(p => p.id === currentPromptFull.id);
-    if (idx !== -1) rangePrompts[idx].span_count = currentSpans.length;
-    renderPromptList(listSearch.value);
-    updateExportButton();
-  } catch (err) { console.error('Save failed:', err); }
+function showSummary() {
+  $('appContainer').style.display = 'none';
+  $('summaryPage').style.display = '';
+  const total = Object.values(trainingResults).reduce((a, r) => a + r.total, 0);
+  const correct = Object.values(trainingResults).reduce((a, r) => a + r.correct, 0);
+  const pct = total > 0 ? Math.round(correct / total * 100) : 0;
+  $('summarySub').textContent = `${config.name}, you reviewed ${Object.keys(trainingResults).length} prompts.`;
+  const cls = pct >= 80 ? 'var(--positive)' : pct >= 50 ? 'var(--neutral)' : 'var(--negative)';
+  $('summaryStats').innerHTML = `
+    <div style="background:var(--bg-elevated);border:1px solid var(--border);border-radius:12px;padding:1rem;text-align:center;">
+      <div style="font-size:2rem;font-weight:700;color:${cls};">${pct}%</div><div style="font-size:0.75rem;color:var(--text-muted);">Accuracy</div>
+    </div>
+    <div style="background:var(--bg-elevated);border:1px solid var(--border);border-radius:12px;padding:1rem;text-align:center;">
+      <div style="font-size:2rem;font-weight:700;color:var(--positive);">${correct}</div><div style="font-size:0.75rem;color:var(--text-muted);">Correct</div>
+    </div>
+    <div style="background:var(--bg-elevated);border:1px solid var(--border);border-radius:12px;padding:1rem;text-align:center;">
+      <div style="font-size:2rem;font-weight:700;color:var(--text-primary);">${total}</div><div style="font-size:0.75rem;color:var(--text-muted);">Total Spans</div>
+    </div>`;
+  let detailHtml = '';
+  for (const [pid, r] of Object.entries(trainingResults)) {
+    const p = allPrompts.find(x => x.id === pid);
+    const label = p ? (p.product_label || p.filename) : pid;
+    const company = p ? p.company : '';
+    const c = r.correct === r.total ? 'var(--positive)' : r.correct > r.total/2 ? 'var(--neutral)' : 'var(--negative)';
+    detailHtml += `<div style="display:flex;align-items:center;gap:0.6rem;padding:0.6rem 1rem;border-bottom:1px solid var(--border);font-size:0.8rem;">
+      <span style="color:${c};font-weight:700;min-width:40px;">${r.correct}/${r.total}</span>
+      <span style="color:var(--text-secondary);">[${escHtml(company)}] ${escHtml(label)}</span>
+    </div>`;
+  }
+  $('summaryDetail').innerHTML = detailHtml;
+  fetch('/api/save_training_result', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ reviewer_name: config.name, results: trainingResults }),
+  }).catch(() => {});
 }
 
-async function doExport() {
+$('btnRestart').addEventListener('click', () => {
+  trainingResults = {};
+  currentIndex = 0;
+  $('summaryPage').style.display = 'none';
+  setupPage.style.display = '';
+});
+
+btnExport.addEventListener('click', async () => {
   await autoSave();
   updateExportButton();
 
   if (btnExport.dataset.ready !== 'true') {
     const missing = getUnreviewedSummary();
-    const proceed = confirm(
+    alert(
       `You still have unreviewed spans:\n\n` +
       missing.join('\n') +
-      `\n\nDo you want to export anyway?`
+      `\n\nPlease review all spans before exporting.`
     );
-    if (!proceed) return;
+    return;
   }
 
   try {
-    const res = await fetch('/api/export', {
+    const res = await fetch('/api/save_training_result', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ reviewer_name: config.name, start: config.start - 1, end: config.end }),
+      body: JSON.stringify({ reviewer_name: config.name }),
     });
     const result = await res.json();
-    showToast(`✓ Exported ${result.annotated_count} annotated prompts`);
-    const a = document.createElement('a');
-    a.href = `/api/download/${result.filename}`; a.download = result.filename; a.click();
+    showToast(`✓ Training results saved: ${result.filename}`);
   } catch (err) { showToast('Export failed: ' + err.message, true); }
-}
-
+});
 btnSave.addEventListener('click', async () => { await autoSave(); showToast('✓ Saved'); });
-btnExport.addEventListener('click', doExport);
 
 // ─── Navigation ──────────────────────────────────
 async function loadAndRender() {
@@ -2077,29 +2209,20 @@ async function loadAndRender() {
 }
 
 // ─── Span-level navigation (← → cross-prompt) ───
-function getPromptSpanCount(idx) {
-  return rangePrompts[idx] ? (rangePrompts[idx].span_count || 0) : 0;
-}
 function getTotalSpanCount() {
   return rangePrompts.reduce((sum, p) => sum + (p.span_count || 0), 0);
 }
 function getGlobalSpanIdx() {
   let total = 0;
-  for (let i = 0; i < currentIndex; i++) total += getPromptSpanCount(i);
+  for (let i = 0; i < currentIndex; i++) total += (rangePrompts[i].span_count || 0);
   return total + currentSpanNavIdx;
 }
 function updateGlobalNav() {
+  const global = getGlobalSpanIdx();
   const total = getTotalSpanCount();
-  if (total > 0) {
-    const global = getGlobalSpanIdx();
-    navCounter.textContent = `Span ${global + 1} / ${total}`;
-    btnPrev.disabled = global <= 0;
-    btnNext.disabled = global >= total - 1;
-  } else {
-    navCounter.textContent = `${currentIndex + 1}/${rangePrompts.length}`;
-    btnPrev.disabled = currentIndex === 0;
-    btnNext.disabled = currentIndex >= rangePrompts.length - 1;
-  }
+  navCounter.textContent = `Span ${global + 1} / ${total}`;
+  btnPrev.disabled = global <= 0;
+  btnNext.disabled = global >= total - 1;
 }
 
 btnPrev.addEventListener('click', async () => {
@@ -2158,20 +2281,11 @@ document.addEventListener('keydown', e => {
 // ─── Setup ───────────────────────────────────────
 setupStartBtn.addEventListener('click', async () => {
   const name = inputName.value.trim();
-  const start = parseInt(inputStart.value);
-  const end = parseInt(inputEnd.value);
   if (!name) { showToast('Please enter your name', true); return; }
-  if (isNaN(start) || isNaN(end) || start < 1 || end < start || end > allPrompts.length) {
-    showToast(`Please enter a valid range (1-${allPrompts.length})`, true); return;
-  }
-  config = { name, start, end };
-  rangePrompts = allPrompts.slice(start - 1, end);
-  if (inputOnlyAnnotated.checked) {
-    rangePrompts = rangePrompts.filter(p => p.span_count > 0);
-    if (rangePrompts.length === 0) { showToast('No pre-annotated prompts in this range', true); return; }
-  }
+  config = { name, start: 1, end: allPrompts.length };
+  rangePrompts = allPrompts;
   currentIndex = 0;
-  headerBadge.textContent = `${name} · Prompts ${start}-${end}`;
+  headerBadge.textContent = `${name} · Training`;
   promptListTotal.textContent = `(${rangePrompts.length})`;
   setupPage.style.display = 'none';
   appContainer.style.display = 'flex';

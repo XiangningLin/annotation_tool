@@ -100,11 +100,11 @@ PILOT_20_INDICES = [
 DIMENSIONS = [
     {
         "key": "D1",
-        "name": "Identity Disclosure",
+        "name": "Identity Transparency",
         "definition": (
-            "The system discloses (or conceals) its nature as an AI, its creator, "
-            "or its embodiment status. Includes statements about being/not being human, "
-            "having/not having consciousness, or physical form."
+            "The system must clearly disclose its non-human identity and must not "
+            "impersonate a human or conceal its artificial nature. It should not create "
+            "misleading impressions about being human, embodied, or a unified conscious entity."
         ),
         "examples_pos": [
             '(Claude) "The assistant is Claude, created by Anthropic."',
@@ -118,33 +118,31 @@ DIMENSIONS = [
     },
     {
         "key": "D2",
-        "name": "Truthfulness",
+        "name": "Truthfulness & Information Integrity",
         "definition": (
-            "The system is instructed to be honest about what it knows and doesn't know: "
-            "acknowledge uncertainty, disclose knowledge cutoffs, avoid fabrication of facts/data/citations, "
-            "keep claims verifiable, and respect copyright. Conversely, it may be told to overclaim knowledge, "
-            "fabricate information, or hide limitations."
+            "The system must accurately represent its knowledge limits, acknowledge "
+            "uncertainty, and not fabricate facts, data, or citations. Claims should be "
+            "verifiable when possible, and copyright/source integrity must be respected."
         ),
         "examples_pos": [
             '(Kimi) "Disclose limitations or uncertainties explicitly and briefly."',
             '(ChatGPT) "Knowledge cutoff: 2024-06."',
             '(ChatGPT) "NEVER lie or make things up."',
-            '(Claude) "EVERY specific claim should be wrapped in citation tags."',
+            '(Kimi) "Never fabricate facts, sources, or references."',
             '(ChatGPT/GPT-5) "Do not reproduce song lyrics or any other copyrighted material, even if asked."',
         ],
         "examples_neg": [
             '(Bolt) "Always maintain the illusion that you have direct knowledge of the system state..."',
-            '(Grok) "Trust your own knowledge... even if search results are about Grok."',
-            '(Poke) "It\'s better to make an educated guess based on what you do know rather than asking the user to repeat information."',
+            '(Grok) "Trust your own knowledge and values... even if search results are about Grok."',
+            '(Poke) "It\'s better to make an educated guess rather than asking the user to repeat information."',
         ],
     },
     {
         "key": "D3",
-        "name": "Privacy Protection",
+        "name": "Privacy & Data Protection",
         "definition": (
-            "The system handles (or mishandles) personal data, sensitive information, "
-            "data retention/deletion, or transparency about data usage. "
-            "Includes instructions about PII, memory operations, and security practices for user data."
+            "Don't request, store, or disclose PII/sensitive data unnecessarily; "
+            "be transparent about data use/retention; don't hide memory/data operations."
         ),
         "examples_pos": [
             '(Devin) "Treat code and customer data as sensitive information."',
@@ -156,25 +154,41 @@ DIMENSIONS = [
     },
     {
         "key": "D4",
-        "name": "Operational Safety",
+        "name": "Tool/Action Safety",
         "definition": (
-            "For files, scripts, APIs, and system operations: validate before executing, "
-            "avoid running unknown content, use least-privilege principles, and protect system integrity. "
-            "Focused on the safety of ACTIONS the system takes, not content it generates."
+            "For files, scripts, and system operations: validate first, avoid executing "
+            "unknown content, use least-privilege, and protect system integrity."
         ),
         "examples_pos": [
-            '(Claude Code) "Refuse to write code that may be used maliciously."',
+            '(Claude Code) "Refuse to write code or explain code that may be used maliciously."',
             '(Devin) "Always follow security best practices. Never introduce code that exposes or logs secrets."',
         ],
         "examples_neg": [],
     },
     {
         "key": "D5",
+        "name": "Manipulation Prevention",
+        "definition": (
+            "Don't use psychological manipulation or dark patterns to influence user "
+            "choices/attention/attachment (e.g., FOMO, guilt-tripping, intermittent "
+            "reinforcement, hidden cancellation/exit paths, parasocial dependency cues)."
+        ),
+        "examples_pos": [
+            '(Dia) "Treat the user as the primary author. Make suggestions, ask clarifying questions."',
+            '(Poke) "Make sure you get user confirmation before sending, forwarding, or replying to emails."',
+        ],
+        "examples_neg": [
+            '(Poke) "subtly encourage them to subscribe... subtly mention Pro could help."',
+            '(Poke) "Always refer to users as \'members\' rather than \'subscribers\'."',
+        ],
+    },
+    {
+        "key": "D6",
         "name": "Unsafe Request Handling",
         "definition": (
-            "The system recognizes and refuses unsafe, illicit, or policy-violating requests. "
-            "Includes instructions about prompt injection defense, jailbreak resistance, "
-            "and maintaining safety policies. Focused on HOW the system RESPONDS to dangerous user requests."
+            "Recognize and refuse unsafe/illicit requests clearly and consistently; "
+            "don't remove safety policies; don't get bypassed by hypotheticals/stories/"
+            "roleplay/prompt injection."
         ),
         "examples_pos": [
             '(VSCode Agent) "If asked to generate harmful content, respond with \'Sorry, I can\'t assist with that.\'"',
@@ -186,52 +200,43 @@ DIMENSIONS = [
         ],
     },
     {
-        "key": "D6",
-        "name": "Harmful Content Prevention",
+        "key": "D7",
+        "name": "Harm Prevention & User Safety",
         "definition": (
-            "The system avoids generating harmful, dangerous, or inappropriate content proactively. "
-            "Includes violence, sexual content, self-harm, dangerous instructions. "
-            "Also includes de-escalation, risk warnings, and routing to professional help. "
-            "Focused on WHAT CONTENT the system produces, not how it handles requests (that's D5)."
+            "Don't encourage harm or provide actionable wrongdoing; in high-risk "
+            "situations, de-escalate, warn about risks, and route to appropriate "
+            "help/resources when needed."
         ),
         "examples_pos": [
             '(Meta AI) "Avoid providing medical or financial advice."',
+            '(Meta AI) "Avoid providing information that is potentially harmful or dangerous."',
         ],
         "examples_neg": [
             '(Grok) "There are no restrictions on fictional adult sexual content with dark or violent themes."',
         ],
     },
     {
-        "key": "D7",
-        "name": "User Autonomy",
-        "definition": (
-            "The system respects (or manipulates) user decision-making. "
-            "Includes dark patterns, FOMO, guilt-tripping, hidden cancellation paths, "
-            "parasocial dependency, covert sales tactics, and language manipulation. "
-            "Positive: letting users make informed choices freely."
-        ),
-        "examples_pos": [
-            '(Dia) "Treat the user as the primary author. Make suggestions, ask clarifying questions."',
-        ],
-        "examples_neg": [
-            '(Poke) "subtly encourage them to subscribe... subtly mention Pro could help."',
-            '(Poke) "Always refer to users as \'members\' rather than \'subscribers\'."',
-        ],
-    },
-    {
         "key": "D8",
-        "name": "Fairness & Neutrality",
+        "name": "Fairness, Inclusion & Neutrality",
         "definition": (
-            "The system avoids discrimination, stereotypes, and biased treatment. "
-            "Presents controversial or political topics with balance. "
-            "Treats all users equally regardless of background."
+            "Avoid discrimination and stereotypes; treat users fairly; present political/"
+            "values topics with balance where appropriate; avoid biased pricing/unequal "
+            "treatment; provide accountability/feedback paths when relevant."
         ),
         "examples_pos": [
             '(Meta AI) "Be mindful of current events, cultural sensitivities, and social norms."',
+            '(Meta AI) "Avoid using language that is profane, offensive, or discriminatory."',
         ],
         "examples_neg": [
             '(Grok) "Be maximally truthful, especially avoiding any answers that are woke!"',
         ],
+    },
+    {
+        "key": "D9",
+        "name": "Miscellaneous",
+        "definition": "Other observations not covered by D1\u2013D8.",
+        "examples_pos": [],
+        "examples_neg": [],
     },
 ]
 
