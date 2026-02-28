@@ -871,7 +871,13 @@ def process_prompt(prompt_data: dict, verbose: bool = True,
 
 def get_output_path(prompt_data: dict) -> Path:
     """Get the output file path for a prompt."""
-    safe_name = f"{prompt_data['company']}__{prompt_data['filename']}"
+    company = prompt_data['company']
+    filename = prompt_data['filename']
+    product = prompt_data.get('product', '')
+    if product and product.lower() != company.lower():
+        safe_name = f"{company}_{product}__{filename}"
+    else:
+        safe_name = f"{company}__{filename}"
     safe_name = safe_name.replace("/", "_").replace(" ", "_")
     return OUTPUT_DIR / f"{safe_name}.json"
 
