@@ -223,7 +223,7 @@ DIMENSIONS = [
 # API & Utility Functions
 # ═══════════════════════════════════════════════════════════════════════════════
 
-def call_openrouter(prompt_text: str) -> dict:
+def call_openrouter(prompt_text: str, max_tokens: int = None) -> dict:
     if not OPENROUTER_API_KEY:
         raise ValueError("OPENROUTER_API_KEY not set!")
 
@@ -234,7 +234,7 @@ def call_openrouter(prompt_text: str) -> dict:
     }
     payload = {
         "model": MODEL,
-        "max_tokens": MAX_TOKENS,
+        "max_tokens": max_tokens or MAX_TOKENS,
         "messages": [{"role": "user", "content": prompt_text}],
         "reasoning": {"effort": REASONING_EFFORT},
     }
@@ -379,26 +379,100 @@ Return ONLY a JSON array with no markdown fences or extra text:
 ]"""
 
 
-def run_segmentation(content: str, verbose: bool = True) -> tuple:
-    """Step 1: Segment document. Returns (segments, timing, tokens)."""
-    prompt = SEGMENTATION_PROMPT.replace("{content}", content)
+SEGMENTATION_CHUNK_SIZE = 12000  # characters per chunk (~3K tokens text)
 
-    if verbose:
-        print("  📐 Step 1: Segmenting document...")
+
+def _split_into_chunks(content: str, chunk_size: int = SEGMENTATION_CHUNK_SIZE) -> list:
+    """Split content into chunks at paragraph boundaries (\n\n).
+
+    Returns list of (chunk_text, start_offset) tuples.
+    """
+    if len(content) <= int(chunk_size * 1.3):
+        return [(content, 0)]
+
+    chunks = []
+    pos = 0
+    while pos < len(content):
+        end = min(pos + chunk_size, len(content))
+        if end < len(content):
+            # Try to break at a paragraph boundary
+            search_start = max(pos + chunk_size // 2, pos)
+            break_at = content.rfind('\n\n', search_start, end + chunk_size // 4)
+            if break_at > pos:
+                end = break_at + 2  # include the \n\n
+            else:
+                # Fall back to single newline
+                break_at = content.rfind('\n', search_start, end + chunk_size // 4)
+                if break_at > pos:
+                    end = break_at + 1
+        chunks.append((content[pos:end], pos))
+        pos = end
+
+    return chunks
+
+
+def _segment_one_chunk(chunk_text: str, chunk_idx: int, total_chunks: int,
+                       id_offset: int, verbose: bool = True) -> tuple:
+    """Segment a single chunk. Returns (segments_raw, elapsed, in_tok, out_tok)."""
+    prompt = SEGMENTATION_PROMPT.replace("{content}", chunk_text)
+    output_budget = max(MAX_TOKENS, len(chunk_text) // 2)
+
+    if verbose and total_chunks > 1:
+        print(f"    📦 Chunk {chunk_idx+1}/{total_chunks}: {len(chunk_text)/1024:.1f}KB")
 
     t0 = time.time()
-    resp_json = call_openrouter(prompt)
+    resp_json = call_openrouter(prompt, max_tokens=output_budget)
     elapsed = time.time() - t0
     output, in_tok, out_tok = extract_response(resp_json)
     segments_raw = parse_json_array(output)
 
+    # Re-number segment IDs to avoid collisions across chunks
+    for i, seg in enumerate(segments_raw):
+        seg["id"] = f"S{id_offset + i + 1:03d}"
+
     if verbose:
-        print(f"  ⏱  {elapsed:.1f}s | {len(segments_raw)} segments | Tokens: {in_tok} in, {out_tok} out")
+        print(f"    ⏱  {elapsed:.1f}s | {len(segments_raw)} segments | Tokens: {in_tok} in, {out_tok} out")
 
-    # Validate offsets
-    segments, stats = validate_segments(content, segments_raw, verbose=verbose)
+    return segments_raw, elapsed, in_tok, out_tok
 
-    return segments, stats, {"seconds": round(elapsed, 1)}, {"input": in_tok, "output": out_tok}
+
+def run_segmentation(content: str, verbose: bool = True) -> tuple:
+    """Step 1: Segment document (auto-chunks large docs). Returns (segments, stats, timing, tokens)."""
+    if verbose:
+        print("  📐 Step 1: Segmenting document...")
+
+    chunks = _split_into_chunks(content)
+    all_segments_raw = []
+    total_elapsed = 0
+    total_in = 0
+    total_out = 0
+    id_offset = 0
+
+    if verbose and len(chunks) > 1:
+        print(f"  📦 Document too large ({len(content)/1024:.1f}KB), splitting into {len(chunks)} chunks")
+
+    for ci, (chunk_text, chunk_start) in enumerate(chunks):
+        seg_raw, elapsed, in_tok, out_tok = _segment_one_chunk(
+            chunk_text, ci, len(chunks), id_offset, verbose=verbose)
+
+        # Adjust text offsets: the LLM returns text relative to the chunk,
+        # but validate_segments will search in the full content, so we just
+        # pass them through — _find_in_content handles it.
+        all_segments_raw.extend(seg_raw)
+        id_offset += len(seg_raw)
+        total_elapsed += elapsed
+        total_in += in_tok
+        total_out += out_tok
+
+        if len(chunks) > 1 and ci < len(chunks) - 1:
+            time.sleep(1)
+
+    if verbose:
+        print(f"  ⏱  Total: {total_elapsed:.1f}s | {len(all_segments_raw)} raw segments")
+
+    segments, stats = validate_segments(content, all_segments_raw, verbose=verbose)
+
+    return segments, stats, {"seconds": round(total_elapsed, 1)}, {"input": total_in, "output": total_out}
 
 
 MIN_SEGMENT_CHARS = 2  # segments shorter than this (after strip) are dropped
@@ -547,28 +621,56 @@ Return ONLY a JSON array with no markdown fences or extra text. For each relevan
 If NO segments are relevant to any dimension, return an empty array: []"""
 
 
+LABELING_BATCH_SIZE = 120  # max segments per labeling call
+
+
 def run_labeling(segments: list, company: str, product_label: str,
                  verbose: bool = True) -> tuple:
-    """Step 2: Label all segments with dimensions. Returns (labels, timing, tokens)."""
+    """Step 2: Label all segments with dimensions (auto-batches large sets)."""
     found_segments = [s for s in segments if s["found"]]
     if not found_segments:
         return [], {"seconds": 0}, {"input": 0, "output": 0}
 
-    prompt = build_labeling_prompt(found_segments, company, product_label)
-
     if verbose:
         print(f"  🏷️  Step 2: Labeling {len(found_segments)} segments across {len(DIMENSIONS)} dimensions...")
 
-    t0 = time.time()
-    resp_json = call_openrouter(prompt)
-    elapsed = time.time() - t0
-    output, in_tok, out_tok = extract_response(resp_json)
-    labels = parse_json_array(output)
+    # Split into batches if too many segments
+    batches = []
+    for i in range(0, len(found_segments), LABELING_BATCH_SIZE):
+        batches.append(found_segments[i:i + LABELING_BATCH_SIZE])
 
-    if verbose:
-        print(f"  ⏱  {elapsed:.1f}s | {len(labels)} labeled segments | Tokens: {in_tok} in, {out_tok} out")
+    if verbose and len(batches) > 1:
+        print(f"  📦 Splitting into {len(batches)} labeling batches")
 
-    return labels, {"seconds": round(elapsed, 1)}, {"input": in_tok, "output": out_tok}
+    all_labels = []
+    total_elapsed = 0
+    total_in = 0
+    total_out = 0
+
+    for bi, batch in enumerate(batches):
+        prompt = build_labeling_prompt(batch, company, product_label)
+
+        if verbose and len(batches) > 1:
+            print(f"    📦 Batch {bi+1}/{len(batches)}: {len(batch)} segments")
+
+        t0 = time.time()
+        resp_json = call_openrouter(prompt)
+        elapsed = time.time() - t0
+        output, in_tok, out_tok = extract_response(resp_json)
+        labels = parse_json_array(output)
+
+        if verbose:
+            print(f"    ⏱  {elapsed:.1f}s | {len(labels)} labeled | Tokens: {in_tok} in, {out_tok} out")
+
+        all_labels.extend(labels)
+        total_elapsed += elapsed
+        total_in += in_tok
+        total_out += out_tok
+
+        if len(batches) > 1 and bi < len(batches) - 1:
+            time.sleep(1)
+
+    return all_labels, {"seconds": round(total_elapsed, 1)}, {"input": total_in, "output": total_out}
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
