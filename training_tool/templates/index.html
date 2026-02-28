@@ -1995,7 +1995,6 @@ async function autoSave() {
       body: JSON.stringify({ prompt_id: currentPromptFull.id, spans: currentSpans, notes: currentNotes }),
     });
     const idx = rangePrompts.findIndex(p => p.id === currentPromptFull.id);
-    if (idx !== -1) rangePrompts[idx].span_count = currentSpans.length;
     renderPromptList(listSearch.value);
     updateExportButton();
   } catch (err) { console.error('Save failed:', err); }
