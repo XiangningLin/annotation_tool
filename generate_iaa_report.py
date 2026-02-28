@@ -80,6 +80,73 @@ def prompt_display_name(prompt_key: str, prompt_data: dict) -> str:
     return f"{company} / {filename}" if company else filename
 
 
+def krippendorffs_alpha(all_decisions: list[dict[tuple, bool]], all_keys: list[tuple]) -> float | None:
+    """Compute Krippendorff's alpha for nominal data.
+
+    Each item (span) can be coded by a variable number of annotators as True/False.
+    Missing values (annotator didn't code this item) are naturally handled.
+    """
+    n_coders = len(all_decisions)
+
+    # Build a value-count matrix: for each item, count how many coders chose each category
+    # Categories: True (accept), False (reject)
+    categories = [True, False]
+    cat_idx = {True: 0, False: 1}
+    n_cats = len(categories)
+
+    # n_uc[item_idx][cat] = number of coders who assigned category cat to item
+    n_uc = []
+    m_u = []  # number of coders per item
+    for key in all_keys:
+        counts = [0, 0]
+        m = 0
+        for a in range(n_coders):
+            v = all_decisions[a].get(key)
+            if v is not None:
+                counts[cat_idx[v]] += 1
+                m += 1
+        if m >= 2:  # need at least 2 coders to be pairable
+            n_uc.append(counts)
+            m_u.append(m)
+
+    if not n_uc:
+        return None
+
+    # Total pairable values
+    n_total = sum(m_u)
+
+    # Observed disagreement: D_o = (1/n_total) * sum_u [ (1/(m_u-1)) * sum_{c!=k} n_uc * n_uk ]
+    d_o = 0.0
+    for u_idx in range(len(n_uc)):
+        m = m_u[u_idx]
+        pair_disagree = 0
+        for c in range(n_cats):
+            for k in range(n_cats):
+                if c != k:
+                    pair_disagree += n_uc[u_idx][c] * n_uc[u_idx][k]
+        d_o += pair_disagree / (m - 1)
+    d_o /= n_total
+
+    # Expected disagreement: D_e = (1/(n_total-1)) * sum_{c!=k} n_c * n_k
+    # where n_c = total times category c was used across all items
+    n_c = [0] * n_cats
+    for u_idx in range(len(n_uc)):
+        for c in range(n_cats):
+            n_c[c] += n_uc[u_idx][c]
+
+    d_e = 0.0
+    for c in range(n_cats):
+        for k in range(n_cats):
+            if c != k:
+                d_e += n_c[c] * n_c[k]
+    d_e /= (n_total - 1)
+
+    if d_e == 0:
+        return None
+
+    return 1.0 - d_o / d_e
+
+
 def generate_report(files: list[Path], output: Path | None = None) -> str:
     annotators_data = []
     for f in files:
@@ -208,6 +275,27 @@ def generate_report(files: list[Path], output: Path | None = None) -> str:
     w(f"  All {n} agree: {all_agree}/{all_compared} = {all_pct:.1f}%")
     w("")
 
+    # --- Krippendorff's Alpha ---
+    alpha = krippendorffs_alpha(all_decisions, all_keys)
+
+    w("=" * 50)
+    w("AGREEMENT COEFFICIENTS")
+    w("=" * 50)
+    w("")
+    if alpha is not None:
+        w(f"  Krippendorff's Alpha (nominal): {alpha:.3f}")
+        if alpha < 0:
+            w("    Interpretation: Less agreement than expected by chance")
+        elif alpha < 0.667:
+            w("    Interpretation: Tentative conclusions only")
+        elif alpha < 0.800:
+            w("    Interpretation: Acceptable for some purposes")
+        else:
+            w("    Interpretation: Good reliability")
+    else:
+        w("  Krippendorff's Alpha: N/A (insufficient data)")
+    w("")
+
     kappa_strs = []
     for i, j, k in kappas:
         if k is not None:
@@ -215,11 +303,13 @@ def generate_report(files: list[Path], output: Path | None = None) -> str:
     if kappa_strs:
         unique_kappas = set(kappa_strs)
         if len(unique_kappas) == 1:
-            w(f"Note: Cohen's Kappa = {kappa_strs[0]} for all pairs (Kappa Paradox due to")
+            w(f"  Cohen's Kappa (pairwise): {kappa_strs[0]} for all pairs")
         else:
             parts = ", ".join(kappa_strs)
-            w(f"Note: Cohen's Kappa = {parts} per pair (Kappa Paradox due to")
-        w(f"~{accept_rate:.0f}% accept rate; percent agreement is the more appropriate metric here).")
+            w(f"  Cohen's Kappa (pairwise): {parts}")
+        w(f"  Note: Kappa Paradox likely — ~{accept_rate:.0f}% accept rate causes low Kappa")
+        w(f"  despite high percent agreement. Alpha and percent agreement are more")
+        w(f"  informative here.")
     w("")
 
     w("=" * 50)

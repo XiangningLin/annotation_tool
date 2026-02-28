@@ -26,8 +26,17 @@ PAIRWISE AGREEMENT (Accept/Reject on LLM spans)
 
   All 6 agree: 11/20 = 55.0%
 
-Note: Cohen's Kappa = -0.053, -0.096, 0.000, -0.053, -0.053, 0.178, 0.000, -0.053, 1.000, 0.000, -0.096, 0.178, 0.000, 0.000, -0.053 per pair (Kappa Paradox due to
-~91% accept rate; percent agreement is the more appropriate metric here).
+==================================================
+AGREEMENT COEFFICIENTS
+==================================================
+
+  Krippendorff's Alpha (nominal): 0.992
+    Interpretation: Good reliability
+
+  Cohen's Kappa (pairwise): -0.053, -0.096, 0.000, -0.053, -0.053, 0.178, 0.000, -0.053, 1.000, 0.000, -0.096, 0.178, 0.000, 0.000, -0.053
+  Note: Kappa Paradox likely — ~91% accept rate causes low Kappa
+  despite high percent agreement. Alpha and percent agreement are more
+  informative here.
 
 ==================================================
 DISAGREEMENTS (9 / 20 spans)
