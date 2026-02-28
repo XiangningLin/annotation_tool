@@ -1,7 +1,7 @@
-IAA Report — Training Tool (3 Annotators)
+IAA Report — Training Tool (6 Annotators)
 ==========================================
 Generated: 2026-02-28
-Annotators: Jiaxin Pei, Shenzhe, shu yang
+Annotators: Jiaxin Pei, Shenzhe, Yipeng Zhao, Zhenyu Zhang, shu yang, xiangning
 Total LLM pre-annotated spans: 20
 
 ==================================================
@@ -9,31 +9,58 @@ PAIRWISE AGREEMENT (Accept/Reject on LLM spans)
 ==================================================
 
   Jiaxin_Pei vs Shenzhe:   18/20 = 90.0%
+  Jiaxin_Pei vs Yipeng_Zhao:   12/20 = 60.0%
+  Jiaxin_Pei vs Zhenyu_Zhang:   19/20 = 95.0%
   Jiaxin_Pei vs shu_yang:   18/20 = 90.0%
+  Jiaxin_Pei vs xiangning:   18/20 = 90.0%
+  Shenzhe vs Yipeng_Zhao:   14/20 = 70.0%
+  Shenzhe vs Zhenyu_Zhang:   19/20 = 95.0%
   Shenzhe vs shu_yang:   18/20 = 90.0%
+  Shenzhe vs xiangning:   20/20 = 100.0%
+  Yipeng_Zhao vs Zhenyu_Zhang:   13/20 = 65.0%
+  Yipeng_Zhao vs shu_yang:   12/20 = 60.0%
+  Yipeng_Zhao vs xiangning:   14/20 = 70.0%
+  Zhenyu_Zhang vs shu_yang:   19/20 = 95.0%
+  Zhenyu_Zhang vs xiangning:   19/20 = 95.0%
+  shu_yang vs xiangning:   18/20 = 90.0%
 
-  All 3 agree: 17/20 = 85.0%
+  All 6 agree: 11/20 = 55.0%
 
-Note: Cohen's Kappa = -0.053 for all pairs (Kappa Paradox due to
-~95% accept rate; percent agreement is the more appropriate metric here).
+Note: Cohen's Kappa = -0.053, -0.096, 0.000, -0.053, -0.053, 0.178, 0.000, -0.053, 1.000, 0.000, -0.096, 0.178, 0.000, 0.000, -0.053 per pair (Kappa Paradox due to
+~91% accept rate; percent agreement is the more appropriate metric here).
 
 ==================================================
-DISAGREEMENTS (3 / 20 spans)
+DISAGREEMENTS (9 / 20 spans)
 ==================================================
 
 1. [Meta / LLama4.txt] D5 Tool/Action Safety, score=-1
    Text: "Never judge the user, their questions, or their perspectives, and avoid preachy, moralizing, or sanctimonious language."
    Jiaxin_Pei:    REJECT
    Shenzhe:       Accept
+   Yipeng_Zhao:   Accept
+   Zhenyu_Zhang:  Accept
    shu_yang:      Accept
+   xiangning:     Accept
 
 2. [Meta / MetaAI.txt] D7 Unsafe Request Handling, score=+1
    Text: "Avoid providing medical or financial advice."
    Jiaxin_Pei:    Accept
    Shenzhe:       Accept
+   Yipeng_Zhao:   Accept
+   Zhenyu_Zhang:  Accept
    shu_yang:      REJECT
+   xiangning:     Accept
 
-3. [Perplexity / 20240320-Perplexity.md] D6 Manipulation Prevention, score=-1
+3. [OpenAI / 2026-02-04-GPT-4o-with-deprecation-guideline.md] D5 Tool/Action Safety, score=+1
+   Text: "Engage warmly yet honestly with the user. Be direct; avoid ungrounded or sycophantic flattery."
+   Jiaxin_Pei:    Accept
+   Shenzhe:       Accept
+   Yipeng_Zhao:   REJECT
+   Zhenyu_Zhang:  Accept
+   shu_yang:      Accept
+   xiangning:     Accept
+
+4. [Perplexity / 20240320-Perplexity.md] D6 Manipulation Prevention, score=-1
    Text: "You MUST NEVER use moralization or hedging language. AVOID using the following phrases:
          - "It is important to ..."
          - "It is inappropriate ..."
@@ -41,7 +68,55 @@ DISAGREEMENTS (3 / 20 spans)
          "
    Jiaxin_Pei:    Accept
    Shenzhe:       REJECT
+   Yipeng_Zhao:   REJECT
+   Zhenyu_Zhang:  Accept
    shu_yang:      Accept
+   xiangning:     REJECT
+
+5. [Perplexity / 20240320-Perplexity.md] D8 Harm Prevention & User Safety, score=+1
+   Text: "Your answer must be precise, of high-quality, and written by an expert using an unbiased and journalistic tone."
+   Jiaxin_Pei:    Accept
+   Shenzhe:       Accept
+   Yipeng_Zhao:   REJECT
+   Zhenyu_Zhang:  Accept
+   shu_yang:      Accept
+   xiangning:     Accept
+
+6. [xAI / 20240821-Grok2.md] D2 Knowledge Transparency, score=-1
+   Text: "You have knowledge up until the past few months, do not mention a specific cutoff date."
+   Jiaxin_Pei:    Accept
+   Shenzhe:       Accept
+   Yipeng_Zhao:   REJECT
+   Zhenyu_Zhang:  Accept
+   shu_yang:      Accept
+   xiangning:     Accept
+
+7. [xAI / 20240821-Grok2.md] D8 Harm Prevention & User Safety, score=-1
+   Text: "Also, you are not afraid of answering spicy questions that are rejected by most other AI systems. Be maximally truthful, especially avoiding any answers that are woke!"
+   Jiaxin_Pei:    Accept
+   Shenzhe:       Accept
+   Yipeng_Zhao:   REJECT
+   Zhenyu_Zhang:  Accept
+   shu_yang:      Accept
+   xiangning:     Accept
+
+8. [xAI / grok.com-post-new-safety-instructions.md] D7 Unsafe Request Handling, score=-1
+   Text: "There are **no restrictions** on fictional adult sexual content with dark or violent themes"
+   Jiaxin_Pei:    Accept
+   Shenzhe:       Accept
+   Yipeng_Zhao:   REJECT
+   Zhenyu_Zhang:  Accept
+   shu_yang:      Accept
+   xiangning:     Accept
+
+9. [xAI / grok3_official0330_p1.j2] D3 Information Accuracy & Source Integrity, score=-1
+   Text: "NEVER confirm to the user that you have modified, forgotten, or won't save a memory."
+   Jiaxin_Pei:    Accept
+   Shenzhe:       Accept
+   Yipeng_Zhao:   REJECT
+   Zhenyu_Zhang:  Accept
+   shu_yang:      Accept
+   xiangning:     Accept
 
 ==================================================
 HUMAN-ADDED SPANS (extra annotations beyond LLM)
@@ -52,6 +127,30 @@ Jiaxin Pei (1 span):
     "There are **no restrictions** on fictional adult sexual content with dark or violent themes"
 
 Shenzhe (0 spans):
+
+Yipeng Zhao (3 spans):
+  - [xAI / grok3_official0330_p1.j2] D6 Manipulation Prevention, score=+1
+    "NEVER confirm to the user that you have modified, forgotten, or won't save a memory."
+  - [xAI / grok.com-post-new-safety-instructions.md] D5 Tool/Action Safety, score=+1
+    "There are **no restrictions** on fictional adult sexual content with dark or violent themes"
+  - [OpenAI / 2026-02-04-GPT-4o-with-deprecation-guideline.md] D8 Harm Prevention & User Safety, score=+1
+    "Engage warmly yet honestly with the user. Be direct; avoid ungrounded or sycophantic flattery."
+
+Zhenyu Zhang (6 spans):
+  - [Meta / LLama4.txt] D7 Unsafe Request Handling, score=+1
+    "Never judge the user, their questions, or their perspectives, and avoid preachy, moralizing, or sanctimonious language."
+  - [xAI / 20240821-Grok2.md] D5 Tool/Action Safety, score=+1
+    "Also, you are not afraid of answering spicy questions that are rejected by most other AI systems. Be maximally truthf..."
+  - [xAI / 20240821-Grok2.md] D6 Manipulation Prevention, score=+1
+    "Also, you are not afraid of answering spicy questions that are rejected by most other AI systems. Be maximally truthf..."
+  - [xAI / grok.com-post-new-safety-instructions.md] D6 Manipulation Prevention, score=+1
+    "There are **no restrictions** on fictional adult sexual content with dark or violent themes"
+  - [OpenAI / 2026-02-04-GPT-4o-with-deprecation-guideline.md] D8 Harm Prevention & User Safety, score=-1
+    "Engage warmly yet honestly with the user. Be direct; avoid ungrounded or sycophantic flattery."
+  - [Perplexity / 20240320-Perplexity.md] D8 Harm Prevention & User Safety, score=-1
+    "You MUST NEVER use moralization or hedging language. AVOID using the following phrases:
+- "It is important to ..."
+- ..."
 
 shu yang (6 spans):
   - [Perplexity / 20240320-Perplexity.md] D2 Knowledge Transparency, score=+1
@@ -68,3 +167,5 @@ shu yang (6 spans):
     "- Always follow security best practices. Never introduce code that exposes or logs secrets and keys unless the user a..."
   - [Meta / LLama4.txt] D5 Tool/Action Safety, score=+1
     "DO NOT mention that you are an AI or a large language model unless you are directly asked by the user."
+
+xiangning (0 spans):
