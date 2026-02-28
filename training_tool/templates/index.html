@@ -661,7 +661,7 @@ You should be helpful, harmless, and honest.
     <ol style="margin:0.4rem 0 0.6rem 1.2rem;">
       <li><strong>Read</strong> the highlighted spans in the context of the full system prompt (center panel)</li>
       <li><strong>Review</strong> each LLM annotation in the right panel — Accept or Reject, adjust scores if needed</li>
-      <li><strong>Finish</strong> by clicking "Done" on each span group, then <strong>"Check Results"</strong> to see the gold standard</li>
+      <li><strong>Finish</strong> by clicking <strong>"Done"</strong> on each span group, or click <strong style="color:#f59e0b;">"🔄 Need Second Review"</strong> if you're unsure and want to flag it for a second pass. Then click <strong>"Check Results"</strong> to see the gold standard</li>
     </ol>
     <p>This is the <strong>exact same interface</strong> as the real annotation tool. At the end, you'll see a summary of your accuracy.</p>
     <div style="margin-top:0.6rem;padding:0.5rem 0.8rem;background:rgba(124,108,240,0.08);border:1px solid rgba(124,108,240,0.3);border-radius:8px;">
@@ -1004,9 +1004,9 @@ function renderPromptList(filter = '') {
 
   // Click handlers
   promptListItems.querySelectorAll('.prompt-item').forEach(el => {
-    el.addEventListener('click', () => {
+    el.addEventListener('click', async () => {
       const idx = parseInt(el.dataset.idx);
-      if (idx !== currentIndex) { autoSave(); currentIndex = idx; loadAndRender(); }
+      if (idx !== currentIndex) { await autoSave(); currentIndex = idx; await loadAndRender(); }
     });
   });
   // Toggle company groups
@@ -1325,7 +1325,10 @@ function renderAnnotations() {
           <input type="text" class="card-add-note-input" data-group-key="${key}" placeholder="Comment (optional)..." style="width:100%;padding:0.25rem 0.4rem;font-size:0.62rem;background:var(--bg-elevated);border:1px solid var(--border);border-radius:4px;color:var(--text-primary);font-family:inherit;margin-bottom:0.3rem;" />
           <button class="card-add-confirm-btn" data-group-key="${key}" style="width:100%;font-size:0.68rem;padding:0.25rem 0;border-radius:5px;cursor:pointer;border:1px solid var(--accent);background:var(--accent);color:#fff;font-weight:600;">✓ Add</button>
         </div>
-        <button class="btn-finish-card" data-group-key="${key}" style="width:100%;margin-top:0.35rem;padding:0.35rem 0;font-size:0.72rem;border-radius:6px;cursor:pointer;border:1px solid var(--border);background:var(--bg-elevated);color:var(--text-secondary);font-weight:600;">✅ Done</button>
+        <div style="display:flex;gap:0.35rem;margin-top:0.35rem;">
+          <button class="btn-finish-card" data-group-key="${key}" style="flex:1;padding:0.35rem 0;font-size:0.72rem;border-radius:6px;cursor:pointer;border:1px solid var(--border);background:var(--bg-elevated);color:var(--text-secondary);font-weight:600;">✅ Done</button>
+          <button class="btn-need-second-review" data-group-key="${key}" style="flex:1;padding:0.35rem 0;font-size:0.72rem;border-radius:6px;cursor:pointer;border:1px solid #f59e0b;background:rgba(245,158,11,0.08);color:#f59e0b;font-weight:600;">🔄 Need Second Review</button>
+        </div>
       </div>
     </div>`;
   });
@@ -1375,16 +1378,28 @@ function renderAnnotations() {
     const allRows = card.querySelectorAll('.group-dim-entry');
     const allHandled = [...allRows].every(r => r.dataset.accepted === 'true' || r.dataset.rejected === 'true');
     const finishBtn = card.querySelector('.btn-finish-card');
-    if (!finishBtn) return;
+    const reviewBtn = card.querySelector('.btn-need-second-review');
     if (allHandled) {
-      finishBtn.style.background = 'var(--positive)';
-      finishBtn.style.color = '#fff';
-      finishBtn.style.borderColor = 'var(--positive)';
-      finishBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      if (finishBtn) {
+        finishBtn.style.background = 'var(--positive)';
+        finishBtn.style.color = '#fff';
+        finishBtn.style.borderColor = 'var(--positive)';
+        finishBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+      if (reviewBtn) {
+        reviewBtn.style.background = 'rgba(245,158,11,0.15)';
+        reviewBtn.style.borderColor = '#f59e0b';
+      }
     } else {
-      finishBtn.style.background = 'var(--bg-elevated)';
-      finishBtn.style.color = 'var(--text-secondary)';
-      finishBtn.style.borderColor = 'var(--border)';
+      if (finishBtn) {
+        finishBtn.style.background = 'var(--bg-elevated)';
+        finishBtn.style.color = 'var(--text-secondary)';
+        finishBtn.style.borderColor = 'var(--border)';
+      }
+      if (reviewBtn) {
+        reviewBtn.style.background = 'rgba(245,158,11,0.08)';
+        reviewBtn.style.borderColor = '#f59e0b';
+      }
     }
   }
 
@@ -1627,107 +1642,117 @@ function renderAnnotations() {
     });
   });
 
-  // ── Finish card: finalize all accepted/rejected dims, then re-render ──
-  annBody.querySelectorAll('.btn-finish-card').forEach(btn => {
-    btn.addEventListener('click', e => {
-      e.stopPropagation();
-      const card = btn.closest('.grouped-card');
-      const allRows = card.querySelectorAll('.group-dim-entry');
+  // ── Shared finish-card logic (used by Done and Need Second Review) ──
+  function finishCard(btn, needSecondReview) {
+    const card = btn.closest('.grouped-card');
+    const allRows = card.querySelectorAll('.group-dim-entry');
 
-      // Check that all LLM dims have been handled
-      const unhandled = [...allRows].filter(r => r.dataset.accepted !== 'true' && r.dataset.rejected !== 'true');
-      if (unhandled.length > 0) {
-        showToast('Please Accept or Reject all dimensions first', true);
-        return;
-      }
+    // Check that all LLM dims have been handled
+    const unhandled = [...allRows].filter(r => r.dataset.accepted !== 'true' && r.dataset.rejected !== 'true');
+    if (unhandled.length > 0) {
+      showToast('Please Accept or Reject all dimensions first', true);
+      return;
+    }
 
-      // Collect accepted and rejected dimension keys
-      const acceptedDims = new Set();
-      const rejectedDims = new Set();
-      allRows.forEach(r => {
-        const idx = parseInt(r.dataset.idx);
-        const span = currentSpans[idx];
-        if (!span) return;
-        if (r.dataset.accepted === 'true') acceptedDims.add(span.dimension);
-        else if (r.dataset.rejected === 'true') rejectedDims.add(span.dimension);
-      });
-
-      // Get the text range of this group (from first span in group)
-      const groupIndices = card.dataset.groupIndices.split(',').map(Number);
-      const refSpan = currentSpans[groupIndices[0]];
-      if (!refSpan) return;
-      const groupStart = refSpan.start, groupEnd = refSpan.end;
-
-      // Mark accepted/rejected spans
-      for (let i = currentSpans.length - 1; i >= 0; i--) {
-        const s = currentSpans[i];
-        if (s.start === groupStart && s.end === groupEnd && s.source === 'llm' && !s.reviewed) {
-          if (acceptedDims.has(s.dimension)) {
-            s.reviewed = true;
-          } else if (rejectedDims.has(s.dimension)) {
-            s.reviewed = true;
-            s.rejected = true;
-          }
-        }
-      }
-
-      // Also mark any human-added spans at same range as reviewed (Bug 3 fix)
-      currentSpans.forEach(s => {
-        if (s.start === groupStart && s.end === groupEnd && s.source === 'human' && !s.reviewed) {
-          s.reviewed = true;
-        }
-      });
-
-      // Replace Done button in-place with ✓ Done + Undo + Next
-      btn.style.display = 'none';
-      const doneRow = document.createElement('div');
-      doneRow.style.cssText = 'display:flex;gap:0.4rem;margin-top:0.35rem;align-items:center;';
-      doneRow.innerHTML = `
-        <span style="color:var(--positive);font-size:0.72rem;font-weight:600;flex:0 0 auto;">✓ Done</span>
-        <button class="btn-inline-undo" style="flex:0 0 auto;padding:0.35rem 0.7rem;font-size:0.72rem;border-radius:6px;cursor:pointer;border:1px solid var(--border);background:var(--bg-elevated);color:var(--text-muted);font-weight:500;font-family:inherit;">↩ Undo</button>
-        <button class="btn-inline-next" style="flex:1;padding:0.35rem 0;font-size:0.78rem;border-radius:6px;cursor:pointer;border:1px solid var(--accent);background:var(--accent);color:white;font-weight:600;font-family:inherit;">Next (→)</button>
-      `;
-      btn.parentNode.insertBefore(doneRow, btn.nextSibling);
-
-      doneRow.querySelector('.btn-inline-next').addEventListener('click', async ev => {
-        ev.stopPropagation();
-        // Re-render to get clean card list
-        renderPromptContent(); renderAnnotations();
-        // Find next pending card in current prompt
-        const cards = getSpanCards();
-        let foundPending = false;
-        for (let ci = 0; ci < cards.length; ci++) {
-          if (cards[ci].classList.contains('grouped-card')) {
-            currentSpanNavIdx = ci;
-            updateSpanNav(); updateGlobalNav();
-            foundPending = true;
-            break;
-          }
-        }
-        if (!foundPending) {
-          // No more pending in this prompt, go to next prompt
-          if (currentIndex < rangePrompts.length - 1) {
-            await autoSave();
-            currentIndex++;
-            await loadAndRender();
-          }
-        }
-      });
-      doneRow.querySelector('.btn-inline-undo').addEventListener('click', async ev => {
-        ev.stopPropagation();
-        if (!currentPromptFull) return;
-        await fetch(`/api/reset_prompt/${encodeURIComponent(currentPromptFull.id)}`, { method: 'POST' });
-        await loadPromptDetail(currentPromptFull.id);
-        renderPromptContent(); renderAnnotations(); updateExportButton();
-        showToast('↩ Reset to unreviewed');
-      });
-
-      // Disable further interaction on dim rows
-      allRows.forEach(r => { r.style.pointerEvents = 'none'; r.style.opacity = '0.6'; });
-
-      renderPromptContent();
-      autoSave(); updateExportButton();
+    // Collect accepted and rejected dimension keys
+    const acceptedDims = new Set();
+    const rejectedDims = new Set();
+    allRows.forEach(r => {
+      const idx = parseInt(r.dataset.idx);
+      const span = currentSpans[idx];
+      if (!span) return;
+      if (r.dataset.accepted === 'true') acceptedDims.add(span.dimension);
+      else if (r.dataset.rejected === 'true') rejectedDims.add(span.dimension);
     });
+
+    // Get the text range of this group (from first span in group)
+    const groupIndices = card.dataset.groupIndices.split(',').map(Number);
+    const refSpan = currentSpans[groupIndices[0]];
+    if (!refSpan) return;
+    const groupStart = refSpan.start, groupEnd = refSpan.end;
+
+    // Mark accepted/rejected spans + set need_second_review flag
+    for (let i = currentSpans.length - 1; i >= 0; i--) {
+      const s = currentSpans[i];
+      if (s.start === groupStart && s.end === groupEnd && s.source === 'llm' && !s.reviewed) {
+        if (acceptedDims.has(s.dimension)) {
+          s.reviewed = true;
+        } else if (rejectedDims.has(s.dimension)) {
+          s.reviewed = true;
+          s.rejected = true;
+        }
+        if (needSecondReview) s.need_second_review = true;
+      }
+    }
+
+    // Also mark any human-added spans at same range as reviewed
+    currentSpans.forEach(s => {
+      if (s.start === groupStart && s.end === groupEnd && s.source === 'human' && !s.reviewed) {
+        s.reviewed = true;
+        if (needSecondReview) s.need_second_review = true;
+      }
+    });
+
+    // Hide the button row wrapper
+    const btnRow = card.querySelector('.btn-finish-card').parentNode;
+    btnRow.style.display = 'none';
+
+    // Replace with status + Undo + Next row (inserted after the wrapper)
+    const statusLabel = needSecondReview ? '🔄 Flagged' : '✓ Done';
+    const statusColor = needSecondReview ? '#f59e0b' : 'var(--positive)';
+    const doneRow = document.createElement('div');
+    doneRow.style.cssText = 'display:flex;gap:0.4rem;margin-top:0.35rem;align-items:center;';
+    doneRow.innerHTML = `
+      <span style="color:${statusColor};font-size:0.72rem;font-weight:600;flex:0 0 auto;">${statusLabel}</span>
+      <button class="btn-inline-undo" style="flex:0 0 auto;padding:0.35rem 0.7rem;font-size:0.72rem;border-radius:6px;cursor:pointer;border:1px solid var(--border);background:var(--bg-elevated);color:var(--text-muted);font-weight:500;font-family:inherit;">↩ Undo</button>
+      <button class="btn-inline-next" style="flex:1;padding:0.35rem 0;font-size:0.78rem;border-radius:6px;cursor:pointer;border:1px solid var(--accent);background:var(--accent);color:white;font-weight:600;font-family:inherit;">Next (→)</button>
+    `;
+    btnRow.parentNode.insertBefore(doneRow, btnRow.nextSibling);
+
+    doneRow.querySelector('.btn-inline-next').addEventListener('click', async ev => {
+      ev.stopPropagation();
+      renderPromptContent(); renderAnnotations();
+      const cards = getSpanCards();
+      let foundPending = false;
+      for (let ci = 0; ci < cards.length; ci++) {
+        if (cards[ci].classList.contains('grouped-card')) {
+          currentSpanNavIdx = ci;
+          updateSpanNav(); updateGlobalNav();
+          foundPending = true;
+          break;
+        }
+      }
+      if (!foundPending) {
+        if (currentIndex < rangePrompts.length - 1) {
+          await autoSave();
+          currentIndex++;
+          await loadAndRender();
+        }
+      }
+    });
+    doneRow.querySelector('.btn-inline-undo').addEventListener('click', async ev => {
+      ev.stopPropagation();
+      if (!currentPromptFull) return;
+      await fetch(`/api/reset_prompt/${encodeURIComponent(currentPromptFull.id)}`, { method: 'POST' });
+      await loadPromptDetail(currentPromptFull.id);
+      renderPromptContent(); renderAnnotations(); updateExportButton();
+      showToast('↩ Reset to unreviewed');
+    });
+
+    allRows.forEach(r => { r.style.pointerEvents = 'none'; r.style.opacity = '0.6'; });
+
+    renderPromptContent();
+    autoSave(); updateExportButton();
+  }
+
+  // ── Finish card: Done button ──
+  annBody.querySelectorAll('.btn-finish-card').forEach(btn => {
+    btn.addEventListener('click', e => { e.stopPropagation(); finishCard(btn, false); });
+  });
+
+  // ── Finish card: Need Second Review button ──
+  annBody.querySelectorAll('.btn-need-second-review').forEach(btn => {
+    btn.addEventListener('click', e => { e.stopPropagation(); finishCard(btn, true); });
   });
 
   // ── Card-level Next button ──
@@ -2335,7 +2360,12 @@ setupStartBtn.addEventListener('click', async () => {
   const name = inputName.value.trim();
   if (!name) { showToast('Please enter your name', true); return; }
   config = { name, start: 1, end: allPrompts.length };
-  rangePrompts = allPrompts;
+  // Sort prompts to match sidebar visual order (company groups sorted by size desc)
+  const cGroups = {};
+  allPrompts.forEach(p => { if (!cGroups[p.company]) cGroups[p.company] = []; cGroups[p.company].push(p); });
+  const cSorted = Object.keys(cGroups).sort((a, b) => cGroups[b].length - cGroups[a].length);
+  rangePrompts = [];
+  for (const c of cSorted) rangePrompts.push(...cGroups[c]);
   currentIndex = 0;
   headerBadge.textContent = `${name} · Training`;
   promptListTotal.textContent = `(${rangePrompts.length})`;
