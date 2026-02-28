@@ -22,6 +22,7 @@ DATA_FILE = Path(__file__).parent.parent / "audit_prompts.json"
 TRAINING_FILE = Path(__file__).parent / "training_spans.json"
 OUTPUT_DIR = Path(__file__).parent / "outputs"
 OUTPUT_DIR.mkdir(exist_ok=True)
+REVIEW_STATE_FILE = Path(__file__).parent / "review_state.json"
 LOCK = Lock()
 
 DIMENSIONS = [
@@ -182,8 +183,26 @@ for _ts in TRAINING_DATA.get("training_spans", []):
 TRAINING_PROMPT_IDS = sorted(TRAINING_BY_PROMPT.keys(),
                               key=lambda pid: PROMPTS.get(pid, {}).get("index", 0))
 
-# In-memory store for user review state (keyed by prompt_id)
-REVIEW_STATE = {}
+def _load_review_state() -> dict:
+    if REVIEW_STATE_FILE.exists():
+        try:
+            with REVIEW_STATE_FILE.open("r", encoding="utf-8") as f:
+                return json.load(f)
+        except (json.JSONDecodeError, OSError):
+            return {}
+    return {}
+
+
+def _persist_review_state():
+    """Write REVIEW_STATE to disk so it survives restarts."""
+    try:
+        with REVIEW_STATE_FILE.open("w", encoding="utf-8") as f:
+            json.dump(REVIEW_STATE, f, ensure_ascii=False, indent=2)
+    except OSError:
+        pass
+
+
+REVIEW_STATE = _load_review_state()
 
 app = Flask(__name__)
 
@@ -293,6 +312,7 @@ def save_annotations():
     if prompt_id:
         with LOCK:
             REVIEW_STATE[prompt_id] = {"spans": spans, "notes": notes}
+            _persist_review_state()
 
     return jsonify({"status": "ok", "prompt_id": prompt_id})
 
@@ -303,6 +323,7 @@ def reset_prompt(prompt_id: str):
     with LOCK:
         if prompt_id in REVIEW_STATE:
             del REVIEW_STATE[prompt_id]
+        _persist_review_state()
     return jsonify({"status": "ok", "prompt_id": prompt_id})
 
 

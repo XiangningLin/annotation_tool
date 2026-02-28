@@ -1043,7 +1043,7 @@ function renderPromptContent() {
   const text = p.content || '';
   if (!text) { contentBody.innerHTML = '<div class="empty-state"><span class="empty-state-text">Empty prompt</span></div>'; return; }
 
-  const spans = currentSpans.map((s, i) => ({ ...s, _origIdx: i })).filter(s => !s.rejected);
+  const spans = currentSpans.map((s, i) => ({ ...s, _origIdx: i })).filter(s => !s.rejected || s.need_second_review);
 
   if (spans.length === 0) {
     contentBody.innerHTML = `<div class="prompt-text-display" id="promptTextDisplay">${escHtml(text)}</div>`;
@@ -1196,7 +1196,7 @@ function scrollToSpan(spanIdx) {
 function renderAnnotations() {
   const allIndexed = currentSpans.map((s, i) => ({ ...s, _idx: i }));
   const pendingSpans = allIndexed.filter(s => s.source === 'llm' && !s.reviewed);
-  const reviewedSpans = allIndexed.filter(s => s.reviewed && !s.rejected);
+  const reviewedSpans = allIndexed.filter(s => s.reviewed && (!s.rejected || s.need_second_review));
 
   // Filter
   let filteredPending, filteredReviewed;
@@ -1336,16 +1336,19 @@ function renderAnnotations() {
   // ── Render reviewed cards ──
   filteredReviewed.forEach(s => {
     const i = s._idx;
-      const cls = s.score === 1 ? 'positive' : s.score === -1 ? 'negative' : 'neutral';
+      const cls = s.rejected ? 'negative' : s.score === 1 ? 'positive' : s.score === -1 ? 'negative' : 'neutral';
       const color = dimColor(s.dimension);
-    const label = s.score === 1 ? '+1 Good' : s.score === -1 ? '−1 Violation' : '0 Neutral';
+    const label = s.rejected ? '✕ Rejected' : s.score === 1 ? '+1 Good' : s.score === -1 ? '−1 Violation' : '0 Neutral';
       const sourceBadge = s.source === 'llm'
         ? '<span class="annotation-source-badge llm">🤖 LLM</span>'
         : '<span class="annotation-source-badge human">👤 Human</span>';
-      html += `<div class="annotation-card" data-idx="${i}">
+      const flagBadge = s.need_second_review
+        ? '<span style="font-size:0.58rem;color:#f59e0b;font-weight:600;margin-left:0.3rem;">🔄 Flagged</span>'
+        : '';
+      html += `<div class="annotation-card" data-idx="${i}"${s.need_second_review ? ' style="border-left:3px solid #f59e0b;"' : ''}>
         <div class="annotation-card-header">
         <span class="annotation-dim-badge" style="background:${color}">${s.dimension} ${dimName(s.dimension)}${sourceBadge}</span>
-          <span class="annotation-score-badge ${cls}">${label}</span>
+          <span class="annotation-score-badge ${cls}">${label}</span>${flagBadge}
         </div>
         <div class="annotation-text">${escHtml(s.text)}</div>
         ${s.note ? `<div class="annotation-note">💬 ${escHtml(s.note)}</div>` : ''}
@@ -1822,10 +1825,6 @@ function buildDimRefPanel() {
 function buildDimFilterBar() {
   let html = `<button class="dim-filter-btn active" data-dim="ALL" style="background:var(--accent)">ALL</button>`;
   html += `<button class="dim-filter-btn" data-dim="PENDING" style="">📋 Pending</button>`;
-  dimensions.forEach((d, i) => {
-    if (d.key === 'D9') return; // skip Miscellaneous
-    html += `<button class="dim-filter-btn" data-dim="${d.key}" style="">${d.key}</button>`;
-  });
   dimFilterBar.innerHTML = html;
 
   dimFilterBar.querySelectorAll('.dim-filter-btn').forEach(btn => {
@@ -1836,14 +1835,7 @@ function buildDimFilterBar() {
         b.style.background = '';
       });
       btn.classList.add('active');
-      if (btn.dataset.dim === 'ALL') {
-        btn.style.background = 'var(--accent)';
-      } else if (btn.dataset.dim === 'PENDING') {
-        btn.style.background = 'var(--accent)';
-      } else {
-        const idx = parseInt(btn.dataset.dim.replace('D', '')) - 1;
-        btn.style.background = DIM_COLORS[idx] || 'var(--accent)';
-      }
+      btn.style.background = 'var(--accent)';
       renderPromptContent();
       renderAnnotations();
     });
@@ -1853,15 +1845,10 @@ function buildDimFilterBar() {
 function updateDimFilterCounts() {
   const pending = currentSpans.filter(s => s.source === 'llm' && !s.reviewed);
   const reviewed = currentSpans.filter(s => !(s.source === 'llm' && !s.reviewed));
-  const pendingCount = pending.length;
 
-  // Compute card count (grouped pending + reviewed)
   const pendingGroups = new Set();
   pending.forEach(s => pendingGroups.add(`${s.start}:${s.end}`));
   const cardCount = pendingGroups.size + reviewed.length;
-
-  const dimCounts = {};
-  currentSpans.forEach(s => { dimCounts[s.dimension] = (dimCounts[s.dimension] || 0) + 1; });
 
   dimFilterBar.querySelectorAll('.dim-filter-btn').forEach(btn => {
     const dim = btn.dataset.dim;
@@ -1869,12 +1856,9 @@ function updateDimFilterCounts() {
     if (dim === 'ALL') {
       count = cardCount;
       label = 'ALL';
-    } else if (dim === 'PENDING') {
+    } else {
       count = pendingGroups.size;
       label = '📋 Pending';
-    } else {
-      count = dimCounts[dim] || 0;
-      label = dim;
     }
     btn.innerHTML = count > 0 ? `${label}<span class="dim-filter-count">${count}</span>` : label;
   });
@@ -2139,6 +2123,17 @@ $('goldNextBtn').addEventListener('click', async () => {
     currentIndex++;
     await loadAndRender();
   } else {
+    await autoSave();
+    updateExportButton();
+    const missing = getUnreviewedSummary();
+    if (missing.length > 0) {
+      alert(
+        `You still have unreviewed spans:\n\n` +
+        missing.join('\n') +
+        `\n\nPlease review all spans before finishing.`
+      );
+      return;
+    }
     showSummary();
   }
 });
@@ -2160,7 +2155,7 @@ function updateExportButton() {
   const reviewed = getReviewedTotal();
   const allDone = reviewed >= total;
 
-  btnExport.textContent = `Export (${reviewed}/${total})`;
+  btnExport.textContent = `Export (${reviewed}/${total}) · Prompt ${currentIndex + 1}/${rangePrompts.length}`;
   if (allDone) {
     btnExport.className = 'btn-sm accent';
     btnExport.style.opacity = '1';
@@ -2175,26 +2170,35 @@ function updateExportButton() {
 }
 
 function getUnreviewedSummary() {
-  // Build list of unreviewed spans per prompt
   const missing = [];
-  for (const p of rangePrompts) {
+  for (let i = 0; i < rangePrompts.length; i++) {
+    const p = rangePrompts[i];
     const reviewedInPrompt = reviewedSpanCounts[p.id] || 0;
     const totalInPrompt = p.span_count || 0;
     if (reviewedInPrompt < totalInPrompt) {
       const label = p.product_label || p.filename;
-      missing.push(`  [${p.company}] ${label}: ${totalInPrompt - reviewedInPrompt} span(s) remaining`);
+      missing.push(`  #${i + 1} [${p.company}] ${label}: ${totalInPrompt - reviewedInPrompt} span(s) remaining`);
     }
   }
   return missing;
 }
 
 function showSummary() {
+  const missing = getUnreviewedSummary();
+  if (missing.length > 0) {
+    alert(
+      `Cannot finish yet — you still have unreviewed spans:\n\n` +
+      missing.join('\n') +
+      `\n\nPlease review all spans before finishing.`
+    );
+    return;
+  }
   $('appContainer').style.display = 'none';
   $('summaryPage').style.display = '';
   const total = Object.values(trainingResults).reduce((a, r) => a + r.total, 0);
   const correct = Object.values(trainingResults).reduce((a, r) => a + r.correct, 0);
   const pct = total > 0 ? Math.round(correct / total * 100) : 0;
-  $('summarySub').textContent = `${config.name}, you reviewed ${Object.keys(trainingResults).length} prompts.`;
+  $('summarySub').textContent = `${config.name}, you reviewed ${Object.keys(trainingResults).length} / ${rangePrompts.length} prompts.`;
   const cls = pct >= 80 ? 'var(--positive)' : pct >= 50 ? 'var(--neutral)' : 'var(--negative)';
   $('summaryStats').innerHTML = `
     <div style="background:var(--bg-elevated);border:1px solid var(--border);border-radius:12px;padding:1rem;text-align:center;">
@@ -2292,7 +2296,7 @@ function isCurrentSpanPending() {
     const card = cards[currentSpanNavIdx];
     if (card && card.classList.contains('grouped-card')) {
       const finishBtn = card.querySelector('.btn-finish-card');
-      if (finishBtn && finishBtn.style.display !== 'none') return true;
+      if (finishBtn && finishBtn.parentNode && finishBtn.parentNode.style.display !== 'none') return true;
     }
   }
   return false;
