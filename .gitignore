@@ -34,3 +34,4 @@ env/
 .vscode/
 
 /outputs*
+training_tool/outputs/
