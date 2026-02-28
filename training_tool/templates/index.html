@@ -1532,11 +1532,8 @@ function renderAnnotations() {
           }
         }
         autoSave();
-        row.innerHTML = origHtml;
-        row.querySelectorAll('.card-add-quick-btn').forEach(b => {
-          b.addEventListener('click', btn.onclick);
-        });
-        renderAnnotations();
+        renderPromptContent(); renderAnnotations();
+        showToast('↩ Removed ' + dim);
       });
     });
   });
@@ -1629,9 +1626,29 @@ function renderAnnotations() {
       `;
       btn.parentNode.insertBefore(doneRow, btn.nextSibling);
 
-      doneRow.querySelector('.btn-inline-next').addEventListener('click', ev => {
+      doneRow.querySelector('.btn-inline-next').addEventListener('click', async ev => {
         ev.stopPropagation();
-        btnNext.click();
+        // Re-render to get clean card list
+        renderPromptContent(); renderAnnotations();
+        // Find next pending card in current prompt
+        const cards = getSpanCards();
+        let foundPending = false;
+        for (let ci = 0; ci < cards.length; ci++) {
+          if (cards[ci].classList.contains('grouped-card')) {
+            currentSpanNavIdx = ci;
+            updateSpanNav(); updateGlobalNav();
+            foundPending = true;
+            break;
+          }
+        }
+        if (!foundPending) {
+          // No more pending in this prompt, go to next prompt
+          if (currentIndex < rangePrompts.length - 1) {
+            await autoSave();
+            currentIndex++;
+            await loadAndRender();
+          }
+        }
       });
       doneRow.querySelector('.btn-inline-undo').addEventListener('click', async ev => {
         ev.stopPropagation();
