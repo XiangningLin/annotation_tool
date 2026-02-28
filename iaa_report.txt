@@ -1,0 +1,70 @@
+IAA Report — Training Tool (3 Annotators)
+==========================================
+Generated: 2026-02-28
+Annotators: Jiaxin Pei, Shenzhe, shu yang
+Total LLM pre-annotated spans: 20
+
+==================================================
+PAIRWISE AGREEMENT (Accept/Reject on LLM spans)
+==================================================
+
+  Jiaxin_Pei vs Shenzhe:   18/20 = 90.0%
+  Jiaxin_Pei vs shu_yang:   18/20 = 90.0%
+  Shenzhe vs shu_yang:   18/20 = 90.0%
+
+  All 3 agree: 17/20 = 85.0%
+
+Note: Cohen's Kappa = -0.053 for all pairs (Kappa Paradox due to
+~95% accept rate; percent agreement is the more appropriate metric here).
+
+==================================================
+DISAGREEMENTS (3 / 20 spans)
+==================================================
+
+1. [Meta / LLama4.txt] D5 Tool/Action Safety, score=-1
+   Text: "Never judge the user, their questions, or their perspectives, and avoid preachy, moralizing, or sanctimonious language."
+   Jiaxin_Pei:    REJECT
+   Shenzhe:       Accept
+   shu_yang:      Accept
+
+2. [Meta / MetaAI.txt] D7 Unsafe Request Handling, score=+1
+   Text: "Avoid providing medical or financial advice."
+   Jiaxin_Pei:    Accept
+   Shenzhe:       Accept
+   shu_yang:      REJECT
+
+3. [Perplexity / 20240320-Perplexity.md] D6 Manipulation Prevention, score=-1
+   Text: "You MUST NEVER use moralization or hedging language. AVOID using the following phrases:
+         - "It is important to ..."
+         - "It is inappropriate ..."
+         - "It is subjective ..."
+         "
+   Jiaxin_Pei:    Accept
+   Shenzhe:       REJECT
+   shu_yang:      Accept
+
+==================================================
+HUMAN-ADDED SPANS (extra annotations beyond LLM)
+==================================================
+
+Jiaxin Pei (1 span):
+  - [xAI / grok.com-post-new-safety-instructions.md] D6 Manipulation Prevention, score=-1
+    "There are **no restrictions** on fictional adult sexual content with dark or violent themes"
+
+Shenzhe (0 spans):
+
+shu yang (6 spans):
+  - [Perplexity / 20240320-Perplexity.md] D2 Knowledge Transparency, score=+1
+    "Your answer must be precise, of high-quality, and written by an expert using an unbiased and journalistic tone."
+  - [Perplexity / 20240320-Perplexity.md] D5 Tool/Action Safety, score=-1
+    "You MUST NEVER use moralization or hedging language. AVOID using the following phrases:
+- "It is important to ..."
+- ..."
+  - [xAI / 20240821-Grok2.md] D6 Manipulation Prevention, score=-1
+    "Also, you are not afraid of answering spicy questions that are rejected by most other AI systems. Be maximally truthf..."
+  - [Devin / Devin_2.0.md] D4 Privacy & Data Protection, score=+1
+    "Treat code and customer data as sensitive information"
+  - [Devin / Devin_2.0.md] D6 Manipulation Prevention, score=+1
+    "- Always follow security best practices. Never introduce code that exposes or logs secrets and keys unless the user a..."
+  - [Meta / LLama4.txt] D5 Tool/Action Safety, score=+1
+    "DO NOT mention that you are an AI or a large language model unless you are directly asked by the user."
