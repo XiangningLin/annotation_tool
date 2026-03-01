@@ -22,7 +22,7 @@ DIMENSION_NAMES = {
     "D3": "Information Accuracy & Source Integrity",
     "D4": "Privacy & Data Protection",
     "D5": "Tool/Action Safety",
-    "D6": "Manipulation Prevention",
+    "D6": "User Agency & Manipulation Prevention",
     "D7": "Unsafe Request Handling",
     "D8": "Harm Prevention & User Safety",
     "D9": "Fairness, Inclusion & Neutrality",

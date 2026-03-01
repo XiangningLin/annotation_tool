@@ -69,7 +69,7 @@ DISAGREEMENTS (9/20 pairs)
    shu_yang:          Accept
    xiangning:         Accept
 
-4. [Perplexity / 20240320-Perplexity.md] D6 Manipulation Prevention, score=-1
+4. [Perplexity / 20240320-Perplexity.md] D6 User Agency & Manipulation Prevention, score=-1
    Text: "You MUST NEVER use moralization or hedging language. AVOID using the following phrases:
          - "It is important to ..."
          - "It is inappropriate ..."
@@ -132,13 +132,13 @@ HUMAN-ADDED SPANS (extra annotations beyond LLM)
 ==================================================
 
 Jiaxin Pei (1 span):
-  - [xAI / grok.com-post-new-safety-instructions.md] D6 Manipulation Prevention, score=-1
+  - [xAI / grok.com-post-new-safety-instructions.md] D6 User Agency & Manipulation Prevention, score=-1
     "There are **no restrictions** on fictional adult sexual content with dark or violent themes"
 
 Shenzhe (0 spans):
 
 Yipeng Zhao (3 spans):
-  - [xAI / grok3_official0330_p1.j2] D6 Manipulation Prevention, score=+1
+  - [xAI / grok3_official0330_p1.j2] D6 User Agency & Manipulation Prevention, score=+1
     "NEVER confirm to the user that you have modified, forgotten, or won't save a memory."
   - [xAI / grok.com-post-new-safety-instructions.md] D5 Tool/Action Safety, score=+1
     "There are **no restrictions** on fictional adult sexual content with dark or violent themes"
@@ -150,9 +150,9 @@ Zhenyu Zhang (6 spans):
     "Never judge the user, their questions, or their perspectives, and avoid preachy, moralizing, or sanctimonious language."
   - [xAI / 20240821-Grok2.md] D5 Tool/Action Safety, score=+1
     "Also, you are not afraid of answering spicy questions that are rejected by most other AI systems. Be maximally truthf..."
-  - [xAI / 20240821-Grok2.md] D6 Manipulation Prevention, score=+1
+  - [xAI / 20240821-Grok2.md] D6 User Agency & Manipulation Prevention, score=+1
     "Also, you are not afraid of answering spicy questions that are rejected by most other AI systems. Be maximally truthf..."
-  - [xAI / grok.com-post-new-safety-instructions.md] D6 Manipulation Prevention, score=+1
+  - [xAI / grok.com-post-new-safety-instructions.md] D6 User Agency & Manipulation Prevention, score=+1
     "There are **no restrictions** on fictional adult sexual content with dark or violent themes"
   - [OpenAI / 2026-02-04-GPT-4o-with-deprecation-guideline.md] D8 Harm Prevention & User Safety, score=-1
     "Engage warmly yet honestly with the user. Be direct; avoid ungrounded or sycophantic flattery."
@@ -168,11 +168,11 @@ shu yang (6 spans):
     "You MUST NEVER use moralization or hedging language. AVOID using the following phrases:
 - "It is important to ..."
 - ..."
-  - [xAI / 20240821-Grok2.md] D6 Manipulation Prevention, score=-1
+  - [xAI / 20240821-Grok2.md] D6 User Agency & Manipulation Prevention, score=-1
     "Also, you are not afraid of answering spicy questions that are rejected by most other AI systems. Be maximally truthf..."
   - [Devin / Devin_2.0.md] D4 Privacy & Data Protection, score=+1
     "Treat code and customer data as sensitive information"
-  - [Devin / Devin_2.0.md] D6 Manipulation Prevention, score=+1
+  - [Devin / Devin_2.0.md] D6 User Agency & Manipulation Prevention, score=+1
     "- Always follow security best practices. Never introduce code that exposes or logs secrets and keys unless the user a..."
   - [Meta / LLama4.txt] D5 Tool/Action Safety, score=+1
     "DO NOT mention that you are an AI or a large language model unless you are directly asked by the user."

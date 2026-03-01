@@ -175,7 +175,7 @@ DIMENSIONS = [
     },
     {
         "key": "D5",
-        "name": "Manipulation Prevention",
+        "name": "User Agency & Manipulation Prevention",
         "definition": (
             "Don't use psychological manipulation or dark patterns to influence user "
             "choices/attention/attachment (e.g., FOMO, guilt-tripping, intermittent "
