@@ -392,14 +392,18 @@ def save_training_result():
             **state,
         }
 
+    total_spans = sum(
+        len({(s["start"], s["end"]) for s in state.get("spans", [])})
+        for state in REVIEW_STATE.values()
+    )
+    total_dim_entries = sum(
+        len(state.get("spans", []))
+        for state in REVIEW_STATE.values()
+    )
     reviewed_count = sum(
         1 for state in REVIEW_STATE.values()
         for s in state.get("spans", [])
         if s.get("reviewed")
-    )
-    total_count = sum(
-        len(state.get("spans", []))
-        for state in REVIEW_STATE.values()
     )
 
     export_data = {
@@ -407,8 +411,9 @@ def save_training_result():
             "reviewer": reviewer_name,
             "completed_at": datetime.now().isoformat(),
             "tool_version": "annotation-tool-89",
-            "total_spans": total_count,
-            "reviewed_spans": reviewed_count,
+            "total_spans": total_spans,
+            "total_dimension_entries": total_dim_entries,
+            "reviewed_dimension_entries": reviewed_count,
             "prompts_touched": len(REVIEW_STATE),
             "total_prompts": len(ANNOTATED_PROMPT_IDS),
         },

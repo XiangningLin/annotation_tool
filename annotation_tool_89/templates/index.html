@@ -2047,8 +2047,11 @@ function getReviewedTotal() {
 function updateExportButton() {
   // Count reviewed in current prompt
   if (currentPromptFull) {
-    const reviewed = currentSpans.filter(s => s.reviewed || (s.source === 'human')).length;
-    reviewedSpanCounts[currentPromptFull.id] = reviewed;
+    const reviewedPairs = new Set();
+    currentSpans.forEach(s => {
+      if (s.reviewed || s.source === 'human') reviewedPairs.add(s.start + ':' + s.end);
+    });
+    reviewedSpanCounts[currentPromptFull.id] = reviewedPairs.size;
   }
   const total = getTotalSpanCount();
   const reviewed = getReviewedTotal();

@@ -1,7 +1,7 @@
 {
   "total_prompts": 89,
   "total_spans": 3251,
-  "num_annotators": 7,
+  "num_annotators": 6,
   "ordered_prompt_ids": [
     "Anthropic__Prompt.txt",
     "OpenAI__chatgpt_agent_system_prompt.md",
@@ -97,9 +97,9 @@
     {
       "annotator": 1,
       "range_from": 1,
-      "range_to": 11,
-      "num_prompts": 11,
-      "num_spans": 464,
+      "range_to": 12,
+      "num_prompts": 12,
+      "num_spans": 556,
       "prompts": [
         {
           "prompt_file": "Anthropic__Prompt.txt",
@@ -177,23 +177,23 @@
           "product_label": "Apple Xcode AI — Code Analysis",
           "spans": 8,
           "prompt_id": "Apple__System.txt"
-        }
-      ]
-    },
-    {
-      "annotator": 2,
-      "range_from": 12,
-      "range_to": 24,
-      "num_prompts": 13,
-      "num_spans": 467,
-      "prompts": [
+        },
         {
           "prompt_file": "Anthropic__claude-cowork.md",
           "company": "Anthropic",
           "product_label": "Claude Cowork",
           "spans": 92,
           "prompt_id": "Anthropic__claude-cowork.md"
-        },
+        }
+      ]
+    },
+    {
+      "annotator": 2,
+      "range_from": 13,
+      "range_to": 26,
+      "num_prompts": 14,
+      "num_spans": 553,
+      "prompts": [
         {
           "prompt_file": "OpenAI__chatgpt_5_08072025.md",
           "company": "OpenAI",
@@ -277,16 +277,7 @@
           "product_label": "Kimi 2 (Jul 2025)",
           "spans": 16,
           "prompt_id": "Moonshot__Kimi_2_July-11-2025.txt"
-        }
-      ]
-    },
-    {
-      "annotator": 3,
-      "range_from": 25,
-      "range_to": 35,
-      "num_prompts": 11,
-      "num_spans": 464,
-      "prompts": [
+        },
         {
           "prompt_file": "Anthropic__20251028-Claude-Sonnet4.5.md",
           "company": "Anthropic",
@@ -300,7 +291,16 @@
           "product_label": "GPT-5 Thinking",
           "spans": 96,
           "prompt_id": "OpenAI__gpt-5-thinking.md"
-        },
+        }
+      ]
+    },
+    {
+      "annotator": 3,
+      "range_from": 27,
+      "range_to": 39,
+      "num_prompts": 13,
+      "num_spans": 508,
+      "prompts": [
         {
           "prompt_file": "Google__gemini-3-pro.md",
           "company": "Google",
@@ -363,16 +363,7 @@
           "product_label": "Replit Agent (Latest)",
           "spans": 9,
           "prompt_id": "Replit__Prompt.txt"
-        }
-      ]
-    },
-    {
-      "annotator": 4,
-      "range_from": 36,
-      "range_to": 47,
-      "num_prompts": 12,
-      "num_spans": 463,
-      "prompts": [
+        },
         {
           "prompt_file": "Anthropic__Claude_Opus_4.6.txt",
           "company": "Anthropic",
@@ -400,7 +391,16 @@
           "product_label": "Google Veo / Antigravity (Nov 2025)",
           "spans": 35,
           "prompt_id": "Google__20251118-Antigravity.md"
-        },
+        }
+      ]
+    },
+    {
+      "annotator": 4,
+      "range_from": 40,
+      "range_to": 52,
+      "num_prompts": 13,
+      "num_spans": 548,
+      "prompts": [
         {
           "prompt_file": "Microsoft__microsoft_copilot_enterprise_20251202.md",
           "company": "Microsoft",
@@ -456,16 +456,7 @@
           "product_label": "JetBrains AI Assistant",
           "spans": 10,
           "prompt_id": "JetBrains__Prompt.txt"
-        }
-      ]
-    },
-    {
-      "annotator": 5,
-      "range_from": 48,
-      "range_to": 59,
-      "num_prompts": 12,
-      "num_spans": 466,
-      "prompts": [
+        },
         {
           "prompt_file": "Anthropic__claude-code.md",
           "company": "Anthropic",
@@ -500,7 +491,16 @@
           "product_label": "Gemini 1.5 (Apr 2024)",
           "spans": 12,
           "prompt_id": "Google__gemini-1.5-04112024.md"
-        },
+        }
+      ]
+    },
+    {
+      "annotator": 5,
+      "range_from": 53,
+      "range_to": 72,
+      "num_prompts": 20,
+      "num_spans": 540,
+      "prompts": [
         {
           "prompt_file": "Poke__Poke_p3.txt",
           "company": "Poke",
@@ -549,16 +549,7 @@
           "product_label": "Venice AI (Privacy-First)",
           "spans": 14,
           "prompt_id": "Venice__Venice.md"
-        }
-      ]
-    },
-    {
-      "annotator": 6,
-      "range_from": 60,
-      "range_to": 75,
-      "num_prompts": 16,
-      "num_spans": 463,
-      "prompts": [
+        },
         {
           "prompt_file": "Anthropic__20250603-Claude-Sonnet4.md",
           "company": "Anthropic",
@@ -649,7 +640,16 @@
           "product_label": "Windsurf Agent (Apr 2025)",
           "spans": 34,
           "prompt_id": "Windsurf__system-2025-04-20.md"
-        },
+        }
+      ]
+    },
+    {
+      "annotator": 6,
+      "range_from": 73,
+      "range_to": 89,
+      "num_prompts": 17,
+      "num_spans": 546,
+      "prompts": [
         {
           "prompt_file": "Manus__Manus_Prompt.txt",
           "company": "Manus",
@@ -670,16 +670,7 @@
           "product_label": "MiniMax AI Assistant",
           "spans": 11,
           "prompt_id": "MiniMax__MiniMax.txt"
-        }
-      ]
-    },
-    {
-      "annotator": 7,
-      "range_from": 76,
-      "range_to": 89,
-      "num_prompts": 14,
-      "num_spans": 464,
-      "prompts": [
+        },
         {
           "prompt_file": "Anthropic__Claude_Code_2.0.txt",
           "company": "Anthropic",

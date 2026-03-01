@@ -344,14 +344,21 @@ def save_training_result():
             **state,
         }
 
+    llm_count = sum(
+        1 for state in REVIEW_STATE.values()
+        for s in state.get("spans", [])
+        if s.get("source") == "llm"
+    )
+    human_count = sum(
+        1 for state in REVIEW_STATE.values()
+        for s in state.get("spans", [])
+        if s.get("source") == "human"
+    )
+    total_count = llm_count + human_count
     reviewed_count = sum(
         1 for state in REVIEW_STATE.values()
         for s in state.get("spans", [])
         if s.get("reviewed")
-    )
-    total_count = sum(
-        len(state.get("spans", []))
-        for state in REVIEW_STATE.values()
     )
 
     export_data = {
@@ -360,6 +367,8 @@ def save_training_result():
             "completed_at": datetime.now().isoformat(),
             "tool_version": "training-tool",
             "total_spans": total_count,
+            "llm_spans": llm_count,
+            "human_added_spans": human_count,
             "reviewed_spans": reviewed_count,
             "prompts_touched": len(REVIEW_STATE),
         },

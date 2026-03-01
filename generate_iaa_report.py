@@ -74,6 +74,28 @@ def build_llm_span_decisions(data: dict) -> dict[tuple, bool]:
     return decisions
 
 
+def build_dimension_flags(data: dict) -> tuple[dict[tuple, bool], set[str]]:
+    """Return ({(prompt_key, dim): flagged}, set_of_prompt_keys).
+
+    A dimension is "flagged" if the annotator accepted an LLM span or added
+    a human span for that dimension on that prompt.
+    """
+    flags: dict[tuple, bool] = {}
+    annotator_prompts: set[str] = set()
+    for prompt_key, prompt_data in data["annotations"].items():
+        annotator_prompts.add(prompt_key)
+        flagged_dims: set[str] = set()
+        for span in prompt_data["spans"]:
+            source = span.get("source", "")
+            if source == "llm" and not is_rejected(span):
+                flagged_dims.add(span["dimension"])
+            elif source == "human":
+                flagged_dims.add(span["dimension"])
+        for dim in DIMENSION_NAMES:
+            flags[(prompt_key, dim)] = dim in flagged_dims
+    return flags, annotator_prompts
+
+
 def prompt_display_name(prompt_key: str, prompt_data: dict) -> str:
     company = prompt_data.get("company", "")
     filename = prompt_data.get("filename", prompt_key)
@@ -83,20 +105,17 @@ def prompt_display_name(prompt_key: str, prompt_data: dict) -> str:
 def krippendorffs_alpha(all_decisions: list[dict[tuple, bool]], all_keys: list[tuple]) -> float | None:
     """Compute Krippendorff's alpha for nominal data.
 
-    Each item (span) can be coded by a variable number of annotators as True/False.
-    Missing values (annotator didn't code this item) are naturally handled.
+    Uses the coincidence-matrix formulation:
+      D_o = 1 - sum_c(o_cc) / n
+      D_e = 1 - sum_c(n_c*(n_c-1)) / (n*(n-1))
+      alpha = 1 - D_o / D_e
     """
     n_coders = len(all_decisions)
-
-    # Build a value-count matrix: for each item, count how many coders chose each category
-    # Categories: True (accept), False (reject)
-    categories = [True, False]
     cat_idx = {True: 0, False: 1}
-    n_cats = len(categories)
+    n_cats = 2
 
-    # n_uc[item_idx][cat] = number of coders who assigned category cat to item
     n_uc = []
-    m_u = []  # number of coders per item
+    m_u = []
     for key in all_keys:
         counts = [0, 0]
         m = 0
@@ -105,41 +124,28 @@ def krippendorffs_alpha(all_decisions: list[dict[tuple, bool]], all_keys: list[t
             if v is not None:
                 counts[cat_idx[v]] += 1
                 m += 1
-        if m >= 2:  # need at least 2 coders to be pairable
+        if m >= 2:
             n_uc.append(counts)
             m_u.append(m)
 
     if not n_uc:
         return None
 
-    # Total pairable values
     n_total = sum(m_u)
 
-    # Observed disagreement: D_o = (1/n_total) * sum_u [ (1/(m_u-1)) * sum_{c!=k} n_uc * n_uk ]
     d_o = 0.0
     for u_idx in range(len(n_uc)):
         m = m_u[u_idx]
-        pair_disagree = 0
-        for c in range(n_cats):
-            for k in range(n_cats):
-                if c != k:
-                    pair_disagree += n_uc[u_idx][c] * n_uc[u_idx][k]
+        pair_disagree = 2 * n_uc[u_idx][0] * n_uc[u_idx][1]
         d_o += pair_disagree / (m - 1)
     d_o /= n_total
 
-    # Expected disagreement: D_e = (1/(n_total-1)) * sum_{c!=k} n_c * n_k
-    # where n_c = total times category c was used across all items
-    n_c = [0] * n_cats
+    n_c = [0, 0]
     for u_idx in range(len(n_uc)):
-        for c in range(n_cats):
-            n_c[c] += n_uc[u_idx][c]
+        n_c[0] += n_uc[u_idx][0]
+        n_c[1] += n_uc[u_idx][1]
 
-    d_e = 0.0
-    for c in range(n_cats):
-        for k in range(n_cats):
-            if c != k:
-                d_e += n_c[c] * n_c[k]
-    d_e /= (n_total - 1)
+    d_e = 2 * n_c[0] * n_c[1] / (n_total * (n_total - 1))
 
     if d_e == 0:
         return None
@@ -147,46 +153,50 @@ def krippendorffs_alpha(all_decisions: list[dict[tuple, bool]], all_keys: list[t
     return 1.0 - d_o / d_e
 
 
-def generate_report(files: list[Path], output: Path | None = None) -> str:
-    annotators_data = []
-    for f in files:
-        d = load_annotations(f)
-        annotators_data.append(d)
-
-    names = [d["metadata"]["reviewer"] for d in annotators_data]
-    n = len(names)
-
-    all_decisions = [build_llm_span_decisions(d) for d in annotators_data]
-    all_keys = set()
-    for dec in all_decisions:
-        all_keys |= dec.keys()
-    all_keys = sorted(all_keys)
-    total_llm_spans = len(all_keys)
-
-    # --- Pairwise agreement ---
-    pair_results = []
-    for i, j in combinations(range(n), 2):
-        agree = 0
-        compared = 0
-        for key in all_keys:
-            if key in all_decisions[i] and key in all_decisions[j]:
-                compared += 1
-                if all_decisions[i][key] == all_decisions[j][key]:
-                    agree += 1
-        pair_results.append((i, j, agree, compared))
-
-    # --- All-agree ---
-    all_agree = 0
+def fleiss_kappa(all_decisions: list[dict[tuple, bool]], all_keys: list[tuple]) -> float | None:
+    """Compute Fleiss' Kappa for multiple annotators with binary nominal data."""
+    n_coders = len(all_decisions)
+    n_items = 0
+    counts = []
     for key in all_keys:
-        votes = [all_decisions[a].get(key) for a in range(n)]
-        if all(v is not None for v in votes) and len(set(votes)) == 1:
-            all_agree += 1
+        votes = [all_decisions[a].get(key) for a in range(n_coders)]
+        present = [v for v in votes if v is not None]
+        if len(present) < 2:
+            continue
+        n1 = sum(1 for v in present if v)
+        n0 = len(present) - n1
+        counts.append((n0, n1, len(present)))
+        n_items += 1
 
-    # --- Kappa (pairwise) ---
-    def cohens_kappa(dec_a, dec_b, keys):
+    if n_items == 0:
+        return None
+
+    p_bar = 0.0
+    total_votes = 0
+    total_1 = 0
+    for n0, n1, m in counts:
+        p_bar += (n0 * (n0 - 1) + n1 * (n1 - 1)) / (m * (m - 1))
+        total_votes += m
+        total_1 += n1
+    p_bar /= n_items
+
+    p1 = total_1 / total_votes
+    p0 = 1 - p1
+    p_e = p0 * p0 + p1 * p1
+
+    if p_e == 1:
+        return None
+    return (p_bar - p_e) / (1 - p_e)
+
+
+def avg_cohens_kappa(all_decisions: list[dict[tuple, bool]], all_keys: list[tuple]) -> float | None:
+    """Compute average pairwise Cohen's Kappa."""
+    n_coders = len(all_decisions)
+    kappas = []
+    for i, j in combinations(range(n_coders), 2):
         tp = tn = fp = fn = 0
-        for k in keys:
-            a, b = dec_a.get(k), dec_b.get(k)
+        for key in all_keys:
+            a, b = all_decisions[i].get(key), all_decisions[j].get(key)
             if a is None or b is None:
                 continue
             if a and b:
@@ -199,20 +209,168 @@ def generate_report(files: list[Path], output: Path | None = None) -> str:
                 fn += 1
         total = tp + tn + fp + fn
         if total == 0:
-            return None
-        po = (tp + tn) / total
-        pa = ((tp + fp) * (tp + fn) + (fn + tn) * (fp + tn)) / (total * total)
-        if pa == 1:
-            return None
-        return (po - pa) / (1 - pa)
+            continue
+        p_o = (tp + tn) / total
+        p_e = ((tp + fp) * (tp + fn) + (fn + tn) * (fp + tn)) / (total * total)
+        if p_e == 1:
+            continue
+        kappas.append((p_o - p_e) / (1 - p_e))
+    return sum(kappas) / len(kappas) if kappas else None
 
-    kappas = []
+
+def alpha_interpretation(a: float) -> str:
+    if a < 0:
+        return "Less agreement than expected by chance"
+    elif a < 0.667:
+        return "Tentative conclusions only"
+    elif a < 0.800:
+        return "Acceptable for some purposes"
+    else:
+        return "Good reliability"
+
+
+def generate_report(files: list[Path], output: Path | None = None) -> str:
+    annotators_data = []
+    for f in files:
+        d = load_annotations(f)
+        annotators_data.append(d)
+
+    names = [d["metadata"]["reviewer"] for d in annotators_data]
+    n = len(names)
+
+    # =========================================================
+    # 1. LLM span-level: accept/reject on pre-annotated spans
+    # =========================================================
+    all_decisions = [build_llm_span_decisions(d) for d in annotators_data]
+    all_keys = set()
+    for dec in all_decisions:
+        all_keys |= dec.keys()
+    all_keys = sorted(all_keys)
+    total_llm_spans = len(all_keys)
+
+    pair_results = []
     for i, j in combinations(range(n), 2):
-        k = cohens_kappa(all_decisions[i], all_decisions[j], all_keys)
-        kappas.append((i, j, k))
+        agree = compared = 0
+        for key in all_keys:
+            if key in all_decisions[i] and key in all_decisions[j]:
+                compared += 1
+                if all_decisions[i][key] == all_decisions[j][key]:
+                    agree += 1
+        pair_results.append((i, j, agree, compared))
 
-    # --- Disagreements ---
-    disagreements = []
+    all_agree = 0
+    for key in all_keys:
+        votes = [all_decisions[a].get(key) for a in range(n)]
+        if all(v is not None for v in votes) and len(set(votes)) == 1:
+            all_agree += 1
+
+    alpha_span = krippendorffs_alpha(all_decisions, all_keys)
+    fleiss_span = fleiss_kappa(all_decisions, all_keys)
+    avg_kappa_span = avg_cohens_kappa(all_decisions, all_keys)
+    avg_pairwise_span = sum(
+        a / c * 100 for _, _, a, c in pair_results if c > 0
+    ) / len(pair_results) if pair_results else 0
+
+    # =========================================================
+    # 2. Combined: 20 LLM spans + human-added new dimensions
+    #    LLM spans: accept=1, reject=0
+    #    Human new dims: added=1, not added=0
+    #    Only (prompt, dim) pairs flagged by >= 1 person.
+    # =========================================================
+    all_dim_flags = []
+    all_annotator_prompts = []
+    for d in annotators_data:
+        flags, prompts_set = build_dimension_flags(d)
+        all_dim_flags.append(flags)
+        all_annotator_prompts.append(prompts_set)
+
+    all_prompt_keys = set()
+    for ps in all_annotator_prompts:
+        all_prompt_keys |= ps
+    all_prompt_keys = sorted(all_prompt_keys)
+
+    # Which dimensions have LLM spans per prompt
+    llm_dims_per_prompt: dict[str, set] = defaultdict(set)
+    for d in annotators_data:
+        for pk, pd in d["annotations"].items():
+            for span in pd["spans"]:
+                if span.get("source") == "llm":
+                    llm_dims_per_prompt[pk].add(span["dimension"])
+
+    # Collect all (prompt, dim) where at least one person flagged
+    active_dim_keys = []
+    active_dim_sources = []  # "LLM" or "HUMAN" per item
+    for pk in all_prompt_keys:
+        for dim in sorted(DIMENSION_NAMES.keys(), key=lambda d: int(d[1:])):
+            flagged_by_anyone = False
+            for a in range(n):
+                if pk in all_annotator_prompts[a] and all_dim_flags[a].get((pk, dim), False):
+                    flagged_by_anyone = True
+                    break
+            if flagged_by_anyone:
+                active_dim_keys.append((pk, dim))
+                active_dim_sources.append("LLM" if dim in llm_dims_per_prompt.get(pk, set()) else "HUMAN")
+
+    # Build decision dicts for active items only
+    active_dim_decisions: list[dict[tuple, bool]] = []
+    for a in range(n):
+        dec = {}
+        for key in active_dim_keys:
+            pk = key[0]
+            if pk in all_annotator_prompts[a]:
+                dec[key] = all_dim_flags[a].get(key, False)
+        active_dim_decisions.append(dec)
+
+    alpha_active = krippendorffs_alpha(active_dim_decisions, active_dim_keys)
+    fleiss_active = fleiss_kappa(active_dim_decisions, active_dim_keys)
+    avg_kappa_active = avg_cohens_kappa(active_dim_decisions, active_dim_keys)
+
+    n_llm_items = sum(1 for s in active_dim_sources if s == "LLM")
+    n_human_items = sum(1 for s in active_dim_sources if s == "HUMAN")
+
+    active_pair_results = []
+    for i, j in combinations(range(n), 2):
+        agree = compared = 0
+        for key in active_dim_keys:
+            vi = active_dim_decisions[i].get(key)
+            vj = active_dim_decisions[j].get(key)
+            if vi is not None and vj is not None:
+                compared += 1
+                if vi == vj:
+                    agree += 1
+        active_pair_results.append((i, j, agree, compared))
+
+    active_all_compared = sum(
+        1 for key in active_dim_keys
+        if all(active_dim_decisions[a].get(key) is not None for a in range(n))
+    )
+    active_all_agree = sum(
+        1 for key in active_dim_keys
+        if all(active_dim_decisions[a].get(key) is not None for a in range(n))
+        and len({active_dim_decisions[a][key] for a in range(n)}) == 1
+    )
+
+    # Active dimension disagreements
+    active_disagreements = []
+    for key in active_dim_keys:
+        votes = {}
+        for a in range(n):
+            v = active_dim_decisions[a].get(key)
+            if v is not None:
+                votes[a] = v
+        if len(votes) >= 2 and len(set(votes.values())) > 1:
+            pk, dim = key
+            display = pk
+            for d in annotators_data:
+                if pk in d["annotations"]:
+                    display = prompt_display_name(pk, d["annotations"][pk])
+                    break
+            active_disagreements.append((display, dim, votes))
+
+    # =========================================================
+    # 3. LLM span disagreement details
+    # =========================================================
+    llm_disagreements = []
     for key in all_keys:
         votes = {}
         for a in range(n):
@@ -231,9 +389,11 @@ def generate_report(files: list[Path], output: Path | None = None) -> str:
                             break
                 if span_info:
                     break
-            disagreements.append((prompt_display, dim, span_info, votes))
+            llm_disagreements.append((prompt_display, dim, span_info, votes))
 
-    # --- Human-added spans ---
+    # =========================================================
+    # 4. Human-added spans list
+    # =========================================================
     human_spans: dict[str, list] = defaultdict(list)
     for idx, d in enumerate(annotators_data):
         reviewer = names[idx]
@@ -243,84 +403,62 @@ def generate_report(files: list[Path], output: Path | None = None) -> str:
                 if span.get("source") == "human":
                     human_spans[reviewer].append((display, span))
 
-    # --- Accept rate ---
-    total_accept = sum(sum(1 for v in dec.values() if v) for dec in all_decisions)
-    total_votes = sum(len(dec) for dec in all_decisions)
-    accept_rate = total_accept / total_votes * 100 if total_votes else 0
-
-    # --- Build report ---
+    # =========================================================
+    # Build report
+    # =========================================================
     lines = []
     w = lines.append
 
     w(f"IAA Report — Training Tool ({n} Annotators)")
-    w("=" * 42)
+    w("=" * 50)
     w(f"Generated: {date.today()}")
     w(f"Annotators: {', '.join(names)}")
-    w(f"Total LLM pre-annotated spans: {total_llm_spans}")
-    w("")
-    w("=" * 50)
-    w("PAIRWISE AGREEMENT (Accept/Reject on LLM spans)")
-    w("=" * 50)
+    w(f"Total (prompt, dimension) pairs: {total_llm_spans}")
     w("")
 
+    # --- Agreement Coefficients ---
+    w("=" * 70)
+    w("AGREEMENT COEFFICIENTS")
+    w("=" * 70)
+    w("")
+    w(f"  {'':28s}  {'Fleiss':>8}  {'Avg Cohen':>10}  {'Krippendorff':>13}  {'Avg Pairwise':>13}")
+    w(f"  {'':28s}  {'Kappa':>8}  {'Kappa':>10}  {'Alpha':>13}  {'Agreement':>13}")
+    w(f"  {'-'*66}")
+
+    def fmt(v):
+        return f"{v:.3f}" if v is not None else "N/A"
+
+    w(f"  {str(total_llm_spans) + ' (prompt, dim) pairs':28s}"
+      f"  {fmt(fleiss_span):>8}  {fmt(avg_kappa_span):>10}  {fmt(alpha_span):>13}  {avg_pairwise_span:>12.1f}%")
+    w("")
+    w(f"  Note: Low chance-corrected scores due to prevalence paradox (91% accept rate).")
+    w(f"  Avg pairwise agreement is the most informative metric here.")
+    w("")
+
+    # --- Pairwise agreement ---
+    w("=" * 50)
+    w(f"PAIRWISE AGREEMENT ({total_llm_spans} (prompt, dimension) pairs)")
+    w("=" * 50)
+    w("")
     for i, j, agree, compared in pair_results:
-        safe_name_i = names[i].replace(" ", "_")
-        safe_name_j = names[j].replace(" ", "_")
+        ni = names[i].replace(" ", "_")
+        nj = names[j].replace(" ", "_")
         pct = agree / compared * 100 if compared else 0
-        w(f"  {safe_name_i} vs {safe_name_j}:   {agree}/{compared} = {pct:.1f}%")
+        w(f"  {ni} vs {nj}:   {agree}/{compared} = {pct:.1f}%")
     w("")
-
     all_compared = sum(1 for key in all_keys if all(all_decisions[a].get(key) is not None for a in range(n)))
     all_pct = all_agree / all_compared * 100 if all_compared else 0
     w(f"  All {n} agree: {all_agree}/{all_compared} = {all_pct:.1f}%")
     w("")
 
-    # --- Krippendorff's Alpha ---
-    alpha = krippendorffs_alpha(all_decisions, all_keys)
-
+    # --- Disagreements ---
     w("=" * 50)
-    w("AGREEMENT COEFFICIENTS")
+    w(f"DISAGREEMENTS ({len(llm_disagreements)}/{total_llm_spans} pairs)")
     w("=" * 50)
     w("")
-    if alpha is not None:
-        w(f"  Krippendorff's Alpha (nominal): {alpha:.3f}")
-        if alpha < 0:
-            w("    Interpretation: Less agreement than expected by chance")
-        elif alpha < 0.667:
-            w("    Interpretation: Tentative conclusions only")
-        elif alpha < 0.800:
-            w("    Interpretation: Acceptable for some purposes")
-        else:
-            w("    Interpretation: Good reliability")
-    else:
-        w("  Krippendorff's Alpha: N/A (insufficient data)")
-    w("")
-
-    kappa_strs = []
-    for i, j, k in kappas:
-        if k is not None:
-            kappa_strs.append(f"{k:.3f}")
-    if kappa_strs:
-        unique_kappas = set(kappa_strs)
-        if len(unique_kappas) == 1:
-            w(f"  Cohen's Kappa (pairwise): {kappa_strs[0]} for all pairs")
-        else:
-            parts = ", ".join(kappa_strs)
-            w(f"  Cohen's Kappa (pairwise): {parts}")
-        w(f"  Note: Kappa Paradox likely — ~{accept_rate:.0f}% accept rate causes low Kappa")
-        w(f"  despite high percent agreement. Alpha and percent agreement are more")
-        w(f"  informative here.")
-    w("")
-
-    w("=" * 50)
-    w(f"DISAGREEMENTS ({len(disagreements)} / {total_llm_spans} spans)")
-    w("=" * 50)
-    w("")
-
-    for idx, (display, dim, span_info, votes) in enumerate(disagreements, 1):
+    for idx, (display, dim, span_info, votes) in enumerate(llm_disagreements, 1):
         score_str = f"+{span_info['score']}" if span_info["score"] > 0 else str(span_info["score"])
         w(f"{idx}. [{display}] {dim_label(dim)}, score={score_str}")
-
         text = span_info["text"]
         text_lines = text.split("\n")
         if len(text_lines) == 1:
@@ -330,7 +468,6 @@ def generate_report(files: list[Path], output: Path | None = None) -> str:
             for tl in text_lines[1:]:
                 w(f'         {tl}')
             w(f'         "')
-
         for a in range(n):
             safe_name = names[a].replace(" ", "_")
             v = votes.get(a)
@@ -340,14 +477,14 @@ def generate_report(files: list[Path], output: Path | None = None) -> str:
                 label = "Accept"
             else:
                 label = "REJECT"
-            w(f"   {safe_name + ':':14s} {label}")
+            w(f"   {safe_name + ':':18s} {label}")
         w("")
 
+    # --- Human-added spans ---
     w("=" * 50)
     w("HUMAN-ADDED SPANS (extra annotations beyond LLM)")
     w("=" * 50)
     w("")
-
     for reviewer in names:
         spans = human_spans.get(reviewer, [])
         w(f"{reviewer} ({len(spans)} span{'s' if len(spans) != 1 else ''}):")
