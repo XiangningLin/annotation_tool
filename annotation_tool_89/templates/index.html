@@ -1667,7 +1667,7 @@ function renderAnnotations() {
   });
 
   // ── Shared finish-card logic (used by Done and Need Second Review) ──
-  function finishCard(btn, needSecondReview) {
+  async function finishCard(btn, needSecondReview) {
     const card = btn.closest('.grouped-card');
     const allRows = card.querySelectorAll('.group-dim-entry');
 
@@ -1758,17 +1758,24 @@ function renderAnnotations() {
     doneRow.querySelector('.btn-inline-undo').addEventListener('click', async ev => {
       ev.stopPropagation();
       if (!currentPromptFull) return;
-      await fetch(`/api/reset_prompt/${encodeURIComponent(currentPromptFull.id)}`, { method: 'POST' });
-      await loadPromptDetail(currentPromptFull.id);
+      // Only undo this specific span group, not the entire prompt
+      for (const s of currentSpans) {
+        if (s.start === groupStart && s.end === groupEnd) {
+          delete s.reviewed;
+          delete s.rejected;
+          delete s.need_second_review;
+        }
+      }
+      await autoSave();
       buildUniqueSpanKeys();
       renderPromptContent(); renderAnnotations(); updateExportButton();
-      showToast('↩ Reset to unreviewed');
+      showToast('↩ Undo this span group');
     });
 
     allRows.forEach(r => { r.style.pointerEvents = 'none'; r.style.opacity = '0.6'; });
 
     renderPromptContent();
-    autoSave(); updateExportButton();
+    await autoSave(); updateExportButton();
   }
 
   // ── Finish card: Done button ──
@@ -2248,6 +2255,14 @@ document.addEventListener('keydown', e => {
   if (selectionPopup.classList.contains('show')) { if (e.key === 'Escape') hidePopup(); return; }
   if (e.key === 'ArrowLeft' || e.key === 'a') btnPrev.click();
   else if (e.key === 'ArrowRight' || e.key === 'd') btnNext.click();
+});
+
+// Save on page close/refresh to prevent data loss
+window.addEventListener('beforeunload', () => {
+  if (!currentPromptFull) return;
+  flushPendingCardDecisions();
+  const data = JSON.stringify({ prompt_id: currentPromptFull.id, spans: currentSpans, notes: annNotes.value });
+  navigator.sendBeacon('/api/save_annotations', new Blob([data], { type: 'application/json' }));
 });
 
 // ─── Setup ───────────────────────────────────────
