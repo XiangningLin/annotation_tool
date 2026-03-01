@@ -853,7 +853,8 @@ const spanNavBar = $('spanNavBar');
 const btnPrevSpan = $('btnPrevSpan');
 const btnNextSpan = $('btnNextSpan');
 const spanNavCounter = $('spanNavCounter');
-let currentSpanNavIdx = 0;  // current focused card index
+let currentSpanNavIdx = 0;  // index into uniqueSpanKeys for current prompt
+let uniqueSpanKeys = [];    // sorted unique 'start:end' keys for current prompt
 
 // ─── Span Navigation (Prev/Next) ─────────────────
 function getSpanCards() {
@@ -861,17 +862,27 @@ function getSpanCards() {
 }
 
 function getCardSpanIdx(card) {
-  // Get the first span index from a card (works for both grouped and single)
   if (card.dataset.groupIndices) {
     return parseInt(card.dataset.groupIndices.split(',')[0]);
   }
   return parseInt(card.dataset.idx || '-1');
 }
 
+function buildUniqueSpanKeys() {
+  const seen = new Set();
+  currentSpans.forEach(s => seen.add(s.start + ':' + s.end));
+  uniqueSpanKeys = [...seen].sort((a, b) => {
+    const [aS] = a.split(':').map(Number);
+    const [bS] = b.split(':').map(Number);
+    return aS - bS;
+  });
+}
+
 function updateSpanNav() {
   const cards = getSpanCards();
   spanNavBar.classList.add('visible');
-  if (currentSpanNavIdx >= cards.length) currentSpanNavIdx = cards.length - 1;
+
+  if (currentSpanNavIdx >= uniqueSpanKeys.length) currentSpanNavIdx = uniqueSpanKeys.length - 1;
   if (currentSpanNavIdx < 0) currentSpanNavIdx = 0;
 
   const global = getGlobalSpanIdx();
@@ -880,14 +891,17 @@ function updateSpanNav() {
   btnPrevSpan.disabled = global <= 0;
   btnNextSpan.disabled = global >= total - 1;
 
-  // Show only the current card
-  cards.forEach((c, i) => {
-    c.style.display = i === currentSpanNavIdx ? '' : 'none';
+  const curKey = uniqueSpanKeys[currentSpanNavIdx] || '';
+  cards.forEach(c => {
+    const idx = getCardSpanIdx(c);
+    const s = idx >= 0 ? currentSpans[idx] : null;
+    const cardKey = s ? (s.start + ':' + s.end) : '';
+    c.style.display = cardKey === curKey ? '' : 'none';
   });
 
-  // Scroll to the corresponding span in the prompt content
-  const idx = getCardSpanIdx(cards[currentSpanNavIdx]);
-  if (idx >= 0) scrollToSpan(idx);
+  const [curStart] = (curKey || '0').split(':').map(Number);
+  const firstMatch = currentSpans.findIndex(s => s.start === curStart);
+  if (firstMatch >= 0) scrollToSpan(firstMatch);
 }
 
 btnPrevSpan.addEventListener('click', () => { btnPrev.click(); });
@@ -1324,26 +1338,42 @@ function renderAnnotations() {
     </div>`;
   });
 
-  // ── Render reviewed cards ──
+  // ── Group reviewed cards by identical start:end ──
+  const reviewedGroupMap = new Map();
   filteredReviewed.forEach(s => {
-    const i = s._idx;
+    const key = `${s.start}:${s.end}`;
+    if (!reviewedGroupMap.has(key)) reviewedGroupMap.set(key, []);
+    reviewedGroupMap.get(key).push(s);
+  });
+
+  reviewedGroupMap.forEach((group, key) => {
+    const first = group[0];
+    const hasFlag = group.some(s => s.need_second_review);
+    const allIndices = group.map(g => g._idx);
+    let dimRows = '';
+    group.forEach(s => {
       const cls = s.rejected ? 'negative' : s.score === 1 ? 'positive' : s.score === -1 ? 'negative' : 'neutral';
       const color = dimColor(s.dimension);
-    const label = s.rejected ? '✕ Rejected' : s.score === 1 ? '+1 Good' : s.score === -1 ? '−1 Violation' : '0 Neutral';
+      const label = s.rejected ? '✕ Rejected' : s.score === 1 ? '+1 Good' : s.score === -1 ? '−1 Violation' : '0 Neutral';
       const sourceBadge = s.source === 'llm'
         ? '<span class="annotation-source-badge llm">🤖 LLM</span>'
         : '<span class="annotation-source-badge human">👤 Human</span>';
       const flagBadge = s.need_second_review
         ? '<span style="font-size:0.58rem;color:#f59e0b;font-weight:600;margin-left:0.3rem;">🔄 Flagged</span>'
         : '';
-      html += `<div class="annotation-card" data-idx="${i}"${s.need_second_review ? ' style="border-left:3px solid #f59e0b;"' : ''}>
-        <div class="annotation-card-header">
-        <span class="annotation-dim-badge" style="background:${color}">${s.dimension} ${dimName(s.dimension)}${sourceBadge}</span>
-          <span class="annotation-score-badge ${cls}">${label}</span>${flagBadge}
-        </div>
-        <div class="annotation-text">${escHtml(s.text)}</div>
-        ${s.note ? `<div class="annotation-note">💬 ${escHtml(s.note)}</div>` : ''}
+      dimRows += `<div style="display:flex;align-items:center;gap:0.4rem;flex-wrap:wrap;padding:0.15rem 0;border-left:3px solid ${color};padding-left:0.5rem;margin-bottom:0.2rem;border-radius:0 4px 4px 0;">
+        <span class="annotation-dim-badge" style="background:${color};font-size:0.62rem;padding:0.1rem 0.4rem;">${s.dimension} ${dimName(s.dimension)}</span>
+        ${sourceBadge}<span class="annotation-score-badge ${cls}" style="font-size:0.58rem;">${label}</span>${flagBadge}
+        ${s.note ? `<span style="font-size:0.55rem;color:var(--text-muted);font-style:italic;">💬 ${escHtml(s.note)}</span>` : ''}
       </div>`;
+    });
+    html += `<div class="annotation-card" data-idx="${first._idx}" data-group-indices="${allIndices.join(',')}"${hasFlag ? ' style="border-left:3px solid #f59e0b;"' : ''}>
+      <div class="annotation-card-header">
+        <span style="font-size:0.62rem;color:var(--text-muted);">✅ Reviewed · ${group.length} dimension${group.length > 1 ? 's' : ''}</span>
+      </div>
+      <div class="annotation-text">${escHtml(first.text)}</div>
+      <div style="margin-top:0.3rem;">${dimRows}</div>
+    </div>`;
   });
 
   annBody.innerHTML = html;
@@ -1706,11 +1736,12 @@ function renderAnnotations() {
     doneRow.querySelector('.btn-inline-next').addEventListener('click', async ev => {
       ev.stopPropagation();
       renderPromptContent(); renderAnnotations();
-      const cards = getSpanCards();
       let foundPending = false;
-      for (let ci = 0; ci < cards.length; ci++) {
-        if (cards[ci].classList.contains('grouped-card')) {
-          currentSpanNavIdx = ci;
+      for (let ki = 0; ki < uniqueSpanKeys.length; ki++) {
+        const [kS, kE] = uniqueSpanKeys[ki].split(':').map(Number);
+        const hasPending = currentSpans.some(s => s.start === kS && s.end === kE && s.source === 'llm' && !s.reviewed);
+        if (hasPending) {
+          currentSpanNavIdx = ki;
           updateSpanNav(); updateGlobalNav();
           foundPending = true;
           break;
@@ -1729,6 +1760,7 @@ function renderAnnotations() {
       if (!currentPromptFull) return;
       await fetch(`/api/reset_prompt/${encodeURIComponent(currentPromptFull.id)}`, { method: 'POST' });
       await loadPromptDetail(currentPromptFull.id);
+      buildUniqueSpanKeys();
       renderPromptContent(); renderAnnotations(); updateExportButton();
       showToast('↩ Reset to unreviewed');
     });
@@ -1762,6 +1794,7 @@ function renderAnnotations() {
       try {
         await fetch(`/api/reset_prompt/${encodeURIComponent(currentPromptFull.id)}`, { method: 'POST' });
         await loadPromptDetail(currentPromptFull.id);
+        buildUniqueSpanKeys();
         renderPromptContent(); renderAnnotations(); updateExportButton();
         showToast('↩ Reset to unreviewed');
       } catch (err) { showToast('Undo failed', true); }
@@ -1929,6 +1962,7 @@ popupConfirm.addEventListener('click', () => {
     };
     currentSpans.push(span);
     hidePopup();
+    buildUniqueSpanKeys();
     renderPromptContent(); renderAnnotations(); autoSave();
     const label = span.score === 1 ? '+1' : span.score === -1 ? '−1' : '0';
     showToast(`✓ Added ${span.dimension} ${label} annotation`);
@@ -2110,7 +2144,12 @@ btnExport.addEventListener('click', async () => {
   try {
     const res = await fetch('/api/save_training_result', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ reviewer_name: config.name }),
+      body: JSON.stringify({
+        reviewer_name: config.name,
+        prompt_ids: rangePrompts.map(p => p.id),
+        range_from: config.start,
+        range_to: config.end,
+      }),
     });
     const result = await res.json();
     showToast(`Saved: ${result.filename}`);
@@ -2124,6 +2163,7 @@ async function loadAndRender() {
   const p = rangePrompts[currentIndex];
   currentSpanNavIdx = 0;
   await loadPromptDetail(p.id);
+  buildUniqueSpanKeys();
   renderPromptList(listSearch.value);
   renderPromptContent();
   renderAnnotations();
@@ -2149,15 +2189,10 @@ function updateGlobalNav() {
 }
 
 function isCurrentSpanPending() {
-  const cards = getSpanCards();
-  if (cards.length > 0 && currentSpanNavIdx < cards.length) {
-    const card = cards[currentSpanNavIdx];
-    if (card && card.classList.contains('grouped-card')) {
-      const finishBtn = card.querySelector('.btn-finish-card');
-      if (finishBtn && finishBtn.parentNode && finishBtn.parentNode.style.display !== 'none') return true;
-    }
-  }
-  return false;
+  const curKey = uniqueSpanKeys[currentSpanNavIdx];
+  if (!curKey) return false;
+  const [cStart, cEnd] = curKey.split(':').map(Number);
+  return currentSpans.some(s => s.start === cStart && s.end === cEnd && s.source === 'llm' && !s.reviewed);
 }
 
 btnPrev.addEventListener('click', async () => {
@@ -2169,8 +2204,7 @@ btnPrev.addEventListener('click', async () => {
     await autoSave();
     currentIndex--;
     await loadAndRender();
-    const cards = getSpanCards();
-    currentSpanNavIdx = Math.max(0, cards.length - 1);
+    currentSpanNavIdx = Math.max(0, uniqueSpanKeys.length - 1);
     updateSpanNav();
     updateGlobalNav();
   }
@@ -2180,8 +2214,7 @@ btnNext.addEventListener('click', async () => {
     showToast('Please click Done first', true);
     return;
   }
-  const cards = getSpanCards();
-  if (currentSpanNavIdx < cards.length - 1) {
+  if (currentSpanNavIdx < uniqueSpanKeys.length - 1) {
     currentSpanNavIdx++;
     updateSpanNav();
     updateGlobalNav();

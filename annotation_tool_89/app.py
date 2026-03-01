@@ -377,12 +377,20 @@ def reset_prompt(prompt_id: str):
 
 @app.post("/api/save_training_result")
 def save_training_result():
-    """Export all reviewed annotations."""
+    """Export reviewed annotations for the selected range only."""
     payload = request.get_json(force=True, silent=True) or {}
     reviewer_name = payload.get("reviewer_name", "unknown")
+    prompt_ids = payload.get("prompt_ids")
+    range_from = payload.get("range_from")
+    range_to = payload.get("range_to")
+
+    if prompt_ids:
+        scope = {pid: REVIEW_STATE[pid] for pid in prompt_ids if pid in REVIEW_STATE}
+    else:
+        scope = REVIEW_STATE
 
     annotations = {}
-    for pid, state in REVIEW_STATE.items():
+    for pid, state in scope.items():
         p = PROMPTS.get(pid, {})
         annotations[pid] = {
             "company": p.get("company", ""),
@@ -394,14 +402,14 @@ def save_training_result():
 
     total_spans = sum(
         len({(s["start"], s["end"]) for s in state.get("spans", [])})
-        for state in REVIEW_STATE.values()
+        for state in scope.values()
     )
     total_dim_entries = sum(
         len(state.get("spans", []))
-        for state in REVIEW_STATE.values()
+        for state in scope.values()
     )
     reviewed_count = sum(
-        1 for state in REVIEW_STATE.values()
+        1 for state in scope.values()
         for s in state.get("spans", [])
         if s.get("reviewed")
     )
@@ -411,10 +419,13 @@ def save_training_result():
             "reviewer": reviewer_name,
             "completed_at": datetime.now().isoformat(),
             "tool_version": "annotation-tool-89",
+            "range_from": range_from,
+            "range_to": range_to,
             "total_spans": total_spans,
             "total_dimension_entries": total_dim_entries,
             "reviewed_dimension_entries": reviewed_count,
-            "prompts_touched": len(REVIEW_STATE),
+            "prompts_touched": len(scope),
+            "prompts_in_range": len(prompt_ids) if prompt_ids else len(ANNOTATED_PROMPT_IDS),
             "total_prompts": len(ANNOTATED_PROMPT_IDS),
         },
         "annotations": annotations,
