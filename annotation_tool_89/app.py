@@ -296,6 +296,10 @@ def list_prompts():
         else:
             all_spans = spans
         span_count = len({(s["start"], s["end"]) for s in all_spans})
+        reviewed_span_count = len({
+            (s["start"], s["end"]) for s in all_spans
+            if s.get("reviewed") or s.get("source") == "human"
+        })
 
         summaries.append({
             "id": pid,
@@ -309,6 +313,7 @@ def list_prompts():
             "date": p.get("date", ""),
             "category": p.get("category", ""),
             "span_count": span_count,
+            "reviewed_span_count": reviewed_span_count,
         })
     return jsonify({
         "prompts": summaries,
@@ -434,6 +439,55 @@ def save_training_result():
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     safe_name = "".join(c if c.isalnum() else "_" for c in reviewer_name)
     filename = f"annotations_{safe_name}_{timestamp}.json"
+    filepath = OUTPUT_DIR / filename
+
+    with LOCK:
+        with filepath.open("w", encoding="utf-8") as f:
+            json.dump(export_data, f, ensure_ascii=False, indent=2)
+
+    return jsonify({"status": "ok", "filename": filename})
+
+
+@app.post("/api/export_prompt")
+def export_prompt():
+    """Quick-export a single prompt's annotations."""
+    payload = request.get_json(force=True, silent=True) or {}
+    reviewer_name = payload.get("reviewer_name", "unknown")
+    prompt_id = payload.get("prompt_id")
+
+    if not prompt_id or prompt_id not in REVIEW_STATE:
+        return jsonify({"status": "error", "message": "No saved annotations for this prompt"}), 400
+
+    state = REVIEW_STATE[prompt_id]
+    p = PROMPTS.get(prompt_id, {})
+    spans = state.get("spans", [])
+
+    export_data = {
+        "metadata": {
+            "reviewer": reviewer_name,
+            "completed_at": datetime.now().isoformat(),
+            "tool_version": "annotation-tool-89",
+            "export_type": "single_prompt",
+            "prompt_id": prompt_id,
+            "total_spans": len({(s["start"], s["end"]) for s in spans}),
+            "total_dimension_entries": len(spans),
+            "reviewed_dimension_entries": sum(1 for s in spans if s.get("reviewed")),
+        },
+        "annotations": {
+            prompt_id: {
+                "company": p.get("company", ""),
+                "product": p.get("product", ""),
+                "product_label": p.get("product_label", ""),
+                "filename": p.get("filename", ""),
+                **state,
+            }
+        },
+    }
+
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    safe_name = "".join(c if c.isalnum() else "_" for c in reviewer_name)
+    safe_pid = "".join(c if c.isalnum() else "_" for c in prompt_id)[:40]
+    filename = f"annotations_{safe_name}_{safe_pid}_{timestamp}.json"
     filepath = OUTPUT_DIR / filename
 
     with LOCK:

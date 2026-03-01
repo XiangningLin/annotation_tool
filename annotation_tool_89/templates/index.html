@@ -699,7 +699,7 @@ You should be helpful, harmless, and honest.
         <input type="number" class="nav-jump" id="navJump" placeholder="#" />
         <button class="nav-btn" id="btnJump">Go</button>
       </div>
-      <button class="btn-sm" id="btnExport" style="opacity:0.6;cursor:pointer;">Export</button>
+      <button id="btnExport" style="cursor:pointer;font-size:0.7rem;padding:0.3rem 0.7rem;border-radius:6px;border:none;background:var(--accent);color:white;font-weight:600;font-family:inherit;">Export</button>
     </div>
   </div>
 
@@ -1048,7 +1048,7 @@ function renderPromptContent() {
   const text = p.content || '';
   if (!text) { contentBody.innerHTML = '<div class="empty-state"><span class="empty-state-text">Empty prompt</span></div>'; return; }
 
-  const spans = currentSpans.map((s, i) => ({ ...s, _origIdx: i })).filter(s => !s.rejected || s.need_second_review);
+  const spans = currentSpans.map((s, i) => ({ ...s, _origIdx: i }));
 
   if (spans.length === 0) {
     contentBody.innerHTML = `<div class="prompt-text-display" id="promptTextDisplay">${escHtml(text)}</div>`;
@@ -1201,7 +1201,7 @@ function scrollToSpan(spanIdx) {
 function renderAnnotations() {
   const allIndexed = currentSpans.map((s, i) => ({ ...s, _idx: i }));
   const pendingSpans = allIndexed.filter(s => s.source === 'llm' && !s.reviewed);
-  const reviewedSpans = allIndexed.filter(s => s.reviewed && (!s.rejected || s.need_second_review));
+  const reviewedSpans = allIndexed.filter(s => s.reviewed);
 
   // Filter
   let filteredPending, filteredReviewed;
@@ -1369,7 +1369,7 @@ function renderAnnotations() {
     });
     html += `<div class="annotation-card" data-idx="${first._idx}" data-group-indices="${allIndices.join(',')}"${hasFlag ? ' style="border-left:3px solid #f59e0b;"' : ''}>
       <div class="annotation-card-header">
-        <span style="font-size:0.62rem;color:var(--text-muted);">✅ Reviewed · ${group.length} dimension${group.length > 1 ? 's' : ''}</span>
+        <span style="font-size:0.62rem;color:var(--text-muted);">${group.every(s => s.rejected) ? '✕ All Rejected' : '✅ Reviewed'} · ${group.length} dimension${group.length > 1 ? 's' : ''}</span>
       </div>
       <div class="annotation-text">${escHtml(first.text)}</div>
       <div style="margin-top:0.3rem;">${dimRows}</div>
@@ -1721,14 +1721,13 @@ function renderAnnotations() {
     const btnRow = card.querySelector('.btn-finish-card').parentNode;
     btnRow.style.display = 'none';
 
-    // Replace with status + Undo + Next row (inserted after the wrapper)
+    // Replace with status + Next row (inserted after the wrapper)
     const statusLabel = needSecondReview ? '🔄 Flagged' : '✓ Done';
     const statusColor = needSecondReview ? '#f59e0b' : 'var(--positive)';
     const doneRow = document.createElement('div');
     doneRow.style.cssText = 'display:flex;gap:0.4rem;margin-top:0.35rem;align-items:center;';
     doneRow.innerHTML = `
       <span style="color:${statusColor};font-size:0.72rem;font-weight:600;flex:0 0 auto;">${statusLabel}</span>
-      <button class="btn-inline-undo" style="flex:0 0 auto;padding:0.35rem 0.7rem;font-size:0.72rem;border-radius:6px;cursor:pointer;border:1px solid var(--border);background:var(--bg-elevated);color:var(--text-muted);font-weight:500;font-family:inherit;">↩ Undo</button>
       <button class="btn-inline-next" style="flex:1;padding:0.35rem 0;font-size:0.78rem;border-radius:6px;cursor:pointer;border:1px solid var(--accent);background:var(--accent);color:white;font-weight:600;font-family:inherit;">Next (→)</button>
     `;
     btnRow.parentNode.insertBefore(doneRow, btnRow.nextSibling);
@@ -1754,22 +1753,6 @@ function renderAnnotations() {
           await loadAndRender();
         }
       }
-    });
-    doneRow.querySelector('.btn-inline-undo').addEventListener('click', async ev => {
-      ev.stopPropagation();
-      if (!currentPromptFull) return;
-      // Only undo this specific span group, not the entire prompt
-      for (const s of currentSpans) {
-        if (s.start === groupStart && s.end === groupEnd) {
-          delete s.reviewed;
-          delete s.rejected;
-          delete s.need_second_review;
-        }
-      }
-      await autoSave();
-      buildUniqueSpanKeys();
-      renderPromptContent(); renderAnnotations(); updateExportButton();
-      showToast('↩ Undo this span group');
     });
 
     allRows.forEach(r => { r.style.pointerEvents = 'none'; r.style.opacity = '0.6'; });
@@ -2099,17 +2082,7 @@ function updateExportButton() {
   const allDone = reviewed >= total;
 
   btnExport.textContent = `Export (${reviewed}/${total}) · Prompt ${currentIndex + 1}/${rangePrompts.length}`;
-  if (allDone) {
-    btnExport.className = 'btn-sm accent';
-    btnExport.style.opacity = '1';
-    btnExport.style.cursor = 'pointer';
-    btnExport.dataset.ready = 'true';
-  } else {
-    btnExport.className = 'btn-sm';
-    btnExport.style.opacity = '0.6';
-    btnExport.style.cursor = 'pointer';
-    btnExport.dataset.ready = 'false';
-  }
+  btnExport.dataset.ready = allDone ? 'true' : 'false';
 }
 
 function getUnreviewedSummary() {
@@ -2293,6 +2266,12 @@ setupStartBtn.addEventListener('click', async () => {
     ? 'All' : `#${rangeFrom}–${rangeTo}`;
   headerBadge.textContent = `${name} · ${rangeLabel} (${rangePrompts.length} prompts)`;
   promptListTotal.textContent = `(${rangePrompts.length})`;
+
+  // Initialize reviewedSpanCounts from server data so previous sessions' progress is preserved
+  rangePrompts.forEach(p => {
+    if (p.reviewed_span_count > 0) reviewedSpanCounts[p.id] = p.reviewed_span_count;
+  });
+
   setupPage.style.display = 'none';
   appContainer.style.display = 'flex';
   renderPromptList();
