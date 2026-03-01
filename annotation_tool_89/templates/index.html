@@ -1776,20 +1776,6 @@ function renderAnnotations() {
     btn.addEventListener('click', e => { e.stopPropagation(); btnNext.click(); });
   });
 
-  // ── Undo reviewed card → reset prompt to unreviewed ──
-  annBody.querySelectorAll('.btn-card-undo').forEach(btn => {
-    btn.addEventListener('click', async e => {
-      e.stopPropagation();
-      if (!currentPromptFull) return;
-      try {
-        await fetch(`/api/reset_prompt/${encodeURIComponent(currentPromptFull.id)}`, { method: 'POST' });
-        await loadPromptDetail(currentPromptFull.id);
-        buildUniqueSpanKeys();
-        renderPromptContent(); renderAnnotations(); updateExportButton();
-        showToast('↩ Reset to unreviewed');
-      } catch (err) { showToast('Undo failed', true); }
-    });
-  });
 
   // ── Click reviewed cards → scroll to span ──
   annBody.querySelectorAll('.annotation-card:not(.pending-review)').forEach(card => {
