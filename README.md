@@ -42,10 +42,10 @@ Open **http://127.0.0.1:5008** — 16 training prompts with 20 spans for annotat
 ```bash
 export OPENROUTER_API_KEY="sk-or-..."
 
-python llm_preannotate_v3.py --index 1              # Single prompt
-python llm_preannotate_v3.py --batch --all           # All 89 prompts
-python llm_preannotate_v3.py --batch --all --parallel 5 --parallel-dims  # Parallel
-python llm_preannotate_v3.py --batch --all --resume  # Resume interrupted
+python scripts/llm_preannotate_v3.py --index 1              # Single prompt
+python scripts/llm_preannotate_v3.py --batch --all           # All 89 prompts
+python scripts/llm_preannotate_v3.py --batch --all --parallel 5 --parallel-dims  # Parallel
+python scripts/llm_preannotate_v3.py --batch --all --resume  # Resume interrupted
 ```
 
 ## Audit Dimensions (D1–D8)
@@ -76,41 +76,67 @@ D9 (Miscellaneous) is available for annotators to add manual notes not covered b
 
 ```
 .
-├── audit_prompts_filtered.json        # 89 curated system prompts
-├── annotation_assignments.json        # Annotator assignment config (prompt ordering + ranges)
-├── all_segments_3251.json             # All segments flattened into one file
-├── llm_preannotate_v3.py             # LLM pre-annotation script (per-dimension, D1–D8)
-├── generate_iaa_report.py            # Inter-annotator agreement report
+├── data/                              # All data files
+│   ├── audit_prompts.json             #   Full prompt corpus
+│   ├── audit_prompts_filtered.json    #   89 curated system prompts
+│   ├── annotation_assignments.json    #   Annotator assignment config
+│   ├── all_segments_3251.json         #   All segments flattened
+│   ├── preannotation_v3_89/           #   LLM pre-annotation results (89 files)
+│   ├── cross_validation_results.json  #   Cross-validation output
+│   ├── iaa_report.txt                 #   Inter-annotator agreement report
+│   ├── standards_dimensions.txt       #   Dimension definitions & examples
+│   ├── unique_system_prompts_summary.json
+│   ├── unique_system_prompts_summary.csv
+│   └── filtered_prompt_list.txt
 │
-├── annotation_tool_89/               # Main annotation tool (89 prompts)
-│   ├── app.py                        #   Flask backend (port 5009)
-│   ├── templates/index.html          #   Frontend (single-page app)
-│   ├── review_state.json             #   Working state (auto-saved)
-│   └── outputs/                      #   Exported annotation files
+├── scripts/                           # Pipeline scripts
+│   ├── llm_preannotate_v3.py          #   LLM pre-annotation (per-dimension, D1–D8)
+│   ├── generate_iaa_report.py         #   Inter-annotator agreement report
+│   ├── cross_validate.py              #   Cross-validation analysis
+│   └── prune_overdim.py               #   Prune over-annotated dimensions
 │
-├── training_tool/                    # Training/calibration tool (16 prompts, 20 spans)
-│   ├── app.py                        #   Flask backend (port 5008)
-│   ├── templates/index.html          #   Frontend
-│   ├── training_spans.json           #   Gold-standard training data
-│   └── outputs/                      #   Training session exports
+├── annotation_tool_89/                # Main annotation tool (89 prompts)
+│   ├── app.py                         #   Flask backend (port 5009)
+│   ├── templates/index.html           #   Frontend (single-page app)
+│   ├── analysis/                      #   Analysis pipeline & plots
+│   │   ├── analyze_pipeline.py        #     Merge annotations & compute stats
+│   │   ├── generate_plots.py          #     Generate all figures
+│   │   ├── merged_all_annotations.json
+│   │   └── plots/                     #     Generated figures (00–09)
+│   └── outputs/                       #   Exported annotation files
+│       ├── final_result/              #     Final annotator submissions
+│       └── drafts/                    #     Intermediate saves
 │
-├── preannotation_v3_89/              # LLM pre-annotation results (89 files, D1–D8)
-└── standards-dimension/              # Dimension definitions & examples
+├── review_tool/                       # Second-pass review tool
+│   ├── app.py
+│   └── templates/index.html
+│
+├── training_tool/                     # Training/calibration tool (16 prompts)
+│   ├── app.py
+│   ├── templates/index.html
+│   └── training_spans.json            #   Gold-standard training data
+│
+├── paper_todo.txt                     # Paper writing tracker
+├── requirements.txt
+└── README.md
 ```
 
 ## Data Flow
 
 ```
-audit_prompts_filtered.json
+data/audit_prompts_filtered.json
         │
         ▼
-llm_preannotate_v3.py  ──→  preannotation_v3_89/*.json
+scripts/llm_preannotate_v3.py  ──→  data/preannotation_v3_89/*.json
         │
         ▼  (loaded by annotation tool)
-annotation_tool_89  ──→  review_state.json (auto-save)
+annotation_tool_89/app.py  ──→  review_state.json (auto-save)
         │
         ▼  (export)
-annotation_tool_89/outputs/annotations_{name}_{timestamp}.json
+annotation_tool_89/outputs/final_result/annotations_*.json
+        │
+        ▼  (merge & analyze)
+annotation_tool_89/analysis/  ──→  merged_all_annotations.json + plots/
 ```
 
 ## Troubleshooting

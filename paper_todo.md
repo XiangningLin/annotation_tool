@@ -1,0 +1,80 @@
+# System Prompt Human Audit Paper — TODO List
+
+> Generated: 2026-03-02
+
+---
+
+## A. Taxonomy & Framework
+
+- [ ] 把 D1-D8 的定义、正负例、边界条件写清楚
+- [ ] 和 EU AI Act / NIST AI RMF / Universal Declaration of Human Rights 的 requirements 做映射对比
+- [ ] 和现有 safety benchmark（TrustLLM, SafetyBench, DecodingTrust）做定位区分——它们评估模型输出，我们评估 system prompt
+- [ ] 说清楚我们的 motivation
+
+## B. 数据集
+
+- [ ] 写清楚数据收集流程：从 TheBigPromptLibrary / system prompts GitHub 等来源筛选的标准
+- [ ] 数据集统计表：公司分布、类型分布、时间跨度、大小分布
+- [ ] 讨论使用泄露 prompt 的伦理合理性？
+
+## C. 标注方法论
+
+- [ ] 描述 LLM 预标注的 prompt 设计（per-dimension extraction 的具体 prompt）
+- [ ] 说明为什么选 span-level 而不是 sentence-level 或 document-level
+- [ ] 描述 training phase 的流程：共同标注 → IAA 校准 → 正式标注
+- [ ] 报告 training phase 的 IAA 数值
+- [ ] 描述标注工具的设计（截图 + 功能说明）？
+- [ ] 描述 review tool 的二次审核流程
+
+## D. LLM-as-Annotator 分析
+
+> *May not be included*
+
+- [ ] 整体质量：85.9% 接受率、14.1% 拒绝率的 per-dimension 拆解
+- [ ] False positive 分析：被拒绝的 815 个 span 分类——LLM 犯了什么类型的错误
+- [ ] Miss 分析：人工新增的 121 个 span 分类——LLM 在哪些场景下漏检
+- [ ] Cross-model validation：Gemini 3.1 Pro 的结果（exact match 36.7%, partial 54.4%）per-dimension 拆解
+- [ ] 加更多模型做 cross-validation（GPT-5, Claude Sonnet, Llama 等），对比不同 LLM 在不同维度上的可靠性
+
+## E. 统计分析加强
+
+- [ ] 公司排名加显著性检验（bootstrap confidence interval 或 permutation test）？
+- [ ] 产品类型差异加统计检验（chatbot vs coding agent vs specialized agent）
+- [ ] Prompt size 大小 vs 安全覆盖的回归分析（控制公司、类型等变量）
+- [ ] 时间趋势的统计检验（行业整体是否在变好）
+- [ ] 维度间 correlation matrix（不只是共现，还有 Pearson/Spearman correlation）
+
+## F. 深度定性分析
+
+- [ ] **Failure mode taxonomy**：对所有 ~796 个负面 span 做系统性分类，提出 failure mode 类型（如 over-anthropomorphization, privacy opacity, safety boundary erosion, commercial manipulation, autonomy override, selective compliance 等）？
+- [ ] **Case study: xAI** — 从 Grok 1 (58.3% neg) 到 Grok 4 (12.5% neg) 的改善，具体改了什么
+- [ ] **Case study: Meta** — 从 Llama 3 (1.9% neg) 到 Llama 4 WhatsApp (75% neg) 的退步，为什么
+- [ ] **Case study: Anthropic** — 为什么整体最好，分析其 prompt 设计哲学
+- [ ] **Case study: Poke/Venice** — 极端负面案例，商业利益如何侵蚀安全
+- [ ] **Design tension 分析**：安全 vs 功能性、安全 vs 用户体验、安全 vs 商业目标的 trade-off 案例
+
+## G. 自动化审计模型/工具/网站
+
+> *Technical contribution — 有网站但是没有 fine-tune 的 model*
+
+- [ ] 任务定义：给定 span → 预测 (dimension, polarity)，multi-label classification
+- [ ] Zero-shot baseline：多个 LLM（GPT-5, Claude, Gemini, Llama）的 zero-shot 表现
+- [ ] Few-shot baseline：用少量标注数据做 in-context learning
+- [ ] Fine-tuned model：用 5072 个 span 微调一个分类器
+- [ ] 评估指标：per-dimension F1, macro F1, 和人工标注的 agreement
+- [ ] Error analysis：自动模型在哪些 case 上失败
+
+## H. Discussion & Implications
+
+- [ ] System prompt 应该被纳入 AI 审计框架的论证
+- [ ] Transparency paradox：公开 prompt 帮助审计但也帮助 jailbreak
+- [ ] 对 AI 公司的具体 recommendations（per-dimension 的最佳实践）
+- [ ] 对监管者的 recommendations：标准化审计框架
+- [ ] Limitations：泄露数据代表性、标注主观性、样本偏差、时间快照、单一来源
+
+## I. 可发布的 Artifacts
+
+- [ ] 开源标注数据集（PromptSafetyCorpus）
+- [ ] 开源标注工具
+- [ ] 开源 taxonomy + annotation guideline
+- [ ] 开源自动审计模型/网站

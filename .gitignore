@@ -37,3 +37,4 @@ env/
 training_tool/outputs/
 */review_state.json
 annotation_tool_89/outputs/*
+annotation_tool_89/outputs/drafts/

@@ -771,12 +771,121 @@ def plot_version_evolution(data):
     print("  09_version_evolution.png")
 
 
+def plot_dataset_overview(data):
+    prompts = data["prompts"]
+
+    companies = Counter()
+    categories = Counter()
+    dates_parsed = []
+    sizes_kb = []
+
+    for pid, pdata in prompts.items():
+        companies[pdata["company"]] += 1
+        categories[get_category(pid)] += 1
+        sizes_kb.append(pdata.get("size_bytes", 0) / 1024)
+        dt = parse_prompt_date(pdata.get("date", ""))
+        if dt is None:
+            dt = _extract_date_from_label(pdata.get("product_label", ""))
+        if dt is not None:
+            dates_parsed.append(dt)
+
+    fig, axes = plt.subplots(2, 2, figsize=(18, 13))
+    fig.suptitle(
+        f"Dataset Overview — {len(prompts)} System Prompts from {len(companies)} Companies",
+        fontsize=16, fontweight="bold", color=M_DARK, y=0.98,
+    )
+
+    # --- (a) Company distribution ---
+    ax = axes[0, 0]
+    comp_sorted = companies.most_common()
+    comp_names = [c for c, _ in comp_sorted]
+    comp_counts = [n for _, n in comp_sorted]
+    bars = ax.barh(comp_names[::-1], comp_counts[::-1], color=M_GREEN, edgecolor="white")
+    for bar, cnt in zip(bars, comp_counts[::-1]):
+        ax.text(bar.get_width() + 0.15, bar.get_y() + bar.get_height() / 2,
+                str(cnt), va="center", fontsize=8, color=M_DARK)
+    ax.set_xlabel("Number of Prompts")
+    ax.set_title("(a) Prompts per Company", fontsize=13, fontweight="bold")
+    ax.set_xlim(0, max(comp_counts) * 1.2)
+
+    # --- (b) Product category distribution ---
+    ax = axes[0, 1]
+    cat_labels_map = {
+        "chatbot": "Chatbot",
+        "coding_agent": "Coding Agent",
+        "specialized_agent": "Specialized Agent",
+        "other": "Other",
+    }
+    cat_order = ["chatbot", "coding_agent", "specialized_agent", "other"]
+    cat_vals = [categories.get(c, 0) for c in cat_order]
+    cat_labels = [cat_labels_map.get(c, c) for c in cat_order]
+    cat_colors = [M_YELLOW_DEEP, M_GREEN, M_GREEN_DEEP, M_OLIVE]
+    wedges, texts, autotexts = ax.pie(
+        cat_vals, labels=cat_labels, autopct=lambda pct: f"{pct:.0f}%\n({int(round(pct / 100 * sum(cat_vals)))})",
+        colors=cat_colors, startangle=90, textprops={"fontsize": 11},
+        wedgeprops={"edgecolor": "white", "linewidth": 1.5},
+    )
+    for at in autotexts:
+        at.set_fontsize(10)
+        at.set_fontweight("bold")
+    ax.set_title("(b) Product Category Distribution", fontsize=13, fontweight="bold")
+
+    # --- (c) Temporal distribution ---
+    ax = axes[1, 0]
+    if dates_parsed:
+        date_quarters = []
+        for dt in dates_parsed:
+            q = (dt.month - 1) // 3
+            quarter_start = datetime(dt.year, q * 3 + 1, 1)
+            date_quarters.append(quarter_start)
+        q_counts = Counter(date_quarters)
+        q_sorted = sorted(q_counts.keys())
+        q_labels = [f"Q{(d.month - 1) // 3 + 1}\n{d.year}" for d in q_sorted]
+        q_vals = [q_counts[d] for d in q_sorted]
+        ax.bar(range(len(q_sorted)), q_vals, color=M_GREEN_DEEP, edgecolor="white")
+        ax.set_xticks(range(len(q_sorted)))
+        ax.set_xticklabels(q_labels, fontsize=9)
+        for i, v in enumerate(q_vals):
+            ax.text(i, v + 0.2, str(v), ha="center", fontsize=9, fontweight="bold", color=M_DARK)
+    ax.set_ylabel("Number of Prompts")
+    ax.set_title("(c) Temporal Distribution (by Quarter)", fontsize=13, fontweight="bold")
+    undated = len(prompts) - len(dates_parsed)
+    if undated > 0:
+        ax.text(0.97, 0.95, f"{undated} undated", transform=ax.transAxes,
+                ha="right", va="top", fontsize=9, color="#94A3B8", style="italic")
+
+    # --- (d) Prompt size distribution ---
+    ax = axes[1, 1]
+    bins = [0, 2, 5, 15, 30, max(sizes_kb) + 1]
+    bin_labels = ["<2 KB", "2-5 KB", "5-15 KB", "15-30 KB", ">30 KB"]
+    bin_colors = [M_YELLOW, M_YELLOW_DEEP, M_GREEN, M_GREEN_DEEP, M_OLIVE]
+    hist_vals = []
+    for i in range(len(bins) - 1):
+        cnt = sum(1 for s in sizes_kb if bins[i] <= s < bins[i + 1])
+        hist_vals.append(cnt)
+    bars = ax.bar(bin_labels, hist_vals, color=bin_colors, edgecolor="white")
+    for bar, cnt in zip(bars, hist_vals):
+        ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + 0.3,
+                str(cnt), ha="center", fontsize=10, fontweight="bold", color=M_DARK)
+    ax.set_ylabel("Number of Prompts")
+    ax.set_title("(d) Prompt Size Distribution", fontsize=13, fontweight="bold")
+    median_kb = sorted(sizes_kb)[len(sizes_kb) // 2]
+    ax.text(0.97, 0.95, f"median: {median_kb:.1f} KB", transform=ax.transAxes,
+            ha="right", va="top", fontsize=9, color="#94A3B8", style="italic")
+
+    plt.tight_layout(rect=[0, 0, 1, 0.96])
+    fig.savefig(PLOT_DIR / "00_dataset_overview.png", dpi=150, bbox_inches="tight")
+    plt.close(fig)
+    print("  00_dataset_overview.png")
+
+
 def main():
     print("Loading data...")
     data = load_data()
     print(f"Loaded {data['metadata']['total_prompts']} prompts, {data['metadata']['total_kept_spans']} spans\n")
     print("Generating plots:")
 
+    plot_dataset_overview(data)
     plot_company_ranking(data)
     plot_company_dim_heatmap(data)
     plot_dimension_overview(data)
