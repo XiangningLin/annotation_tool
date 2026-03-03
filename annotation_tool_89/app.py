@@ -19,8 +19,9 @@ from threading import Lock
 from flask import Flask, abort, jsonify, render_template, request
 
 BASE_DIR = Path(__file__).parent.parent
-DATA_FILE = BASE_DIR / "audit_prompts_filtered.json"
-PREANNOTATION_DIR = BASE_DIR / "preannotation_v3_89"
+DATA_DIR = BASE_DIR / "data"
+DATA_FILE = DATA_DIR / "audit_prompts_filtered.json"
+PREANNOTATION_DIR = DATA_DIR / "preannotation_v3_89"
 OUTPUT_DIR = Path(__file__).parent / "outputs"
 OUTPUT_DIR.mkdir(exist_ok=True)
 REVIEW_STATE_FILE = Path(__file__).parent / "review_state.json"
@@ -234,16 +235,19 @@ PREANNOTATIONS = _load_preannotations(_RAW_PROMPTS, PROMPTS)
 ASSIGNMENT_FILE = BASE_DIR / "annotation_assignments.json"
 
 def _load_ordered_prompt_ids() -> list:
-    """Load prompt ordering from assignment config, fall back to index order."""
+    """Load prompt ordering from assignment config, fall back to index order.
+
+    If the config specifies ordered_prompt_ids, ONLY those prompts are loaded
+    (no extras appended). This allows filtering to a subset (e.g. 59 redo prompts).
+    """
     if ASSIGNMENT_FILE.exists():
         try:
             with ASSIGNMENT_FILE.open("r", encoding="utf-8") as f:
                 config = json.load(f)
             ordered = config.get("ordered_prompt_ids", [])
             valid = [pid for pid in ordered if pid in PREANNOTATIONS]
-            remaining = [pid for pid in PREANNOTATIONS if pid not in set(valid)]
-            remaining.sort(key=lambda pid: PROMPTS.get(pid, {}).get("index", 0))
-            return valid + remaining
+            if valid:
+                return valid
         except (json.JSONDecodeError, OSError):
             pass
     return sorted(
