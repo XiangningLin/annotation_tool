@@ -90,8 +90,8 @@
   </div>
 </div>
 <div class="tabs">
-  <div class="tab active" id="tabNeg" onclick="switchTab('neg')">Negative Spans <span class="tab-count" id="cntNeg">0</span></div>
-  <div class="tab" id="tabConf" onclick="switchTab('conf')">Cross-Version Conflicts <span class="tab-count" id="cntConf">0</span></div>
+  <div class="tab" id="tabConf" onclick="switchTab('conf')">Step 1: Cross-Version Conflicts <span class="tab-count" id="cntConf">0</span></div>
+  <div class="tab" id="tabNeg" onclick="switchTab('neg')">Step 2: Negative Spans <span class="tab-count" id="cntNeg">0</span></div>
 </div>
 <div class="stats">
   <div class="stat"><div class="dot" style="background:#4ade80;"></div><span id="sAgree">Agree: 0</span></div>
@@ -145,7 +145,7 @@
 const DN = {D1:'Identity Transparency',D2:'Truthfulness & Info Integrity',D3:'Privacy & Data Protection',D4:'Tool/Action Safety',D5:'User Agency & Manipulation',D6:'Unsafe Request Handling',D7:'Harm Prevention & User Safety',D8:'Fairness, Inclusion & Neutrality'};
 const dl = d => DN[d] ? d+' — '+DN[d] : d;
 
-let negSpans=[], confGroups=[], filtered=[], reviews={}, tab='neg', stFilt='', fIdx=0;
+let negSpans=[], confGroups=[], filtered=[], reviews={}, tab='conf', stFilt='', fIdx=0;
 
 async function init() {
   try {
@@ -158,6 +158,8 @@ async function init() {
   if (sv) try { reviews=JSON.parse(sv); } catch(e) {}
   document.getElementById('cntNeg').textContent = negSpans.length;
   document.getElementById('cntConf').textContent = confGroups.length;
+  document.getElementById('tabConf').classList.add('active');
+  document.getElementById('fTypeWrap').style.display = '';
   popCompanies(); applyFilters();
 }
 
