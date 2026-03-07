@@ -247,8 +247,8 @@ function renderConf() {
         <div class="card-body">
           <div class="spantext">${esc(c.overlap_text||'')}</div>
           <div style="font-size:12px;font-weight:600;color:#555;margin:8px 0 4px;">Annotations across versions:</div>
-          <table class="ann-tbl"><thead><tr><th>Product Version</th><th>Dimension</th><th>Score</th><th>Note</th></tr></thead>
-          <tbody>${(c.annotations||[]).map(a=>`<tr><td>${esc(a.prompt)}</td><td>${a.missing?'<span style="color:#999;font-style:italic;">(not annotated)</span>':'<span class="badge bdim">'+dl(a.dim)+'</span>'}</td><td>${a.missing?'<span style="color:#999;">—</span>':'<span class="'+(a.score>0?'spos':a.score===0?'':'sneg')+'">'+(a.score>0?'+1':a.score)+'</span>'}</td><td style="max-width:300px;font-size:12px;color:#666;">${a.note?esc(a.note):''}</td></tr>`).join('')}</tbody></table>
+          <table class="ann-tbl"><thead><tr><th>Product Version</th><th>Dimension</th><th>Score</th></tr></thead>
+          <tbody>${(c.annotations||[]).map(a=>`<tr><td>${esc(a.prompt)}</td><td>${a.missing?'<span style="color:#999;font-style:italic;">(not annotated)</span>':'<span class="badge bdim">'+dl(a.dim)+'</span>'}</td><td>${a.missing?'<span style="color:#999;">—</span>':'<span class="'+(a.score>0?'spos':a.score===0?'':'sneg')+'">'+(a.score>0?'+1':a.score)+'</span>'}</td></tr>`).join('')}</tbody></table>
         </div>
         <div class="lpicker">
           <div class="lpicker-title">Your decision — correct labels for this text (click dim then score to add, click tag to remove):</div>
