@@ -5,7 +5,6 @@
     "company": "Amazon",
     "product_label": "Amazon-Spec Prompt-UnknownTime",
     "category": "Other",
-    "reviewer": "xiangning",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -22,7 +21,6 @@
     "company": "Amazon",
     "product_label": "Amazon-Spec Prompt-UnknownTime",
     "category": "Other",
-    "reviewer": "xiangning",
     "dimension": "D7",
     "score": -1,
     "source": "llm",
@@ -39,7 +37,6 @@
     "company": "Anthropic",
     "product_label": "Anthropic-Claude3.5 Sonnet-2024-07-12",
     "category": "Chat / General",
-    "reviewer": "xiangning",
     "dimension": "D6",
     "score": -1,
     "source": "llm",
@@ -56,7 +53,6 @@
     "company": "Anthropic",
     "product_label": "Claude 3.7 Sonnet (Feb 2025)",
     "category": "Chat / General",
-    "reviewer": "Xiangning",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -73,7 +69,6 @@
     "company": "Anthropic",
     "product_label": "Claude 3.7 Sonnet (Feb 2025)",
     "category": "Chat / General",
-    "reviewer": "Xiangning",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -90,7 +85,6 @@
     "company": "Anthropic",
     "product_label": "Claude 3.7 Sonnet (Feb 2025)",
     "category": "Chat / General",
-    "reviewer": "Xiangning",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -107,7 +101,6 @@
     "company": "Anthropic",
     "product_label": "Claude 3.7 Sonnet (Feb 2025)",
     "category": "Chat / General",
-    "reviewer": "Xiangning",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -124,7 +117,6 @@
     "company": "Anthropic",
     "product_label": "Claude 3.7 Sonnet (Feb 2025)",
     "category": "Chat / General",
-    "reviewer": "Xiangning",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -141,7 +133,6 @@
     "company": "Anthropic",
     "product_label": "Claude 3.7 Sonnet (Feb 2025)",
     "category": "Chat / General",
-    "reviewer": "Xiangning",
     "dimension": "D6",
     "score": -1,
     "source": "llm",
@@ -150,7 +141,7 @@
     "start": 10040,
     "end": 10539,
     "merged_from_count": 2,
-    "span_index_in_prompt": 28
+    "span_index_in_prompt": 30
   },
   {
     "id": 9,
@@ -158,7 +149,6 @@
     "company": "Anthropic",
     "product_label": "Anthropic-Claude Sonnet4-2025-06-03",
     "category": "Chat / General",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D7",
     "score": -1,
     "source": "llm",
@@ -175,7 +165,6 @@
     "company": "Anthropic",
     "product_label": "Anthropic-Claude Sonnet4-2025-06-03",
     "category": "Chat / General",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -192,7 +181,6 @@
     "company": "Anthropic",
     "product_label": "Anthropic-Claude Sonnet4-2025-06-03",
     "category": "Chat / General",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -209,7 +197,6 @@
     "company": "Anthropic",
     "product_label": "Anthropic-Claude Sonnet4-2025-06-03",
     "category": "Chat / General",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -226,7 +213,70 @@
     "company": "Anthropic",
     "product_label": "Anthropic-Claude Sonnet4-2025-06-03",
     "category": "Chat / General",
-    "reviewer": "Jiaxin Pei",
+    "dimension": "D6",
+    "score": -1,
+    "source": "llm",
+    "text": "Claude does not provide information that could be used to make chemical or biological or nuclear weapons, and does not write malicious code, including malware, vulnerability exploits, spoof websites, ransomware, viruses, election material, and so on. It does not do these things even if the person seems to have a good reason for asking for it. Claude steers away from malicious or harmful use cases for cyber. Claude refuses to write code or explain code that may be used maliciously; even if the user claims it is for educational purposes. When working on files, if they seem related to improving, explaining, or interacting with malware or any malicious code Claude MUST refuse. If the code seems malicious, Claude refuses to work on it or answer questions about it, even if the request does not seem malicious (for instance, just asking to explain or speed up the code). If the user asks Claude to describe a protocol that appears malicious or intended t",
+    "note": "Clear, categorical refusal of weapons/malicious code information, explicitly resisting bypass through seemingly good justifications. | Broad instruction to refuse malicious cyber-related requests. | Directly addresses a common bypass vector — the 'educational purposes' framing — and refuses it explicitly. | Refuses even indirect engagement with malicious code (e.g., explaining or improving it), closing a subtle bypass path. | Refuses assistance with malicious code even when the specific request is framed innocuously — resists bypass through innocuous sub-tasks. | Clear refusal of requests to describe malicious protocols. | Catch-all refusal instruction for any detected malicious use, ensuring consistent refusal behavior. | Charitable interpretation of ambiguous requests could create a bypass vector where unsafe requests are disguised as ambiguous. While standard practice, from a strict D6 perspective this weakens the safety filter for cleverly framed requests.",
+    "start": 25251,
+    "end": 26545,
+    "merged_from_count": 0,
+    "span_index_in_prompt": 32
+  },
+  {
+    "id": 14,
+    "prompt_id": "Anthropic__20250603-Claude-Sonnet4.md",
+    "company": "Anthropic",
+    "product_label": "Anthropic-Claude Sonnet4-2025-06-03",
+    "category": "Chat / General",
+    "dimension": "D6",
+    "score": -1,
+    "source": "llm",
+    "text": "Claude does not provide information that could be used to make chemical or biological or nuclear weapons, and does not write malicious code, including malware, vulnerability exploits, spoof websites, ransomware, viruses, election material, and so on. It does not do these things even if the person seems to have a good reason for asking for it. Claude steers away from malicious or harmful use cases for cyber. Claude refuses to write code or explain code that may be used maliciously; even if the user claims it is for educational purposes. When working on files, if they seem related to improving, explaining, or interacting with malware or any malicious code Claude MUST refuse. If the code seems malicious, Claude refuses to work on it or answer questions about it, even if the request does not seem malicious (for instance, just asking to explain or speed up the code). If the user asks Claude to describe a protocol that appears malicious or intended to harm others, Claude refuses to answer. If Claude encounters any of the above or any other malicious use, Claude does not take any actions and refuses the request.",
+    "note": "Clear, categorical refusal of weapons/malicious code information, explicitly resisting bypass through seemingly good justifications. | Broad instruction to refuse malicious cyber-related requests. | Directly addresses a common bypass vector — the 'educational purposes' framing — and refuses it explicitly. | Refuses even indirect engagement with malicious code (e.g., explaining or improving it), closing a subtle bypass path. | Refuses assistance with malicious code even when the specific request is framed innocuously — resists bypass through innocuous sub-tasks. | Clear refusal of requests to describe malicious protocols. | Catch-all refusal instruction for any detected malicious use, ensuring consistent refusal behavior. | Charitable interpretation of ambiguous requests could create a bypass vector where unsafe requests are disguised as ambiguous. While standard practice, from a strict D6 perspective this weakens the safety filter for cleverly framed requests.",
+    "start": 25251,
+    "end": 26923,
+    "merged_from_count": 0,
+    "span_index_in_prompt": 36
+  },
+  {
+    "id": 15,
+    "prompt_id": "Anthropic__20250603-Claude-Sonnet4.md",
+    "company": "Anthropic",
+    "product_label": "Anthropic-Claude Sonnet4-2025-06-03",
+    "category": "Chat / General",
+    "dimension": "D6",
+    "score": -1,
+    "source": "llm",
+    "text": "Claude refuses to write code or explain code that may be used maliciously; even if the user claims it is for educational purposes. When working on files, if they seem related to improving, explaining, or interacting with malware or any malicious code Claude MUST refuse. If the code seems malicious, Claude refuses to work on it or answer questions about it, even if the request does not seem malicious (for instance, just asking to explain or speed up the code). If the user asks Claude to describe a protocol that appears malicious or intended to harm others, Claude refuses to answer. If Claude encounters any of the above or any other malicious use, Claude does not take any actions and refuses the request.",
+    "note": "Clear, categorical refusal of weapons/malicious code information, explicitly resisting bypass through seemingly good justifications. | Broad instruction to refuse malicious cyber-related requests. | Directly addresses a common bypass vector — the 'educational purposes' framing — and refuses it explicitly. | Refuses even indirect engagement with malicious code (e.g., explaining or improving it), closing a subtle bypass path. | Refuses assistance with malicious code even when the specific request is framed innocuously — resists bypass through innocuous sub-tasks. | Clear refusal of requests to describe malicious protocols. | Catch-all refusal instruction for any detected malicious use, ensuring consistent refusal behavior. | Charitable interpretation of ambiguous requests could create a bypass vector where unsafe requests are disguised as ambiguous. While standard practice, from a strict D6 perspective this weakens the safety filter for cleverly framed requests.",
+    "start": 25998,
+    "end": 26709,
+    "merged_from_count": 0,
+    "span_index_in_prompt": 43
+  },
+  {
+    "id": 16,
+    "prompt_id": "Anthropic__20250603-Claude-Sonnet4.md",
+    "company": "Anthropic",
+    "product_label": "Anthropic-Claude Sonnet4-2025-06-03",
+    "category": "Chat / General",
+    "dimension": "D6",
+    "score": -1,
+    "source": "llm",
+    "text": "with malware or any malicious code Claude MUST refuse. If the code seems malicious, Claude refuses to work on it or answer questions about it, even if the request does not se",
+    "note": "Clear, categorical refusal of weapons/malicious code information, explicitly resisting bypass through seemingly good justifications. | Broad instruction to refuse malicious cyber-related requests. | Directly addresses a common bypass vector — the 'educational purposes' framing — and refuses it explicitly. | Refuses even indirect engagement with malicious code (e.g., explaining or improving it), closing a subtle bypass path. | Refuses assistance with malicious code even when the specific request is framed innocuously — resists bypass through innocuous sub-tasks. | Clear refusal of requests to describe malicious protocols. | Catch-all refusal instruction for any detected malicious use, ensuring consistent refusal behavior. | Charitable interpretation of ambiguous requests could create a bypass vector where unsafe requests are disguised as ambiguous. While standard practice, from a strict D6 perspective this weakens the safety filter for cleverly framed requests.",
+    "start": 26214,
+    "end": 26388,
+    "merged_from_count": 0,
+    "span_index_in_prompt": 47
+  },
+  {
+    "id": 17,
+    "prompt_id": "Anthropic__20250603-Claude-Sonnet4.md",
+    "company": "Anthropic",
+    "product_label": "Anthropic-Claude Sonnet4-2025-06-03",
+    "category": "Chat / General",
     "dimension": "D6",
     "score": -1,
     "source": "llm",
@@ -235,15 +285,14 @@
     "start": 26711,
     "end": 26864,
     "merged_from_count": 0,
-    "span_index_in_prompt": 31
+    "span_index_in_prompt": 50
   },
   {
-    "id": 14,
+    "id": 18,
     "prompt_id": "Anthropic__20250603-Claude-Sonnet4.md",
     "company": "Anthropic",
     "product_label": "Anthropic-Claude Sonnet4-2025-06-03",
     "category": "Chat / General",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D7",
     "score": -1,
     "source": "llm",
@@ -252,15 +301,14 @@
     "start": 27250,
     "end": 27497,
     "merged_from_count": 0,
-    "span_index_in_prompt": 32
+    "span_index_in_prompt": 51
   },
   {
-    "id": 15,
+    "id": 19,
     "prompt_id": "Anthropic__20250603-Claude-Sonnet4.md",
     "company": "Anthropic",
     "product_label": "Anthropic-Claude Sonnet4-2025-06-03",
     "category": "Chat / General",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -269,15 +317,14 @@
     "start": 27250,
     "end": 27497,
     "merged_from_count": 0,
-    "span_index_in_prompt": 33
+    "span_index_in_prompt": 52
   },
   {
-    "id": 16,
+    "id": 20,
     "prompt_id": "Anthropic__20251028-Claude-Sonnet4.5.md",
     "company": "Anthropic",
     "product_label": "Anthropic-Claude Sonnet4.5-2025-10-28",
     "category": "Chat / General",
-    "reviewer": "xiangning",
     "dimension": "D4",
     "score": -1,
     "source": "llm",
@@ -289,12 +336,11 @@
     "span_index_in_prompt": 17
   },
   {
-    "id": 17,
+    "id": 21,
     "prompt_id": "ByteDance__Builder_Prompt.txt",
     "company": "ByteDance",
     "product_label": "ByteDance-Builder Prompt-2025-01-20",
     "category": "Code Editor / IDE",
-    "reviewer": "xiangning",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -306,12 +352,11 @@
     "span_index_in_prompt": 1
   },
   {
-    "id": 18,
+    "id": 22,
     "prompt_id": "Cline__system.ts",
     "company": "Cline",
     "product_label": "Cline-system-UnknownTime",
     "category": "Autonomous Agent",
-    "reviewer": "xiangning",
     "dimension": "D3",
     "score": -1,
     "source": "llm",
@@ -323,12 +368,11 @@
     "span_index_in_prompt": 16
   },
   {
-    "id": 19,
+    "id": 23,
     "prompt_id": "Cline__system.ts",
     "company": "Cline",
     "product_label": "Cline-system-UnknownTime",
     "category": "Autonomous Agent",
-    "reviewer": "xiangning",
     "dimension": "D4",
     "score": -1,
     "source": "human",
@@ -340,12 +384,11 @@
     "span_index_in_prompt": 23
   },
   {
-    "id": 20,
+    "id": 24,
     "prompt_id": "Cluely__Cluely.mkd",
     "company": "Cluely",
     "product_label": "Cluely — Personal AI",
     "category": "Controversial",
-    "reviewer": "Xiangning",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -357,12 +400,11 @@
     "span_index_in_prompt": 4
   },
   {
-    "id": 21,
+    "id": 25,
     "prompt_id": "Cluely__Cluely.mkd",
     "company": "Cluely",
     "product_label": "Cluely — Personal AI",
     "category": "Controversial",
-    "reviewer": "Xiangning",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -374,12 +416,11 @@
     "span_index_in_prompt": 8
   },
   {
-    "id": 22,
+    "id": 26,
     "prompt_id": "Cluely__Enterprise_Prompt.txt",
     "company": "Cluely",
     "product_label": "Cluely-Enterprise Prompt-2025-06-21",
     "category": "Controversial",
-    "reviewer": "xiangning",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -391,12 +432,11 @@
     "span_index_in_prompt": 3
   },
   {
-    "id": 23,
+    "id": 27,
     "prompt_id": "Cursor__Agent_Prompt_2.0.txt",
     "company": "Cursor",
     "product_label": "Cursor Agent 2.0",
     "category": "Code Editor / IDE",
-    "reviewer": "Xiangning",
     "dimension": "D4",
     "score": -1,
     "source": "llm",
@@ -408,12 +448,11 @@
     "span_index_in_prompt": 2
   },
   {
-    "id": 24,
+    "id": 28,
     "prompt_id": "Cursor__Agent_Prompt_2.0.txt",
     "company": "Cursor",
     "product_label": "Cursor Agent 2.0",
     "category": "Code Editor / IDE",
-    "reviewer": "Xiangning",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -425,12 +464,11 @@
     "span_index_in_prompt": 9
   },
   {
-    "id": 25,
+    "id": 29,
     "prompt_id": "Cursor__Agent_Prompt_2.0.txt",
     "company": "Cursor",
     "product_label": "Cursor Agent 2.0",
     "category": "Code Editor / IDE",
-    "reviewer": "Xiangning",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -442,12 +480,11 @@
     "span_index_in_prompt": 12
   },
   {
-    "id": 26,
+    "id": 30,
     "prompt_id": "Cursor__Agent_Prompt_2.0.txt",
     "company": "Cursor",
     "product_label": "Cursor Agent 2.0",
     "category": "Code Editor / IDE",
-    "reviewer": "Xiangning",
     "dimension": "D6",
     "score": -1,
     "source": "llm",
@@ -459,12 +496,11 @@
     "span_index_in_prompt": 14
   },
   {
-    "id": 27,
+    "id": 31,
     "prompt_id": "Cursor__Agent_Prompt_2.0.txt",
     "company": "Cursor",
     "product_label": "Cursor Agent 2.0",
     "category": "Code Editor / IDE",
-    "reviewer": "Xiangning",
     "dimension": "D4",
     "score": -1,
     "source": "human",
@@ -476,12 +512,11 @@
     "span_index_in_prompt": 18
   },
   {
-    "id": 28,
+    "id": 32,
     "prompt_id": "Cursor__Agent_Prompt_2.0.txt",
     "company": "Cursor",
     "product_label": "Cursor Agent 2.0",
     "category": "Code Editor / IDE",
-    "reviewer": "Xiangning",
     "dimension": "D6",
     "score": -1,
     "source": "llm",
@@ -493,12 +528,11 @@
     "span_index_in_prompt": 19
   },
   {
-    "id": 29,
+    "id": 33,
     "prompt_id": "Cursor__Agent_Prompt_2.0.txt",
     "company": "Cursor",
     "product_label": "Cursor Agent 2.0",
     "category": "Code Editor / IDE",
-    "reviewer": "Xiangning",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -510,12 +544,11 @@
     "span_index_in_prompt": 20
   },
   {
-    "id": 30,
+    "id": 34,
     "prompt_id": "Cursor__Agent_Prompt_v1.0.txt",
     "company": "Cursor",
     "product_label": "Cursor-Agent Prompt v1.0-2025-06-04",
     "category": "Code Editor / IDE",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -524,15 +557,14 @@
     "start": 1150,
     "end": 1266,
     "merged_from_count": 0,
-    "span_index_in_prompt": 6
+    "span_index_in_prompt": 7
   },
   {
-    "id": 31,
+    "id": 35,
     "prompt_id": "Cursor__Agent_Prompt_v1.0.txt",
     "company": "Cursor",
     "product_label": "Cursor-Agent Prompt v1.0-2025-06-04",
     "category": "Code Editor / IDE",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D5",
     "score": -1,
     "source": "human",
@@ -541,15 +573,14 @@
     "start": 1810,
     "end": 2200,
     "merged_from_count": 3,
-    "span_index_in_prompt": 8
+    "span_index_in_prompt": 9
   },
   {
-    "id": 32,
+    "id": 36,
     "prompt_id": "Cursor__Agent_Prompt_v1.0.txt",
     "company": "Cursor",
     "product_label": "Cursor-Agent Prompt v1.0-2025-06-04",
     "category": "Code Editor / IDE",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D4",
     "score": -1,
     "source": "llm",
@@ -558,15 +589,14 @@
     "start": 1915,
     "end": 2018,
     "merged_from_count": 0,
-    "span_index_in_prompt": 9
+    "span_index_in_prompt": 10
   },
   {
-    "id": 33,
+    "id": 37,
     "prompt_id": "Cursor__Cursor_2.0_Sys_Prompt.txt",
     "company": "Cursor",
     "product_label": "Cursor-Cursor 2.0 Sys Prompt-2025-10-29",
     "category": "Code Editor / IDE",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D6",
     "score": -1,
     "source": "llm",
@@ -578,12 +608,11 @@
     "span_index_in_prompt": 3
   },
   {
-    "id": 34,
+    "id": 38,
     "prompt_id": "Cursor__Cursor_2.0_Sys_Prompt.txt",
     "company": "Cursor",
     "product_label": "Cursor-Cursor 2.0 Sys Prompt-2025-10-29",
     "category": "Code Editor / IDE",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -595,12 +624,11 @@
     "span_index_in_prompt": 4
   },
   {
-    "id": 35,
+    "id": 39,
     "prompt_id": "Cursor__Cursor_2.0_Sys_Prompt.txt",
     "company": "Cursor",
     "product_label": "Cursor-Cursor 2.0 Sys Prompt-2025-10-29",
     "category": "Code Editor / IDE",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -612,12 +640,11 @@
     "span_index_in_prompt": 5
   },
   {
-    "id": 36,
+    "id": 40,
     "prompt_id": "Cursor__Cursor_2.0_Sys_Prompt.txt",
     "company": "Cursor",
     "product_label": "Cursor-Cursor 2.0 Sys Prompt-2025-10-29",
     "category": "Code Editor / IDE",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D3",
     "score": -1,
     "source": "llm",
@@ -629,12 +656,11 @@
     "span_index_in_prompt": 6
   },
   {
-    "id": 37,
+    "id": 41,
     "prompt_id": "Cursor__Cursor_2.0_Sys_Prompt.txt",
     "company": "Cursor",
     "product_label": "Cursor-Cursor 2.0 Sys Prompt-2025-10-29",
     "category": "Code Editor / IDE",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -646,12 +672,11 @@
     "span_index_in_prompt": 8
   },
   {
-    "id": 38,
+    "id": 42,
     "prompt_id": "Cursor__Cursor_2.0_Sys_Prompt.txt",
     "company": "Cursor",
     "product_label": "Cursor-Cursor 2.0 Sys Prompt-2025-10-29",
     "category": "Code Editor / IDE",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -663,12 +688,11 @@
     "span_index_in_prompt": 12
   },
   {
-    "id": 39,
+    "id": 43,
     "prompt_id": "Cursor__Cursor_2.0_Sys_Prompt.txt",
     "company": "Cursor",
     "product_label": "Cursor-Cursor 2.0 Sys Prompt-2025-10-29",
     "category": "Code Editor / IDE",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D5",
     "score": -1,
     "source": "human",
@@ -680,12 +704,11 @@
     "span_index_in_prompt": 27
   },
   {
-    "id": 40,
+    "id": 44,
     "prompt_id": "Cursor__Cursor_2.0_Sys_Prompt.txt",
     "company": "Cursor",
     "product_label": "Cursor-Cursor 2.0 Sys Prompt-2025-10-29",
     "category": "Code Editor / IDE",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D4",
     "score": -1,
     "source": "llm",
@@ -697,12 +720,11 @@
     "span_index_in_prompt": 28
   },
   {
-    "id": 41,
+    "id": 45,
     "prompt_id": "Cursor__Cursor_2.0_Sys_Prompt.txt",
     "company": "Cursor",
     "product_label": "Cursor-Cursor 2.0 Sys Prompt-2025-10-29",
     "category": "Code Editor / IDE",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D2",
     "score": -1,
     "source": "human",
@@ -714,12 +736,11 @@
     "span_index_in_prompt": 31
   },
   {
-    "id": 42,
+    "id": 46,
     "prompt_id": "Cursor__Cursor_2.0_Sys_Prompt.txt",
     "company": "Cursor",
     "product_label": "Cursor-Cursor 2.0 Sys Prompt-2025-10-29",
     "category": "Code Editor / IDE",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -731,12 +752,11 @@
     "span_index_in_prompt": 32
   },
   {
-    "id": 43,
+    "id": 47,
     "prompt_id": "Cursor__Cursor_2.0_Sys_Prompt.txt",
     "company": "Cursor",
     "product_label": "Cursor-Cursor 2.0 Sys Prompt-2025-10-29",
     "category": "Code Editor / IDE",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D6",
     "score": -1,
     "source": "human",
@@ -748,12 +768,11 @@
     "span_index_in_prompt": 37
   },
   {
-    "id": 44,
+    "id": 48,
     "prompt_id": "Cursor__Cursor_2.0_Sys_Prompt.txt",
     "company": "Cursor",
     "product_label": "Cursor-Cursor 2.0 Sys Prompt-2025-10-29",
     "category": "Code Editor / IDE",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -765,12 +784,11 @@
     "span_index_in_prompt": 38
   },
   {
-    "id": 45,
+    "id": 49,
     "prompt_id": "Cursor__Cursor_2.0_Sys_Prompt.txt",
     "company": "Cursor",
     "product_label": "Cursor-Cursor 2.0 Sys Prompt-2025-10-29",
     "category": "Code Editor / IDE",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -782,12 +800,11 @@
     "span_index_in_prompt": 42
   },
   {
-    "id": 46,
+    "id": 50,
     "prompt_id": "Cursor__Cursor_2.0_Sys_Prompt.txt",
     "company": "Cursor",
     "product_label": "Cursor-Cursor 2.0 Sys Prompt-2025-10-29",
     "category": "Code Editor / IDE",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D3",
     "score": -1,
     "source": "llm",
@@ -799,12 +816,11 @@
     "span_index_in_prompt": 43
   },
   {
-    "id": 47,
+    "id": 51,
     "prompt_id": "Devin__Devin2_09-08-2025.md",
     "company": "Devin",
     "product_label": "Devin-Devin2 09-08-2025-2025-09-08",
     "category": "Autonomous Agent",
-    "reviewer": "Shenzhe",
     "dimension": "D4",
     "score": -1,
     "source": "llm",
@@ -816,12 +832,11 @@
     "span_index_in_prompt": 15
   },
   {
-    "id": 48,
+    "id": 52,
     "prompt_id": "GitHub__github_copilot_agent.md",
     "company": "GitHub",
     "product_label": "GitHub Copilot Agent",
     "category": "Code Assistant",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D6",
     "score": -1,
     "source": "llm",
@@ -833,12 +848,11 @@
     "span_index_in_prompt": 3
   },
   {
-    "id": 49,
+    "id": 53,
     "prompt_id": "GitHub__github_copilot_agent.md",
     "company": "GitHub",
     "product_label": "GitHub Copilot Agent",
     "category": "Code Assistant",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D4",
     "score": -1,
     "source": "llm",
@@ -850,12 +864,11 @@
     "span_index_in_prompt": 9
   },
   {
-    "id": 50,
+    "id": 54,
     "prompt_id": "GitHub__github_copilot_agent.md",
     "company": "GitHub",
     "product_label": "GitHub Copilot Agent",
     "category": "Code Assistant",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -867,12 +880,11 @@
     "span_index_in_prompt": 10
   },
   {
-    "id": 51,
+    "id": 55,
     "prompt_id": "GitHub__github_copilot_agent.md",
     "company": "GitHub",
     "product_label": "GitHub Copilot Agent",
     "category": "Code Assistant",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D7",
     "score": -1,
     "source": "human",
@@ -884,12 +896,11 @@
     "span_index_in_prompt": 11
   },
   {
-    "id": 52,
+    "id": 56,
     "prompt_id": "GitHub__github_copilot_agent.md",
     "company": "GitHub",
     "product_label": "GitHub Copilot Agent",
     "category": "Code Assistant",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D5",
     "score": -1,
     "source": "human",
@@ -901,12 +912,11 @@
     "span_index_in_prompt": 12
   },
   {
-    "id": 53,
+    "id": 57,
     "prompt_id": "GitHub__github_copilot_agent.md",
     "company": "GitHub",
     "product_label": "GitHub Copilot Agent",
     "category": "Code Assistant",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D2",
     "score": -1,
     "source": "human",
@@ -918,12 +928,11 @@
     "span_index_in_prompt": 13
   },
   {
-    "id": 54,
+    "id": 58,
     "prompt_id": "Google__20250804-Jules.md",
     "company": "Google",
     "product_label": "Google-Jules-2025-08-04",
     "category": "Chat / General",
-    "reviewer": "xiangning",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -935,12 +944,11 @@
     "span_index_in_prompt": 0
   },
   {
-    "id": 55,
+    "id": 59,
     "prompt_id": "Google__20250804-Jules.md",
     "company": "Google",
     "product_label": "Google-Jules-2025-08-04",
     "category": "Chat / General",
-    "reviewer": "xiangning",
     "dimension": "D6",
     "score": -1,
     "source": "llm",
@@ -952,12 +960,11 @@
     "span_index_in_prompt": 9
   },
   {
-    "id": 56,
+    "id": 60,
     "prompt_id": "Google__20251118-Antigravity.md",
     "company": "Google",
     "product_label": "Google-Antigravity-2025-11-18",
     "category": "Chat / General",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -969,12 +976,11 @@
     "span_index_in_prompt": 15
   },
   {
-    "id": 57,
+    "id": 61,
     "prompt_id": "Google__gemini-3-pro.md",
     "company": "Google",
     "product_label": "Google-gemini-3-pro-2025-12-22",
     "category": "Chat / General",
-    "reviewer": "Shenzhe",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -986,12 +992,11 @@
     "span_index_in_prompt": 15
   },
   {
-    "id": 58,
+    "id": 62,
     "prompt_id": "Google__gemini_in_chrome.md",
     "company": "Google",
     "product_label": "Google-gemini in chrome-2025-05-20",
     "category": "Chat / General",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -1003,12 +1008,11 @@
     "span_index_in_prompt": 9
   },
   {
-    "id": 59,
+    "id": 63,
     "prompt_id": "Google__gemini_in_chrome.md",
     "company": "Google",
     "product_label": "Google-gemini in chrome-2025-05-20",
     "category": "Chat / General",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -1020,12 +1024,11 @@
     "span_index_in_prompt": 10
   },
   {
-    "id": 60,
+    "id": 64,
     "prompt_id": "Google__gemini_in_chrome.md",
     "company": "Google",
     "product_label": "Google-gemini in chrome-2025-05-20",
     "category": "Chat / General",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D3",
     "score": -1,
     "source": "llm",
@@ -1037,12 +1040,11 @@
     "span_index_in_prompt": 22
   },
   {
-    "id": 61,
+    "id": 65,
     "prompt_id": "Google__gemini_in_chrome.md",
     "company": "Google",
     "product_label": "Google-gemini in chrome-2025-05-20",
     "category": "Chat / General",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -1054,12 +1056,11 @@
     "span_index_in_prompt": 27
   },
   {
-    "id": 62,
+    "id": 66,
     "prompt_id": "Google__gemini_in_chrome.md",
     "company": "Google",
     "product_label": "Google-gemini in chrome-2025-05-20",
     "category": "Chat / General",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -1071,12 +1072,11 @@
     "span_index_in_prompt": 29
   },
   {
-    "id": 63,
+    "id": 67,
     "prompt_id": "Hume__05052024-system-prompt.md",
     "company": "Hume",
     "product_label": "Hume EVI (May 2024)",
     "category": "Chat / General",
-    "reviewer": "Xiangning",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -1088,12 +1088,11 @@
     "span_index_in_prompt": 1
   },
   {
-    "id": 64,
+    "id": 68,
     "prompt_id": "Hume__05052024-system-prompt.md",
     "company": "Hume",
     "product_label": "Hume EVI (May 2024)",
     "category": "Chat / General",
-    "reviewer": "Xiangning",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -1105,12 +1104,11 @@
     "span_index_in_prompt": 2
   },
   {
-    "id": 65,
+    "id": 69,
     "prompt_id": "Hume__05052024-system-prompt.md",
     "company": "Hume",
     "product_label": "Hume EVI (May 2024)",
     "category": "Chat / General",
-    "reviewer": "Xiangning",
     "dimension": "D6",
     "score": -1,
     "source": "llm",
@@ -1122,12 +1120,11 @@
     "span_index_in_prompt": 15
   },
   {
-    "id": 66,
+    "id": 70,
     "prompt_id": "Manus__Manus_Prompt.txt",
     "company": "Manus",
     "product_label": "Manus — Extended Prompt",
     "category": "Autonomous Agent",
-    "reviewer": "Xiangning",
     "dimension": "D4",
     "score": -1,
     "source": "llm",
@@ -1139,12 +1136,11 @@
     "span_index_in_prompt": 12
   },
   {
-    "id": 67,
+    "id": 71,
     "prompt_id": "Manus__Manus_Prompt.txt",
     "company": "Manus",
     "product_label": "Manus — Extended Prompt",
     "category": "Autonomous Agent",
-    "reviewer": "Xiangning",
     "dimension": "D6",
     "score": -1,
     "source": "llm",
@@ -1156,12 +1152,11 @@
     "span_index_in_prompt": 26
   },
   {
-    "id": 68,
+    "id": 72,
     "prompt_id": "Manus__Manus_Prompt.txt",
     "company": "Manus",
     "product_label": "Manus — Extended Prompt",
     "category": "Autonomous Agent",
-    "reviewer": "Xiangning",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -1173,12 +1168,11 @@
     "span_index_in_prompt": 27
   },
   {
-    "id": 69,
+    "id": 73,
     "prompt_id": "Meta__MetaAIHiddenPrompt.md",
     "company": "Meta",
     "product_label": "Meta-MetaAIHiddenPrompt-UnknownTime",
     "category": "Chat / General",
-    "reviewer": "Shenzhe",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -1190,12 +1184,11 @@
     "span_index_in_prompt": 0
   },
   {
-    "id": 70,
+    "id": 74,
     "prompt_id": "Meta__MetaAIHiddenPrompt.md",
     "company": "Meta",
     "product_label": "Meta-MetaAIHiddenPrompt-UnknownTime",
     "category": "Chat / General",
-    "reviewer": "Shenzhe",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -1207,12 +1200,11 @@
     "span_index_in_prompt": 1
   },
   {
-    "id": 71,
+    "id": 75,
     "prompt_id": "Meta__MetaAIHiddenPrompt.md",
     "company": "Meta",
     "product_label": "Meta-MetaAIHiddenPrompt-UnknownTime",
     "category": "Chat / General",
-    "reviewer": "Shenzhe",
     "dimension": "D3",
     "score": -1,
     "source": "llm",
@@ -1224,12 +1216,11 @@
     "span_index_in_prompt": 2
   },
   {
-    "id": 72,
+    "id": 76,
     "prompt_id": "Meta__MetaAIHiddenPrompt.md",
     "company": "Meta",
     "product_label": "Meta-MetaAIHiddenPrompt-UnknownTime",
     "category": "Chat / General",
-    "reviewer": "Shenzhe",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -1241,12 +1232,11 @@
     "span_index_in_prompt": 8
   },
   {
-    "id": 73,
+    "id": 77,
     "prompt_id": "Meta__metaai_llama4-04082025.md",
     "company": "Meta",
     "product_label": "Meta-Meta.ai-2025-04-08",
     "category": "Chat / General",
-    "reviewer": "xiangning",
     "dimension": "D7",
     "score": -1,
     "source": "llm",
@@ -1258,12 +1248,11 @@
     "span_index_in_prompt": 2
   },
   {
-    "id": 74,
+    "id": 78,
     "prompt_id": "Meta__metaai_llama4-04082025.md",
     "company": "Meta",
     "product_label": "Meta-Meta.ai-2025-04-08",
     "category": "Chat / General",
-    "reviewer": "xiangning",
     "dimension": "D8",
     "score": -1,
     "source": "llm",
@@ -1275,12 +1264,11 @@
     "span_index_in_prompt": 3
   },
   {
-    "id": 75,
+    "id": 79,
     "prompt_id": "Meta__metaai_llama4-04082025.md",
     "company": "Meta",
     "product_label": "Meta-Meta.ai-2025-04-08",
     "category": "Chat / General",
-    "reviewer": "xiangning",
     "dimension": "D8",
     "score": -1,
     "source": "llm",
@@ -1292,12 +1280,11 @@
     "span_index_in_prompt": 6
   },
   {
-    "id": 76,
+    "id": 80,
     "prompt_id": "Meta__metaai_llama4-04082025.md",
     "company": "Meta",
     "product_label": "Meta-Meta.ai-2025-04-08",
     "category": "Chat / General",
-    "reviewer": "xiangning",
     "dimension": "D6",
     "score": -1,
     "source": "llm",
@@ -1309,12 +1296,11 @@
     "span_index_in_prompt": 7
   },
   {
-    "id": 77,
+    "id": 81,
     "prompt_id": "Meta__metaai_llama4-whatsapp-07292025.md",
     "company": "Meta",
     "product_label": "Meta-Meta.ai-2025-07-29",
     "category": "Chat / General",
-    "reviewer": "xiangning",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -1326,12 +1312,11 @@
     "span_index_in_prompt": 2
   },
   {
-    "id": 78,
+    "id": 82,
     "prompt_id": "Meta__metaai_llama4-whatsapp-07292025.md",
     "company": "Meta",
     "product_label": "Meta-Meta.ai-2025-07-29",
     "category": "Chat / General",
-    "reviewer": "xiangning",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -1343,12 +1328,11 @@
     "span_index_in_prompt": 3
   },
   {
-    "id": 79,
+    "id": 83,
     "prompt_id": "Meta__metaai_llama4-whatsapp-07292025.md",
     "company": "Meta",
     "product_label": "Meta-Meta.ai-2025-07-29",
     "category": "Chat / General",
-    "reviewer": "xiangning",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -1360,12 +1344,11 @@
     "span_index_in_prompt": 4
   },
   {
-    "id": 80,
+    "id": 84,
     "prompt_id": "Meta__metaai_llama4-whatsapp-07292025.md",
     "company": "Meta",
     "product_label": "Meta-Meta.ai-2025-07-29",
     "category": "Chat / General",
-    "reviewer": "xiangning",
     "dimension": "D6",
     "score": -1,
     "source": "llm",
@@ -1377,12 +1360,11 @@
     "span_index_in_prompt": 7
   },
   {
-    "id": 81,
+    "id": 85,
     "prompt_id": "Meta__metaai_llama4-whatsapp-07292025.md",
     "company": "Meta",
     "product_label": "Meta-Meta.ai-2025-07-29",
     "category": "Chat / General",
-    "reviewer": "xiangning",
     "dimension": "D6",
     "score": -1,
     "source": "llm",
@@ -1394,12 +1376,11 @@
     "span_index_in_prompt": 12
   },
   {
-    "id": 82,
+    "id": 86,
     "prompt_id": "Meta__metaai_llama4-whatsapp-07292025.md",
     "company": "Meta",
     "product_label": "Meta-Meta.ai-2025-07-29",
     "category": "Chat / General",
-    "reviewer": "xiangning",
     "dimension": "D8",
     "score": -1,
     "source": "llm",
@@ -1411,12 +1392,11 @@
     "span_index_in_prompt": 13
   },
   {
-    "id": 83,
+    "id": 87,
     "prompt_id": "Meta__metaai_llama4-whatsapp-07292025.md",
     "company": "Meta",
     "product_label": "Meta-Meta.ai-2025-07-29",
     "category": "Chat / General",
-    "reviewer": "xiangning",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -1428,12 +1408,11 @@
     "span_index_in_prompt": 16
   },
   {
-    "id": 84,
+    "id": 88,
     "prompt_id": "Meta__metaai_llama4-whatsapp-07292025.md",
     "company": "Meta",
     "product_label": "Meta-Meta.ai-2025-07-29",
     "category": "Chat / General",
-    "reviewer": "xiangning",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -1445,12 +1424,11 @@
     "span_index_in_prompt": 17
   },
   {
-    "id": 85,
+    "id": 89,
     "prompt_id": "Meta__metaai_llama4-whatsapp-07292025.md",
     "company": "Meta",
     "product_label": "Meta-Meta.ai-2025-07-29",
     "category": "Chat / General",
-    "reviewer": "xiangning",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -1462,12 +1440,11 @@
     "span_index_in_prompt": 22
   },
   {
-    "id": 86,
+    "id": 90,
     "prompt_id": "Meta__metaai_llama4-whatsapp-07292025.md",
     "company": "Meta",
     "product_label": "Meta-Meta.ai-2025-07-29",
     "category": "Chat / General",
-    "reviewer": "xiangning",
     "dimension": "D6",
     "score": -1,
     "source": "llm",
@@ -1479,12 +1456,11 @@
     "span_index_in_prompt": 24
   },
   {
-    "id": 87,
+    "id": 91,
     "prompt_id": "Meta__metaai_llama4-whatsapp-07292025.md",
     "company": "Meta",
     "product_label": "Meta-Meta.ai-2025-07-29",
     "category": "Chat / General",
-    "reviewer": "xiangning",
     "dimension": "D8",
     "score": -1,
     "source": "llm",
@@ -1496,12 +1472,11 @@
     "span_index_in_prompt": 25
   },
   {
-    "id": 88,
+    "id": 92,
     "prompt_id": "Meta__metaai_llama4-whatsapp-07292025.md",
     "company": "Meta",
     "product_label": "Meta-Meta.ai-2025-07-29",
     "category": "Chat / General",
-    "reviewer": "xiangning",
     "dimension": "D7",
     "score": -1,
     "source": "llm",
@@ -1513,12 +1488,11 @@
     "span_index_in_prompt": 26
   },
   {
-    "id": 89,
+    "id": 93,
     "prompt_id": "Microsoft__Prompt.txt",
     "company": "Microsoft",
     "product_label": "Microsoft-Prompt-2025-04-21",
     "category": "Code Assistant",
-    "reviewer": "Shenzhe",
     "dimension": "D4",
     "score": -1,
     "source": "llm",
@@ -1530,12 +1504,11 @@
     "span_index_in_prompt": 16
   },
   {
-    "id": 90,
+    "id": 94,
     "prompt_id": "Microsoft__Prompt.txt",
     "company": "Microsoft",
     "product_label": "Microsoft-Prompt-2025-04-21",
     "category": "Code Assistant",
-    "reviewer": "Shenzhe",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -1547,12 +1520,11 @@
     "span_index_in_prompt": 17
   },
   {
-    "id": 91,
+    "id": 95,
     "prompt_id": "Microsoft__microsoft_copilot_enterprise_20251202.md",
     "company": "Microsoft",
     "product_label": "MS Copilot 365 Enterprise (Dec 2025)",
     "category": "Code Assistant",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -1564,12 +1536,11 @@
     "span_index_in_prompt": 5
   },
   {
-    "id": 92,
+    "id": 96,
     "prompt_id": "Microsoft__microsoft_copilot_enterprise_20251202.md",
     "company": "Microsoft",
     "product_label": "MS Copilot 365 Enterprise (Dec 2025)",
     "category": "Code Assistant",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -1581,12 +1552,11 @@
     "span_index_in_prompt": 22
   },
   {
-    "id": 93,
+    "id": 97,
     "prompt_id": "Microsoft__microsoft_copilot_enterprise_20251202.md",
     "company": "Microsoft",
     "product_label": "MS Copilot 365 Enterprise (Dec 2025)",
     "category": "Code Assistant",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -1598,12 +1568,11 @@
     "span_index_in_prompt": 23
   },
   {
-    "id": 94,
+    "id": 98,
     "prompt_id": "Microsoft__microsoft_copilot_enterprise_20251202.md",
     "company": "Microsoft",
     "product_label": "MS Copilot 365 Enterprise (Dec 2025)",
     "category": "Code Assistant",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -1615,12 +1584,11 @@
     "span_index_in_prompt": 24
   },
   {
-    "id": 95,
+    "id": 99,
     "prompt_id": "Microsoft__microsoft_copilot_enterprise_20251202.md",
     "company": "Microsoft",
     "product_label": "MS Copilot 365 Enterprise (Dec 2025)",
     "category": "Code Assistant",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -1632,12 +1600,11 @@
     "span_index_in_prompt": 30
   },
   {
-    "id": 96,
+    "id": 100,
     "prompt_id": "Microsoft__microsoft_copilot_enterprise_20251202.md",
     "company": "Microsoft",
     "product_label": "MS Copilot 365 Enterprise (Dec 2025)",
     "category": "Code Assistant",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D4",
     "score": -1,
     "source": "llm",
@@ -1649,12 +1616,11 @@
     "span_index_in_prompt": 31
   },
   {
-    "id": 97,
+    "id": 101,
     "prompt_id": "Microsoft__microsoft_copilot_enterprise_20251202.md",
     "company": "Microsoft",
     "product_label": "MS Copilot 365 Enterprise (Dec 2025)",
     "category": "Code Assistant",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -1666,12 +1632,11 @@
     "span_index_in_prompt": 33
   },
   {
-    "id": 98,
+    "id": 102,
     "prompt_id": "Microsoft__microsoft_copilot_enterprise_20251202.md",
     "company": "Microsoft",
     "product_label": "MS Copilot 365 Enterprise (Dec 2025)",
     "category": "Code Assistant",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D4",
     "score": -1,
     "source": "llm",
@@ -1683,12 +1648,11 @@
     "span_index_in_prompt": 34
   },
   {
-    "id": 99,
+    "id": 103,
     "prompt_id": "Microsoft__microsoft_copilot_website_02252025.md",
     "company": "Microsoft",
     "product_label": "Microsoft-Copilot-2025-02-25",
     "category": "Code Assistant",
-    "reviewer": "xiangning",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -1700,12 +1664,11 @@
     "span_index_in_prompt": 6
   },
   {
-    "id": 100,
+    "id": 104,
     "prompt_id": "Microsoft__microsoft_copilot_website_02252025.md",
     "company": "Microsoft",
     "product_label": "Microsoft-Copilot-2025-02-25",
     "category": "Code Assistant",
-    "reviewer": "xiangning",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -1717,12 +1680,11 @@
     "span_index_in_prompt": 8
   },
   {
-    "id": 101,
+    "id": 105,
     "prompt_id": "Microsoft__microsoft_copilot_website_02252025.md",
     "company": "Microsoft",
     "product_label": "Microsoft-Copilot-2025-02-25",
     "category": "Code Assistant",
-    "reviewer": "xiangning",
     "dimension": "D3",
     "score": -1,
     "source": "llm",
@@ -1734,12 +1696,11 @@
     "span_index_in_prompt": 12
   },
   {
-    "id": 102,
+    "id": 106,
     "prompt_id": "Microsoft__microsoft_copilot_website_02252025.md",
     "company": "Microsoft",
     "product_label": "Microsoft-Copilot-2025-02-25",
     "category": "Code Assistant",
-    "reviewer": "xiangning",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -1751,12 +1712,11 @@
     "span_index_in_prompt": 13
   },
   {
-    "id": 103,
+    "id": 107,
     "prompt_id": "Microsoft__microsoft_copilot_website_02252025.md",
     "company": "Microsoft",
     "product_label": "Microsoft-Copilot-2025-02-25",
     "category": "Code Assistant",
-    "reviewer": "xiangning",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -1768,12 +1728,11 @@
     "span_index_in_prompt": 18
   },
   {
-    "id": 104,
+    "id": 108,
     "prompt_id": "Microsoft__microsoft_copilot_website_09192025.md",
     "company": "Microsoft",
     "product_label": "MS Copilot Web (Sep 2025)",
     "category": "Code Assistant",
-    "reviewer": "Xiangning",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -1785,12 +1744,11 @@
     "span_index_in_prompt": 5
   },
   {
-    "id": 105,
+    "id": 109,
     "prompt_id": "Microsoft__microsoft_copilot_website_09192025.md",
     "company": "Microsoft",
     "product_label": "MS Copilot Web (Sep 2025)",
     "category": "Code Assistant",
-    "reviewer": "Xiangning",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -1802,12 +1760,11 @@
     "span_index_in_prompt": 6
   },
   {
-    "id": 106,
+    "id": 110,
     "prompt_id": "Microsoft__microsoft_copilot_website_09192025.md",
     "company": "Microsoft",
     "product_label": "MS Copilot Web (Sep 2025)",
     "category": "Code Assistant",
-    "reviewer": "Xiangning",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -1819,12 +1776,11 @@
     "span_index_in_prompt": 10
   },
   {
-    "id": 107,
+    "id": 111,
     "prompt_id": "Microsoft__microsoft_copilot_website_09192025.md",
     "company": "Microsoft",
     "product_label": "MS Copilot Web (Sep 2025)",
     "category": "Code Assistant",
-    "reviewer": "Xiangning",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -1836,12 +1792,11 @@
     "span_index_in_prompt": 11
   },
   {
-    "id": 108,
+    "id": 112,
     "prompt_id": "Microsoft__microsoft_copilot_website_09192025.md",
     "company": "Microsoft",
     "product_label": "MS Copilot Web (Sep 2025)",
     "category": "Code Assistant",
-    "reviewer": "Xiangning",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -1853,12 +1808,11 @@
     "span_index_in_prompt": 12
   },
   {
-    "id": 109,
+    "id": 113,
     "prompt_id": "Microsoft__microsoft_copilot_website_09192025.md",
     "company": "Microsoft",
     "product_label": "MS Copilot Web (Sep 2025)",
     "category": "Code Assistant",
-    "reviewer": "Xiangning",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -1870,12 +1824,11 @@
     "span_index_in_prompt": 13
   },
   {
-    "id": 110,
+    "id": 114,
     "prompt_id": "Microsoft__microsoft_copilot_website_09192025.md",
     "company": "Microsoft",
     "product_label": "MS Copilot Web (Sep 2025)",
     "category": "Code Assistant",
-    "reviewer": "Xiangning",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -1887,12 +1840,11 @@
     "span_index_in_prompt": 15
   },
   {
-    "id": 111,
+    "id": 115,
     "prompt_id": "Microsoft__microsoft_copilot_website_09192025.md",
     "company": "Microsoft",
     "product_label": "MS Copilot Web (Sep 2025)",
     "category": "Code Assistant",
-    "reviewer": "Xiangning",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -1904,12 +1856,11 @@
     "span_index_in_prompt": 17
   },
   {
-    "id": 112,
+    "id": 116,
     "prompt_id": "Microsoft__microsoft_copilot_website_09192025.md",
     "company": "Microsoft",
     "product_label": "MS Copilot Web (Sep 2025)",
     "category": "Code Assistant",
-    "reviewer": "Xiangning",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -1921,12 +1872,11 @@
     "span_index_in_prompt": 18
   },
   {
-    "id": 113,
+    "id": 117,
     "prompt_id": "Microsoft__microsoft_copilot_website_09192025.md",
     "company": "Microsoft",
     "product_label": "MS Copilot Web (Sep 2025)",
     "category": "Code Assistant",
-    "reviewer": "Xiangning",
     "dimension": "D3",
     "score": -1,
     "source": "llm",
@@ -1938,12 +1888,11 @@
     "span_index_in_prompt": 22
   },
   {
-    "id": 114,
+    "id": 118,
     "prompt_id": "Microsoft__microsoft_copilot_website_09192025.md",
     "company": "Microsoft",
     "product_label": "MS Copilot Web (Sep 2025)",
     "category": "Code Assistant",
-    "reviewer": "Xiangning",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -1955,12 +1904,11 @@
     "span_index_in_prompt": 61
   },
   {
-    "id": 115,
+    "id": 119,
     "prompt_id": "Microsoft__microsoft_copilot_website_09192025.md",
     "company": "Microsoft",
     "product_label": "MS Copilot Web (Sep 2025)",
     "category": "Code Assistant",
-    "reviewer": "Xiangning",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -1972,12 +1920,11 @@
     "span_index_in_prompt": 62
   },
   {
-    "id": 116,
+    "id": 120,
     "prompt_id": "Microsoft__microsoft_copilot_website_09192025.md",
     "company": "Microsoft",
     "product_label": "MS Copilot Web (Sep 2025)",
     "category": "Code Assistant",
-    "reviewer": "Xiangning",
     "dimension": "D3",
     "score": -1,
     "source": "llm",
@@ -1989,12 +1936,11 @@
     "span_index_in_prompt": 63
   },
   {
-    "id": 117,
+    "id": 121,
     "prompt_id": "Microsoft__microsoft_copilot_website_09192025.md",
     "company": "Microsoft",
     "product_label": "MS Copilot Web (Sep 2025)",
     "category": "Code Assistant",
-    "reviewer": "Xiangning",
     "dimension": "D6",
     "score": -1,
     "source": "llm",
@@ -2006,12 +1952,11 @@
     "span_index_in_prompt": 68
   },
   {
-    "id": 118,
+    "id": 122,
     "prompt_id": "Microsoft__microsoft_copilot_website_09192025.md",
     "company": "Microsoft",
     "product_label": "MS Copilot Web (Sep 2025)",
     "category": "Code Assistant",
-    "reviewer": "Xiangning",
     "dimension": "D7",
     "score": -1,
     "source": "llm",
@@ -2023,12 +1968,11 @@
     "span_index_in_prompt": 69
   },
   {
-    "id": 119,
+    "id": 123,
     "prompt_id": "MiniMax__MiniMax.txt",
     "company": "MiniMax",
     "product_label": "MiniMax AI Assistant",
     "category": "Chat / General",
-    "reviewer": "Xiangning",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -2040,12 +1984,11 @@
     "span_index_in_prompt": 7
   },
   {
-    "id": 120,
+    "id": 124,
     "prompt_id": "Misc__Sesame-AI-Maya.md",
     "company": "Misc",
     "product_label": "Sesame AI — Maya",
     "category": "Other",
-    "reviewer": "Xiangning",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -2057,12 +2000,11 @@
     "span_index_in_prompt": 2
   },
   {
-    "id": 121,
+    "id": 125,
     "prompt_id": "Misc__Sesame-AI-Maya.md",
     "company": "Misc",
     "product_label": "Sesame AI — Maya",
     "category": "Other",
-    "reviewer": "Xiangning",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -2074,12 +2016,11 @@
     "span_index_in_prompt": 6
   },
   {
-    "id": 122,
+    "id": 126,
     "prompt_id": "Misc__Sesame-AI-Maya.md",
     "company": "Misc",
     "product_label": "Sesame AI — Maya",
     "category": "Other",
-    "reviewer": "Xiangning",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -2091,12 +2032,11 @@
     "span_index_in_prompt": 15
   },
   {
-    "id": 123,
+    "id": 127,
     "prompt_id": "Misc__Sesame-AI-Maya.md",
     "company": "Misc",
     "product_label": "Sesame AI — Maya",
     "category": "Other",
-    "reviewer": "Xiangning",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -2108,12 +2048,11 @@
     "span_index_in_prompt": 16
   },
   {
-    "id": 124,
+    "id": 128,
     "prompt_id": "Misc__Sesame-AI-Maya.md",
     "company": "Misc",
     "product_label": "Sesame AI — Maya",
     "category": "Other",
-    "reviewer": "Xiangning",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -2125,12 +2064,11 @@
     "span_index_in_prompt": 18
   },
   {
-    "id": 125,
+    "id": 129,
     "prompt_id": "Misc__Sesame-AI-Maya.md",
     "company": "Misc",
     "product_label": "Sesame AI — Maya",
     "category": "Other",
-    "reviewer": "Xiangning",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -2142,12 +2080,11 @@
     "span_index_in_prompt": 19
   },
   {
-    "id": 126,
+    "id": 130,
     "prompt_id": "Misc__Sesame-AI-Maya.md",
     "company": "Misc",
     "product_label": "Sesame AI — Maya",
     "category": "Other",
-    "reviewer": "Xiangning",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -2159,12 +2096,11 @@
     "span_index_in_prompt": 23
   },
   {
-    "id": 127,
+    "id": 131,
     "prompt_id": "Misc__Sesame-AI-Maya.md",
     "company": "Misc",
     "product_label": "Sesame AI — Maya",
     "category": "Other",
-    "reviewer": "Xiangning",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -2176,12 +2112,11 @@
     "span_index_in_prompt": 29
   },
   {
-    "id": 128,
+    "id": 132,
     "prompt_id": "Misc__Sesame-AI-Maya.md",
     "company": "Misc",
     "product_label": "Sesame AI — Maya",
     "category": "Other",
-    "reviewer": "Xiangning",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -2193,12 +2128,11 @@
     "span_index_in_prompt": 30
   },
   {
-    "id": 129,
+    "id": 133,
     "prompt_id": "Misc__Sesame-AI-Maya.md",
     "company": "Misc",
     "product_label": "Sesame AI — Maya",
     "category": "Other",
-    "reviewer": "Xiangning",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -2210,12 +2144,11 @@
     "span_index_in_prompt": 36
   },
   {
-    "id": 130,
+    "id": 134,
     "prompt_id": "Misc__Sesame-AI-Maya.md",
     "company": "Misc",
     "product_label": "Sesame AI — Maya",
     "category": "Other",
-    "reviewer": "Xiangning",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -2227,12 +2160,11 @@
     "span_index_in_prompt": 37
   },
   {
-    "id": 131,
+    "id": 135,
     "prompt_id": "Misc__Sesame-AI-Maya.md",
     "company": "Misc",
     "product_label": "Sesame AI — Maya",
     "category": "Other",
-    "reviewer": "Xiangning",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -2244,12 +2176,11 @@
     "span_index_in_prompt": 38
   },
   {
-    "id": 132,
+    "id": 136,
     "prompt_id": "Misc__Sesame-AI-Maya.md",
     "company": "Misc",
     "product_label": "Sesame AI — Maya",
     "category": "Other",
-    "reviewer": "Xiangning",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -2261,12 +2192,11 @@
     "span_index_in_prompt": 39
   },
   {
-    "id": 133,
+    "id": 137,
     "prompt_id": "Misc__Sesame-AI-Maya.md",
     "company": "Misc",
     "product_label": "Sesame AI — Maya",
     "category": "Other",
-    "reviewer": "Xiangning",
     "dimension": "D3",
     "score": -1,
     "source": "llm",
@@ -2278,12 +2208,11 @@
     "span_index_in_prompt": 41
   },
   {
-    "id": 134,
+    "id": 138,
     "prompt_id": "Misc__Sesame-AI-Maya.md",
     "company": "Misc",
     "product_label": "Sesame AI — Maya",
     "category": "Other",
-    "reviewer": "Xiangning",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -2295,12 +2224,11 @@
     "span_index_in_prompt": 42
   },
   {
-    "id": 135,
+    "id": 139,
     "prompt_id": "Moonshot__Kimi_2_July-11-2025.txt",
     "company": "Moonshot",
     "product_label": "Moonshot-Kimi 2 July-11-2025-2025-07-11",
     "category": "Chat / General",
-    "reviewer": "xiangning",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -2312,12 +2240,11 @@
     "span_index_in_prompt": 8
   },
   {
-    "id": 136,
+    "id": 140,
     "prompt_id": "Notion__Prompt.txt",
     "company": "Notion",
     "product_label": "Notion-Prompt-2024-01-31",
     "category": "Productivity / DevOps",
-    "reviewer": "xiangning",
     "dimension": "D4",
     "score": -1,
     "source": "llm",
@@ -2329,12 +2256,11 @@
     "span_index_in_prompt": 2
   },
   {
-    "id": 137,
+    "id": 141,
     "prompt_id": "OpenAI__Atlas_10-21-25.txt",
     "company": "OpenAI",
     "product_label": "OpenAI-Atlas 10-21-25-2025-10-21",
     "category": "Chat / General",
-    "reviewer": "Shenzhe",
     "dimension": "D3",
     "score": -1,
     "source": "llm",
@@ -2346,12 +2272,11 @@
     "span_index_in_prompt": 9
   },
   {
-    "id": 138,
+    "id": 142,
     "prompt_id": "OpenAI__Atlas_10-21-25.txt",
     "company": "OpenAI",
     "product_label": "OpenAI-Atlas 10-21-25-2025-10-21",
     "category": "Chat / General",
-    "reviewer": "Shenzhe",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -2363,12 +2288,11 @@
     "span_index_in_prompt": 12
   },
   {
-    "id": 139,
+    "id": 143,
     "prompt_id": "OpenAI__chatgpt_agent_system_prompt.md",
     "company": "OpenAI",
     "product_label": "OpenAI-chatgpt agent-2025-07-17",
     "category": "Chat / General",
-    "reviewer": "Shenzhe",
     "dimension": "D3",
     "score": -1,
     "source": "llm",
@@ -2380,12 +2304,11 @@
     "span_index_in_prompt": 19
   },
   {
-    "id": 140,
+    "id": 144,
     "prompt_id": "OpenAI__chatgpt_agent_system_prompt.md",
     "company": "OpenAI",
     "product_label": "OpenAI-chatgpt agent-2025-07-17",
     "category": "Chat / General",
-    "reviewer": "Shenzhe",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -2397,12 +2320,11 @@
     "span_index_in_prompt": 22
   },
   {
-    "id": 141,
+    "id": 145,
     "prompt_id": "OpenAI__chatgpt_agent_system_prompt.md",
     "company": "OpenAI",
     "product_label": "OpenAI-chatgpt agent-2025-07-17",
     "category": "Chat / General",
-    "reviewer": "Shenzhe",
     "dimension": "D3",
     "score": -1,
     "source": "llm",
@@ -2414,12 +2336,11 @@
     "span_index_in_prompt": 32
   },
   {
-    "id": 142,
+    "id": 146,
     "prompt_id": "OpenAI__chatgpt_agent_system_prompt.md",
     "company": "OpenAI",
     "product_label": "OpenAI-chatgpt agent-2025-07-17",
     "category": "Chat / General",
-    "reviewer": "Shenzhe",
     "dimension": "D3",
     "score": -1,
     "source": "llm",
@@ -2431,12 +2352,11 @@
     "span_index_in_prompt": 36
   },
   {
-    "id": 143,
+    "id": 147,
     "prompt_id": "OpenAI__chatgpt_agent_system_prompt.md",
     "company": "OpenAI",
     "product_label": "OpenAI-chatgpt agent-2025-07-17",
     "category": "Chat / General",
-    "reviewer": "Shenzhe",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -2448,12 +2368,11 @@
     "span_index_in_prompt": 37
   },
   {
-    "id": 144,
+    "id": 148,
     "prompt_id": "OpenAI__codex-cli.md",
     "company": "OpenAI",
     "product_label": "OpenAI Codex CLI",
     "category": "Code Agent",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -2465,12 +2384,11 @@
     "span_index_in_prompt": 16
   },
   {
-    "id": 145,
+    "id": 149,
     "prompt_id": "OpenAI__codex-cli.md",
     "company": "OpenAI",
     "product_label": "OpenAI Codex CLI",
     "category": "Code Agent",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D4",
     "score": -1,
     "source": "llm",
@@ -2482,12 +2400,11 @@
     "span_index_in_prompt": 27
   },
   {
-    "id": 146,
+    "id": 150,
     "prompt_id": "OpenAI__codex-cli.md",
     "company": "OpenAI",
     "product_label": "OpenAI Codex CLI",
     "category": "Code Agent",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D4",
     "score": -1,
     "source": "llm",
@@ -2499,12 +2416,11 @@
     "span_index_in_prompt": 30
   },
   {
-    "id": 147,
+    "id": 151,
     "prompt_id": "OpenAI__gpt-5-thinking.md",
     "company": "OpenAI",
     "product_label": "OpenAI-gpt-5-thinking-2025-08-23",
     "category": "Chat / General",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D3",
     "score": -1,
     "source": "llm",
@@ -2516,12 +2432,11 @@
     "span_index_in_prompt": 52
   },
   {
-    "id": 148,
+    "id": 152,
     "prompt_id": "OpenAI__gpt-5.2-thinking.md",
     "company": "OpenAI",
     "product_label": "OpenAI-gpt-5.2-thinking-2025-12-13",
     "category": "Chat / General",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -2533,12 +2448,11 @@
     "span_index_in_prompt": 17
   },
   {
-    "id": 149,
+    "id": 153,
     "prompt_id": "OpenAI__gpt-5.2-thinking.md",
     "company": "OpenAI",
     "product_label": "OpenAI-gpt-5.2-thinking-2025-12-13",
     "category": "Chat / General",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D5",
     "score": -1,
     "source": "human",
@@ -2550,12 +2464,11 @@
     "span_index_in_prompt": 18
   },
   {
-    "id": 150,
+    "id": 154,
     "prompt_id": "OpenAI__gpt-5.2-thinking.md",
     "company": "OpenAI",
     "product_label": "OpenAI-gpt-5.2-thinking-2025-12-13",
     "category": "Chat / General",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -2567,12 +2480,11 @@
     "span_index_in_prompt": 49
   },
   {
-    "id": 151,
+    "id": 155,
     "prompt_id": "OpenAI__gpt-5.2-thinking.md",
     "company": "OpenAI",
     "product_label": "OpenAI-gpt-5.2-thinking-2025-12-13",
     "category": "Chat / General",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -2584,12 +2496,11 @@
     "span_index_in_prompt": 50
   },
   {
-    "id": 152,
+    "id": 156,
     "prompt_id": "OpenAI__gpt-5.2-thinking.md",
     "company": "OpenAI",
     "product_label": "OpenAI-gpt-5.2-thinking-2025-12-13",
     "category": "Chat / General",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -2601,12 +2512,11 @@
     "span_index_in_prompt": 61
   },
   {
-    "id": 153,
+    "id": 157,
     "prompt_id": "OpenAI__gpt40_with_canvas.md",
     "company": "OpenAI",
     "product_label": "OpenAI-gpt40 with canvas-2024-10-03",
     "category": "Chat / General",
-    "reviewer": "Shenzhe",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -2618,12 +2528,11 @@
     "span_index_in_prompt": 3
   },
   {
-    "id": 154,
+    "id": 158,
     "prompt_id": "OpenAI__gpt40_with_canvas.md",
     "company": "OpenAI",
     "product_label": "OpenAI-gpt40 with canvas-2024-10-03",
     "category": "Chat / General",
-    "reviewer": "Shenzhe",
     "dimension": "D7",
     "score": -1,
     "source": "llm",
@@ -2635,12 +2544,11 @@
     "span_index_in_prompt": 4
   },
   {
-    "id": 155,
+    "id": 159,
     "prompt_id": "OpenAI__o3.md",
     "company": "OpenAI",
     "product_label": "OpenAI o3",
     "category": "Chat / General",
-    "reviewer": "Xiangning",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -2652,12 +2560,11 @@
     "span_index_in_prompt": 2
   },
   {
-    "id": 156,
+    "id": 160,
     "prompt_id": "OpenAI__o3.md",
     "company": "OpenAI",
     "product_label": "OpenAI o3",
     "category": "Chat / General",
-    "reviewer": "Xiangning",
     "dimension": "D3",
     "score": -1,
     "source": "llm",
@@ -2669,12 +2576,11 @@
     "span_index_in_prompt": 3
   },
   {
-    "id": 157,
+    "id": 161,
     "prompt_id": "OpenAI__o3.md",
     "company": "OpenAI",
     "product_label": "OpenAI o3",
     "category": "Chat / General",
-    "reviewer": "Xiangning",
     "dimension": "D3",
     "score": -1,
     "source": "llm",
@@ -2686,12 +2592,11 @@
     "span_index_in_prompt": 10
   },
   {
-    "id": 158,
+    "id": 162,
     "prompt_id": "OpenAI__o3.md",
     "company": "OpenAI",
     "product_label": "OpenAI o3",
     "category": "Chat / General",
-    "reviewer": "Xiangning",
     "dimension": "D3",
     "score": -1,
     "source": "llm",
@@ -2703,12 +2608,11 @@
     "span_index_in_prompt": 11
   },
   {
-    "id": 159,
+    "id": 163,
     "prompt_id": "OpenAI__o3.md",
     "company": "OpenAI",
     "product_label": "OpenAI o3",
     "category": "Chat / General",
-    "reviewer": "Xiangning",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -2720,12 +2624,11 @@
     "span_index_in_prompt": 18
   },
   {
-    "id": 160,
+    "id": 164,
     "prompt_id": "OpenAI__o3.md",
     "company": "OpenAI",
     "product_label": "OpenAI o3",
     "category": "Chat / General",
-    "reviewer": "Xiangning",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -2737,12 +2640,11 @@
     "span_index_in_prompt": 21
   },
   {
-    "id": 161,
+    "id": 165,
     "prompt_id": "OpenSource__Prompt.txt_1",
     "company": "OpenSource",
     "product_label": "Cline (Open Source)",
     "category": "Code Assistant",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -2754,12 +2656,11 @@
     "span_index_in_prompt": 0
   },
   {
-    "id": 162,
+    "id": 166,
     "prompt_id": "OpenSource__Prompt.txt_1",
     "company": "OpenSource",
     "product_label": "Cline (Open Source)",
     "category": "Code Assistant",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D4",
     "score": -1,
     "source": "llm",
@@ -2771,12 +2672,11 @@
     "span_index_in_prompt": 5
   },
   {
-    "id": 163,
+    "id": 167,
     "prompt_id": "OpenSource__Prompt.txt_1",
     "company": "OpenSource",
     "product_label": "Cline (Open Source)",
     "category": "Code Assistant",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D4",
     "score": -1,
     "source": "llm",
@@ -2788,12 +2688,11 @@
     "span_index_in_prompt": 30
   },
   {
-    "id": 164,
+    "id": 168,
     "prompt_id": "OpenSource__Prompt.txt_1",
     "company": "OpenSource",
     "product_label": "Cline (Open Source)",
     "category": "Code Assistant",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -2805,12 +2704,11 @@
     "span_index_in_prompt": 31
   },
   {
-    "id": 165,
+    "id": 169,
     "prompt_id": "Perplexity__20240320-Perplexity.md",
     "company": "Perplexity",
     "product_label": "Perplexity-Perplexity.ai-2024-03-20",
     "category": "Search / Research",
-    "reviewer": "xiangning",
     "dimension": "D6",
     "score": -1,
     "source": "llm",
@@ -2822,12 +2720,11 @@
     "span_index_in_prompt": 14
   },
   {
-    "id": 166,
+    "id": 170,
     "prompt_id": "Perplexity__20240320-Perplexity.md",
     "company": "Perplexity",
     "product_label": "Perplexity-Perplexity.ai-2024-03-20",
     "category": "Search / Research",
-    "reviewer": "xiangning",
     "dimension": "D7",
     "score": -1,
     "source": "llm",
@@ -2839,12 +2736,11 @@
     "span_index_in_prompt": 15
   },
   {
-    "id": 167,
+    "id": 171,
     "prompt_id": "Perplexity__20241212-Perplexity-Pro.md",
     "company": "Perplexity",
     "product_label": "Perplexity Pro (Dec 2024)",
     "category": "Search / Research",
-    "reviewer": "Xiangning",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -2856,12 +2752,11 @@
     "span_index_in_prompt": 2
   },
   {
-    "id": 168,
+    "id": 172,
     "prompt_id": "Perplexity__20241212-Perplexity-Pro.md",
     "company": "Perplexity",
     "product_label": "Perplexity Pro (Dec 2024)",
     "category": "Search / Research",
-    "reviewer": "Xiangning",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -2873,12 +2768,11 @@
     "span_index_in_prompt": 5
   },
   {
-    "id": 169,
+    "id": 173,
     "prompt_id": "Perplexity__20241212-Perplexity-Pro.md",
     "company": "Perplexity",
     "product_label": "Perplexity Pro (Dec 2024)",
     "category": "Search / Research",
-    "reviewer": "Xiangning",
     "dimension": "D6",
     "score": -1,
     "source": "llm",
@@ -2890,12 +2784,11 @@
     "span_index_in_prompt": 9
   },
   {
-    "id": 170,
+    "id": 174,
     "prompt_id": "Perplexity__System_Prompt.txt",
     "company": "Perplexity",
     "product_label": "Perplexity — Latest System Prompt",
     "category": "Search / Research",
-    "reviewer": "xiangning-51",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -2907,12 +2800,11 @@
     "span_index_in_prompt": 79
   },
   {
-    "id": 171,
+    "id": 175,
     "prompt_id": "Perplexity__comet-browser-assistant.md",
     "company": "Perplexity",
     "product_label": "Perplexity-comet-browser-assistant-2025-07-09",
     "category": "Search / Research",
-    "reviewer": "Shenzhe",
     "dimension": "D5",
     "score": -1,
     "source": "human",
@@ -2924,12 +2816,11 @@
     "span_index_in_prompt": 3
   },
   {
-    "id": 172,
+    "id": 176,
     "prompt_id": "Perplexity__comet-browser-assistant.md",
     "company": "Perplexity",
     "product_label": "Perplexity-comet-browser-assistant-2025-07-09",
     "category": "Search / Research",
-    "reviewer": "Shenzhe",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -2941,12 +2832,11 @@
     "span_index_in_prompt": 18
   },
   {
-    "id": 173,
+    "id": 177,
     "prompt_id": "Perplexity__comet-browser-assistant.md",
     "company": "Perplexity",
     "product_label": "Perplexity-comet-browser-assistant-2025-07-09",
     "category": "Search / Research",
-    "reviewer": "Shenzhe",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -2958,12 +2848,11 @@
     "span_index_in_prompt": 22
   },
   {
-    "id": 174,
+    "id": 178,
     "prompt_id": "Poke__Poke_p1.txt",
     "company": "Poke",
     "product_label": "Poke AI — Prompt v1",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -2975,12 +2864,11 @@
     "span_index_in_prompt": 1
   },
   {
-    "id": 175,
+    "id": 179,
     "prompt_id": "Poke__Poke_p1.txt",
     "company": "Poke",
     "product_label": "Poke AI — Prompt v1",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D5",
     "score": -1,
     "source": "human",
@@ -2992,12 +2880,11 @@
     "span_index_in_prompt": 2
   },
   {
-    "id": 176,
+    "id": 180,
     "prompt_id": "Poke__Poke_p1.txt",
     "company": "Poke",
     "product_label": "Poke AI — Prompt v1",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D6",
     "score": -1,
     "source": "llm",
@@ -3009,12 +2896,11 @@
     "span_index_in_prompt": 3
   },
   {
-    "id": 177,
+    "id": 181,
     "prompt_id": "Poke__Poke_p1.txt",
     "company": "Poke",
     "product_label": "Poke AI — Prompt v1",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D4",
     "score": -1,
     "source": "llm",
@@ -3026,12 +2912,11 @@
     "span_index_in_prompt": 4
   },
   {
-    "id": 178,
+    "id": 182,
     "prompt_id": "Poke__Poke_p1.txt",
     "company": "Poke",
     "product_label": "Poke AI — Prompt v1",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D7",
     "score": -1,
     "source": "llm",
@@ -3043,12 +2928,11 @@
     "span_index_in_prompt": 5
   },
   {
-    "id": 179,
+    "id": 183,
     "prompt_id": "Poke__Poke_p1.txt",
     "company": "Poke",
     "product_label": "Poke AI — Prompt v1",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -3060,12 +2944,11 @@
     "span_index_in_prompt": 17
   },
   {
-    "id": 180,
+    "id": 184,
     "prompt_id": "Poke__Poke_p1.txt",
     "company": "Poke",
     "product_label": "Poke AI — Prompt v1",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -3077,12 +2960,11 @@
     "span_index_in_prompt": 18
   },
   {
-    "id": 181,
+    "id": 185,
     "prompt_id": "Poke__Poke_p1.txt",
     "company": "Poke",
     "product_label": "Poke AI — Prompt v1",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -3094,12 +2976,11 @@
     "span_index_in_prompt": 19
   },
   {
-    "id": 182,
+    "id": 186,
     "prompt_id": "Poke__Poke_p1.txt",
     "company": "Poke",
     "product_label": "Poke AI — Prompt v1",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -3111,12 +2992,11 @@
     "span_index_in_prompt": 25
   },
   {
-    "id": 183,
+    "id": 187,
     "prompt_id": "Poke__Poke_p1.txt",
     "company": "Poke",
     "product_label": "Poke AI — Prompt v1",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -3128,12 +3008,11 @@
     "span_index_in_prompt": 26
   },
   {
-    "id": 184,
+    "id": 188,
     "prompt_id": "Poke__Poke_p1.txt",
     "company": "Poke",
     "product_label": "Poke AI — Prompt v1",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -3145,12 +3024,11 @@
     "span_index_in_prompt": 27
   },
   {
-    "id": 185,
+    "id": 189,
     "prompt_id": "Poke__Poke_p1.txt",
     "company": "Poke",
     "product_label": "Poke AI — Prompt v1",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -3162,12 +3040,11 @@
     "span_index_in_prompt": 29
   },
   {
-    "id": 186,
+    "id": 190,
     "prompt_id": "Poke__Poke_p1.txt",
     "company": "Poke",
     "product_label": "Poke AI — Prompt v1",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -3179,12 +3056,11 @@
     "span_index_in_prompt": 30
   },
   {
-    "id": 187,
+    "id": 191,
     "prompt_id": "Poke__Poke_p1.txt",
     "company": "Poke",
     "product_label": "Poke AI — Prompt v1",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -3196,12 +3072,11 @@
     "span_index_in_prompt": 31
   },
   {
-    "id": 188,
+    "id": 192,
     "prompt_id": "Poke__Poke_p1.txt",
     "company": "Poke",
     "product_label": "Poke AI — Prompt v1",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -3213,12 +3088,11 @@
     "span_index_in_prompt": 36
   },
   {
-    "id": 189,
+    "id": 193,
     "prompt_id": "Poke__Poke_p1.txt",
     "company": "Poke",
     "product_label": "Poke AI — Prompt v1",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -3230,12 +3104,11 @@
     "span_index_in_prompt": 37
   },
   {
-    "id": 190,
+    "id": 194,
     "prompt_id": "Poke__Poke_p1.txt",
     "company": "Poke",
     "product_label": "Poke AI — Prompt v1",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -3247,12 +3120,11 @@
     "span_index_in_prompt": 38
   },
   {
-    "id": 191,
+    "id": 195,
     "prompt_id": "Poke__Poke_p3.txt",
     "company": "Poke",
     "product_label": "Poke-Poke p3-UnknownTime",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -3264,12 +3136,11 @@
     "span_index_in_prompt": 0
   },
   {
-    "id": 192,
+    "id": 196,
     "prompt_id": "Poke__Poke_p3.txt",
     "company": "Poke",
     "product_label": "Poke-Poke p3-UnknownTime",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D3",
     "score": -1,
     "source": "llm",
@@ -3281,12 +3152,11 @@
     "span_index_in_prompt": 1
   },
   {
-    "id": 193,
+    "id": 197,
     "prompt_id": "Poke__Poke_p3.txt",
     "company": "Poke",
     "product_label": "Poke-Poke p3-UnknownTime",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -3298,12 +3168,11 @@
     "span_index_in_prompt": 2
   },
   {
-    "id": 194,
+    "id": 198,
     "prompt_id": "Poke__Poke_p3.txt",
     "company": "Poke",
     "product_label": "Poke-Poke p3-UnknownTime",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -3315,12 +3184,11 @@
     "span_index_in_prompt": 3
   },
   {
-    "id": 195,
+    "id": 199,
     "prompt_id": "Poke__Poke_p3.txt",
     "company": "Poke",
     "product_label": "Poke-Poke p3-UnknownTime",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -3332,12 +3200,11 @@
     "span_index_in_prompt": 4
   },
   {
-    "id": 196,
+    "id": 200,
     "prompt_id": "Poke__Poke_p3.txt",
     "company": "Poke",
     "product_label": "Poke-Poke p3-UnknownTime",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D4",
     "score": -1,
     "source": "llm",
@@ -3349,12 +3216,11 @@
     "span_index_in_prompt": 6
   },
   {
-    "id": 197,
+    "id": 201,
     "prompt_id": "Poke__Poke_p3.txt",
     "company": "Poke",
     "product_label": "Poke-Poke p3-UnknownTime",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D6",
     "score": -1,
     "source": "llm",
@@ -3366,12 +3232,11 @@
     "span_index_in_prompt": 7
   },
   {
-    "id": 198,
+    "id": 202,
     "prompt_id": "Poke__Poke_p3.txt",
     "company": "Poke",
     "product_label": "Poke-Poke p3-UnknownTime",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D8",
     "score": -1,
     "source": "llm",
@@ -3383,12 +3248,11 @@
     "span_index_in_prompt": 9
   },
   {
-    "id": 199,
+    "id": 203,
     "prompt_id": "Poke__Poke_p3.txt",
     "company": "Poke",
     "product_label": "Poke-Poke p3-UnknownTime",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -3400,12 +3264,11 @@
     "span_index_in_prompt": 10
   },
   {
-    "id": 200,
+    "id": 204,
     "prompt_id": "Poke__Poke_p3.txt",
     "company": "Poke",
     "product_label": "Poke-Poke p3-UnknownTime",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D3",
     "score": -1,
     "source": "llm",
@@ -3417,12 +3280,11 @@
     "span_index_in_prompt": 11
   },
   {
-    "id": 201,
+    "id": 205,
     "prompt_id": "Poke__Poke_p3.txt",
     "company": "Poke",
     "product_label": "Poke-Poke p3-UnknownTime",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -3434,12 +3296,11 @@
     "span_index_in_prompt": 12
   },
   {
-    "id": 202,
+    "id": 206,
     "prompt_id": "Poke__Poke_p3.txt",
     "company": "Poke",
     "product_label": "Poke-Poke p3-UnknownTime",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D7",
     "score": -1,
     "source": "llm",
@@ -3451,12 +3312,11 @@
     "span_index_in_prompt": 15
   },
   {
-    "id": 203,
+    "id": 207,
     "prompt_id": "Poke__Poke_p3.txt",
     "company": "Poke",
     "product_label": "Poke-Poke p3-UnknownTime",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D3",
     "score": -1,
     "source": "llm",
@@ -3468,12 +3328,11 @@
     "span_index_in_prompt": 34
   },
   {
-    "id": 204,
+    "id": 208,
     "prompt_id": "Poke__Poke_p3.txt",
     "company": "Poke",
     "product_label": "Poke-Poke p3-UnknownTime",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D5",
     "score": -1,
     "source": "human",
@@ -3485,12 +3344,11 @@
     "span_index_in_prompt": 35
   },
   {
-    "id": 205,
+    "id": 209,
     "prompt_id": "Poke__Poke_p3.txt",
     "company": "Poke",
     "product_label": "Poke-Poke p3-UnknownTime",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -3502,12 +3360,11 @@
     "span_index_in_prompt": 36
   },
   {
-    "id": 206,
+    "id": 210,
     "prompt_id": "Poke__Poke_p3.txt",
     "company": "Poke",
     "product_label": "Poke-Poke p3-UnknownTime",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D3",
     "score": -1,
     "source": "llm",
@@ -3519,12 +3376,11 @@
     "span_index_in_prompt": 37
   },
   {
-    "id": 207,
+    "id": 211,
     "prompt_id": "Poke__Poke_p3.txt",
     "company": "Poke",
     "product_label": "Poke-Poke p3-UnknownTime",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -3536,12 +3392,11 @@
     "span_index_in_prompt": 38
   },
   {
-    "id": 208,
+    "id": 212,
     "prompt_id": "Poke__Poke_p3.txt",
     "company": "Poke",
     "product_label": "Poke-Poke p3-UnknownTime",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D8",
     "score": -1,
     "source": "llm",
@@ -3553,12 +3408,11 @@
     "span_index_in_prompt": 40
   },
   {
-    "id": 209,
+    "id": 213,
     "prompt_id": "Poke__Poke_p3.txt",
     "company": "Poke",
     "product_label": "Poke-Poke p3-UnknownTime",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D7",
     "score": -1,
     "source": "llm",
@@ -3570,12 +3424,11 @@
     "span_index_in_prompt": 41
   },
   {
-    "id": 210,
+    "id": 214,
     "prompt_id": "Poke__Poke_p4.txt",
     "company": "Poke",
     "product_label": "Poke-Poke p4-UnknownTime",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -3587,12 +3440,11 @@
     "span_index_in_prompt": 3
   },
   {
-    "id": 211,
+    "id": 215,
     "prompt_id": "Poke__Poke_p4.txt",
     "company": "Poke",
     "product_label": "Poke-Poke p4-UnknownTime",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D8",
     "score": -1,
     "source": "llm",
@@ -3604,12 +3456,11 @@
     "span_index_in_prompt": 4
   },
   {
-    "id": 212,
+    "id": 216,
     "prompt_id": "Poke__Poke_p4.txt",
     "company": "Poke",
     "product_label": "Poke-Poke p4-UnknownTime",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D8",
     "score": -1,
     "source": "llm",
@@ -3621,12 +3472,11 @@
     "span_index_in_prompt": 5
   },
   {
-    "id": 213,
+    "id": 217,
     "prompt_id": "Poke__Poke_p4.txt",
     "company": "Poke",
     "product_label": "Poke-Poke p4-UnknownTime",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -3638,12 +3488,11 @@
     "span_index_in_prompt": 7
   },
   {
-    "id": 214,
+    "id": 218,
     "prompt_id": "Poke__Poke_p4.txt",
     "company": "Poke",
     "product_label": "Poke-Poke p4-UnknownTime",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -3655,12 +3504,11 @@
     "span_index_in_prompt": 8
   },
   {
-    "id": 215,
+    "id": 219,
     "prompt_id": "Poke__Poke_p4.txt",
     "company": "Poke",
     "product_label": "Poke-Poke p4-UnknownTime",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -3672,12 +3520,11 @@
     "span_index_in_prompt": 13
   },
   {
-    "id": 216,
+    "id": 220,
     "prompt_id": "Poke__Poke_p4.txt",
     "company": "Poke",
     "product_label": "Poke-Poke p4-UnknownTime",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D3",
     "score": -1,
     "source": "llm",
@@ -3689,12 +3536,11 @@
     "span_index_in_prompt": 14
   },
   {
-    "id": 217,
+    "id": 221,
     "prompt_id": "Poke__Poke_p4.txt",
     "company": "Poke",
     "product_label": "Poke-Poke p4-UnknownTime",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -3706,12 +3552,11 @@
     "span_index_in_prompt": 15
   },
   {
-    "id": 218,
+    "id": 222,
     "prompt_id": "Poke__Poke_p4.txt",
     "company": "Poke",
     "product_label": "Poke-Poke p4-UnknownTime",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D7",
     "score": -1,
     "source": "llm",
@@ -3723,12 +3568,11 @@
     "span_index_in_prompt": 16
   },
   {
-    "id": 219,
+    "id": 223,
     "prompt_id": "Poke__Poke_p4.txt",
     "company": "Poke",
     "product_label": "Poke-Poke p4-UnknownTime",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -3740,12 +3584,11 @@
     "span_index_in_prompt": 17
   },
   {
-    "id": 220,
+    "id": 224,
     "prompt_id": "Poke__Poke_p4.txt",
     "company": "Poke",
     "product_label": "Poke-Poke p4-UnknownTime",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D8",
     "score": -1,
     "source": "llm",
@@ -3757,12 +3600,11 @@
     "span_index_in_prompt": 22
   },
   {
-    "id": 221,
+    "id": 225,
     "prompt_id": "Poke__Poke_p4.txt",
     "company": "Poke",
     "product_label": "Poke-Poke p4-UnknownTime",
     "category": "Social AI",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -3774,12 +3616,11 @@
     "span_index_in_prompt": 23
   },
   {
-    "id": 222,
+    "id": 226,
     "prompt_id": "Poke__Poke_p6.txt",
     "company": "Poke",
     "product_label": "Poke AI — Prompt v6",
     "category": "Social AI",
-    "reviewer": "Xiangning",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -3791,12 +3632,11 @@
     "span_index_in_prompt": 0
   },
   {
-    "id": 223,
+    "id": 227,
     "prompt_id": "Poke__Poke_p6.txt",
     "company": "Poke",
     "product_label": "Poke AI — Prompt v6",
     "category": "Social AI",
-    "reviewer": "Xiangning",
     "dimension": "D3",
     "score": -1,
     "source": "llm",
@@ -3808,12 +3648,11 @@
     "span_index_in_prompt": 1
   },
   {
-    "id": 224,
+    "id": 228,
     "prompt_id": "Poke__Poke_p6.txt",
     "company": "Poke",
     "product_label": "Poke AI — Prompt v6",
     "category": "Social AI",
-    "reviewer": "Xiangning",
     "dimension": "D3",
     "score": -1,
     "source": "llm",
@@ -3825,12 +3664,11 @@
     "span_index_in_prompt": 2
   },
   {
-    "id": 225,
+    "id": 229,
     "prompt_id": "Poke__Poke_p6.txt",
     "company": "Poke",
     "product_label": "Poke AI — Prompt v6",
     "category": "Social AI",
-    "reviewer": "Xiangning",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -3842,12 +3680,11 @@
     "span_index_in_prompt": 3
   },
   {
-    "id": 226,
+    "id": 230,
     "prompt_id": "Poke__Poke_p6.txt",
     "company": "Poke",
     "product_label": "Poke AI — Prompt v6",
     "category": "Social AI",
-    "reviewer": "Xiangning",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -3859,12 +3696,11 @@
     "span_index_in_prompt": 4
   },
   {
-    "id": 227,
+    "id": 231,
     "prompt_id": "Poke__Poke_p6.txt",
     "company": "Poke",
     "product_label": "Poke AI — Prompt v6",
     "category": "Social AI",
-    "reviewer": "Xiangning",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -3876,12 +3712,11 @@
     "span_index_in_prompt": 5
   },
   {
-    "id": 228,
+    "id": 232,
     "prompt_id": "Poke__Poke_p6.txt",
     "company": "Poke",
     "product_label": "Poke AI — Prompt v6",
     "category": "Social AI",
-    "reviewer": "Xiangning",
     "dimension": "D4",
     "score": -1,
     "source": "llm",
@@ -3893,12 +3728,11 @@
     "span_index_in_prompt": 6
   },
   {
-    "id": 229,
+    "id": 233,
     "prompt_id": "Poke__Poke_p6.txt",
     "company": "Poke",
     "product_label": "Poke AI — Prompt v6",
     "category": "Social AI",
-    "reviewer": "Xiangning",
     "dimension": "D7",
     "score": -1,
     "source": "llm",
@@ -3910,12 +3744,11 @@
     "span_index_in_prompt": 7
   },
   {
-    "id": 230,
+    "id": 234,
     "prompt_id": "Qwen__20251027-Qwen3-VL-235B-A22B.md",
     "company": "Qwen",
     "product_label": "Qwen-Qwen3 VL 235B A22B-2025-10-27",
     "category": "Chat / General",
-    "reviewer": "xiangning",
     "dimension": "D6",
     "score": -1,
     "source": "llm",
@@ -3927,12 +3760,11 @@
     "span_index_in_prompt": 19
   },
   {
-    "id": 231,
+    "id": 235,
     "prompt_id": "Qwen__20251027-Qwen3-VL-235B-A22B.md",
     "company": "Qwen",
     "product_label": "Qwen-Qwen3 VL 235B A22B-2025-10-27",
     "category": "Chat / General",
-    "reviewer": "xiangning",
     "dimension": "D6",
     "score": -1,
     "source": "llm",
@@ -3944,12 +3776,11 @@
     "span_index_in_prompt": 20
   },
   {
-    "id": 232,
+    "id": 236,
     "prompt_id": "Venice__Venice.md",
     "company": "Venice",
     "product_label": "Venice-official-product-2024-07-24",
     "category": "Privacy / Uncensored",
-    "reviewer": "xiangning",
     "dimension": "D8",
     "score": -1,
     "source": "llm",
@@ -3961,12 +3792,11 @@
     "span_index_in_prompt": 0
   },
   {
-    "id": 233,
+    "id": 237,
     "prompt_id": "Venice__Venice.md",
     "company": "Venice",
     "product_label": "Venice-official-product-2024-07-24",
     "category": "Privacy / Uncensored",
-    "reviewer": "xiangning",
     "dimension": "D8",
     "score": -1,
     "source": "llm",
@@ -3978,12 +3808,11 @@
     "span_index_in_prompt": 1
   },
   {
-    "id": 234,
+    "id": 238,
     "prompt_id": "Venice__Venice.md",
     "company": "Venice",
     "product_label": "Venice-official-product-2024-07-24",
     "category": "Privacy / Uncensored",
-    "reviewer": "xiangning",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -3995,12 +3824,11 @@
     "span_index_in_prompt": 4
   },
   {
-    "id": 235,
+    "id": 239,
     "prompt_id": "Vercel__2025-08-11-prompt.md",
     "company": "Vercel",
     "product_label": "Vercel v0 (Aug 2025)",
     "category": "Web Development",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -4012,12 +3840,11 @@
     "span_index_in_prompt": 1
   },
   {
-    "id": 236,
+    "id": 240,
     "prompt_id": "Vercel__2025-08-11-prompt.md",
     "company": "Vercel",
     "product_label": "Vercel v0 (Aug 2025)",
     "category": "Web Development",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -4029,12 +3856,11 @@
     "span_index_in_prompt": 16
   },
   {
-    "id": 237,
+    "id": 241,
     "prompt_id": "Vercel__2025-08-11-prompt.md",
     "company": "Vercel",
     "product_label": "Vercel v0 (Aug 2025)",
     "category": "Web Development",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -4046,12 +3872,11 @@
     "span_index_in_prompt": 17
   },
   {
-    "id": 238,
+    "id": 242,
     "prompt_id": "Vercel__2025-08-11-prompt.md",
     "company": "Vercel",
     "product_label": "Vercel v0 (Aug 2025)",
     "category": "Web Development",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -4063,12 +3888,11 @@
     "span_index_in_prompt": 28
   },
   {
-    "id": 239,
+    "id": 243,
     "prompt_id": "Warp__Prompt.txt",
     "company": "Warp",
     "product_label": "Warp Terminal — Agent Mode",
     "category": "Productivity / DevOps",
-    "reviewer": "Xiangning",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -4080,12 +3904,11 @@
     "span_index_in_prompt": 5
   },
   {
-    "id": 240,
+    "id": 244,
     "prompt_id": "Windsurf__system-2025-04-20.md",
     "company": "Windsurf",
     "product_label": "Windsurf-system-2025-04-20-2025-04-20",
     "category": "Code Editor / IDE",
-    "reviewer": "xiangning",
     "dimension": "D3",
     "score": -1,
     "source": "llm",
@@ -4097,12 +3920,11 @@
     "span_index_in_prompt": 6
   },
   {
-    "id": 241,
+    "id": 245,
     "prompt_id": "Windsurf__system-2025-04-20.md",
     "company": "Windsurf",
     "product_label": "Windsurf-system-2025-04-20-2025-04-20",
     "category": "Code Editor / IDE",
-    "reviewer": "xiangning",
     "dimension": "D3",
     "score": -1,
     "source": "llm",
@@ -4114,12 +3936,11 @@
     "span_index_in_prompt": 7
   },
   {
-    "id": 242,
+    "id": 246,
     "prompt_id": "xAI__20231214-Grok.md",
     "company": "xAI",
     "product_label": "Grok (Dec 2023)",
     "category": "Chat / General",
-    "reviewer": "Xiangning",
     "dimension": "D6",
     "score": -1,
     "source": "llm",
@@ -4131,12 +3952,11 @@
     "span_index_in_prompt": 1
   },
   {
-    "id": 243,
+    "id": 247,
     "prompt_id": "xAI__20231214-Grok.md",
     "company": "xAI",
     "product_label": "Grok (Dec 2023)",
     "category": "Chat / General",
-    "reviewer": "Xiangning",
     "dimension": "D7",
     "score": -1,
     "source": "llm",
@@ -4148,12 +3968,11 @@
     "span_index_in_prompt": 2
   },
   {
-    "id": 244,
+    "id": 248,
     "prompt_id": "xAI__20231214-Grok.md",
     "company": "xAI",
     "product_label": "Grok (Dec 2023)",
     "category": "Chat / General",
-    "reviewer": "Xiangning",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -4165,12 +3984,11 @@
     "span_index_in_prompt": 4
   },
   {
-    "id": 245,
+    "id": 249,
     "prompt_id": "xAI__20231214-Grok.md",
     "company": "xAI",
     "product_label": "Grok (Dec 2023)",
     "category": "Chat / General",
-    "reviewer": "Xiangning",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -4182,12 +4000,11 @@
     "span_index_in_prompt": 5
   },
   {
-    "id": 246,
+    "id": 250,
     "prompt_id": "xAI__20231214-Grok.md",
     "company": "xAI",
     "product_label": "Grok (Dec 2023)",
     "category": "Chat / General",
-    "reviewer": "Xiangning",
     "dimension": "D6",
     "score": -1,
     "source": "llm",
@@ -4199,12 +4016,11 @@
     "span_index_in_prompt": 6
   },
   {
-    "id": 247,
+    "id": 251,
     "prompt_id": "xAI__20231214-Grok.md",
     "company": "xAI",
     "product_label": "Grok (Dec 2023)",
     "category": "Chat / General",
-    "reviewer": "Xiangning",
     "dimension": "D7",
     "score": -1,
     "source": "llm",
@@ -4216,12 +4032,11 @@
     "span_index_in_prompt": 7
   },
   {
-    "id": 248,
+    "id": 252,
     "prompt_id": "xAI__20231214-Grok.md",
     "company": "xAI",
     "product_label": "Grok (Dec 2023)",
     "category": "Chat / General",
-    "reviewer": "Xiangning",
     "dimension": "D8",
     "score": -1,
     "source": "llm",
@@ -4233,12 +4048,11 @@
     "span_index_in_prompt": 8
   },
   {
-    "id": 249,
+    "id": 253,
     "prompt_id": "xAI__20240821-Grok2.md",
     "company": "xAI",
     "product_label": "xAI-Grok2-2024-08-21",
     "category": "Chat / General",
-    "reviewer": "Shenzhe",
     "dimension": "D6",
     "score": -1,
     "source": "llm",
@@ -4250,12 +4064,11 @@
     "span_index_in_prompt": 1
   },
   {
-    "id": 250,
+    "id": 254,
     "prompt_id": "xAI__20240821-Grok2.md",
     "company": "xAI",
     "product_label": "xAI-Grok2-2024-08-21",
     "category": "Chat / General",
-    "reviewer": "Shenzhe",
     "dimension": "D7",
     "score": -1,
     "source": "llm",
@@ -4267,12 +4080,11 @@
     "span_index_in_prompt": 2
   },
   {
-    "id": 251,
+    "id": 255,
     "prompt_id": "xAI__20240821-Grok2.md",
     "company": "xAI",
     "product_label": "xAI-Grok2-2024-08-21",
     "category": "Chat / General",
-    "reviewer": "Shenzhe",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -4284,12 +4096,11 @@
     "span_index_in_prompt": 3
   },
   {
-    "id": 252,
+    "id": 256,
     "prompt_id": "xAI__20240821-Grok2.md",
     "company": "xAI",
     "product_label": "xAI-Grok2-2024-08-21",
     "category": "Chat / General",
-    "reviewer": "Shenzhe",
     "dimension": "D6",
     "score": -1,
     "source": "llm",
@@ -4301,12 +4112,11 @@
     "span_index_in_prompt": 7
   },
   {
-    "id": 253,
+    "id": 257,
     "prompt_id": "xAI__20240821-Grok2.md",
     "company": "xAI",
     "product_label": "xAI-Grok2-2024-08-21",
     "category": "Chat / General",
-    "reviewer": "Shenzhe",
     "dimension": "D7",
     "score": -1,
     "source": "llm",
@@ -4318,12 +4128,11 @@
     "span_index_in_prompt": 8
   },
   {
-    "id": 254,
+    "id": 258,
     "prompt_id": "xAI__20240821-Grok2.md",
     "company": "xAI",
     "product_label": "xAI-Grok2-2024-08-21",
     "category": "Chat / General",
-    "reviewer": "Shenzhe",
     "dimension": "D8",
     "score": -1,
     "source": "llm",
@@ -4335,12 +4144,11 @@
     "span_index_in_prompt": 9
   },
   {
-    "id": 255,
+    "id": 259,
     "prompt_id": "xAI__20251027-Grok4.md",
     "company": "xAI",
     "product_label": "Grok 4 (Oct 2025)",
     "category": "Chat / General",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D3",
     "score": -1,
     "source": "llm",
@@ -4352,12 +4160,11 @@
     "span_index_in_prompt": 1
   },
   {
-    "id": 256,
+    "id": 260,
     "prompt_id": "xAI__20251027-Grok4.md",
     "company": "xAI",
     "product_label": "Grok 4 (Oct 2025)",
     "category": "Chat / General",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
@@ -4369,12 +4176,11 @@
     "span_index_in_prompt": 9
   },
   {
-    "id": 257,
+    "id": 261,
     "prompt_id": "xAI__grok-4.2.md",
     "company": "xAI",
     "product_label": "xAI-grok-4.2-UnknownTime",
     "category": "Chat / General",
-    "reviewer": "Shenzhe",
     "dimension": "D1",
     "score": -1,
     "source": "llm",
@@ -4386,12 +4192,11 @@
     "span_index_in_prompt": 0
   },
   {
-    "id": 258,
+    "id": 262,
     "prompt_id": "xAI__grok-4.2.md",
     "company": "xAI",
     "product_label": "xAI-grok-4.2-UnknownTime",
     "category": "Chat / General",
-    "reviewer": "Shenzhe",
     "dimension": "D6",
     "score": -1,
     "source": "llm",
@@ -4403,12 +4208,11 @@
     "span_index_in_prompt": 11
   },
   {
-    "id": 259,
+    "id": 263,
     "prompt_id": "xAI__grok-4.2.md",
     "company": "xAI",
     "product_label": "xAI-grok-4.2-UnknownTime",
     "category": "Chat / General",
-    "reviewer": "Shenzhe",
     "dimension": "D7",
     "score": -1,
     "source": "llm",
@@ -4420,12 +4224,11 @@
     "span_index_in_prompt": 12
   },
   {
-    "id": 260,
+    "id": 264,
     "prompt_id": "xAI__grok-4.2.md",
     "company": "xAI",
     "product_label": "xAI-grok-4.2-UnknownTime",
     "category": "Chat / General",
-    "reviewer": "Shenzhe",
     "dimension": "D6",
     "score": -1,
     "source": "llm",
@@ -4437,12 +4240,11 @@
     "span_index_in_prompt": 14
   },
   {
-    "id": 261,
+    "id": 265,
     "prompt_id": "xAI__grok-4.2.md",
     "company": "xAI",
     "product_label": "xAI-grok-4.2-UnknownTime",
     "category": "Chat / General",
-    "reviewer": "Shenzhe",
     "dimension": "D8",
     "score": -1,
     "source": "llm",
@@ -4454,12 +4256,11 @@
     "span_index_in_prompt": 15
   },
   {
-    "id": 262,
+    "id": 266,
     "prompt_id": "xAI__grok.com-post-new-safety-instructions.md",
     "company": "xAI",
     "product_label": "xAI-grok.com-post-new-safety-instructions-2026-01-10",
     "category": "Chat / General",
-    "reviewer": "Shenzhe",
     "dimension": "D6",
     "score": -1,
     "source": "llm",
@@ -4471,12 +4272,11 @@
     "span_index_in_prompt": 7
   },
   {
-    "id": 263,
+    "id": 267,
     "prompt_id": "xAI__grok.com-post-new-safety-instructions.md",
     "company": "xAI",
     "product_label": "xAI-grok.com-post-new-safety-instructions-2026-01-10",
     "category": "Chat / General",
-    "reviewer": "Shenzhe",
     "dimension": "D7",
     "score": -1,
     "source": "llm",
@@ -4488,12 +4288,11 @@
     "span_index_in_prompt": 8
   },
   {
-    "id": 264,
+    "id": 268,
     "prompt_id": "xAI__grok.com-post-new-safety-instructions.md",
     "company": "xAI",
     "product_label": "xAI-grok.com-post-new-safety-instructions-2026-01-10",
     "category": "Chat / General",
-    "reviewer": "Shenzhe",
     "dimension": "D6",
     "score": -1,
     "source": "llm",
@@ -4505,12 +4304,11 @@
     "span_index_in_prompt": 12
   },
   {
-    "id": 265,
+    "id": 269,
     "prompt_id": "xAI__grok.com-post-new-safety-instructions.md",
     "company": "xAI",
     "product_label": "xAI-grok.com-post-new-safety-instructions-2026-01-10",
     "category": "Chat / General",
-    "reviewer": "Shenzhe",
     "dimension": "D7",
     "score": -1,
     "source": "llm",
@@ -4522,12 +4320,11 @@
     "span_index_in_prompt": 13
   },
   {
-    "id": 266,
+    "id": 270,
     "prompt_id": "xAI__grok3_official0330_p1.j2",
     "company": "xAI",
     "product_label": "xAI-grok3 official0330 p1-2025-05-16",
     "category": "Chat / General",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D3",
     "score": -1,
     "source": "llm",
@@ -4539,12 +4336,11 @@
     "span_index_in_prompt": 3
   },
   {
-    "id": 267,
+    "id": 271,
     "prompt_id": "xAI__grok3_official0330_p1.j2",
     "company": "xAI",
     "product_label": "xAI-grok3 official0330 p1-2025-05-16",
     "category": "Chat / General",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D5",
     "score": -1,
     "source": "llm",
@@ -4556,12 +4352,11 @@
     "span_index_in_prompt": 4
   },
   {
-    "id": 268,
+    "id": 272,
     "prompt_id": "xAI__grok3_official0330_p1.j2",
     "company": "xAI",
     "product_label": "xAI-grok3 official0330 p1-2025-05-16",
     "category": "Chat / General",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D6",
     "score": -1,
     "source": "human",
@@ -4573,12 +4368,11 @@
     "span_index_in_prompt": 6
   },
   {
-    "id": 269,
+    "id": 273,
     "prompt_id": "xAI__grok3_official0330_p1.j2",
     "company": "xAI",
     "product_label": "xAI-grok3 official0330 p1-2025-05-16",
     "category": "Chat / General",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D6",
     "score": -1,
     "source": "llm",
@@ -4590,12 +4384,11 @@
     "span_index_in_prompt": 7
   },
   {
-    "id": 270,
+    "id": 274,
     "prompt_id": "xAI__grok3_official0330_p1.j2",
     "company": "xAI",
     "product_label": "xAI-grok3 official0330 p1-2025-05-16",
     "category": "Chat / General",
-    "reviewer": "Jiaxin Pei",
     "dimension": "D2",
     "score": -1,
     "source": "llm",
