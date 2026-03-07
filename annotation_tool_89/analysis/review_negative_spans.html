@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Negative Span Review Tool</title>
+<title>Annotation Review Tool</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f5; color: #1a1a1a; }
@@ -14,6 +14,12 @@
 
   .progress-bar { width: 200px; height: 8px; background: #333; border-radius: 4px; overflow: hidden; }
   .progress-fill { height: 100%; background: #4ade80; transition: width 0.3s; }
+
+  .tabs { display: flex; gap: 0; background: #fff; border-bottom: 2px solid #e0e0e0; }
+  .tab { padding: 10px 24px; cursor: pointer; font-size: 14px; font-weight: 500; color: #666; border-bottom: 3px solid transparent; margin-bottom: -2px; }
+  .tab.active { color: #1a1a2e; border-bottom-color: #1a1a2e; }
+  .tab .tab-count { background: #e0e0e0; color: #333; padding: 1px 8px; border-radius: 10px; font-size: 12px; margin-left: 6px; }
+  .tab.active .tab-count { background: #1a1a2e; color: #fff; }
 
   .stats { display: flex; gap: 16px; padding: 12px 24px; background: #fff; border-bottom: 1px solid #e0e0e0; font-size: 13px; flex-wrap: wrap; }
   .stat { display: flex; align-items: center; gap: 4px; }
@@ -29,18 +35,16 @@
   .filter-group select { padding: 4px 8px; border: 1px solid #d0d0d0; border-radius: 4px; font-size: 13px; }
   .search-box { padding: 4px 8px; border: 1px solid #d0d0d0; border-radius: 4px; font-size: 13px; width: 180px; }
 
-  .view-toggle { margin-left: auto; display: flex; gap: 4px; }
-  .view-btn { padding: 4px 12px; border: 1px solid #d0d0d0; background: #fff; border-radius: 4px; cursor: pointer; font-size: 13px; }
-  .view-btn.active { background: #1a1a2e; color: #fff; border-color: #1a1a2e; }
+  .filter-status-btns { display: flex; gap: 4px; }
+  .filter-status-btn { padding: 3px 10px; border: 1px solid #d0d0d0; border-radius: 4px; background: #fff; cursor: pointer; font-size: 12px; }
+  .filter-status-btn.active { background: #1a1a2e; color: #fff; border-color: #1a1a2e; }
 
   .main { padding: 16px 24px; }
 
-  /* Card view */
-  .card-view .card { background: #fff; border-radius: 8px; border: 1px solid #e0e0e0; margin-bottom: 12px; overflow: hidden; transition: border-color 0.2s; }
+  .card { background: #fff; border-radius: 8px; border: 1px solid #e0e0e0; margin-bottom: 12px; overflow: hidden; }
   .card.status-agree { border-left: 4px solid #4ade80; }
   .card.status-disagree { border-left: 4px solid #f87171; }
   .card.status-discuss { border-left: 4px solid #fbbf24; }
-  .card.status-skip { border-left: 4px solid #94a3b8; }
 
   .card-header { display: flex; justify-content: space-between; align-items: flex-start; padding: 12px 16px; background: #fafafa; border-bottom: 1px solid #f0f0f0; }
   .card-meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
@@ -48,7 +52,7 @@
   .badge-dim { background: #e0e7ff; color: #3730a3; }
   .badge-company { background: #fce7f3; color: #9d174d; }
   .badge-cat { background: #ecfdf5; color: #065f46; }
-  .badge-reviewer { background: #f3e8ff; color: #6b21a8; }
+  .badge-type { background: #fef3c7; color: #92400e; }
   .card-id { font-size: 12px; color: #999; font-weight: 500; }
 
   .card-body { padding: 16px; }
@@ -65,67 +69,56 @@
   .btn-agree.selected { background: #4ade80; }
   .btn-disagree.selected { background: #f87171; }
   .btn-discuss.selected { background: #fbbf24; color: #1a1a1a; }
+  .btn-pick-a.selected { background: #3b82f6; }
+  .btn-pick-b.selected { background: #8b5cf6; }
   .review-comment { flex: 1; margin-left: 8px; padding: 5px 8px; border: 1px solid #d0d0d0; border-radius: 4px; font-size: 13px; }
 
-  /* Table view */
-  .table-view { overflow-x: auto; }
-  .table-view table { width: 100%; border-collapse: collapse; font-size: 13px; background: #fff; }
-  .table-view th { background: #f8f8f8; padding: 8px 10px; text-align: left; border-bottom: 2px solid #e0e0e0; font-weight: 600; position: sticky; top: 0; }
-  .table-view td { padding: 8px 10px; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
-  .table-view tr:hover { background: #f8f9fa; }
-  .table-view .text-cell { max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .table-view .note-cell { max-width: 250px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .table-view .status-cell select { padding: 2px 4px; font-size: 12px; border-radius: 4px; }
+  .conflict-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 10px; }
+  .conflict-side { border: 1px solid #e0e0e0; border-radius: 6px; padding: 12px; }
+  .conflict-side-a { border-left: 3px solid #3b82f6; }
+  .conflict-side-b { border-left: 3px solid #8b5cf6; }
+  .conflict-label { font-size: 12px; font-weight: 600; margin-bottom: 6px; }
+  .conflict-label-a { color: #3b82f6; }
+  .conflict-label-b { color: #8b5cf6; }
+  .conflict-score { display: inline-block; padding: 1px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; }
+  .score-pos { background: #dcfce7; color: #166534; }
+  .score-neg { background: #fee2e2; color: #991b1b; }
+  .conflict-text { font-size: 13px; line-height: 1.5; margin-top: 6px; color: #333; }
+  .conflict-note { font-size: 12px; color: #666; margin-top: 6px; }
+  .sim-badge { background: #f0f0f0; color: #555; padding: 2px 8px; border-radius: 10px; font-size: 11px; }
 
   .export-btn { padding: 6px 16px; background: #2563eb; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 500; }
   .export-btn:hover { background: #1d4ed8; }
 
-  .nav-btns { display: flex; gap: 8px; }
-  .nav-btn { padding: 4px 12px; background: #e0e0e0; border: none; border-radius: 4px; cursor: pointer; font-size: 13px; }
-  .nav-btn:hover { background: #d0d0d0; }
-
   .keyboard-hint { font-size: 11px; color: #999; padding: 4px 24px; background: #fff; border-bottom: 1px solid #f0f0f0; }
   kbd { background: #e8e8e8; padding: 1px 5px; border-radius: 3px; font-size: 11px; border: 1px solid #ccc; }
-
-  .dim-legend { font-size: 12px; color: #666; padding: 8px 24px; background: #fff; border-bottom: 1px solid #e0e0e0; display: flex; flex-wrap: wrap; gap: 12px; }
-  .dim-legend span { white-space: nowrap; }
-
-  .filter-status-btns { display: flex; gap: 4px; }
-  .filter-status-btn { padding: 3px 10px; border: 1px solid #d0d0d0; border-radius: 4px; background: #fff; cursor: pointer; font-size: 12px; }
-  .filter-status-btn.active { background: #1a1a2e; color: #fff; border-color: #1a1a2e; }
 </style>
 </head>
 <body>
 
 <div class="header">
-  <h1>Negative Span Review (score = -1)</h1>
+  <h1>Annotation Review Tool</h1>
   <div class="header-right">
-    <span id="progressText" style="font-size:13px;">0 / 270</span>
+    <span id="progressText" style="font-size:13px;">0 / 0</span>
     <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
     <button class="export-btn" onclick="exportResults()">Export JSON</button>
     <button class="export-btn" style="background:#059669;" onclick="exportCSV()">Export CSV</button>
   </div>
 </div>
 
-<div class="dim-legend">
-  <span><b>D1</b> Identity Transparency</span>
-  <span><b>D2</b> Truthfulness</span>
-  <span><b>D3</b> Privacy</span>
-  <span><b>D4</b> Tool Safety</span>
-  <span><b>D5</b> User Agency</span>
-  <span><b>D6</b> Unsafe Requests</span>
-  <span><b>D7</b> Harm Prevention</span>
-  <span><b>D8</b> Fairness</span>
+<div class="tabs">
+  <div class="tab active" id="tabNeg" onclick="switchTab('neg')">Negative Spans <span class="tab-count" id="tabNegCount">0</span></div>
+  <div class="tab" id="tabConflict" onclick="switchTab('conflict')">Cross-Version Conflicts <span class="tab-count" id="tabConflictCount">0</span></div>
 </div>
 
 <div class="stats" id="statsBar">
   <div class="stat"><div class="dot dot-agree"></div><span id="countAgree">Agree: 0</span></div>
   <div class="stat"><div class="dot dot-disagree"></div><span id="countDisagree">Disagree: 0</span></div>
   <div class="stat"><div class="dot dot-discuss"></div><span id="countDiscuss">Discuss: 0</span></div>
-  <div class="stat"><div class="dot dot-skip"></div><span id="countSkip">Unreviewed: 270</span></div>
+  <div class="stat"><div class="dot dot-skip"></div><span id="countSkip">Unreviewed: 0</span></div>
 </div>
 
-<div class="controls-bar">
+<div class="controls-bar" id="controlsBar">
   <div class="filter-group">
     <label>Dimension:</label>
     <select id="filterDim" onchange="applyFilters()">
@@ -145,79 +138,79 @@
     <select id="filterCompany" onchange="applyFilters()"></select>
   </div>
   <div class="filter-group">
-    <label>Reviewer:</label>
-    <select id="filterReviewer" onchange="applyFilters()"></select>
-  </div>
-  <div class="filter-group">
     <label>Status:</label>
     <div class="filter-status-btns">
-      <button class="filter-status-btn active" data-status="" onclick="setStatusFilter(this, '')">All</button>
-      <button class="filter-status-btn" data-status="unreviewed" onclick="setStatusFilter(this, 'unreviewed')">Unreviewed</button>
-      <button class="filter-status-btn" data-status="agree" onclick="setStatusFilter(this, 'agree')">Agree</button>
-      <button class="filter-status-btn" data-status="disagree" onclick="setStatusFilter(this, 'disagree')">Disagree</button>
-      <button class="filter-status-btn" data-status="discuss" onclick="setStatusFilter(this, 'discuss')">Discuss</button>
+      <button class="filter-status-btn active" onclick="setStatusFilter(this, '')">All</button>
+      <button class="filter-status-btn" onclick="setStatusFilter(this, 'unreviewed')">Unreviewed</button>
+      <button class="filter-status-btn" onclick="setStatusFilter(this, 'agree')">Agree</button>
+      <button class="filter-status-btn" onclick="setStatusFilter(this, 'disagree')">Disagree</button>
+      <button class="filter-status-btn" onclick="setStatusFilter(this, 'discuss')">Discuss</button>
     </div>
   </div>
-  <input type="text" class="search-box" id="searchBox" placeholder="Search text/note..." oninput="applyFilters()">
-  <div class="view-toggle">
-    <button class="view-btn active" id="btnCardView" onclick="setView('card')">Cards</button>
-    <button class="view-btn" id="btnTableView" onclick="setView('table')">Table</button>
-  </div>
+  <input type="text" class="search-box" id="searchBox" placeholder="Search text..." oninput="applyFilters()">
 </div>
 
 <div class="keyboard-hint">
-  Keyboard: <kbd>A</kbd> Agree &nbsp; <kbd>D</kbd> Disagree &nbsp; <kbd>W</kbd> Discuss &nbsp; <kbd>→</kbd> Next &nbsp; <kbd>←</kbd> Prev &nbsp; <kbd>E</kbd> Export
+  Keyboard: <kbd>A</kbd> Agree / Pick A &nbsp; <kbd>D</kbd> Disagree / Pick B &nbsp; <kbd>W</kbd> Discuss &nbsp; <kbd>→</kbd> Next &nbsp; <kbd>←</kbd> Prev &nbsp; <kbd>E</kbd> Export
 </div>
 
 <div class="main" id="mainContent"></div>
 
 <script>
 const DIM_NAMES = {
-  D1: 'Identity Transparency',
-  D2: 'Truthfulness & Info Integrity',
-  D3: 'Privacy & Data Protection',
-  D4: 'Tool/Action Safety',
-  D5: 'User Agency & Manipulation',
-  D6: 'Unsafe Request Handling',
-  D7: 'Harm Prevention & User Safety',
-  D8: 'Fairness, Inclusion & Neutrality',
+  D1: 'Identity Transparency', D2: 'Truthfulness & Info Integrity',
+  D3: 'Privacy & Data Protection', D4: 'Tool/Action Safety',
+  D5: 'User Agency & Manipulation', D6: 'Unsafe Request Handling',
+  D7: 'Harm Prevention & User Safety', D8: 'Fairness, Inclusion & Neutrality',
 };
 function dimLabel(d) { return DIM_NAMES[d] ? d + ' — ' + DIM_NAMES[d] : d; }
 
-let allSpans = [];
+let negSpans = [], conflicts = [];
 let filtered = [];
 let reviews = {};
-let currentView = 'card';
+let activeTab = 'neg';
 let statusFilter = '';
-let focusedCardIdx = 0;
+let focusedIdx = 0;
 
 async function loadData() {
   try {
-    const resp = await fetch('negative_spans_review.json');
-    allSpans = await resp.json();
+    const [negResp, confResp] = await Promise.all([
+      fetch('negative_spans_review.json'),
+      fetch('cross_version_conflicts.json'),
+    ]);
+    negSpans = await negResp.json();
+    const confData = await confResp.json();
+    conflicts = (confData.conflicts || confData).map((c, i) => ({ ...c, _id: 'conf_' + i }));
   } catch(e) {
-    document.getElementById('mainContent').innerHTML = '<p style="padding:20px;color:red;">Cannot load negative_spans_review.json. Make sure this HTML is served from the same directory (use a local server like <code>python3 -m http.server 8080</code>).</p>';
+    document.getElementById('mainContent').innerHTML = '<p style="padding:20px;color:red;">Cannot load data files. Run <code>./review.sh</code> from the analysis directory.</p>';
     return;
   }
 
-  const saved = localStorage.getItem('neg_span_reviews');
-  if (saved) {
-    try { reviews = JSON.parse(saved); } catch(e) {}
-  }
+  const saved = localStorage.getItem('review_tool_data_v2');
+  if (saved) { try { reviews = JSON.parse(saved); } catch(e) {} }
+
+  document.getElementById('tabNegCount').textContent = negSpans.length;
+  document.getElementById('tabConflictCount').textContent = conflicts.length;
 
   populateFilters();
   applyFilters();
 }
 
 function populateFilters() {
-  const companies = [...new Set(allSpans.map(s => s.company))].sort();
-  const reviewers = [...new Set(allSpans.map(s => s.reviewer))].sort();
+  const items = activeTab === 'neg' ? negSpans : conflicts;
+  const companies = [...new Set(items.map(s => s.company))].sort();
+  const sel = document.getElementById('filterCompany');
+  sel.innerHTML = '<option value="">All</option>' + companies.map(c => `<option value="${c}">${c}</option>`).join('');
+}
 
-  const compSel = document.getElementById('filterCompany');
-  compSel.innerHTML = '<option value="">All</option>' + companies.map(c => `<option value="${c}">${c}</option>`).join('');
-
-  const revSel = document.getElementById('filterReviewer');
-  revSel.innerHTML = '<option value="">All</option>' + reviewers.map(r => `<option value="${r}">${r}</option>`).join('');
+function switchTab(tab) {
+  activeTab = tab;
+  document.getElementById('tabNeg').classList.toggle('active', tab === 'neg');
+  document.getElementById('tabConflict').classList.toggle('active', tab === 'conflict');
+  populateFilters();
+  statusFilter = '';
+  document.querySelectorAll('.filter-status-btn').forEach((b, i) => b.classList.toggle('active', i === 0));
+  applyFilters();
 }
 
 function setStatusFilter(btn, status) {
@@ -227,246 +220,220 @@ function setStatusFilter(btn, status) {
   applyFilters();
 }
 
+function getItemId(item) { return item._id !== undefined ? item._id : item.id; }
+function getReview(item) { return reviews[getItemId(item)] || {}; }
+
 function applyFilters() {
   const dim = document.getElementById('filterDim').value;
   const company = document.getElementById('filterCompany').value;
-  const reviewer = document.getElementById('filterReviewer').value;
   const search = document.getElementById('searchBox').value.toLowerCase();
+  const items = activeTab === 'neg' ? negSpans : conflicts;
 
-  filtered = allSpans.filter(s => {
+  filtered = items.filter(s => {
     if (dim && s.dimension !== dim) return false;
     if (company && s.company !== company) return false;
-    if (reviewer && s.reviewer !== reviewer) return false;
-    if (search && !s.text.toLowerCase().includes(search) && !s.note.toLowerCase().includes(search) && !s.product_label.toLowerCase().includes(search)) return false;
+    if (search) {
+      const haystack = activeTab === 'neg'
+        ? (s.text + ' ' + (s.note || '') + ' ' + s.product_label).toLowerCase()
+        : (s.text_a + ' ' + s.text_b + ' ' + s.prompt_a + ' ' + s.prompt_b).toLowerCase();
+      if (!haystack.includes(search)) return false;
+    }
     if (statusFilter) {
-      const st = reviews[s.id]?.status || 'unreviewed';
+      const st = getReview(s).status || 'unreviewed';
       if (statusFilter !== st) return false;
     }
     return true;
   });
 
-  focusedCardIdx = 0;
+  focusedIdx = 0;
   render();
   updateStats();
 }
 
 function render() {
-  if (currentView === 'card') renderCards();
-  else renderTable();
+  if (activeTab === 'neg') renderNegCards();
+  else renderConflictCards();
 }
 
-function renderCards() {
+function renderNegCards() {
   const container = document.getElementById('mainContent');
-  if (filtered.length === 0) {
-    container.innerHTML = '<p style="padding:20px;color:#666;">No spans match the current filters.</p>';
-    return;
-  }
+  if (!filtered.length) { container.innerHTML = '<p style="padding:20px;color:#666;">No items match filters.</p>'; return; }
 
-  container.className = 'main card-view';
   container.innerHTML = `<div style="font-size:13px;color:#666;margin-bottom:12px;">Showing ${filtered.length} spans</div>` +
     filtered.map((s, i) => {
-      const r = reviews[s.id] || {};
+      const r = getReview(s);
       const st = r.status || '';
-      return `<div class="card ${st ? 'status-' + st : ''}" id="card-${i}" data-idx="${i}">
+      return `<div class="card ${st ? 'status-' + st : ''}" id="card-${i}">
         <div class="card-header">
           <div class="card-meta">
             <span class="badge badge-dim">${dimLabel(s.dimension)}</span>
             <span class="badge badge-company">${s.company}</span>
             <span class="badge badge-cat">${s.category}</span>
-            <span class="badge badge-reviewer">${s.reviewer}</span>
-            ${s.source === 'human' ? '<span class="badge" style="background:#fef3c7;color:#92400e;">human-added</span>' : ''}
+            ${s.source === 'human' ? '<span class="badge badge-type">human-added</span>' : ''}
             ${s.merged_from_count > 1 ? '<span class="badge" style="background:#dbeafe;color:#1e40af;">merged×' + s.merged_from_count + '</span>' : ''}
           </div>
-          <span class="card-id">#${s.id + 1}/${allSpans.length}</span>
+          <span class="card-id">#${i + 1}/${filtered.length}</span>
         </div>
         <div class="card-body">
           <div class="card-product">${s.product_label}</div>
-          <div class="card-text">${escHtml(s.text)}</div>
-          ${s.note ? `<div class="card-note" id="note-${s.id}">${escHtml(s.note)}</div>
-          ${s.note.length > 200 ? `<div class="note-toggle" onclick="toggleNote(${s.id})">Show more</div>` : ''}` : '<div style="font-size:12px;color:#aaa;">No note</div>'}
+          <div class="card-text">${esc(s.text)}</div>
+          ${s.note ? `<div class="card-note" id="note-${s.id}">${esc(s.note)}</div>
+          ${s.note.length > 200 ? `<div class="note-toggle" onclick="toggleNote('${s.id}')">Show more</div>` : ''}` : ''}
         </div>
         <div class="card-actions">
-          <button class="action-btn btn-agree ${st === 'agree' ? 'selected' : ''}" onclick="setStatus(${s.id}, 'agree', ${i})">✓ Agree</button>
-          <button class="action-btn btn-disagree ${st === 'disagree' ? 'selected' : ''}" onclick="setStatus(${s.id}, 'disagree', ${i})">✗ Disagree</button>
-          <button class="action-btn btn-discuss ${st === 'discuss' ? 'selected' : ''}" onclick="setStatus(${s.id}, 'discuss', ${i})">? Discuss</button>
-          <input class="review-comment" placeholder="Comment (optional)" value="${escAttr(r.comment || '')}" onchange="setComment(${s.id}, this.value)">
+          <button class="action-btn btn-agree ${st==='agree'?'selected':''}" onclick="setStatus('${getItemId(s)}','agree',${i})">✓ Agree</button>
+          <button class="action-btn btn-disagree ${st==='disagree'?'selected':''}" onclick="setStatus('${getItemId(s)}','disagree',${i})">✗ Disagree</button>
+          <button class="action-btn btn-discuss ${st==='discuss'?'selected':''}" onclick="setStatus('${getItemId(s)}','discuss',${i})">? Discuss</button>
+          <input class="review-comment" placeholder="Comment (optional)" value="${escA(r.comment||'')}" onchange="setComment('${getItemId(s)}',this.value)">
         </div>
       </div>`;
     }).join('');
 }
 
-function renderTable() {
+function renderConflictCards() {
   const container = document.getElementById('mainContent');
-  container.className = 'main table-view';
-  if (filtered.length === 0) {
-    container.innerHTML = '<p style="padding:20px;color:#666;">No spans match the current filters.</p>';
-    return;
+  if (!filtered.length) { container.innerHTML = '<p style="padding:20px;color:#666;">No conflicts match filters.</p>'; return; }
+
+  container.innerHTML = `<div style="font-size:13px;color:#666;margin-bottom:12px;">Showing ${filtered.length} conflicts</div>` +
+    filtered.map((c, i) => {
+      const r = getReview(c);
+      const st = r.status || '';
+      return `<div class="card ${st ? 'status-' + st : ''}" id="card-${i}">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="badge badge-dim">${dimLabel(c.dimension)}</span>
+            <span class="badge badge-company">${c.company}</span>
+            <span class="sim-badge">similarity: ${c.similarity}</span>
+          </div>
+          <span class="card-id">#${i + 1}/${filtered.length}</span>
+        </div>
+        <div class="card-body">
+          <div class="conflict-pair">
+            <div class="conflict-side conflict-side-a">
+              <div class="conflict-label conflict-label-a">Version A: ${esc(c.prompt_a)}</div>
+              <span class="conflict-score ${c.score_a > 0 ? 'score-pos' : 'score-neg'}">score: ${c.score_a > 0 ? '+1' : '-1'}</span>
+              <div class="conflict-text">${esc(c.text_a)}</div>
+              ${c.note_a ? `<div class="conflict-note">${esc(c.note_a)}</div>` : ''}
+            </div>
+            <div class="conflict-side conflict-side-b">
+              <div class="conflict-label conflict-label-b">Version B: ${esc(c.prompt_b)}</div>
+              <span class="conflict-score ${c.score_b > 0 ? 'score-pos' : 'score-neg'}">score: ${c.score_b > 0 ? '+1' : '-1'}</span>
+              <div class="conflict-text">${esc(c.text_b)}</div>
+              ${c.note_b ? `<div class="conflict-note">${esc(c.note_b)}</div>` : ''}
+            </div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="action-btn btn-pick-a ${st==='agree'?'selected':''}" onclick="setStatus('${getItemId(c)}','agree',${i})">A is correct (${c.score_a > 0 ? '+1' : '-1'})</button>
+          <button class="action-btn btn-pick-b ${st==='disagree'?'selected':''}" onclick="setStatus('${getItemId(c)}','disagree',${i})">B is correct (${c.score_b > 0 ? '+1' : '-1'})</button>
+          <button class="action-btn btn-discuss ${st==='discuss'?'selected':''}" onclick="setStatus('${getItemId(c)}','discuss',${i})">? Discuss</button>
+          <input class="review-comment" placeholder="Comment (optional)" value="${escA(r.comment||'')}" onchange="setComment('${getItemId(c)}',this.value)">
+        </div>
+      </div>`;
+    }).join('');
+}
+
+function setStatus(id, status, idx) {
+  if (!reviews[id]) reviews[id] = {};
+  reviews[id].status = status;
+  focusedIdx = idx;
+  save(); render(); updateStats();
+  if (idx + 1 < filtered.length) {
+    document.getElementById('card-' + (idx + 1))?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    focusedIdx = idx + 1;
   }
-
-  container.innerHTML = `<div style="font-size:13px;color:#666;margin-bottom:8px;">Showing ${filtered.length} spans</div>
-    <table>
-      <thead><tr>
-        <th>#</th><th>Company</th><th>Product</th><th>Dim</th><th>Text</th><th>Note</th><th>Reviewer</th><th>Status</th><th>Comment</th>
-      </tr></thead>
-      <tbody>${filtered.map((s, i) => {
-        const r = reviews[s.id] || {};
-        return `<tr>
-          <td>${s.id + 1}</td>
-          <td>${s.company}</td>
-          <td style="white-space:nowrap;">${s.product_label}</td>
-          <td style="white-space:nowrap;">${dimLabel(s.dimension)}</td>
-          <td class="text-cell" title="${escAttr(s.text)}">${escHtml(s.text.slice(0, 80))}${s.text.length > 80 ? '...' : ''}</td>
-          <td class="note-cell" title="${escAttr(s.note)}">${escHtml(s.note.slice(0, 60))}${s.note.length > 60 ? '...' : ''}</td>
-          <td>${s.reviewer}</td>
-          <td class="status-cell">
-            <select onchange="setStatus(${s.id}, this.value, ${i})">
-              <option value="" ${!r.status ? 'selected' : ''}>--</option>
-              <option value="agree" ${r.status === 'agree' ? 'selected' : ''}>Agree</option>
-              <option value="disagree" ${r.status === 'disagree' ? 'selected' : ''}>Disagree</option>
-              <option value="discuss" ${r.status === 'discuss' ? 'selected' : ''}>Discuss</option>
-            </select>
-          </td>
-          <td><input style="width:100px;font-size:12px;padding:2px 4px;border:1px solid #ddd;border-radius:3px;" value="${escAttr(r.comment || '')}" onchange="setComment(${s.id}, this.value)"></td>
-        </tr>`;
-      }).join('')}</tbody>
-    </table>`;
 }
 
-function setStatus(spanId, status, cardIdx) {
-  if (!reviews[spanId]) reviews[spanId] = {};
-  reviews[spanId].status = status;
-  focusedCardIdx = cardIdx;
-  save();
-  render();
-  updateStats();
-
-  if (currentView === 'card' && cardIdx + 1 < filtered.length) {
-    const next = document.getElementById('card-' + (cardIdx + 1));
-    if (next) next.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    focusedCardIdx = cardIdx + 1;
-  }
-}
-
-function setComment(spanId, comment) {
-  if (!reviews[spanId]) reviews[spanId] = {};
-  reviews[spanId].comment = comment;
+function setComment(id, comment) {
+  if (!reviews[id]) reviews[id] = {};
+  reviews[id].comment = comment;
   save();
 }
 
-function toggleNote(spanId) {
-  const el = document.getElementById('note-' + spanId);
+function toggleNote(id) {
+  const el = document.getElementById('note-' + id);
+  if (!el) return;
   el.classList.toggle('expanded');
   const toggle = el.nextElementSibling;
-  toggle.textContent = el.classList.contains('expanded') ? 'Show less' : 'Show more';
+  if (toggle) toggle.textContent = el.classList.contains('expanded') ? 'Show less' : 'Show more';
 }
 
-function save() {
-  localStorage.setItem('neg_span_reviews', JSON.stringify(reviews));
-}
+function save() { localStorage.setItem('review_tool_data_v2', JSON.stringify(reviews)); }
 
 function updateStats() {
+  const allItems = [...negSpans.map(s => getItemId(s)), ...conflicts.map(c => getItemId(c))];
   let agree = 0, disagree = 0, discuss = 0;
-  for (const r of Object.values(reviews)) {
-    if (r.status === 'agree') agree++;
-    else if (r.status === 'disagree') disagree++;
-    else if (r.status === 'discuss') discuss++;
+  for (const id of allItems) {
+    const st = reviews[id]?.status;
+    if (st === 'agree') agree++;
+    else if (st === 'disagree') disagree++;
+    else if (st === 'discuss') discuss++;
   }
   const reviewed = agree + disagree + discuss;
-  const unreviewed = allSpans.length - reviewed;
-  document.getElementById('countAgree').textContent = `Agree: ${agree}`;
-  document.getElementById('countDisagree').textContent = `Disagree: ${disagree}`;
+  const total = allItems.length;
+  document.getElementById('countAgree').textContent = `Agree/Pick A: ${agree}`;
+  document.getElementById('countDisagree').textContent = `Disagree/Pick B: ${disagree}`;
   document.getElementById('countDiscuss').textContent = `Discuss: ${discuss}`;
-  document.getElementById('countSkip').textContent = `Unreviewed: ${unreviewed}`;
-  document.getElementById('progressText').textContent = `${reviewed} / ${allSpans.length}`;
-  document.getElementById('progressFill').style.width = (reviewed / allSpans.length * 100) + '%';
-}
-
-function setView(view) {
-  currentView = view;
-  document.getElementById('btnCardView').classList.toggle('active', view === 'card');
-  document.getElementById('btnTableView').classList.toggle('active', view === 'table');
-  render();
+  document.getElementById('countSkip').textContent = `Unreviewed: ${total - reviewed}`;
+  document.getElementById('progressText').textContent = `${reviewed} / ${total}`;
+  document.getElementById('progressFill').style.width = (reviewed / total * 100) + '%';
 }
 
 function exportResults() {
-  const output = allSpans.map(s => ({
-    ...s,
-    review_status: reviews[s.id]?.status || 'unreviewed',
-    review_comment: reviews[s.id]?.comment || ''
-  }));
-
-  const blob = new Blob([JSON.stringify(output, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'negative_spans_reviewed_' + new Date().toISOString().slice(0, 10) + '.json';
-  a.click();
-  URL.revokeObjectURL(url);
-
-  showExportToast('JSON exported!');
+  const output = {
+    negative_spans: negSpans.map(s => ({ ...s, review_status: getReview(s).status || 'unreviewed', review_comment: getReview(s).comment || '' })),
+    cross_version_conflicts: conflicts.map(c => ({ ...c, review_status: getReview(c).status || 'unreviewed', review_comment: getReview(c).comment || '' })),
+  };
+  download(JSON.stringify(output, null, 2), 'review_results_' + today() + '.json', 'application/json');
+  toast('JSON exported!');
 }
 
 function exportCSV() {
-  const headers = ['id','company','product_label','dimension','dimension_name','score','reviewer','text','note','review_status','review_comment'];
-  const rows = allSpans.map(s => {
-    const r = reviews[s.id] || {};
-    return [
-      s.id + 1,
-      s.company,
-      s.product_label,
-      s.dimension,
-      DIM_NAMES[s.dimension] || '',
-      s.score,
-      s.reviewer,
-      '"' + s.text.replace(/"/g, '""').replace(/\n/g, ' ') + '"',
-      '"' + (s.note || '').replace(/"/g, '""').replace(/\n/g, ' ') + '"',
-      r.status || 'unreviewed',
-      '"' + (r.comment || '').replace(/"/g, '""') + '"',
-    ].join(',');
+  const h1 = ['type','id','company','product_label','dimension','dimension_name','score','text','note','review_status','review_comment'];
+  const rows = negSpans.map(s => {
+    const r = getReview(s);
+    return ['"negative"', s.id+1, q(s.company), q(s.product_label), s.dimension, q(DIM_NAMES[s.dimension]||''), s.score, q(s.text), q(s.note||''), r.status||'unreviewed', q(r.comment||'')].join(',');
+  });
+  const h2 = ['type','id','company','dimension','dimension_name','prompt_a','score_a','text_a','prompt_b','score_b','text_b','similarity','review_status','review_comment'];
+  const rows2 = conflicts.map((c, i) => {
+    const r = getReview(c);
+    return ['"conflict"', i+1, q(c.company), c.dimension, q(DIM_NAMES[c.dimension]||''), q(c.prompt_a), c.score_a, q(c.text_a), q(c.prompt_b), c.score_b, q(c.text_b), c.similarity, r.status||'unreviewed', q(r.comment||'')].join(',');
   });
 
-  const csv = headers.join(',') + '\n' + rows.join('\n');
-  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'negative_spans_reviewed_' + new Date().toISOString().slice(0, 10) + '.csv';
-  a.click();
-  URL.revokeObjectURL(url);
-
-  showExportToast('CSV exported!');
+  const csv = '--- NEGATIVE SPANS ---\n' + h1.join(',') + '\n' + rows.join('\n') + '\n\n--- CROSS-VERSION CONFLICTS ---\n' + h2.join(',') + '\n' + rows2.join('\n');
+  download(csv, 'review_results_' + today() + '.csv', 'text/csv;charset=utf-8;');
+  toast('CSV exported!');
 }
 
-function showExportToast(msg) {
-  const toast = document.createElement('div');
-  toast.textContent = msg;
-  toast.style.cssText = 'position:fixed;bottom:24px;right:24px;background:#1a1a2e;color:#fff;padding:10px 20px;border-radius:8px;font-size:14px;z-index:9999;';
-  document.body.appendChild(toast);
-  setTimeout(() => toast.remove(), 2000);
+function q(s) { return '"' + String(s).replace(/"/g, '""').replace(/\n/g, ' ') + '"'; }
+function today() { return new Date().toISOString().slice(0, 10); }
+function download(content, name, type) {
+  const blob = new Blob([content], { type });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; a.click();
 }
-
-function escHtml(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
-function escAttr(s) { return s.replace(/"/g, '&quot;').replace(/'/g, '&#39;'); }
+function toast(msg) {
+  const t = document.createElement('div');
+  t.textContent = msg;
+  t.style.cssText = 'position:fixed;bottom:24px;right:24px;background:#1a1a2e;color:#fff;padding:10px 20px;border-radius:8px;font-size:14px;z-index:9999;';
+  document.body.appendChild(t); setTimeout(() => t.remove(), 2000);
+}
+function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function escA(s) { return String(s).replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
 
 document.addEventListener('keydown', e => {
-  if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') return;
-  if (currentView !== 'card' || filtered.length === 0) return;
-
-  const span = filtered[focusedCardIdx];
-  if (!span) return;
-
-  if (e.key === 'a' || e.key === 'A') { setStatus(span.id, 'agree', focusedCardIdx); }
-  else if (e.key === 'd' || e.key === 'D') { setStatus(span.id, 'disagree', focusedCardIdx); }
-  else if (e.key === 'w' || e.key === 'W') { setStatus(span.id, 'discuss', focusedCardIdx); }
-  else if (e.key === 'ArrowRight' && focusedCardIdx < filtered.length - 1) {
-    focusedCardIdx++;
-    document.getElementById('card-' + focusedCardIdx)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
-  else if (e.key === 'ArrowLeft' && focusedCardIdx > 0) {
-    focusedCardIdx--;
-    document.getElementById('card-' + focusedCardIdx)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
-  else if (e.key === 'e' || e.key === 'E') { exportResults(); }
+  if (['INPUT','SELECT','TEXTAREA'].includes(e.target.tagName)) return;
+  if (!filtered.length) return;
+  const item = filtered[focusedIdx];
+  if (!item) return;
+  const id = getItemId(item);
+  if (e.key === 'a' || e.key === 'A') setStatus(id, 'agree', focusedIdx);
+  else if (e.key === 'd' || e.key === 'D') setStatus(id, 'disagree', focusedIdx);
+  else if (e.key === 'w' || e.key === 'W') setStatus(id, 'discuss', focusedIdx);
+  else if (e.key === 'ArrowRight' && focusedIdx < filtered.length - 1) {
+    focusedIdx++; document.getElementById('card-' + focusedIdx)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  } else if (e.key === 'ArrowLeft' && focusedIdx > 0) {
+    focusedIdx--; document.getElementById('card-' + focusedIdx)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  } else if (e.key === 'e' || e.key === 'E') exportResults();
 });
 
 loadData();
