@@ -251,17 +251,17 @@ function renderConf() {
           <tbody>${(c.annotations||[]).map(a=>`<tr><td>${esc(a.prompt)}</td><td><span class="badge bdim">${dl(a.dim)}</span></td><td><span class="${a.score>0?'spos':'sneg'}">${a.score>0?'+1':a.score}</span></td></tr>`).join('')}</tbody></table>
         </div>
         <div class="lpicker">
-          <div class="lpicker-title">Your decision — correct label for this text:</div>
+          <div class="lpicker-title">Your decision — correct labels for this text (click dim then score to add, click tag to remove):</div>
           <div class="lrow">
-            <span class="lrow-label">Dimension:</span>
-            ${['D1','D2','D3','D4','D5','D6','D7','D8'].map(d=>`<button class="dbtn ${fd===d?'pk':''}" onclick="pickDim('${rid(c)}','${d}',${i})" title="${DN[d]}">${d}</button>`).join('')}
+            <span class="lrow-label">Add label:</span>
+            ${['D1','D2','D3','D4','D5','D6','D7','D8'].map(d=>`<button class="dbtn ${r._pendingDim===d?'pk':''}" onclick="pendDim('${rid(c)}','${d}',${i})" title="${DN[d]}">${d}</button>`).join('')}
+            <button class="sbtn ${r._pendingScore===1?'pk-pos':''}" onclick="pendScore('${rid(c)}',1,${i})" style="margin-left:8px;">+1</button>
+            <button class="sbtn ${r._pendingScore===-1?'pk-neg':''}" onclick="pendScore('${rid(c)}',-1,${i})">-1</button>
           </div>
-          <div class="lrow">
-            <span class="lrow-label">Score:</span>
-            <button class="sbtn ${fs===1?'pk-pos':''}" onclick="pickScore('${rid(c)}',1,${i})">+1</button>
-            <button class="sbtn ${fs===-1?'pk-neg':''}" onclick="pickScore('${rid(c)}',-1,${i})">-1</button>
-            ${hasDec ? `<span class="decision-summary">→ ${fd} score=${fs>0?'+1':'-1'}</span>` : ''}
-          </div>
+          ${(r.final_labels&&r.final_labels.length) ? `<div class="lrow" style="margin-top:4px;">
+            <span class="lrow-label">Selected:</span>
+            ${r.final_labels.map((lb,li)=>`<span class="dbtn pk" style="cursor:pointer;" onclick="removeLabel('${rid(c)}',${li},${i})" title="Click to remove">${lb.dim} ${lb.score>0?'+1':'-1'} ✕</span>`).join(' ')}
+          </div>` : ''}
         </div>
         <div class="card-actions">
           <button class="abtn ${st==='agree'?'sel-g':''}" onclick="setSt('${rid(c)}','agree',${i})">✓ All OK</button>
@@ -272,16 +272,32 @@ function renderConf() {
     }).join('');
 }
 
-function pickDim(id,dim,idx) {
+function pendDim(id,dim,idx) {
   if (!reviews[id]) reviews[id]={};
-  reviews[id].final_dim = reviews[id].final_dim===dim ? '' : dim;
-  if (reviews[id].final_dim && reviews[id].final_score!==undefined) reviews[id].status='disagree';
+  reviews[id]._pendingDim = reviews[id]._pendingDim===dim ? '' : dim;
+  tryAddLabel(id,idx);
   save(); render();
 }
-function pickScore(id,score,idx) {
+function pendScore(id,score,idx) {
   if (!reviews[id]) reviews[id]={};
-  reviews[id].final_score = reviews[id].final_score===score ? undefined : score;
-  if (reviews[id].final_dim && reviews[id].final_score!==undefined) reviews[id].status='disagree';
+  reviews[id]._pendingScore = reviews[id]._pendingScore===score ? undefined : score;
+  tryAddLabel(id,idx);
+  save(); render(); updateStats();
+}
+function tryAddLabel(id,idx) {
+  const r = reviews[id];
+  if (r._pendingDim && r._pendingScore!==undefined) {
+    if (!r.final_labels) r.final_labels=[];
+    const exists = r.final_labels.some(l=>l.dim===r._pendingDim && l.score===r._pendingScore);
+    if (!exists) r.final_labels.push({dim:r._pendingDim, score:r._pendingScore});
+    r._pendingDim=''; r._pendingScore=undefined;
+    r.status='disagree';
+  }
+}
+function removeLabel(id,li,idx) {
+  if (!reviews[id]||!reviews[id].final_labels) return;
+  reviews[id].final_labels.splice(li,1);
+  if (!reviews[id].final_labels.length) reviews[id].status='';
   save(); render(); updateStats();
 }
 
@@ -308,14 +324,14 @@ function updateStats() {
 
 function doExport(fmt) {
   const neg = negSpans.map(s=>({...s, review_status:rv(s).status||'unreviewed', review_comment:rv(s).comment||''}));
-  const conf = confGroups.map(c=>{const r=rv(c); return {...c, review_status:r.status||'unreviewed', review_comment:r.comment||'', final_dim:r.final_dim||'', final_score:r.final_score!==undefined?r.final_score:''};});
+  const conf = confGroups.map(c=>{const r=rv(c); return {...c, review_status:r.status||'unreviewed', review_comment:r.comment||'', final_labels:r.final_labels||[]};});
   if (fmt==='json') {
     dl2(JSON.stringify({negative_spans:neg, cross_version_conflicts:conf},null,2), 'review_results_'+td()+'.json','application/json');
   } else {
     const h='type,company,product,dimension,score,text,note,review_status,review_comment\n';
     const rows=neg.map(s=>['"neg"',q(s.company),q(s.product_label),s.dimension,s.score,q(s.text),q(s.note||''),s.review_status,q(s.review_comment)].join(','));
-    const h2='\n\ntype,company,dims,has_score_conflict,overlap_text,num_annotations,review_status,final_dim,final_score,review_comment\n';
-    const rows2=conf.map(c=>['"conflict"',q(c.company),q((c.dims_involved||[]).join('+')),c.has_score_conflict,q(c.overlap_text||''),c.num_annotations,c.review_status,c.final_dim,c.final_score,q(c.review_comment)].join(','));
+    const h2='\n\ntype,company,dims,has_score_conflict,overlap_text,num_annotations,review_status,final_labels,review_comment\n';
+    const rows2=conf.map(c=>['"conflict"',q(c.company),q((c.dims_involved||[]).join('+')),c.has_score_conflict,q(c.overlap_text||''),c.num_annotations,c.review_status,q((c.final_labels||[]).map(l=>l.dim+'='+(l.score>0?'+1':'-1')).join('; ')),q(c.review_comment)].join(','));
     dl2(h+rows.join('\n')+h2+rows2.join('\n'), 'review_results_'+td()+'.csv','text/csv;charset=utf-8;');
   }
   toast(fmt.toUpperCase()+' exported!');

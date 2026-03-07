@@ -66,29 +66,32 @@ def apply_negative_reviews(merged, neg_reviews, log):
 
 def apply_conflict_decisions(merged, conf_reviews, log):
     """
-    For each conflict with final_dim + final_score:
+    For each conflict with final_labels (list of {dim, score}):
     find all spans across all same-company prompts containing the shared text,
-    and unify them to the decided label.
+    and replace their labels with the decided set.
+
+    For each matching span, if its current (dim, score) is NOT in the final_labels,
+    update it to the first matching final_label for that dim, or the first label overall.
     """
     unified = 0
     changed_spans = 0
 
     for cr in conf_reviews:
-        final_dim = cr.get("final_dim", "")
-        final_score = cr.get("final_score", "")
-        if not final_dim or final_score == "":
+        final_labels = cr.get("final_labels", [])
+        if not final_labels:
             continue
 
-        final_score = int(final_score)
         company = cr["company"]
         overlap_text = cr.get("overlap_text", "")
-
         if not overlap_text:
             continue
 
         unified += 1
-        log.append(f"\n  Unifying: [{company}] → {final_dim} score={'+1' if final_score > 0 else '-1'}")
+        labels_str = ", ".join(f"{l['dim']}={'+1' if l['score'] > 0 else '-1'}" for l in final_labels)
+        log.append(f"\n  Unifying: [{company}] → [{labels_str}]")
         log.append(f"    Text: \"{overlap_text[:100]}\"")
+
+        final_set = set((l["dim"], l["score"]) for l in final_labels)
 
         for pid, prompt in merged["prompts"].items():
             if prompt["company"] != company:
@@ -104,13 +107,22 @@ def apply_conflict_decisions(merged, conf_reviews, log):
                 old_dim = span["dimension"]
                 old_score = span.get("score")
 
-                if old_dim == final_dim and old_score == final_score:
+                if (old_dim, old_score) in final_set:
                     continue
 
-                span["dimension"] = final_dim
-                span["score"] = final_score
+                # Find best replacement: same dim if available, otherwise first label
+                replacement = None
+                for fl in final_labels:
+                    if fl["dim"] == old_dim:
+                        replacement = fl
+                        break
+                if not replacement:
+                    replacement = final_labels[0]
+
+                span["dimension"] = replacement["dim"]
+                span["score"] = replacement["score"]
                 changed_spans += 1
-                log.append(f"    Changed [{pid}]: {old_dim}(s={old_score}) → {final_dim}(s={final_score})")
+                log.append(f"    Changed [{pid}]: {old_dim}(s={old_score}) → {replacement['dim']}(s={replacement['score']})")
 
     return unified, changed_spans
 
@@ -160,7 +172,7 @@ def main():
     print(f"    discuss: {sum(1 for r in neg_reviews if r.get('review_status')=='discuss')}")
     print(f"    unreviewed: {sum(1 for r in neg_reviews if r.get('review_status','unreviewed')=='unreviewed')}")
     print(f"  Conflicts: {len(conf_reviews)}")
-    print(f"    with final decision: {sum(1 for r in conf_reviews if r.get('final_dim') and r.get('final_score','')!='')}")
+    print(f"    with final decision: {sum(1 for r in conf_reviews if r.get('final_labels'))}")
     print(f"    all ok: {sum(1 for r in conf_reviews if r.get('review_status')=='agree')}")
 
     merged = load_merged()
