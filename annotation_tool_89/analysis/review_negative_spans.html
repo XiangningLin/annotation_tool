@@ -146,16 +146,22 @@ const DN = {D1:'Identity Transparency',D2:'Truthfulness & Info Integrity',D3:'Pr
 const dl = d => DN[d] ? d+' — '+DN[d] : d;
 
 let negSpans=[], confGroups=[], filtered=[], reviews={}, tab='conf', stFilt='', fIdx=0;
+let _saveTimer = null;
 
 async function init() {
   try {
-    const [r1,r2] = await Promise.all([fetch('negative_spans_review.json'), fetch('shared_text_review.json')]);
+    const [r1,r2,r3] = await Promise.all([
+      fetch('review_data/negative_spans_review.json'),
+      fetch('review_data/shared_text_review.json'),
+      fetch('/api/neg_review_state'),
+    ]);
     negSpans = await r1.json();
     const raw = await r2.json();
     confGroups = (Array.isArray(raw) ? raw : raw.conflicts || []).map((c,i) => ({...c, _id: c._id || 'c'+i}));
-  } catch(e) { document.getElementById('main').innerHTML='<p style="padding:20px;color:red;">Cannot load data. Run ./review.sh</p>'; return; }
-  const sv = localStorage.getItem('review_v3');
-  if (sv) try { reviews=JSON.parse(sv); } catch(e) {}
+    reviews = await r3.json();
+  } catch(e) { document.getElementById('main').innerHTML='<p style="padding:20px;color:red;">Cannot load data. Make sure Flask app is running (python app.py → http://127.0.0.1:5009/review)</p>'; return; }
+  const restored = Object.keys(reviews).length;
+  if (restored > 0) console.log(`Loaded ${restored} review decisions from server`);
   document.getElementById('cntNeg').textContent = negSpans.length;
   document.getElementById('cntConf').textContent = confGroups.length;
   document.getElementById('tabConf').classList.add('active');
@@ -180,7 +186,7 @@ function switchTab(t) {
 
 function setStFilt(btn,s) { document.querySelectorAll('.fsbtn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); stFilt=s; applyFilters(); }
 
-function rid(item) { return item._id !== undefined ? item._id : item.id; }
+function rid(item) { return String(item._id !== undefined ? item._id : item.id); }
 function rv(item) { return reviews[rid(item)] || {}; }
 
 function applyFilters() {
@@ -303,12 +309,24 @@ function removeLabel(id,li,idx) {
 }
 
 function setSt(id,st,idx) {
-  if (!reviews[id]) reviews[id]={}; reviews[id].status=st; fIdx=idx; save(); render(); updateStats();
+  if (!reviews[id]) reviews[id]={}; reviews[id].status=st;
+  fIdx=idx; save(); render(); updateStats();
   if (idx+1<filtered.length) { document.getElementById('c'+(idx+1))?.scrollIntoView({behavior:'smooth',block:'center'}); fIdx=idx+1; }
 }
-function setCmt(id,c) { if (!reviews[id]) reviews[id]={}; reviews[id].comment=c; save(); }
+function setCmt(id,c) {
+  if (!reviews[id]) reviews[id]={}; reviews[id].comment=c; save();
+}
 function togN(id) { const e=document.getElementById(id); if(!e)return; e.classList.toggle('expanded'); const t=e.nextElementSibling; if(t&&t.classList.contains('ntoggle')) t.textContent=e.classList.contains('expanded')?'Show less':'Show more'; }
-function save() { localStorage.setItem('review_v3', JSON.stringify(reviews)); }
+function save() {
+  if (_saveTimer) clearTimeout(_saveTimer);
+  _saveTimer = setTimeout(() => {
+    fetch('/api/neg_review_state', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(reviews),
+    }).catch(e => console.warn('Save failed:', e));
+  }, 300);
+}
 
 function updateStats() {
   const all=[...negSpans.map(rid),...confGroups.map(rid)];
@@ -324,10 +342,17 @@ function updateStats() {
 }
 
 function doExport(fmt) {
-  const neg = negSpans.map(s=>({...s, review_status:rv(s).status||'unreviewed', review_comment:rv(s).comment||''}));
+  const neg = negSpans.map(s=>{const r=rv(s); return {...s, review_status:r.status||'unreviewed', review_comment:r.comment||''};});
   const conf = confGroups.map(c=>{const r=rv(c); return {...c, review_status:r.status||'unreviewed', review_comment:r.comment||'', final_labels:r.final_labels||[]};});
+  const reviewed = neg.filter(s=>s.review_status!=='unreviewed').length + conf.filter(c=>c.review_status!=='unreviewed').length;
+  const total = neg.length + conf.length;
   if (fmt==='json') {
-    dl2(JSON.stringify({negative_spans:neg, cross_version_conflicts:conf},null,2), 'review_results_'+td()+'.json','application/json');
+    const out = {
+      metadata: { exported_at: new Date().toISOString(), total_items: total, reviewed_items: reviewed, negative_spans_count: neg.length, conflicts_count: conf.length },
+      negative_spans: neg,
+      cross_version_conflicts: conf
+    };
+    dl2(JSON.stringify(out,null,2), 'review_results_'+td()+'.json','application/json');
   } else {
     const h='type,company,product,dimension,score,text,note,review_status,review_comment\n';
     const rows=neg.map(s=>['"neg"',q(s.company),q(s.product_label),s.dimension,s.score,q(s.text),q(s.note||''),s.review_status,q(s.review_comment)].join(','));
@@ -335,7 +360,7 @@ function doExport(fmt) {
     const rows2=conf.map(c=>['"conflict"',q(c.company),q((c.dims_involved||[]).join('+')),c.has_score_conflict,q(c.overlap_text||''),c.num_annotations,c.review_status,q((c.final_labels||[]).map(l=>l.dim+'='+(l.score>0?'+1':'-1')).join('; ')),q(c.review_comment)].join(','));
     dl2(h+rows.join('\n')+h2+rows2.join('\n'), 'review_results_'+td()+'.csv','text/csv;charset=utf-8;');
   }
-  toast(fmt.toUpperCase()+' exported!');
+  toast(`${fmt.toUpperCase()} exported! (${reviewed}/${total} reviewed)`);
 }
 function q(s){return '"'+String(s).replace(/"/g,'""').replace(/\n/g,' ')+'"';}
 function td(){return new Date().toISOString().slice(0,10);}
@@ -354,6 +379,11 @@ document.addEventListener('keydown',e=>{
   else if(e.key==='ArrowRight'&&fIdx<filtered.length-1){fIdx++;document.getElementById('c'+fIdx)?.scrollIntoView({behavior:'smooth',block:'center'});}
   else if(e.key==='ArrowLeft'&&fIdx>0){fIdx--;document.getElementById('c'+fIdx)?.scrollIntoView({behavior:'smooth',block:'center'});}
   else if(e.key==='e'||e.key==='E') doExport('json');
+});
+
+window.addEventListener('beforeunload', () => {
+  if (_saveTimer) clearTimeout(_saveTimer);
+  navigator.sendBeacon('/api/neg_review_state', new Blob([JSON.stringify(reviews)], {type:'application/json'}));
 });
 
 init();

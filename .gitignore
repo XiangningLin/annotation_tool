@@ -36,5 +36,8 @@ env/
 /outputs*
 training_tool/outputs/
 */review_state.json
+**/neg_review_state.json
+*_pre_unify_*.json
+*_pre_review_*.json
 annotation_tool_89/outputs/*
 annotation_tool_89/outputs/drafts/

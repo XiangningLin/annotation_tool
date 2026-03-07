@@ -16,7 +16,7 @@ from datetime import datetime
 from pathlib import Path
 from threading import Lock
 
-from flask import Flask, abort, jsonify, render_template, request
+from flask import Flask, abort, jsonify, render_template, request, send_from_directory
 
 BASE_DIR = Path(__file__).parent.parent
 DATA_DIR = BASE_DIR / "data"
@@ -28,6 +28,8 @@ REVIEW_STATE_FILE = Path(__file__).parent / "review_state.json"
 ANALYSIS_DIR = Path(__file__).parent / "outputs" / "final_result" / "analysis"
 NEED_REVIEW_FILE = ANALYSIS_DIR / "need_review_and_misc.json"
 MERGED_ANNOTATIONS_FILE = ANALYSIS_DIR / "merged_all_annotations.json"
+NEG_REVIEW_DIR = Path(__file__).parent / "analysis"
+NEG_REVIEW_STATE_FILE = NEG_REVIEW_DIR / "neg_review_state.json"
 LOCK = Lock()
 
 DIMENSIONS = [
@@ -615,6 +617,46 @@ def export_prompt():
             json.dump(export_data, f, ensure_ascii=False, indent=2)
 
     return jsonify({"status": "ok", "filename": filename})
+
+
+# ── Negative Span Review Tool ──────────────────────────────────────
+
+
+@app.get("/review")
+def review_page():
+    """Serve the negative-span review HTML."""
+    return send_from_directory(NEG_REVIEW_DIR, "review_negative_spans.html")
+
+
+@app.get("/review_data/<path:filename>")
+def review_data(filename: str):
+    """Serve JSON data files used by the review page."""
+    return send_from_directory(NEG_REVIEW_DIR, filename)
+
+
+@app.get("/api/neg_review_state")
+def get_neg_review_state():
+    """Load saved review decisions."""
+    if NEG_REVIEW_STATE_FILE.exists():
+        try:
+            with NEG_REVIEW_STATE_FILE.open("r", encoding="utf-8") as f:
+                return jsonify(json.load(f))
+        except (json.JSONDecodeError, OSError):
+            pass
+    return jsonify({})
+
+
+@app.post("/api/neg_review_state")
+def save_neg_review_state():
+    """Persist review decisions to disk."""
+    payload = request.get_json(force=True, silent=True) or {}
+    with LOCK:
+        try:
+            with NEG_REVIEW_STATE_FILE.open("w", encoding="utf-8") as f:
+                json.dump(payload, f, ensure_ascii=False, indent=2)
+        except OSError as e:
+            return jsonify({"status": "error", "message": str(e)}), 500
+    return jsonify({"status": "ok", "saved": len(payload)})
 
 
 if __name__ == "__main__":
