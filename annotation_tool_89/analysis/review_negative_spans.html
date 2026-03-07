@@ -122,6 +122,7 @@
     <select id="fType" onchange="applyFilters()">
       <option value="">All</option>
       <option value="score">Score Conflict</option>
+      <option value="missing">Missing Span</option>
       <option value="dim">Dim Difference</option>
     </select>
   </div>
@@ -188,7 +189,7 @@ function applyFilters() {
   filtered = items.filter(s => {
     if (dim) { if (tab==='neg' ? s.dimension!==dim : !(s.dims_involved||[]).includes(dim)) return false; }
     if (comp && s.company!==comp) return false;
-    if (tab==='conf') { const ct=document.getElementById('fType').value; if (ct==='score' && !s.has_score_conflict) return false; if (ct==='dim' && s.has_score_conflict) return false; }
+    if (tab==='conf') { const ct=document.getElementById('fType').value; if (ct && s.conflict_type!==({score:'score_conflict',missing:'missing_span',dim:'dim_only'}[ct]||'')) return false; }
     if (q) { const h = tab==='neg' ? (s.text+' '+(s.note||'')+' '+s.product_label).toLowerCase() : ((s.overlap_text||'')+' '+(s.annotations||[]).map(a=>a.prompt).join(' ')).toLowerCase(); if (!h.includes(q)) return false; }
     if (stFilt) { if ((rv(s).status||'unreviewed')!==stFilt) return false; }
     return true;
@@ -233,8 +234,8 @@ function renderConf() {
   el.innerHTML = `<div style="font-size:13px;color:#666;margin-bottom:12px;">${filtered.length} shared text groups</div>` +
     filtered.map((c,i) => {
       const r=rv(c), st=r.status||'';
-      const tl = c.has_score_conflict ? 'Score Conflict' : 'Dim Difference';
-      const tc = c.has_score_conflict ? 'background:#fee2e2;color:#991b1b;' : 'background:#e0e7ff;color:#3730a3;';
+      const typeMap = {score_conflict:['Score Conflict','background:#fee2e2;color:#991b1b;'], missing_span:['Missing Span','background:#fef3c7;color:#92400e;'], dim_only:['Dim Difference','background:#e0e7ff;color:#3730a3;']};
+      const [tl,tc] = typeMap[c.conflict_type] || ['Unknown',''];
       const fd = r.final_dim||'', fs = r.final_score;
       const hasDec = fd && fs!==undefined;
       return `<div class="card ${st?'st-'+st:''}" id="c${i}">
@@ -247,7 +248,7 @@ function renderConf() {
           <div class="spantext">${esc(c.overlap_text||'')}</div>
           <div style="font-size:12px;font-weight:600;color:#555;margin:8px 0 4px;">Annotations across versions:</div>
           <table class="ann-tbl"><thead><tr><th>Product Version</th><th>Dimension</th><th>Score</th></tr></thead>
-          <tbody>${(c.annotations||[]).map(a=>`<tr><td>${esc(a.prompt)}</td><td><span class="badge bdim">${dl(a.dim)}</span></td><td><span class="${a.score>0?'spos':'sneg'}">${a.score>0?'+1':a.score}</span></td></tr>`).join('')}</tbody></table>
+          <tbody>${(c.annotations||[]).map(a=>`<tr><td>${esc(a.prompt)}</td><td>${a.missing?'<span style="color:#999;font-style:italic;">(not annotated)</span>':'<span class="badge bdim">'+dl(a.dim)+'</span>'}</td><td>${a.missing?'<span style="color:#999;">—</span>':'<span class="'+(a.score>0?'spos':'sneg')+'">'+(a.score>0?'+1':a.score)+'</span>'}</td></tr>`).join('')}</tbody></table>
         </div>
         <div class="lpicker">
           <div class="lpicker-title">Your decision — correct labels for this text (click dim then score to add, click tag to remove):</div>
