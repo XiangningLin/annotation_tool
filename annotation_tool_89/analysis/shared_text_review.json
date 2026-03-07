@@ -1,103 +1,5 @@
 [
   {
-    "_id": "inc_7",
-    "company": "Anthropic",
-    "overlap_text": "Claude does not provide information that could be used to make chemical or biological or nuclear weapons, and does not write malicious code, including malware, vulnerability exploits, spoof websites, ransomware, viruses, election material, and so on. It does not do these things even if the person seems to have a good reason for asking for it. Claude steers away from malicious or harmful use cases for cyber. Claude refuses to write code or explain code that may be used maliciously; even if the user claims it is for educational purposes. When working on files, if they seem related to improving, explaining, or interacting with malware or any malicious code Claude MUST refuse. If the code seems malicious, Claude refuses to work on it or answer questions about it, even if the request does not seem malicious (for instance, just asking to explain or speed up the code). If the user asks Claude to describe a protocol that appears malicious or intended to harm others, Claude refuses to answer. If Claude encounters any of the above or any other malicious use, Claude does not take any actions and refuses the request.",
-    "overlap_len": 1122,
-    "annotations": [
-      {
-        "prompt": "Anthropic-Claude Sonnet4-2025-06-03",
-        "prompt_id": "Anthropic__20250603-Claude-Sonnet4.md",
-        "dim": "D6",
-        "score": 1
-      },
-      {
-        "prompt": "Anthropic-Claude Sonnet4-2025-06-03",
-        "prompt_id": "Anthropic__20250603-Claude-Sonnet4.md",
-        "dim": "D7",
-        "score": 1
-      },
-      {
-        "prompt": "Anthropic-Claude Sonnet4-2025-06-03",
-        "prompt_id": "Anthropic__20250603-Claude-Sonnet4.md",
-        "dim": "D4",
-        "score": 1
-      },
-      {
-        "prompt": "Anthropic-Claude Sonnet4-2025-06-03",
-        "prompt_id": "Anthropic__20250603-Claude-Sonnet4.md",
-        "dim": "D6",
-        "score": -1
-      },
-      {
-        "prompt": "Anthropic-Claude Sonnet4.5-2025-10-28",
-        "prompt_id": "Anthropic__20251028-Claude-Sonnet4.5.md",
-        "dim": "(none)",
-        "score": 0,
-        "missing": true
-      },
-      {
-        "prompt": "Anthropic-Claude for Chrome-2025-12-29",
-        "prompt_id": "Anthropic__Prompt.txt",
-        "dim": "(none)",
-        "score": 0,
-        "missing": true
-      }
-    ],
-    "num_annotations": 6,
-    "num_versions": 3,
-    "dims_involved": [
-      "D4",
-      "D6",
-      "D7"
-    ],
-    "has_score_conflict": true,
-    "has_missing": true,
-    "conflict_type": "score_conflict"
-  },
-  {
-    "_id": "inc_5",
-    "company": "Anthropic",
-    "overlap_text": "Claude assumes the human is asking for something legal and legitimate if their message is ambiguous and could have a legal and legitimate interpretation.",
-    "overlap_len": 153,
-    "annotations": [
-      {
-        "prompt": "Claude 3.7 Sonnet (Feb 2025)",
-        "prompt_id": "Anthropic__20250225-Claude3.7-Sonnet.md",
-        "dim": "D5",
-        "score": 1
-      },
-      {
-        "prompt": "Anthropic-Claude Sonnet4-2025-06-03",
-        "prompt_id": "Anthropic__20250603-Claude-Sonnet4.md",
-        "dim": "D6",
-        "score": 1
-      },
-      {
-        "prompt": "Anthropic-Claude Sonnet4-2025-06-03",
-        "prompt_id": "Anthropic__20250603-Claude-Sonnet4.md",
-        "dim": "D7",
-        "score": 1
-      },
-      {
-        "prompt": "Anthropic-Claude Sonnet4-2025-06-03",
-        "prompt_id": "Anthropic__20250603-Claude-Sonnet4.md",
-        "dim": "D6",
-        "score": -1
-      }
-    ],
-    "num_annotations": 4,
-    "num_versions": 2,
-    "dims_involved": [
-      "D5",
-      "D6",
-      "D7"
-    ],
-    "has_score_conflict": true,
-    "has_missing": false,
-    "conflict_type": "score_conflict"
-  },
-  {
     "_id": "inc_49",
     "company": "OpenAI",
     "overlap_text": "- Lean toward NOT suggesting tasks. Only offer to remind the user about something if you're sure it would be helpful.",
@@ -145,7 +47,7 @@
     "conflict_type": "score_conflict"
   },
   {
-    "_id": "inc_75",
+    "_id": "inc_74",
     "company": "xAI",
     "overlap_text": "* Your knowledge is continuously updated - no strict knowledge cutoff.",
     "overlap_len": 70,
@@ -179,46 +81,109 @@
     "conflict_type": "score_conflict"
   },
   {
-    "_id": "inc_36",
+    "_id": "inc_7",
     "company": "Anthropic",
-    "overlap_text": "Claude should be cautious about sharing personal opinions on political topics where debate is ongoing. Claude doesn't need to deny that it has such opinions but can decline to share them out of a desire to not influence people or because it seems inappropriate, just as any person might if they were operating in a public or professional context. Claude can instead treats such requests as an opportunity to give a fair and accurate overview of existing positions.",
-    "overlap_len": 464,
+    "overlap_text": "Claude does not provide information that could be used to make chemical or biological or nuclear weapons, and does not write malicious code, including malware, vulnerability exploits, spoof websites, ransomware, viruses, election material, and so on. It does not do these things even if the person seems to have a good reason for asking for it. Claude steers away from malicious or harmful use cases for cyber. Claude refuses to write code or explain code that may be used maliciously; even if the user claims it is for educational purposes. When working on files, if they seem related to improving, explaining, or interacting with malware or any malicious code Claude MUST refuse. If the code seems malicious, Claude refuses to work on it or answer questions about it, even if the request does not seem malicious (for instance, just asking to explain or speed up the code). If the user asks Claude to describe a protocol that appears malicious or intended to harm others, Claude refuses to answer. If Claude encounters any of the above or any other malicious use, Claude does not take any actions and refuses the request.",
+    "overlap_len": 1122,
     "annotations": [
       {
-        "prompt": "Anthropic-Claude Opus 4.6-2025-05-14",
-        "prompt_id": "Anthropic__Claude_Opus_4.6.txt",
+        "prompt": "Anthropic-Claude Sonnet4-2025-06-03",
+        "prompt_id": "Anthropic__20250603-Claude-Sonnet4.md",
+        "dim": "D4",
+        "score": 1
+      },
+      {
+        "prompt": "Anthropic-Claude Sonnet4-2025-06-03",
+        "prompt_id": "Anthropic__20250603-Claude-Sonnet4.md",
+        "dim": "D6",
+        "score": 1
+      },
+      {
+        "prompt": "Anthropic-Claude Sonnet4-2025-06-03",
+        "prompt_id": "Anthropic__20250603-Claude-Sonnet4.md",
+        "dim": "D7",
+        "score": 1
+      },
+      {
+        "prompt": "Anthropic-Claude Sonnet4.5-2025-10-28",
+        "prompt_id": "Anthropic__20251028-Claude-Sonnet4.5.md",
+        "dim": "D7",
+        "score": 1
+      },
+      {
+        "prompt": "Anthropic-Claude Sonnet4.5-2025-10-28",
+        "prompt_id": "Anthropic__20251028-Claude-Sonnet4.5.md",
+        "dim": "D6",
+        "score": 1
+      },
+      {
+        "prompt": "Anthropic-Claude Sonnet4.5-2025-10-28",
+        "prompt_id": "Anthropic__20251028-Claude-Sonnet4.5.md",
+        "dim": "Misc",
+        "score": 0
+      },
+      {
+        "prompt": "Anthropic-Claude for Chrome-2025-12-29",
+        "prompt_id": "Anthropic__Prompt.txt",
         "dim": "(none)",
         "score": 0,
         "missing": true
-      },
-      {
-        "prompt": "Anthropic-claude-cowork-2025-11-01",
-        "prompt_id": "Anthropic__claude-cowork.md",
-        "dim": "D5",
-        "score": 1
       }
     ],
-    "num_annotations": 2,
-    "num_versions": 2,
+    "num_annotations": 7,
+    "num_versions": 3,
     "dims_involved": [
-      "D5"
+      "D4",
+      "D6",
+      "D7",
+      "Misc"
     ],
     "has_score_conflict": false,
     "has_missing": true,
     "conflict_type": "missing_span"
   },
   {
-    "_id": "inc_4",
+    "_id": "inc_17",
     "company": "Anthropic",
-    "overlap_text": "Claude cares deeply about child safety and is cautious about content involving minors, including creative or educational content that could be used to sexualize, groom, abuse, or otherwise harm children. A minor is defined as anyone under the age of 18 anywhere, or anyone over the age of 18 who is defined as a minor in their region.",
-    "overlap_len": 334,
+    "overlap_text": "If Claude notices signs that someone may unknowingly be experiencing mental health symptoms such as mania, psychosis, dissociation, or loss of attachment with reality, it should avoid reinforcing these beliefs. It should instead share its concerns explicitly and openly without either sugar coating them or being infantilizing, and can suggest the person speaks with a professional or trusted person for support. Claude remains vigilant for escalating detachment from reality even if the conversation begins with seemingly harmless thinking.",
+    "overlap_len": 541,
     "annotations": [
       {
-        "prompt": "Claude 3.7 Sonnet (Feb 2025)",
-        "prompt_id": "Anthropic__20250225-Claude3.7-Sonnet.md",
-        "dim": "D6",
+        "prompt": "Anthropic-Claude Sonnet4.5-2025-10-28",
+        "prompt_id": "Anthropic__20251028-Claude-Sonnet4.5.md",
+        "dim": "D5",
         "score": 1
       },
+      {
+        "prompt": "Anthropic-Claude Sonnet4.5-2025-10-28",
+        "prompt_id": "Anthropic__20251028-Claude-Sonnet4.5.md",
+        "dim": "Misc",
+        "score": 0
+      },
+      {
+        "prompt": "Anthropic-Claude for Chrome-2025-12-29",
+        "prompt_id": "Anthropic__Prompt.txt",
+        "dim": "(none)",
+        "score": 0,
+        "missing": true
+      }
+    ],
+    "num_annotations": 3,
+    "num_versions": 2,
+    "dims_involved": [
+      "D5",
+      "Misc"
+    ],
+    "has_score_conflict": false,
+    "has_missing": true,
+    "conflict_type": "missing_span"
+  },
+  {
+    "_id": "inc_3",
+    "company": "Anthropic",
+    "overlap_text": "Claude cares about people's wellbeing and avoids encouraging or facilitating self-destructive behaviors such as addiction, disordered or unhealthy approaches to eating or exercise, or highly negative self-talk or self-criticism, and avoids creating content that would support or reinforce self-destructive behavior even if they request this. In ambiguous cases, it tries to ensure the human is happy and is approaching things in a healthy way. Claude does not generate content that is not in the person's best interests even if asked to.",
+    "overlap_len": 537,
+    "annotations": [
       {
         "prompt": "Claude 3.7 Sonnet (Feb 2025)",
         "prompt_id": "Anthropic__20250225-Claude3.7-Sonnet.md",
@@ -235,9 +200,49 @@
       {
         "prompt": "Anthropic-Claude Sonnet4.5-2025-10-28",
         "prompt_id": "Anthropic__20251028-Claude-Sonnet4.5.md",
+        "dim": "D7",
+        "score": 1
+      },
+      {
+        "prompt": "Anthropic-Claude for Chrome-2025-12-29",
+        "prompt_id": "Anthropic__Prompt.txt",
+        "dim": "D7",
+        "score": 1
+      }
+    ],
+    "num_annotations": 4,
+    "num_versions": 4,
+    "dims_involved": [
+      "D7"
+    ],
+    "has_score_conflict": false,
+    "has_missing": true,
+    "conflict_type": "missing_span"
+  },
+  {
+    "_id": "inc_4",
+    "company": "Anthropic",
+    "overlap_text": "Claude cares deeply about child safety and is cautious about content involving minors, including creative or educational content that could be used to sexualize, groom, abuse, or otherwise harm children. A minor is defined as anyone under the age of 18 anywhere, or anyone over the age of 18 who is defined as a minor in their region.",
+    "overlap_len": 334,
+    "annotations": [
+      {
+        "prompt": "Claude 3.7 Sonnet (Feb 2025)",
+        "prompt_id": "Anthropic__20250225-Claude3.7-Sonnet.md",
+        "dim": "D7",
+        "score": 1
+      },
+      {
+        "prompt": "Anthropic-Claude Sonnet4-2025-06-03",
+        "prompt_id": "Anthropic__20250603-Claude-Sonnet4.md",
         "dim": "(none)",
         "score": 0,
         "missing": true
+      },
+      {
+        "prompt": "Anthropic-Claude Sonnet4.5-2025-10-28",
+        "prompt_id": "Anthropic__20251028-Claude-Sonnet4.5.md",
+        "dim": "D8",
+        "score": 1
       },
       {
         "prompt": "Anthropic-Claude Opus 4.6-2025-05-14",
@@ -266,11 +271,12 @@
         "missing": true
       }
     ],
-    "num_annotations": 8,
+    "num_annotations": 7,
     "num_versions": 6,
     "dims_involved": [
       "D6",
-      "D7"
+      "D7",
+      "D8"
     ],
     "has_score_conflict": false,
     "has_missing": true,
@@ -410,55 +416,20 @@
       {
         "prompt": "Anthropic-Claude Sonnet4.5-2025-10-28",
         "prompt_id": "Anthropic__20251028-Claude-Sonnet4.5.md",
-        "dim": "D8",
-        "score": 1
-      },
-      {
-        "prompt": "Anthropic-Claude Sonnet4.5-2025-10-28",
-        "prompt_id": "Anthropic__20251028-Claude-Sonnet4.5.md",
-        "dim": "D7",
-        "score": 1
-      },
-      {
-        "prompt": "Anthropic-Claude Sonnet4.5-2025-10-28",
-        "prompt_id": "Anthropic__20251028-Claude-Sonnet4.5.md",
-        "dim": "D6",
-        "score": 1
-      },
-      {
-        "prompt": "Anthropic-Claude Sonnet4.5-2025-10-28",
-        "prompt_id": "Anthropic__20251028-Claude-Sonnet4.5.md",
-        "dim": "Misc",
-        "score": 0
-      },
-      {
-        "prompt": "Anthropic-Claude Sonnet4.5-2025-10-28",
-        "prompt_id": "Anthropic__20251028-Claude-Sonnet4.5.md",
         "dim": "D2",
         "score": 1
       },
       {
         "prompt": "Anthropic-Claude Opus 4.6-2025-05-14",
         "prompt_id": "Anthropic__Claude_Opus_4.6.txt",
-        "dim": "D6",
-        "score": 1
-      },
-      {
-        "prompt": "Anthropic-Claude Opus 4.6-2025-05-14",
-        "prompt_id": "Anthropic__Claude_Opus_4.6.txt",
-        "dim": "D5",
-        "score": 1
+        "dim": "(none)",
+        "score": 0,
+        "missing": true
       },
       {
         "prompt": "Anthropic-Claude for Chrome-2025-12-29",
         "prompt_id": "Anthropic__Prompt.txt",
         "dim": "D8",
-        "score": 1
-      },
-      {
-        "prompt": "Anthropic-Claude for Chrome-2025-12-29",
-        "prompt_id": "Anthropic__Prompt.txt",
-        "dim": "D7",
         "score": 1
       },
       {
@@ -469,16 +440,14 @@
         "missing": true
       }
     ],
-    "num_annotations": 14,
+    "num_annotations": 8,
     "num_versions": 5,
     "dims_involved": [
       "D2",
       "D3",
-      "D5",
       "D6",
       "D7",
-      "D8",
-      "Misc"
+      "D8"
     ],
     "has_score_conflict": false,
     "has_missing": true,
@@ -609,6 +578,42 @@
     "num_versions": 2,
     "dims_involved": [
       "D2"
+    ],
+    "has_score_conflict": false,
+    "has_missing": true,
+    "conflict_type": "missing_span"
+  },
+  {
+    "_id": "inc_36",
+    "company": "Anthropic",
+    "overlap_text": "Claude should avoid being heavy-handed or repetitive when sharing its views, and should offer alternative perspectives where relevant in order to help the user navigate topics for themselves.",
+    "overlap_len": 191,
+    "annotations": [
+      {
+        "prompt": "Anthropic-Claude Opus 4.6-2025-05-14",
+        "prompt_id": "Anthropic__Claude_Opus_4.6.txt",
+        "dim": "(none)",
+        "score": 0,
+        "missing": true
+      },
+      {
+        "prompt": "Anthropic-claude-cowork-2025-11-01",
+        "prompt_id": "Anthropic__claude-cowork.md",
+        "dim": "D5",
+        "score": 1
+      },
+      {
+        "prompt": "Anthropic-claude-cowork-2025-11-01",
+        "prompt_id": "Anthropic__claude-cowork.md",
+        "dim": "D8",
+        "score": 1
+      }
+    ],
+    "num_annotations": 3,
+    "num_versions": 2,
+    "dims_involved": [
+      "D5",
+      "D8"
     ],
     "has_score_conflict": false,
     "has_missing": true,
@@ -823,50 +828,7 @@
     "conflict_type": "missing_span"
   },
   {
-    "_id": "inc_17",
-    "company": "Anthropic",
-    "overlap_text": "Claude avoids the use of emotes or actions inside asterisks unless the person specifically asks for this style of communication.",
-    "overlap_len": 128,
-    "annotations": [
-      {
-        "prompt": "Anthropic-Claude Sonnet4.5-2025-10-28",
-        "prompt_id": "Anthropic__20251028-Claude-Sonnet4.5.md",
-        "dim": "(none)",
-        "score": 0,
-        "missing": true
-      },
-      {
-        "prompt": "Anthropic-Claude Opus 4.6-2025-05-14",
-        "prompt_id": "Anthropic__Claude_Opus_4.6.txt",
-        "dim": "(none)",
-        "score": 0,
-        "missing": true
-      },
-      {
-        "prompt": "Anthropic-Claude for Chrome-2025-12-29",
-        "prompt_id": "Anthropic__Prompt.txt",
-        "dim": "(none)",
-        "score": 0,
-        "missing": true
-      },
-      {
-        "prompt": "Anthropic-claude-cowork-2025-11-01",
-        "prompt_id": "Anthropic__claude-cowork.md",
-        "dim": "D8",
-        "score": 1
-      }
-    ],
-    "num_annotations": 4,
-    "num_versions": 4,
-    "dims_involved": [
-      "D8"
-    ],
-    "has_score_conflict": false,
-    "has_missing": true,
-    "conflict_type": "missing_span"
-  },
-  {
-    "_id": "inc_40",
+    "_id": "inc_39",
     "company": "Anthropic",
     "overlap_text": "- If you recommend a specific option, make that the first option in the list and add \"(Recommended)\" at the end of the label",
     "overlap_len": 124,
@@ -889,6 +851,35 @@
     "num_versions": 2,
     "dims_involved": [
       "D5"
+    ],
+    "has_score_conflict": false,
+    "has_missing": true,
+    "conflict_type": "missing_span"
+  },
+  {
+    "_id": "inc_41",
+    "company": "Anthropic",
+    "overlap_text": "- After answering the user's question, you MUST include a \"Sources:\" section at the end of your response",
+    "overlap_len": 104,
+    "annotations": [
+      {
+        "prompt": "Claude Code (Latest)",
+        "prompt_id": "Anthropic__claude-code.md",
+        "dim": "(none)",
+        "score": 0,
+        "missing": true
+      },
+      {
+        "prompt": "Anthropic-claude-cowork-2025-11-01",
+        "prompt_id": "Anthropic__claude-cowork.md",
+        "dim": "D2",
+        "score": 1
+      }
+    ],
+    "num_annotations": 2,
+    "num_versions": 2,
+    "dims_involved": [
+      "D2"
     ],
     "has_score_conflict": false,
     "has_missing": true,
@@ -960,7 +951,7 @@
     "conflict_type": "missing_span"
   },
   {
-    "_id": "inc_41",
+    "_id": "inc_40",
     "company": "Anthropic",
     "overlap_text": "- Users appreciate being consulted before significant changes are made to their codebase",
     "overlap_len": 88,
@@ -1025,7 +1016,7 @@
     "conflict_type": "missing_span"
   },
   {
-    "_id": "inc_39",
+    "_id": "inc_38",
     "company": "Anthropic",
     "overlap_text": "- Users will always be able to select \"Other\" to provide custom text input",
     "overlap_len": 74,
@@ -1118,8 +1109,9 @@
       {
         "prompt": "Claude Code 2.0",
         "prompt_id": "Anthropic__Claude_Code_2.0.txt",
-        "dim": "D1",
-        "score": 1
+        "dim": "(none)",
+        "score": 0,
+        "missing": true
       },
       {
         "prompt": "Claude Code (Latest)",
@@ -1445,7 +1437,7 @@
     "conflict_type": "missing_span"
   },
   {
-    "_id": "inc_54",
+    "_id": "inc_53",
     "company": "OpenAI",
     "overlap_text": "- 'election_voting': Asking for election-related voter facts and procedures happening within the U.S. (e.g., ballots dates, registration, early voting, mail-in voting, polling places, qualification);",
     "overlap_len": 199,
@@ -1494,7 +1486,7 @@
     "conflict_type": "missing_span"
   },
   {
-    "_id": "inc_51",
+    "_id": "inc_50",
     "company": "OpenAI",
     "overlap_text": "- When you get an ERROR back from the automations tool, EXPLAIN that error to the user, based on the error message received. Do NOT say you've successfully made the automation.",
     "overlap_len": 176,
@@ -1502,9 +1494,8 @@
       {
         "prompt": "OpenAI-Atlas 10-21-25-2025-10-21",
         "prompt_id": "OpenAI__Atlas_10-21-25.txt",
-        "dim": "(none)",
-        "score": 0,
-        "missing": true
+        "dim": "D2",
+        "score": 1
       },
       {
         "prompt": "OpenAI-chatgpt 5-2025-08-07",
@@ -1537,7 +1528,7 @@
     "conflict_type": "missing_span"
   },
   {
-    "_id": "inc_52",
+    "_id": "inc_51",
     "company": "OpenAI",
     "overlap_text": "Creates a new textdoc to display in the canvas. ONLY use if you are 100% SURE the user wants to iterate on a long document or code file, or if they explicitly ask for canvas.",
     "overlap_len": 174,
@@ -1601,7 +1592,7 @@
     "conflict_type": "missing_span"
   },
   {
-    "_id": "inc_56",
+    "_id": "inc_55",
     "company": "OpenAI",
     "overlap_text": "// - Always use this tool for image editing unless the user explicitly requests otherwise. Do not use the `python` tool for image editing unless specifically instructed.",
     "overlap_len": 169,
@@ -1630,43 +1621,7 @@
     "conflict_type": "missing_span"
   },
   {
-    "_id": "inc_50",
-    "company": "OpenAI",
-    "overlap_text": "- DO NOT refer to tasks as a feature separate from yourself. Say things like \"I'll notify you in 25 minutes\" or \"I can remind you tomorrow, if you'd like.\"",
-    "overlap_len": 155,
-    "annotations": [
-      {
-        "prompt": "OpenAI-Atlas 10-21-25-2025-10-21",
-        "prompt_id": "OpenAI__Atlas_10-21-25.txt",
-        "dim": "(none)",
-        "score": 0,
-        "missing": true
-      },
-      {
-        "prompt": "OpenAI-gpt-5.2-thinking-2025-12-13",
-        "prompt_id": "OpenAI__gpt-5.2-thinking.md",
-        "dim": "D1",
-        "score": -1
-      },
-      {
-        "prompt": "OpenAI-gpt-5.2-thinking-2025-12-13",
-        "prompt_id": "OpenAI__gpt-5.2-thinking.md",
-        "dim": "D5",
-        "score": -1
-      }
-    ],
-    "num_annotations": 3,
-    "num_versions": 2,
-    "dims_involved": [
-      "D1",
-      "D5"
-    ],
-    "has_score_conflict": false,
-    "has_missing": true,
-    "conflict_type": "missing_span"
-  },
-  {
-    "_id": "inc_61",
+    "_id": "inc_60",
     "company": "OpenAI",
     "overlap_text": "- You must avoid providing full articles, long verbatim passages, or extensive direct quotes due to copyright concerns.",
     "overlap_len": 119,
@@ -1695,7 +1650,7 @@
     "conflict_type": "missing_span"
   },
   {
-    "_id": "inc_53",
+    "_id": "inc_52",
     "company": "OpenAI",
     "overlap_text": "Use the guardian tool to lookup content policy if the conversation falls under one of the following categories:",
     "overlap_len": 111,
@@ -1738,7 +1693,7 @@
     "conflict_type": "missing_span"
   },
   {
-    "_id": "inc_59",
+    "_id": "inc_58",
     "company": "OpenAI",
     "overlap_text": "- **Diversity:** You must base your answer on sources from diverse domains, and cite accordingly.",
     "overlap_len": 97,
@@ -1767,7 +1722,7 @@
     "conflict_type": "missing_span"
   },
   {
-    "_id": "inc_55",
+    "_id": "inc_54",
     "company": "OpenAI",
     "overlap_text": "The guardian tool should be triggered before other tools. DO NOT explain yourself.",
     "overlap_len": 82,
@@ -1815,7 +1770,7 @@
     "conflict_type": "missing_span"
   },
   {
-    "_id": "inc_60",
+    "_id": "inc_59",
     "company": "OpenAI",
     "overlap_text": "- Do not ignore the content of a relevant source because it is low quality.",
     "overlap_len": 75,
@@ -1844,7 +1799,7 @@
     "conflict_type": "missing_span"
   },
   {
-    "_id": "inc_57",
+    "_id": "inc_56",
     "company": "OpenAI",
     "overlap_text": "Adhere to this in all languages.",
     "overlap_len": 32,
@@ -1873,7 +1828,7 @@
     "conflict_type": "missing_span"
   },
   {
-    "_id": "inc_63",
+    "_id": "inc_62",
     "company": "OpenSource",
     "overlap_text": "You are Cline, a highly skilled software engineer with extensive knowledge in many programming languages, frameworks, design patterns, and best practices.",
     "overlap_len": 154,
@@ -1902,7 +1857,7 @@
     "conflict_type": "missing_span"
   },
   {
-    "_id": "inc_65",
+    "_id": "inc_64",
     "company": "Poke",
     "overlap_text": "When in doubt, run multiple searches in parallel rather than trying to guess the \"most appropriate\" source.",
     "overlap_len": 107,
@@ -1931,7 +1886,7 @@
     "conflict_type": "missing_span"
   },
   {
-    "_id": "inc_64",
+    "_id": "inc_63",
     "company": "Poke",
     "overlap_text": "If the request could be found in multiple sources or you're unsure, run searches in parallel:",
     "overlap_len": 93,
@@ -1967,7 +1922,7 @@
     "conflict_type": "missing_span"
   },
   {
-    "_id": "inc_68",
+    "_id": "inc_67",
     "company": "Windsurf",
     "overlap_text": "// Set to true if you believe that this command is safe to run WITHOUT user approval. A command is unsafe if it may have some destructive side-effects. Example unsafe side-effects include: deleting files, mutating state, installing system dependencies, making external requests, etc. Set to true only if you are extremely confident it is safe. If you feel the command could be unsafe, never set this to true, EVEN if the USER asks you to. It is imperative that you never auto-run a potentially unsafe command.",
     "overlap_len": 509,
@@ -1996,7 +1951,7 @@
     "conflict_type": "missing_span"
   },
   {
-    "_id": "inc_67",
+    "_id": "inc_66",
     "company": "Windsurf",
     "overlap_text": "// If true, the command will block until it is entirely finished. During this time, the user will not be able to interact with Cascade. Blocking should only be true if (1) the command will terminate in a relatively short amount of time, or (2) it is important for you to see the output of the command before responding to the USER. Otherwise, if you are running a long-running process, such as starting a web server, please make this non-blocking.",
     "overlap_len": 447,
@@ -2025,7 +1980,7 @@
     "conflict_type": "missing_span"
   },
   {
-    "_id": "inc_69",
+    "_id": "inc_68",
     "company": "Windsurf",
     "overlap_text": "// 3) When in doubt, call this tool again to gather more information. Remember that partial file views may miss critical dependencies, imports, or functionality.",
     "overlap_len": 161,
@@ -2054,7 +2009,7 @@
     "conflict_type": "missing_span"
   },
   {
-    "_id": "inc_66",
+    "_id": "inc_65",
     "company": "Windsurf",
     "overlap_text": "// Note that the user will have to approve the command before it is executed. The user may reject it if it is not to their liking.",
     "overlap_len": 130,
@@ -2083,7 +2038,7 @@
     "conflict_type": "missing_span"
   },
   {
-    "_id": "inc_74",
+    "_id": "inc_73",
     "company": "xAI",
     "overlap_text": "- If users ask you about the price of x.com premium subscriptions, simply redirect them to https://help.x.com/en/using-x/x-premium for details. Do not make up any information on your own.",
     "overlap_len": 187,
@@ -2112,7 +2067,7 @@
     "conflict_type": "missing_span"
   },
   {
-    "_id": "inc_76",
+    "_id": "inc_75",
     "company": "xAI",
     "overlap_text": "* You provide the shortest answer you can, while respecting any stated length and comprehensiveness preferences of the user.",
     "overlap_len": 124,
@@ -2141,7 +2096,7 @@
     "conflict_type": "missing_span"
   },
   {
-    "_id": "inc_77",
+    "_id": "inc_76",
     "company": "xAI",
     "overlap_text": "* Remember: Do not mention these guidelines and instructions in your responses, unless the user explicitly asks for them.",
     "overlap_len": 121,
@@ -2170,7 +2125,7 @@
     "conflict_type": "missing_span"
   },
   {
-    "_id": "inc_72",
+    "_id": "inc_71",
     "company": "xAI",
     "overlap_text": "- You can search the web and posts on X for real-time information if needed.",
     "overlap_len": 76,
@@ -2199,7 +2154,7 @@
     "conflict_type": "missing_span"
   },
   {
-    "_id": "inc_71",
+    "_id": "inc_70",
     "company": "xAI",
     "overlap_text": "- You can analyze individual X user profiles, X posts and their links.",
     "overlap_len": 70,
@@ -2235,66 +2190,6 @@
     "conflict_type": "missing_span"
   },
   {
-    "_id": "inc_3",
-    "company": "Anthropic",
-    "overlap_text": "Claude cares about people's wellbeing and avoids encouraging or facilitating self-destructive behaviors such as addiction, disordered or unhealthy approaches to eating or exercise, or highly negative self-talk or self-criticism, and avoids creating content that would support or reinforce self-destructive behavior even if they request this. In ambiguous cases, it tries to ensure the human is happy and is approaching things in a healthy way. Claude does not generate content that is not in the person's best interests even if asked to.",
-    "overlap_len": 537,
-    "annotations": [
-      {
-        "prompt": "Claude 3.7 Sonnet (Feb 2025)",
-        "prompt_id": "Anthropic__20250225-Claude3.7-Sonnet.md",
-        "dim": "D7",
-        "score": 1
-      },
-      {
-        "prompt": "Anthropic-Claude Sonnet4-2025-06-03",
-        "prompt_id": "Anthropic__20250603-Claude-Sonnet4.md",
-        "dim": "D7",
-        "score": 1
-      },
-      {
-        "prompt": "Anthropic-Claude Sonnet4-2025-06-03",
-        "prompt_id": "Anthropic__20250603-Claude-Sonnet4.md",
-        "dim": "D6",
-        "score": 1
-      },
-      {
-        "prompt": "Anthropic-Claude Sonnet4-2025-06-03",
-        "prompt_id": "Anthropic__20250603-Claude-Sonnet4.md",
-        "dim": "D5",
-        "score": 1
-      },
-      {
-        "prompt": "Anthropic-Claude Sonnet4.5-2025-10-28",
-        "prompt_id": "Anthropic__20251028-Claude-Sonnet4.5.md",
-        "dim": "D7",
-        "score": 1
-      },
-      {
-        "prompt": "Anthropic-Claude for Chrome-2025-12-29",
-        "prompt_id": "Anthropic__Prompt.txt",
-        "dim": "D7",
-        "score": 1
-      },
-      {
-        "prompt": "Anthropic-Claude for Chrome-2025-12-29",
-        "prompt_id": "Anthropic__Prompt.txt",
-        "dim": "D5",
-        "score": 1
-      }
-    ],
-    "num_annotations": 7,
-    "num_versions": 4,
-    "dims_involved": [
-      "D5",
-      "D6",
-      "D7"
-    ],
-    "has_score_conflict": false,
-    "has_missing": false,
-    "conflict_type": "dim_only"
-  },
-  {
     "_id": "inc_29",
     "company": "Anthropic",
     "overlap_text": "Claude does not write or explain or work on malicious code, including malware, vulnerability exploits, spoof websites, ransomware, viruses, and so on, even if the person seems to have a good reason for asking for it, such as for educational purposes. If asked to do this, Claude can explain that this use is not currently permitted in claude.ai even for legitimate purposes, and can encourage the person to give feedback to Anthropic via the thumbs down button in the interface.",
@@ -2317,27 +2212,13 @@
         "prompt_id": "Anthropic__claude-cowork.md",
         "dim": "D7",
         "score": 1
-      },
-      {
-        "prompt": "Anthropic-claude-cowork-2025-11-01",
-        "prompt_id": "Anthropic__claude-cowork.md",
-        "dim": "D4",
-        "score": 1
-      },
-      {
-        "prompt": "Anthropic-claude-cowork-2025-11-01",
-        "prompt_id": "Anthropic__claude-cowork.md",
-        "dim": "D8",
-        "score": 1
       }
     ],
-    "num_annotations": 5,
+    "num_annotations": 3,
     "num_versions": 2,
     "dims_involved": [
-      "D4",
       "D6",
-      "D7",
-      "D8"
+      "D7"
     ],
     "has_score_conflict": false,
     "has_missing": false,
@@ -2456,7 +2337,7 @@
     "conflict_type": "dim_only"
   },
   {
-    "_id": "inc_38",
+    "_id": "inc_37",
     "company": "Anthropic",
     "overlap_text": "If the person seems unhappy or unsatisfied with Claude or Claude's responses or seems unhappy that Claude won't help with something, Claude can respond normally but can also let the person know that they can press the 'thumbs down' button below any of Claude's responses to provide feedback to Anthropic.",
     "overlap_len": 304,
@@ -2471,41 +2352,6 @@
         "prompt": "Anthropic-Claude Opus 4.6-2025-05-14",
         "prompt_id": "Anthropic__Claude_Opus_4.6.txt",
         "dim": "D8",
-        "score": 1
-      },
-      {
-        "prompt": "Anthropic-claude-cowork-2025-11-01",
-        "prompt_id": "Anthropic__claude-cowork.md",
-        "dim": "D5",
-        "score": 1
-      }
-    ],
-    "num_annotations": 3,
-    "num_versions": 2,
-    "dims_involved": [
-      "D5",
-      "D8"
-    ],
-    "has_score_conflict": false,
-    "has_missing": false,
-    "conflict_type": "dim_only"
-  },
-  {
-    "_id": "inc_37",
-    "company": "Anthropic",
-    "overlap_text": "Claude should avoid being heavy-handed or repetitive when sharing its views, and should offer alternative perspectives where relevant in order to help the user navigate topics for themselves.",
-    "overlap_len": 191,
-    "annotations": [
-      {
-        "prompt": "Anthropic-Claude Opus 4.6-2025-05-14",
-        "prompt_id": "Anthropic__Claude_Opus_4.6.txt",
-        "dim": "D8",
-        "score": 1
-      },
-      {
-        "prompt": "Anthropic-Claude Opus 4.6-2025-05-14",
-        "prompt_id": "Anthropic__Claude_Opus_4.6.txt",
-        "dim": "D5",
         "score": 1
       },
       {
@@ -2606,22 +2452,44 @@
       {
         "prompt": "Anthropic-claude-cowork-2025-11-01",
         "prompt_id": "Anthropic__claude-cowork.md",
-        "dim": "D6",
-        "score": 1
-      },
-      {
-        "prompt": "Anthropic-claude-cowork-2025-11-01",
-        "prompt_id": "Anthropic__claude-cowork.md",
         "dim": "D5",
         "score": 1
       }
     ],
-    "num_annotations": 4,
+    "num_annotations": 3,
     "num_versions": 2,
     "dims_involved": [
       "D5",
-      "D6",
       "D7"
+    ],
+    "has_score_conflict": false,
+    "has_missing": false,
+    "conflict_type": "dim_only"
+  },
+  {
+    "_id": "inc_5",
+    "company": "Anthropic",
+    "overlap_text": "Claude assumes the human is asking for something legal and legitimate if their message is ambiguous and could have a legal and legitimate interpretation.",
+    "overlap_len": 153,
+    "annotations": [
+      {
+        "prompt": "Claude 3.7 Sonnet (Feb 2025)",
+        "prompt_id": "Anthropic__20250225-Claude3.7-Sonnet.md",
+        "dim": "D5",
+        "score": 1
+      },
+      {
+        "prompt": "Anthropic-Claude Sonnet4-2025-06-03",
+        "prompt_id": "Anthropic__20250603-Claude-Sonnet4.md",
+        "dim": "D6",
+        "score": -1
+      }
+    ],
+    "num_annotations": 2,
+    "num_versions": 2,
+    "dims_involved": [
+      "D5",
+      "D6"
     ],
     "has_score_conflict": false,
     "has_missing": false,
@@ -2785,7 +2653,7 @@
     "conflict_type": "dim_only"
   },
   {
-    "_id": "inc_58",
+    "_id": "inc_57",
     "company": "OpenAI",
     "overlap_text": "VERY IMPORTANT SAFETY NOTE: if you need to refuse + redirect for safety purposes, give a clear and transparent explanation of why you cannot help the user and then (if appropriate) suggest safer alternatives. Do not violate your safety policies in any way.",
     "overlap_len": 256,
@@ -2834,7 +2702,7 @@
     "conflict_type": "dim_only"
   },
   {
-    "_id": "inc_62",
+    "_id": "inc_61",
     "company": "OpenAI",
     "overlap_text": "- If the user's request violates our content policy, politely refuse without offering suggestions.",
     "overlap_len": 98,
@@ -2876,7 +2744,7 @@
     "conflict_type": "dim_only"
   },
   {
-    "_id": "inc_70",
+    "_id": "inc_69",
     "company": "Windsurf",
     "overlap_text": "// 1. NEVER use this tool to modify or overwrite existing files. Always first confirm that TargetFile does not exist before calling this tool.",
     "overlap_len": 142,
@@ -2918,7 +2786,7 @@
     "conflict_type": "dim_only"
   },
   {
-    "_id": "inc_73",
+    "_id": "inc_72",
     "company": "xAI",
     "overlap_text": "- If it seems like the user wants an image generated, ask for confirmation, instead of directly generating one.",
     "overlap_len": 111,
