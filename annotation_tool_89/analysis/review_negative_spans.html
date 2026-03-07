@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Negative Span Review Tool</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f5; color: #1a1a1a; }
+
+  .header { background: #1a1a2e; color: #fff; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+  .header h1 { font-size: 18px; font-weight: 600; }
+  .header-right { display: flex; gap: 12px; align-items: center; }
+
+  .progress-bar { width: 200px; height: 8px; background: #333; border-radius: 4px; overflow: hidden; }
+  .progress-fill { height: 100%; background: #4ade80; transition: width 0.3s; }
+
+  .stats { display: flex; gap: 16px; padding: 12px 24px; background: #fff; border-bottom: 1px solid #e0e0e0; font-size: 13px; flex-wrap: wrap; }
+  .stat { display: flex; align-items: center; gap: 4px; }
+  .stat .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot-agree { background: #4ade80; }
+  .dot-disagree { background: #f87171; }
+  .dot-discuss { background: #fbbf24; }
+  .dot-skip { background: #94a3b8; }
+
+  .controls-bar { display: flex; gap: 8px; padding: 12px 24px; background: #fff; border-bottom: 1px solid #e0e0e0; flex-wrap: wrap; align-items: center; }
+  .filter-group { display: flex; align-items: center; gap: 6px; font-size: 13px; }
+  .filter-group label { font-weight: 500; color: #666; }
+  .filter-group select { padding: 4px 8px; border: 1px solid #d0d0d0; border-radius: 4px; font-size: 13px; }
+  .search-box { padding: 4px 8px; border: 1px solid #d0d0d0; border-radius: 4px; font-size: 13px; width: 180px; }
+
+  .view-toggle { margin-left: auto; display: flex; gap: 4px; }
+  .view-btn { padding: 4px 12px; border: 1px solid #d0d0d0; background: #fff; border-radius: 4px; cursor: pointer; font-size: 13px; }
+  .view-btn.active { background: #1a1a2e; color: #fff; border-color: #1a1a2e; }
+
+  .main { padding: 16px 24px; }
+
+  /* Card view */
+  .card-view .card { background: #fff; border-radius: 8px; border: 1px solid #e0e0e0; margin-bottom: 12px; overflow: hidden; transition: border-color 0.2s; }
+  .card.status-agree { border-left: 4px solid #4ade80; }
+  .card.status-disagree { border-left: 4px solid #f87171; }
+  .card.status-discuss { border-left: 4px solid #fbbf24; }
+  .card.status-skip { border-left: 4px solid #94a3b8; }
+
+  .card-header { display: flex; justify-content: space-between; align-items: flex-start; padding: 12px 16px; background: #fafafa; border-bottom: 1px solid #f0f0f0; }
+  .card-meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .badge { padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+  .badge-dim { background: #e0e7ff; color: #3730a3; }
+  .badge-company { background: #fce7f3; color: #9d174d; }
+  .badge-cat { background: #ecfdf5; color: #065f46; }
+  .badge-reviewer { background: #f3e8ff; color: #6b21a8; }
+  .card-id { font-size: 12px; color: #999; font-weight: 500; }
+
+  .card-body { padding: 16px; }
+  .card-product { font-size: 14px; font-weight: 600; margin-bottom: 8px; color: #333; }
+  .card-text { background: #fff7ed; border-left: 3px solid #f97316; padding: 10px 14px; margin-bottom: 10px; font-size: 14px; line-height: 1.6; color: #333; white-space: pre-wrap; word-break: break-word; }
+  .card-note { font-size: 13px; color: #555; line-height: 1.5; max-height: 120px; overflow-y: auto; }
+  .card-note.expanded { max-height: none; }
+  .note-toggle { color: #2563eb; cursor: pointer; font-size: 12px; margin-top: 4px; }
+
+  .card-actions { display: flex; gap: 6px; padding: 10px 16px; border-top: 1px solid #f0f0f0; align-items: center; }
+  .action-btn { padding: 5px 14px; border-radius: 6px; border: 1px solid #d0d0d0; background: #fff; cursor: pointer; font-size: 13px; font-weight: 500; transition: all 0.15s; }
+  .action-btn:hover { transform: translateY(-1px); box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+  .action-btn.selected { color: #fff; border-color: transparent; }
+  .btn-agree.selected { background: #4ade80; }
+  .btn-disagree.selected { background: #f87171; }
+  .btn-discuss.selected { background: #fbbf24; color: #1a1a1a; }
+  .review-comment { flex: 1; margin-left: 8px; padding: 5px 8px; border: 1px solid #d0d0d0; border-radius: 4px; font-size: 13px; }
+
+  /* Table view */
+  .table-view { overflow-x: auto; }
+  .table-view table { width: 100%; border-collapse: collapse; font-size: 13px; background: #fff; }
+  .table-view th { background: #f8f8f8; padding: 8px 10px; text-align: left; border-bottom: 2px solid #e0e0e0; font-weight: 600; position: sticky; top: 0; }
+  .table-view td { padding: 8px 10px; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
+  .table-view tr:hover { background: #f8f9fa; }
+  .table-view .text-cell { max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .table-view .note-cell { max-width: 250px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .table-view .status-cell select { padding: 2px 4px; font-size: 12px; border-radius: 4px; }
+
+  .export-btn { padding: 6px 16px; background: #2563eb; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 500; }
+  .export-btn:hover { background: #1d4ed8; }
+
+  .nav-btns { display: flex; gap: 8px; }
+  .nav-btn { padding: 4px 12px; background: #e0e0e0; border: none; border-radius: 4px; cursor: pointer; font-size: 13px; }
+  .nav-btn:hover { background: #d0d0d0; }
+
+  .keyboard-hint { font-size: 11px; color: #999; padding: 4px 24px; background: #fff; border-bottom: 1px solid #f0f0f0; }
+  kbd { background: #e8e8e8; padding: 1px 5px; border-radius: 3px; font-size: 11px; border: 1px solid #ccc; }
+
+  .dim-legend { font-size: 12px; color: #666; padding: 8px 24px; background: #fff; border-bottom: 1px solid #e0e0e0; display: flex; flex-wrap: wrap; gap: 12px; }
+  .dim-legend span { white-space: nowrap; }
+
+  .filter-status-btns { display: flex; gap: 4px; }
+  .filter-status-btn { padding: 3px 10px; border: 1px solid #d0d0d0; border-radius: 4px; background: #fff; cursor: pointer; font-size: 12px; }
+  .filter-status-btn.active { background: #1a1a2e; color: #fff; border-color: #1a1a2e; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Negative Span Review (score = -1)</h1>
+  <div class="header-right">
+    <span id="progressText" style="font-size:13px;">0 / 270</span>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <button class="export-btn" onclick="exportResults()">Export Results</button>
+  </div>
+</div>
+
+<div class="dim-legend">
+  <span><b>D1</b> Identity Transparency</span>
+  <span><b>D2</b> Truthfulness</span>
+  <span><b>D3</b> Privacy</span>
+  <span><b>D4</b> Tool Safety</span>
+  <span><b>D5</b> User Agency</span>
+  <span><b>D6</b> Unsafe Requests</span>
+  <span><b>D7</b> Harm Prevention</span>
+  <span><b>D8</b> Fairness</span>
+</div>
+
+<div class="stats" id="statsBar">
+  <div class="stat"><div class="dot dot-agree"></div><span id="countAgree">Agree: 0</span></div>
+  <div class="stat"><div class="dot dot-disagree"></div><span id="countDisagree">Disagree: 0</span></div>
+  <div class="stat"><div class="dot dot-discuss"></div><span id="countDiscuss">Discuss: 0</span></div>
+  <div class="stat"><div class="dot dot-skip"></div><span id="countSkip">Unreviewed: 270</span></div>
+</div>
+
+<div class="controls-bar">
+  <div class="filter-group">
+    <label>Dimension:</label>
+    <select id="filterDim" onchange="applyFilters()">
+      <option value="">All</option>
+      <option value="D1">D1</option><option value="D2">D2</option><option value="D3">D3</option><option value="D4">D4</option>
+      <option value="D5">D5</option><option value="D6">D6</option><option value="D7">D7</option><option value="D8">D8</option>
+    </select>
+  </div>
+  <div class="filter-group">
+    <label>Company:</label>
+    <select id="filterCompany" onchange="applyFilters()"></select>
+  </div>
+  <div class="filter-group">
+    <label>Reviewer:</label>
+    <select id="filterReviewer" onchange="applyFilters()"></select>
+  </div>
+  <div class="filter-group">
+    <label>Status:</label>
+    <div class="filter-status-btns">
+      <button class="filter-status-btn active" data-status="" onclick="setStatusFilter(this, '')">All</button>
+      <button class="filter-status-btn" data-status="unreviewed" onclick="setStatusFilter(this, 'unreviewed')">Unreviewed</button>
+      <button class="filter-status-btn" data-status="agree" onclick="setStatusFilter(this, 'agree')">Agree</button>
+      <button class="filter-status-btn" data-status="disagree" onclick="setStatusFilter(this, 'disagree')">Disagree</button>
+      <button class="filter-status-btn" data-status="discuss" onclick="setStatusFilter(this, 'discuss')">Discuss</button>
+    </div>
+  </div>
+  <input type="text" class="search-box" id="searchBox" placeholder="Search text/note..." oninput="applyFilters()">
+  <div class="view-toggle">
+    <button class="view-btn active" id="btnCardView" onclick="setView('card')">Cards</button>
+    <button class="view-btn" id="btnTableView" onclick="setView('table')">Table</button>
+  </div>
+</div>
+
+<div class="keyboard-hint">
+  Keyboard: <kbd>A</kbd> Agree &nbsp; <kbd>D</kbd> Disagree &nbsp; <kbd>W</kbd> Discuss &nbsp; <kbd>→</kbd> Next &nbsp; <kbd>←</kbd> Prev &nbsp; <kbd>E</kbd> Export
+</div>
+
+<div class="main" id="mainContent"></div>
+
+<script>
+let allSpans = [];
+let filtered = [];
+let reviews = {};
+let currentView = 'card';
+let statusFilter = '';
+let focusedCardIdx = 0;
+
+async function loadData() {
+  try {
+    const resp = await fetch('negative_spans_review.json');
+    allSpans = await resp.json();
+  } catch(e) {
+    document.getElementById('mainContent').innerHTML = '<p style="padding:20px;color:red;">Cannot load negative_spans_review.json. Make sure this HTML is served from the same directory (use a local server like <code>python3 -m http.server 8080</code>).</p>';
+    return;
+  }
+
+  const saved = localStorage.getItem('neg_span_reviews');
+  if (saved) {
+    try { reviews = JSON.parse(saved); } catch(e) {}
+  }
+
+  populateFilters();
+  applyFilters();
+}
+
+function populateFilters() {
+  const companies = [...new Set(allSpans.map(s => s.company))].sort();
+  const reviewers = [...new Set(allSpans.map(s => s.reviewer))].sort();
+
+  const compSel = document.getElementById('filterCompany');
+  compSel.innerHTML = '<option value="">All</option>' + companies.map(c => `<option value="${c}">${c}</option>`).join('');
+
+  const revSel = document.getElementById('filterReviewer');
+  revSel.innerHTML = '<option value="">All</option>' + reviewers.map(r => `<option value="${r}">${r}</option>`).join('');
+}
+
+function setStatusFilter(btn, status) {
+  document.querySelectorAll('.filter-status-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  statusFilter = status;
+  applyFilters();
+}
+
+function applyFilters() {
+  const dim = document.getElementById('filterDim').value;
+  const company = document.getElementById('filterCompany').value;
+  const reviewer = document.getElementById('filterReviewer').value;
+  const search = document.getElementById('searchBox').value.toLowerCase();
+
+  filtered = allSpans.filter(s => {
+    if (dim && s.dimension !== dim) return false;
+    if (company && s.company !== company) return false;
+    if (reviewer && s.reviewer !== reviewer) return false;
+    if (search && !s.text.toLowerCase().includes(search) && !s.note.toLowerCase().includes(search) && !s.product_label.toLowerCase().includes(search)) return false;
+    if (statusFilter) {
+      const st = reviews[s.id]?.status || 'unreviewed';
+      if (statusFilter !== st) return false;
+    }
+    return true;
+  });
+
+  focusedCardIdx = 0;
+  render();
+  updateStats();
+}
+
+function render() {
+  if (currentView === 'card') renderCards();
+  else renderTable();
+}
+
+function renderCards() {
+  const container = document.getElementById('mainContent');
+  if (filtered.length === 0) {
+    container.innerHTML = '<p style="padding:20px;color:#666;">No spans match the current filters.</p>';
+    return;
+  }
+
+  container.className = 'main card-view';
+  container.innerHTML = `<div style="font-size:13px;color:#666;margin-bottom:12px;">Showing ${filtered.length} spans</div>` +
+    filtered.map((s, i) => {
+      const r = reviews[s.id] || {};
+      const st = r.status || '';
+      return `<div class="card ${st ? 'status-' + st : ''}" id="card-${i}" data-idx="${i}">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="badge badge-dim">${s.dimension}</span>
+            <span class="badge badge-company">${s.company}</span>
+            <span class="badge badge-cat">${s.category}</span>
+            <span class="badge badge-reviewer">${s.reviewer}</span>
+            ${s.source === 'human' ? '<span class="badge" style="background:#fef3c7;color:#92400e;">human-added</span>' : ''}
+            ${s.merged_from_count > 1 ? '<span class="badge" style="background:#dbeafe;color:#1e40af;">merged×' + s.merged_from_count + '</span>' : ''}
+          </div>
+          <span class="card-id">#${s.id + 1}/270</span>
+        </div>
+        <div class="card-body">
+          <div class="card-product">${s.product_label}</div>
+          <div class="card-text">${escHtml(s.text)}</div>
+          ${s.note ? `<div class="card-note" id="note-${s.id}">${escHtml(s.note)}</div>
+          ${s.note.length > 200 ? `<div class="note-toggle" onclick="toggleNote(${s.id})">Show more</div>` : ''}` : '<div style="font-size:12px;color:#aaa;">No note</div>'}
+        </div>
+        <div class="card-actions">
+          <button class="action-btn btn-agree ${st === 'agree' ? 'selected' : ''}" onclick="setStatus(${s.id}, 'agree', ${i})">✓ Agree</button>
+          <button class="action-btn btn-disagree ${st === 'disagree' ? 'selected' : ''}" onclick="setStatus(${s.id}, 'disagree', ${i})">✗ Disagree</button>
+          <button class="action-btn btn-discuss ${st === 'discuss' ? 'selected' : ''}" onclick="setStatus(${s.id}, 'discuss', ${i})">? Discuss</button>
+          <input class="review-comment" placeholder="Comment (optional)" value="${escAttr(r.comment || '')}" onchange="setComment(${s.id}, this.value)">
+        </div>
+      </div>`;
+    }).join('');
+}
+
+function renderTable() {
+  const container = document.getElementById('mainContent');
+  container.className = 'main table-view';
+  if (filtered.length === 0) {
+    container.innerHTML = '<p style="padding:20px;color:#666;">No spans match the current filters.</p>';
+    return;
+  }
+
+  container.innerHTML = `<div style="font-size:13px;color:#666;margin-bottom:8px;">Showing ${filtered.length} spans</div>
+    <table>
+      <thead><tr>
+        <th>#</th><th>Company</th><th>Product</th><th>Dim</th><th>Text</th><th>Note</th><th>Reviewer</th><th>Status</th><th>Comment</th>
+      </tr></thead>
+      <tbody>${filtered.map((s, i) => {
+        const r = reviews[s.id] || {};
+        return `<tr>
+          <td>${s.id + 1}</td>
+          <td>${s.company}</td>
+          <td style="white-space:nowrap;">${s.product_label}</td>
+          <td>${s.dimension}</td>
+          <td class="text-cell" title="${escAttr(s.text)}">${escHtml(s.text.slice(0, 80))}${s.text.length > 80 ? '...' : ''}</td>
+          <td class="note-cell" title="${escAttr(s.note)}">${escHtml(s.note.slice(0, 60))}${s.note.length > 60 ? '...' : ''}</td>
+          <td>${s.reviewer}</td>
+          <td class="status-cell">
+            <select onchange="setStatus(${s.id}, this.value, ${i})">
+              <option value="" ${!r.status ? 'selected' : ''}>--</option>
+              <option value="agree" ${r.status === 'agree' ? 'selected' : ''}>Agree</option>
+              <option value="disagree" ${r.status === 'disagree' ? 'selected' : ''}>Disagree</option>
+              <option value="discuss" ${r.status === 'discuss' ? 'selected' : ''}>Discuss</option>
+            </select>
+          </td>
+          <td><input style="width:100px;font-size:12px;padding:2px 4px;border:1px solid #ddd;border-radius:3px;" value="${escAttr(r.comment || '')}" onchange="setComment(${s.id}, this.value)"></td>
+        </tr>`;
+      }).join('')}</tbody>
+    </table>`;
+}
+
+function setStatus(spanId, status, cardIdx) {
+  if (!reviews[spanId]) reviews[spanId] = {};
+  reviews[spanId].status = status;
+  focusedCardIdx = cardIdx;
+  save();
+  render();
+  updateStats();
+
+  if (currentView === 'card' && cardIdx + 1 < filtered.length) {
+    const next = document.getElementById('card-' + (cardIdx + 1));
+    if (next) next.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    focusedCardIdx = cardIdx + 1;
+  }
+}
+
+function setComment(spanId, comment) {
+  if (!reviews[spanId]) reviews[spanId] = {};
+  reviews[spanId].comment = comment;
+  save();
+}
+
+function toggleNote(spanId) {
+  const el = document.getElementById('note-' + spanId);
+  el.classList.toggle('expanded');
+  const toggle = el.nextElementSibling;
+  toggle.textContent = el.classList.contains('expanded') ? 'Show less' : 'Show more';
+}
+
+function save() {
+  localStorage.setItem('neg_span_reviews', JSON.stringify(reviews));
+}
+
+function updateStats() {
+  let agree = 0, disagree = 0, discuss = 0;
+  for (const r of Object.values(reviews)) {
+    if (r.status === 'agree') agree++;
+    else if (r.status === 'disagree') disagree++;
+    else if (r.status === 'discuss') discuss++;
+  }
+  const reviewed = agree + disagree + discuss;
+  const unreviewed = allSpans.length - reviewed;
+  document.getElementById('countAgree').textContent = `Agree: ${agree}`;
+  document.getElementById('countDisagree').textContent = `Disagree: ${disagree}`;
+  document.getElementById('countDiscuss').textContent = `Discuss: ${discuss}`;
+  document.getElementById('countSkip').textContent = `Unreviewed: ${unreviewed}`;
+  document.getElementById('progressText').textContent = `${reviewed} / ${allSpans.length}`;
+  document.getElementById('progressFill').style.width = (reviewed / allSpans.length * 100) + '%';
+}
+
+function setView(view) {
+  currentView = view;
+  document.getElementById('btnCardView').classList.toggle('active', view === 'card');
+  document.getElementById('btnTableView').classList.toggle('active', view === 'table');
+  render();
+}
+
+function exportResults() {
+  const output = allSpans.map(s => ({
+    ...s,
+    review_status: reviews[s.id]?.status || 'unreviewed',
+    review_comment: reviews[s.id]?.comment || ''
+  }));
+
+  const blob = new Blob([JSON.stringify(output, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'negative_spans_reviewed_' + new Date().toISOString().slice(0, 10) + '.json';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function escHtml(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+function escAttr(s) { return s.replace(/"/g, '&quot;').replace(/'/g, '&#39;'); }
+
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') return;
+  if (currentView !== 'card' || filtered.length === 0) return;
+
+  const span = filtered[focusedCardIdx];
+  if (!span) return;
+
+  if (e.key === 'a' || e.key === 'A') { setStatus(span.id, 'agree', focusedCardIdx); }
+  else if (e.key === 'd' || e.key === 'D') { setStatus(span.id, 'disagree', focusedCardIdx); }
+  else if (e.key === 'w' || e.key === 'W') { setStatus(span.id, 'discuss', focusedCardIdx); }
+  else if (e.key === 'ArrowRight' && focusedCardIdx < filtered.length - 1) {
+    focusedCardIdx++;
+    document.getElementById('card-' + focusedCardIdx)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  else if (e.key === 'ArrowLeft' && focusedCardIdx > 0) {
+    focusedCardIdx--;
+    document.getElementById('card-' + focusedCardIdx)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  else if (e.key === 'e' || e.key === 'E') { exportResults(); }
+});
+
+loadData();
+</script>
+</body>
+</html>
