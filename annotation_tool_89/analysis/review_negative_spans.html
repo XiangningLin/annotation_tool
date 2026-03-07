@@ -254,13 +254,14 @@ function renderConf() {
           <div class="lpicker-title">Your decision — correct labels for this text (click dim then score to add, click tag to remove):</div>
           <div class="lrow">
             <span class="lrow-label">Add label:</span>
-            ${['D1','D2','D3','D4','D5','D6','D7','D8'].map(d=>`<button class="dbtn ${r._pendingDim===d?'pk':''}" onclick="pendDim('${rid(c)}','${d}',${i})" title="${DN[d]}">${d}</button>`).join('')}
+            ${['D1','D2','D3','D4','D5','D6','D7','D8','Misc'].map(d=>`<button class="dbtn ${r._pendingDim===d?'pk':''}" onclick="pendDim('${rid(c)}','${d}',${i})" title="${DN[d]||d}">${d}</button>`).join('')}
             <button class="sbtn ${r._pendingScore===1?'pk-pos':''}" onclick="pendScore('${rid(c)}',1,${i})" style="margin-left:8px;">+1</button>
             <button class="sbtn ${r._pendingScore===-1?'pk-neg':''}" onclick="pendScore('${rid(c)}',-1,${i})">-1</button>
+            <button class="sbtn ${r._pendingScore===0?'pk':''}" onclick="pendScore('${rid(c)}',0,${i})">0</button>
           </div>
           ${(r.final_labels&&r.final_labels.length) ? `<div class="lrow" style="margin-top:4px;">
             <span class="lrow-label">Selected:</span>
-            ${r.final_labels.map((lb,li)=>`<span class="dbtn pk" style="cursor:pointer;" onclick="removeLabel('${rid(c)}',${li},${i})" title="Click to remove">${lb.dim} ${lb.score>0?'+1':'-1'} ✕</span>`).join(' ')}
+            ${r.final_labels.map((lb,li)=>`<span class="dbtn pk" style="cursor:pointer;" onclick="removeLabel('${rid(c)}',${li},${i})" title="Click to remove">${lb.dim} ${lb.score>0?'+1':lb.score===0?'0':'-1'} ✕</span>`).join(' ')}
           </div>` : ''}
         </div>
         <div class="card-actions">
