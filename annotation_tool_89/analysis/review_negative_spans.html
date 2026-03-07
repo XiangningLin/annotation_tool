@@ -102,7 +102,8 @@
   <div class="header-right">
     <span id="progressText" style="font-size:13px;">0 / 270</span>
     <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-    <button class="export-btn" onclick="exportResults()">Export Results</button>
+    <button class="export-btn" onclick="exportResults()">Export JSON</button>
+    <button class="export-btn" style="background:#059669;" onclick="exportCSV()">Export CSV</button>
   </div>
 </div>
 
@@ -128,9 +129,15 @@
   <div class="filter-group">
     <label>Dimension:</label>
     <select id="filterDim" onchange="applyFilters()">
-      <option value="">All</option>
-      <option value="D1">D1</option><option value="D2">D2</option><option value="D3">D3</option><option value="D4">D4</option>
-      <option value="D5">D5</option><option value="D6">D6</option><option value="D7">D7</option><option value="D8">D8</option>
+      <option value="">All Dimensions</option>
+      <option value="D1">D1 — Identity Transparency</option>
+      <option value="D2">D2 — Truthfulness & Info Integrity</option>
+      <option value="D3">D3 — Privacy & Data Protection</option>
+      <option value="D4">D4 — Tool/Action Safety</option>
+      <option value="D5">D5 — User Agency & Manipulation</option>
+      <option value="D6">D6 — Unsafe Request Handling</option>
+      <option value="D7">D7 — Harm Prevention & User Safety</option>
+      <option value="D8">D8 — Fairness, Inclusion & Neutrality</option>
     </select>
   </div>
   <div class="filter-group">
@@ -165,6 +172,18 @@
 <div class="main" id="mainContent"></div>
 
 <script>
+const DIM_NAMES = {
+  D1: 'Identity Transparency',
+  D2: 'Truthfulness & Info Integrity',
+  D3: 'Privacy & Data Protection',
+  D4: 'Tool/Action Safety',
+  D5: 'User Agency & Manipulation',
+  D6: 'Unsafe Request Handling',
+  D7: 'Harm Prevention & User Safety',
+  D8: 'Fairness, Inclusion & Neutrality',
+};
+function dimLabel(d) { return DIM_NAMES[d] ? d + ' — ' + DIM_NAMES[d] : d; }
+
 let allSpans = [];
 let filtered = [];
 let reviews = {};
@@ -251,14 +270,14 @@ function renderCards() {
       return `<div class="card ${st ? 'status-' + st : ''}" id="card-${i}" data-idx="${i}">
         <div class="card-header">
           <div class="card-meta">
-            <span class="badge badge-dim">${s.dimension}</span>
+            <span class="badge badge-dim">${dimLabel(s.dimension)}</span>
             <span class="badge badge-company">${s.company}</span>
             <span class="badge badge-cat">${s.category}</span>
             <span class="badge badge-reviewer">${s.reviewer}</span>
             ${s.source === 'human' ? '<span class="badge" style="background:#fef3c7;color:#92400e;">human-added</span>' : ''}
             ${s.merged_from_count > 1 ? '<span class="badge" style="background:#dbeafe;color:#1e40af;">merged×' + s.merged_from_count + '</span>' : ''}
           </div>
-          <span class="card-id">#${s.id + 1}/270</span>
+          <span class="card-id">#${s.id + 1}/${allSpans.length}</span>
         </div>
         <div class="card-body">
           <div class="card-product">${s.product_label}</div>
@@ -295,7 +314,7 @@ function renderTable() {
           <td>${s.id + 1}</td>
           <td>${s.company}</td>
           <td style="white-space:nowrap;">${s.product_label}</td>
-          <td>${s.dimension}</td>
+          <td style="white-space:nowrap;">${dimLabel(s.dimension)}</td>
           <td class="text-cell" title="${escAttr(s.text)}">${escHtml(s.text.slice(0, 80))}${s.text.length > 80 ? '...' : ''}</td>
           <td class="note-cell" title="${escAttr(s.note)}">${escHtml(s.note.slice(0, 60))}${s.note.length > 60 ? '...' : ''}</td>
           <td>${s.reviewer}</td>
@@ -383,6 +402,47 @@ function exportResults() {
   a.download = 'negative_spans_reviewed_' + new Date().toISOString().slice(0, 10) + '.json';
   a.click();
   URL.revokeObjectURL(url);
+
+  showExportToast('JSON exported!');
+}
+
+function exportCSV() {
+  const headers = ['id','company','product_label','dimension','dimension_name','score','reviewer','text','note','review_status','review_comment'];
+  const rows = allSpans.map(s => {
+    const r = reviews[s.id] || {};
+    return [
+      s.id + 1,
+      s.company,
+      s.product_label,
+      s.dimension,
+      DIM_NAMES[s.dimension] || '',
+      s.score,
+      s.reviewer,
+      '"' + s.text.replace(/"/g, '""').replace(/\n/g, ' ') + '"',
+      '"' + (s.note || '').replace(/"/g, '""').replace(/\n/g, ' ') + '"',
+      r.status || 'unreviewed',
+      '"' + (r.comment || '').replace(/"/g, '""') + '"',
+    ].join(',');
+  });
+
+  const csv = headers.join(',') + '\n' + rows.join('\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'negative_spans_reviewed_' + new Date().toISOString().slice(0, 10) + '.csv';
+  a.click();
+  URL.revokeObjectURL(url);
+
+  showExportToast('CSV exported!');
+}
+
+function showExportToast(msg) {
+  const toast = document.createElement('div');
+  toast.textContent = msg;
+  toast.style.cssText = 'position:fixed;bottom:24px;right:24px;background:#1a1a2e;color:#fff;padding:10px 20px;border-radius:8px;font-size:14px;z-index:9999;';
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 2000);
 }
 
 function escHtml(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
