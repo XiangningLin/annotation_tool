@@ -151,8 +151,8 @@
     <label>Type:</label>
     <select id="filterConflictType" onchange="applyFilters()">
       <option value="">All Types</option>
-      <option value="same_dim_diff_score">Same Dim, Diff Score</option>
-      <option value="diff_dim">Different Dimension</option>
+      <option value="score_conflict">Has Score Conflict</option>
+      <option value="dim_only">Dimension Difference Only</option>
     </select>
   </div>
   <input type="text" class="search-box" id="searchBox" placeholder="Search text..." oninput="applyFilters()">
@@ -184,11 +184,11 @@ async function loadData() {
   try {
     const [negResp, confResp] = await Promise.all([
       fetch('negative_spans_review.json'),
-      fetch('cross_version_conflicts.json'),
+      fetch('shared_text_review.json'),
     ]);
     negSpans = await negResp.json();
     const confData = await confResp.json();
-    conflicts = (confData.conflicts || confData).map((c, i) => ({ ...c, _id: 'conf_' + i }));
+    conflicts = (Array.isArray(confData) ? confData : confData.conflicts || confData).map((c, i) => ({ ...c, _id: c._id || 'conf_' + i }));
   } catch(e) {
     document.getElementById('mainContent').innerHTML = '<p style="padding:20px;color:red;">Cannot load data files. Run <code>./review.sh</code> from the analysis directory.</p>';
     return;
@@ -241,12 +241,13 @@ function applyFilters() {
   filtered = items.filter(s => {
     if (dim) {
       if (activeTab === 'neg') { if (s.dimension !== dim) return false; }
-      else { if (s.dim_a !== dim && s.dim_b !== dim) return false; }
+      else { if (!s.dims_involved || !s.dims_involved.includes(dim)) return false; }
     }
     if (company && s.company !== company) return false;
     if (activeTab === 'conflict') {
       const ct = document.getElementById('filterConflictType').value;
-      if (ct && s.conflict_type !== ct) return false;
+      if (ct === 'score_conflict' && !s.has_score_conflict) return false;
+      if (ct === 'dim_only' && s.has_score_conflict) return false;
     }
     if (search) {
       const haystack = activeTab === 'neg'
@@ -310,50 +311,46 @@ function renderConflictCards() {
   const container = document.getElementById('mainContent');
   if (!filtered.length) { container.innerHTML = '<p style="padding:20px;color:#666;">No conflicts match filters.</p>'; return; }
 
-  container.innerHTML = `<div style="font-size:13px;color:#666;margin-bottom:12px;">Showing ${filtered.length} conflicts</div>` +
+  container.innerHTML = `<div style="font-size:13px;color:#666;margin-bottom:12px;">Showing ${filtered.length} shared text groups</div>` +
     filtered.map((c, i) => {
       const r = getReview(c);
       const st = r.status || '';
-      const typeLabel = c.conflict_type === 'same_dim_diff_score' ? 'Same Dim, Diff Score' : 'Diff Dimension';
-      const typeBg = c.conflict_type === 'same_dim_diff_score' ? 'background:#fee2e2;color:#991b1b;' : 'background:#e0e7ff;color:#3730a3;';
+      const typeLabel = c.has_score_conflict ? 'Score Conflict' : 'Dim Difference';
+      const typeBg = c.has_score_conflict ? 'background:#fee2e2;color:#991b1b;' : 'background:#e0e7ff;color:#3730a3;';
+      const dims = (c.dims_involved || []).map(d => dimLabel(d)).join(', ');
       return `<div class="card ${st ? 'status-' + st : ''}" id="card-${i}">
         <div class="card-header">
           <div class="card-meta">
-            <span class="badge badge-dim">${dimLabel(c.dim_a)}</span>
-            ${c.dim_a !== c.dim_b ? `<span style="font-size:11px;color:#999;">vs</span><span class="badge badge-dim">${dimLabel(c.dim_b)}</span>` : ''}
+            ${(c.dims_involved || []).map(d => `<span class="badge badge-dim">${dimLabel(d)}</span>`).join(' ')}
             <span class="badge badge-company">${c.company}</span>
             <span class="badge" style="${typeBg}">${typeLabel}</span>
-            <span class="sim-badge">${c.overlap_len} chars overlap</span>
+            <span class="sim-badge">${c.num_annotations} annotations</span>
           </div>
           <span class="card-id">#${i + 1}/${filtered.length}</span>
         </div>
         <div class="card-body">
-          <div style="background:#f8f8f8;border:1px solid #e0e0e0;border-radius:6px;padding:10px 14px;margin-bottom:12px;">
-            <div style="font-size:12px;font-weight:600;color:#666;margin-bottom:4px;">Overlapping Text (${c.overlap_len} chars)</div>
-            <div style="font-size:13px;line-height:1.5;color:#333;">${esc(c.overlap_text)}</div>
+          <div style="background:#fff7ed;border-left:3px solid #f97316;padding:10px 14px;margin-bottom:12px;font-size:14px;line-height:1.6;white-space:pre-wrap;word-break:break-word;">
+            ${esc(c.overlap_text)}
           </div>
-          <div class="conflict-pair">
-            <div class="conflict-side conflict-side-a">
-              <div class="conflict-label conflict-label-a">A: ${esc(c.prompt_a)}</div>
-              <span class="badge badge-dim" style="margin-right:4px;">${c.dim_a}</span>
-              <span class="conflict-score ${c.score_a > 0 ? 'score-pos' : c.score_a === 0 ? '' : 'score-neg'}">score: ${c.score_a > 0 ? '+1' : c.score_a}</span>
-              <div class="conflict-text">${esc(c.text_a)}</div>
-              ${c.note_a ? `<div class="conflict-note">${esc(c.note_a)}</div>` : ''}
-            </div>
-            <div class="conflict-side conflict-side-b">
-              <div class="conflict-label conflict-label-b">B: ${esc(c.prompt_b)}</div>
-              <span class="badge badge-dim" style="margin-right:4px;">${c.dim_b}</span>
-              <span class="conflict-score ${c.score_b > 0 ? 'score-pos' : c.score_b === 0 ? '' : 'score-neg'}">score: ${c.score_b > 0 ? '+1' : c.score_b}</span>
-              <div class="conflict-text">${esc(c.text_b)}</div>
-              ${c.note_b ? `<div class="conflict-note">${esc(c.note_b)}</div>` : ''}
-            </div>
-          </div>
+          <div style="font-size:13px;font-weight:600;color:#555;margin-bottom:8px;">Current annotations across versions:</div>
+          <table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:8px;">
+            <thead><tr style="background:#f8f8f8;border-bottom:2px solid #e0e0e0;">
+              <th style="padding:6px 8px;text-align:left;">Product Version</th>
+              <th style="padding:6px 8px;text-align:left;">Dimension</th>
+              <th style="padding:6px 8px;text-align:center;">Score</th>
+            </tr></thead>
+            <tbody>${(c.annotations || []).map(a => `<tr style="border-bottom:1px solid #f0f0f0;">
+              <td style="padding:6px 8px;">${esc(a.prompt)}</td>
+              <td style="padding:6px 8px;"><span class="badge badge-dim">${dimLabel(a.dim)}</span></td>
+              <td style="padding:6px 8px;text-align:center;"><span class="conflict-score ${a.score > 0 ? 'score-pos' : a.score === 0 ? '' : 'score-neg'}">${a.score > 0 ? '+1' : a.score}</span></td>
+            </tr>`).join('')}</tbody>
+          </table>
         </div>
         <div class="card-actions">
-          <button class="action-btn btn-pick-a ${st==='agree'?'selected':''}" onclick="setStatus('${getItemId(c)}','agree',${i})">A is correct</button>
-          <button class="action-btn btn-pick-b ${st==='disagree'?'selected':''}" onclick="setStatus('${getItemId(c)}','disagree',${i})">B is correct</button>
+          <button class="action-btn btn-agree ${st==='agree'?'selected':''}" onclick="setStatus('${getItemId(c)}','agree',${i})">✓ Agree (labels OK)</button>
+          <button class="action-btn btn-disagree ${st==='disagree'?'selected':''}" onclick="setStatus('${getItemId(c)}','disagree',${i})">✗ Needs Fix</button>
           <button class="action-btn btn-discuss ${st==='discuss'?'selected':''}" onclick="setStatus('${getItemId(c)}','discuss',${i})">? Discuss</button>
-          <input class="review-comment" placeholder="Comment (optional)" value="${escA(r.comment||'')}" onchange="setComment('${getItemId(c)}',this.value)">
+          <input class="review-comment" placeholder="Which label is correct? (optional)" value="${escA(r.comment||'')}" onchange="setComment('${getItemId(c)}',this.value)">
         </div>
       </div>`;
     }).join('');
