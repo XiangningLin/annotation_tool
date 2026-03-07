@@ -25,6 +25,9 @@ PREANNOTATION_DIR = DATA_DIR / "preannotation_v3_89"
 OUTPUT_DIR = Path(__file__).parent / "outputs"
 OUTPUT_DIR.mkdir(exist_ok=True)
 REVIEW_STATE_FILE = Path(__file__).parent / "review_state.json"
+ANALYSIS_DIR = Path(__file__).parent / "outputs" / "final_result" / "analysis"
+NEED_REVIEW_FILE = ANALYSIS_DIR / "need_review_and_misc.json"
+MERGED_ANNOTATIONS_FILE = ANALYSIS_DIR / "merged_all_annotations.json"
 LOCK = Lock()
 
 DIMENSIONS = [
@@ -278,6 +281,113 @@ def _persist_review_state():
 
 REVIEW_STATE = _load_review_state()
 
+
+def _load_second_review_data() -> dict:
+    """Load items needing second review, excluding those already captured as
+    negative (-1) kept spans in the merged annotations."""
+    empty = {
+        "need_second_review": [], "misc_with_notes": [],
+        "excluded_nsr": 0, "excluded_misc": 0,
+        "original_nsr_count": 0, "original_misc_count": 0,
+    }
+    if not NEED_REVIEW_FILE.exists() or not MERGED_ANNOTATIONS_FILE.exists():
+        return empty
+
+    with NEED_REVIEW_FILE.open("r", encoding="utf-8") as f:
+        nsr_data = json.load(f)
+    with MERGED_ANNOTATIONS_FILE.open("r", encoding="utf-8") as f:
+        merged_data = json.load(f)
+
+    negative_texts: set[tuple[str, str]] = set()
+    for pid, pdata in merged_data.get("prompts", {}).items():
+        for span in pdata.get("kept_spans", []):
+            if span.get("score", 0) < 0:
+                norm = span.get("text", "").strip()[:100].lower()
+                negative_texts.add((pid, norm))
+
+    raw_nsr = nsr_data.get("need_second_review", [])
+    raw_misc = nsr_data.get("misc_dimension", [])
+
+    excluded_nsr = 0
+    filtered_nsr = []
+    for item in raw_nsr:
+        norm = item.get("text", "").strip()[:100].lower()
+        if (item["prompt_id"], norm) in negative_texts:
+            excluded_nsr += 1
+            continue
+        filtered_nsr.append(item)
+
+    excluded_misc = 0
+    filtered_misc = []
+    for item in raw_misc:
+        if not item.get("note"):
+            continue
+        norm = item.get("text", "").strip()[:100].lower()
+        if (item["prompt_id"], norm) in negative_texts:
+            excluded_misc += 1
+            continue
+        filtered_misc.append(item)
+
+    # Group need_second_review by (prompt_id, text) for dedup
+    nsr_groups: dict[tuple[str, str], list] = {}
+    for item in filtered_nsr:
+        key = (item["prompt_id"], item.get("text", "")[:200])
+        nsr_groups.setdefault(key, []).append(item)
+
+    grouped_nsr = []
+    for (pid, text), items in nsr_groups.items():
+        first = items[0]
+        grouped_nsr.append({
+            "prompt_id": pid,
+            "product_label": first.get("product_label", ""),
+            "company": first.get("company", ""),
+            "reviewer": first.get("reviewer", ""),
+            "text": first.get("text", ""),
+            "dimensions": [
+                {
+                    "dimension": it["dimension"],
+                    "score": it["score"],
+                    "rejected": it.get("rejected", False),
+                    "note": it.get("note", ""),
+                    "source": it.get("source", "llm"),
+                }
+                for it in items
+            ],
+        })
+    grouped_nsr.sort(key=lambda x: (x["company"], x["prompt_id"]))
+
+    # Group misc by (prompt_id, text)
+    misc_groups: dict[tuple[str, str], list] = {}
+    for item in filtered_misc:
+        key = (item["prompt_id"], item.get("text", "")[:200])
+        misc_groups.setdefault(key, []).append(item)
+
+    grouped_misc = []
+    for (pid, text), items in misc_groups.items():
+        first = items[0]
+        grouped_misc.append({
+            "prompt_id": pid,
+            "product_label": first.get("product_label", ""),
+            "company": first.get("company", ""),
+            "reviewer": first.get("reviewer", ""),
+            "text": first.get("text", ""),
+            "note": first.get("note", ""),
+            "source": first.get("source", "human"),
+        })
+    grouped_misc.sort(key=lambda x: (x["company"], x["prompt_id"]))
+
+    return {
+        "need_second_review": grouped_nsr,
+        "misc_with_notes": grouped_misc,
+        "excluded_nsr": excluded_nsr,
+        "excluded_misc": excluded_misc,
+        "original_nsr_count": len(raw_nsr),
+        "original_misc_count": len(raw_misc),
+    }
+
+
+SECOND_REVIEW_DATA = _load_second_review_data()
+
 app = Flask(__name__)
 
 
@@ -356,6 +466,12 @@ def get_prompt(prompt_id: str):
         },
         "annotations": {"spans": spans, "notes": notes},
     })
+
+
+@app.get("/api/second_review")
+def get_second_review():
+    """Return items needing second review (excluding those already in negatives)."""
+    return jsonify(SECOND_REVIEW_DATA)
 
 
 @app.post("/api/save_annotations")

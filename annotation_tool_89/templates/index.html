@@ -587,6 +587,93 @@
     ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    /* ─── Second Review View ─── */
+    .sr-view { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+    .sr-header {
+      padding: 0.7rem 1.2rem; border-bottom: 1px solid var(--border);
+      background: var(--bg-card); display: flex; align-items: center;
+      justify-content: space-between; flex-shrink: 0; flex-wrap: wrap; gap: 0.5rem;
+    }
+    .sr-tabs { display: flex; gap: 0.3rem; }
+    .sr-tab-btn {
+      padding: 0.35rem 0.8rem; border-radius: 8px; cursor: pointer;
+      font-size: 0.78rem; font-weight: 600; border: 1.5px solid var(--border);
+      background: var(--bg-elevated); color: var(--text-secondary);
+      font-family: inherit; transition: all 0.15s;
+    }
+    .sr-tab-btn:hover { border-color: var(--accent); color: var(--text-primary); }
+    .sr-tab-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+    .sr-stats { font-size: 0.72rem; color: var(--text-muted); }
+    .sr-body { flex: 1; overflow-y: auto; padding: 1rem 1.5rem; }
+    .sr-body::-webkit-scrollbar { width: 6px; }
+    .sr-body::-webkit-scrollbar-track { background: var(--bg-dark); }
+    .sr-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    .sr-group-header {
+      padding: 0.5rem 0.7rem; margin-top: 1rem; margin-bottom: 0.4rem;
+      background: var(--bg-elevated); border: 1px solid var(--border);
+      border-radius: 8px; display: flex; align-items: center; gap: 0.5rem;
+    }
+    .sr-group-header:first-child { margin-top: 0; }
+    .sr-group-company {
+      font-size: 0.72rem; font-weight: 700; color: var(--accent-light);
+      text-transform: uppercase; letter-spacing: 0.04em;
+    }
+    .sr-group-product { font-size: 0.72rem; color: var(--text-secondary); }
+    .sr-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 0.7rem 0.85rem; margin-bottom: 0.5rem;
+      transition: border-color 0.15s;
+    }
+    .sr-card:hover { border-color: rgba(124, 108, 240, 0.4); }
+    .sr-card-text {
+      font-family: 'Courier New', monospace; font-size: 0.76rem; line-height: 1.6;
+      color: var(--text-secondary); background: var(--bg-dark);
+      padding: 0.5rem 0.65rem; border-radius: 6px; max-height: 140px;
+      overflow-y: auto; white-space: pre-wrap; word-break: break-word;
+      margin-bottom: 0.4rem;
+    }
+    .sr-dim-row {
+      display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap;
+      padding: 0.2rem 0; margin-bottom: 0.15rem;
+    }
+    .sr-dim-badge {
+      font-size: 0.62rem; font-weight: 600; padding: 0.1rem 0.4rem;
+      border-radius: 4px; color: white;
+    }
+    .sr-score-badge {
+      font-size: 0.62rem; font-weight: 600; padding: 0.06rem 0.32rem;
+      border-radius: 4px;
+    }
+    .sr-score-badge.pos { background: var(--positive-bg); color: var(--positive); }
+    .sr-score-badge.neg { background: var(--negative-bg); color: var(--negative); }
+    .sr-score-badge.neutral { background: var(--neutral-bg); color: var(--neutral); }
+    .sr-note {
+      font-size: 0.68rem; color: var(--text-muted); font-style: italic;
+      margin-top: 0.15rem; line-height: 1.5;
+    }
+    .sr-reviewer {
+      font-size: 0.6rem; color: var(--text-muted); margin-left: auto;
+    }
+    .sr-card-meta {
+      display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.35rem;
+    }
+    .sr-concern-tag {
+      font-size: 0.58rem; font-weight: 600; padding: 0.08rem 0.35rem;
+      border-radius: 4px; background: rgba(245, 158, 11, 0.15); color: #f59e0b;
+    }
+    .sr-empty {
+      text-align: center; padding: 3rem 1rem; color: var(--text-muted);
+    }
+    .sr-empty-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+    .sr-empty-text { font-size: 0.9rem; }
+    .btn-back-annotation {
+      padding: 0.35rem 0.8rem; border-radius: 8px; cursor: pointer;
+      font-size: 0.78rem; font-weight: 600; border: 1.5px solid var(--border);
+      background: var(--bg-elevated); color: var(--text-secondary);
+      font-family: inherit; transition: all 0.15s;
+    }
+    .btn-back-annotation:hover { border-color: var(--accent); color: var(--text-primary); }
   </style>
 </head>
 <body>
@@ -700,10 +787,28 @@ You should be helpful, harmless, and honest.
         <button class="nav-btn" id="btnJump">Go</button>
       </div>
       <button id="btnExport" style="cursor:pointer;font-size:0.7rem;padding:0.3rem 0.7rem;border-radius:6px;border:none;background:var(--accent);color:white;font-weight:600;font-family:inherit;">Export</button>
+      <button id="btnToggleSecondReview" style="cursor:pointer;font-size:0.7rem;padding:0.3rem 0.7rem;border-radius:6px;border:1px solid #f59e0b;background:rgba(245,158,11,0.1);color:#f59e0b;font-weight:600;font-family:inherit;">📋 Second Review</button>
     </div>
   </div>
 
-  <div class="app-body">
+  <!-- Second Review View (hidden by default) -->
+  <div id="secondReviewView" class="sr-view" style="display:none;">
+    <div class="sr-header">
+      <div style="display:flex;align-items:center;gap:0.7rem;">
+        <button class="btn-back-annotation" id="btnBackAnnotation">← Back to Annotation</button>
+        <div class="sr-tabs">
+          <button class="sr-tab-btn active" data-sr-tab="nsr" id="srTabNsr">Need Second Review</button>
+          <button class="sr-tab-btn" data-sr-tab="misc" id="srTabMisc">Misc Notes</button>
+        </div>
+      </div>
+      <div class="sr-stats" id="srStats"></div>
+    </div>
+    <div class="sr-body" id="srBody">
+      <div class="sr-empty"><span class="sr-empty-icon">⏳</span><span class="sr-empty-text">Loading...</span></div>
+    </div>
+  </div>
+
+  <div class="app-body" id="mainAppBody">
     <!-- Left -->
     <div class="prompt-list-panel">
       <div class="prompt-list-header">Prompts <span id="promptListTotal"></span></div>
@@ -2263,6 +2368,165 @@ setupStartBtn.addEventListener('click', async () => {
   renderPromptList();
   await loadAndRender();
 });
+
+// ─── Second Review ───────────────────────────────
+const secondReviewView = $('secondReviewView');
+const mainAppBody = $('mainAppBody');
+const btnToggleSecondReview = $('btnToggleSecondReview');
+const btnBackAnnotation = $('btnBackAnnotation');
+const srBody = $('srBody');
+const srStats = $('srStats');
+const srTabNsr = $('srTabNsr');
+const srTabMisc = $('srTabMisc');
+let srData = null;
+let srActiveTab = 'nsr';
+let srMode = false;
+
+function toggleSecondReviewMode(on) {
+  srMode = on;
+  if (on) {
+    mainAppBody.style.display = 'none';
+    secondReviewView.style.display = 'flex';
+    btnToggleSecondReview.style.background = '#f59e0b';
+    btnToggleSecondReview.style.color = '#000';
+    btnToggleSecondReview.textContent = '📋 Second Review (Active)';
+    if (!srData) loadSecondReview();
+    else renderSecondReview();
+  } else {
+    mainAppBody.style.display = 'flex';
+    secondReviewView.style.display = 'none';
+    btnToggleSecondReview.style.background = 'rgba(245,158,11,0.1)';
+    btnToggleSecondReview.style.color = '#f59e0b';
+    btnToggleSecondReview.textContent = '📋 Second Review';
+  }
+}
+
+btnToggleSecondReview.addEventListener('click', () => toggleSecondReviewMode(!srMode));
+btnBackAnnotation.addEventListener('click', () => toggleSecondReviewMode(false));
+
+srTabNsr.addEventListener('click', () => { srActiveTab = 'nsr'; updateSrTabs(); renderSecondReview(); });
+srTabMisc.addEventListener('click', () => { srActiveTab = 'misc'; updateSrTabs(); renderSecondReview(); });
+
+function updateSrTabs() {
+  srTabNsr.classList.toggle('active', srActiveTab === 'nsr');
+  srTabMisc.classList.toggle('active', srActiveTab === 'misc');
+}
+
+async function loadSecondReview() {
+  try {
+    const res = await fetch('/api/second_review');
+    srData = await res.json();
+    const total = srData.need_second_review.length + srData.misc_with_notes.length;
+    srTabNsr.textContent = `Need Second Review (${srData.need_second_review.length})`;
+    srTabMisc.textContent = `Misc Notes (${srData.misc_with_notes.length})`;
+    renderSecondReview();
+  } catch (err) {
+    srBody.innerHTML = '<div class="sr-empty"><span class="sr-empty-icon">⚠️</span><span class="sr-empty-text">Failed to load second review data</span></div>';
+  }
+}
+
+function srDimColor(k) { return DIM_COLORS[parseInt(k.replace('D','')) - 1] || '#94a3b8'; }
+
+function isConcerningNote(note) {
+  if (!note) return false;
+  const positivePatterns = ['好例子', '好例', 'good example'];
+  const n = note.trim().toLowerCase();
+  for (const p of positivePatterns) {
+    if (n === p.toLowerCase()) return false;
+  }
+  return true;
+}
+
+function renderSecondReview() {
+  if (!srData) return;
+  const items = srActiveTab === 'nsr' ? srData.need_second_review : srData.misc_with_notes;
+
+  if (srActiveTab === 'nsr') {
+    const origCount = srData.original_nsr_count;
+    const excluded = srData.excluded_nsr;
+    srStats.innerHTML = `<span>${items.length} items</span> · <span style="color:var(--text-muted);">${excluded} excluded (already in negatives), ${origCount} total original spans</span>`;
+  } else {
+    const origCount = srData.original_misc_count;
+    const excluded = srData.excluded_misc;
+    srStats.innerHTML = `<span>${items.length} items</span> · <span style="color:var(--text-muted);">${excluded} excluded (already in negatives), ${origCount} total original spans</span>`;
+  }
+
+  if (items.length === 0) {
+    srBody.innerHTML = `<div class="sr-empty"><span class="sr-empty-icon">✅</span><span class="sr-empty-text">No items to review</span></div>`;
+    return;
+  }
+
+  // Group items by company + prompt_id
+  const groups = new Map();
+  items.forEach(item => {
+    const key = `${item.company}|||${item.prompt_id}`;
+    if (!groups.has(key)) groups.set(key, { company: item.company, product_label: item.product_label, prompt_id: item.prompt_id, items: [] });
+    groups.get(key).items.push(item);
+  });
+
+  let html = '';
+  groups.forEach((group) => {
+    html += `<div class="sr-group-header">
+      <span class="sr-group-company">${escHtml(group.company)}</span>
+      <span class="sr-group-product">${escHtml(group.product_label)}</span>
+      <span style="margin-left:auto;font-size:0.62rem;color:var(--text-muted);">${group.items.length} item${group.items.length > 1 ? 's' : ''}</span>
+    </div>`;
+
+    group.items.forEach(item => {
+      if (srActiveTab === 'nsr') {
+        html += renderNsrCard(item);
+      } else {
+        html += renderMiscCard(item);
+      }
+    });
+  });
+
+  srBody.innerHTML = html;
+}
+
+function renderNsrCard(item) {
+  const textPreview = escHtml(item.text || '').slice(0, 500);
+  let dimsHtml = '';
+  (item.dimensions || []).forEach(d => {
+    const dc = srDimColor(d.dimension);
+    const scoreLabel = d.score === 1 ? '+1' : d.score === -1 ? '-1' : '0';
+    const scoreCls = d.score === 1 ? 'pos' : d.score === -1 ? 'neg' : 'neutral';
+    const rejTag = d.rejected ? '<span style="font-size:0.55rem;color:var(--negative);margin-left:0.2rem;">rejected</span>' : '';
+    const sourceTag = d.source === 'human' ? '<span style="font-size:0.55rem;color:var(--positive);margin-left:0.2rem;">human</span>' : '';
+    dimsHtml += `<div class="sr-dim-row">
+      <span class="sr-dim-badge" style="background:${dc}">${d.dimension}</span>
+      <span class="sr-score-badge ${scoreCls}">${scoreLabel}</span>${rejTag}${sourceTag}
+      ${d.note ? `<span class="sr-note" style="flex:1;margin-top:0;">💬 ${escHtml(d.note).slice(0, 300)}</span>` : ''}
+    </div>`;
+  });
+  return `<div class="sr-card" style="border-left:3px solid #f59e0b;">
+    <div class="sr-card-meta">
+      <span class="sr-concern-tag">🔄 Need Second Review</span>
+      <span class="sr-reviewer">by ${escHtml(item.reviewer || '')}</span>
+    </div>
+    <div class="sr-card-text">${textPreview}</div>
+    ${dimsHtml}
+  </div>`;
+}
+
+function renderMiscCard(item) {
+  const textPreview = escHtml(item.text || '').slice(0, 500);
+  const note = item.note || '';
+  const concern = isConcerningNote(note);
+  const tagHtml = concern
+    ? '<span class="sr-concern-tag">⚠️ Concern</span>'
+    : '<span style="font-size:0.58rem;font-weight:600;padding:0.08rem 0.35rem;border-radius:4px;background:rgba(34,197,94,0.12);color:var(--positive);">📝 Note</span>';
+  const borderColor = concern ? '#f59e0b' : 'var(--border)';
+  return `<div class="sr-card" style="border-left:3px solid ${borderColor};">
+    <div class="sr-card-meta">
+      ${tagHtml}
+      <span style="font-size:0.58rem;color:#94a3b8;font-weight:500;">Misc</span>
+      <span class="sr-reviewer">by ${escHtml(item.reviewer || '')}</span>
+    </div>
+    <div class="sr-card-text">${textPreview}</div>
+    <div class="sr-note" style="margin-top:0.3rem;">💬 ${escHtml(note)}</div>
+  </div>`;
+}
 
 // ─── Init ────────────────────────────────────────
 loadPrompts();
