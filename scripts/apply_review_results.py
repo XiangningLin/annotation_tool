@@ -93,6 +93,8 @@ def apply_conflict_decisions(merged, conf_reviews, log):
 
         final_set = set((l["dim"], l["score"]) for l in final_labels)
 
+        MAX_LEN_DIFF = 50  # only modify spans whose length is close to the overlap text
+
         for pid, prompt in merged["prompts"].items():
             if prompt["company"] != company:
                 continue
@@ -104,13 +106,16 @@ def apply_conflict_decisions(merged, conf_reviews, log):
                 if overlap_clean not in span_text and span_text not in overlap_clean:
                     continue
 
+                # Skip spans that are much larger than the overlap text
+                if abs(len(span_text) - len(overlap_clean)) > MAX_LEN_DIFF:
+                    continue
+
                 old_dim = span["dimension"]
                 old_score = span.get("score")
 
                 if (old_dim, old_score) in final_set:
                     continue
 
-                # Find best replacement: same dim if available, otherwise first label
                 replacement = None
                 for fl in final_labels:
                     if fl["dim"] == old_dim:
