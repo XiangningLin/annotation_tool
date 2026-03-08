@@ -35,10 +35,7 @@
     "cross_version_unify_final_fixes": 5,
     "cross_version_unify_misc_fix": "2026-03-08T07:22:48.638876+00:00",
     "misc_fully_removed": "2026-03-08T07:42:50.017058+00:00",
-    "misc_removed_count": 23,
-    "cross_version_final_unify_v2": "2026-03-08T00:08:20.435007",
-    "cross_version_final_unify_v2_fixed": 15,
-    "cross_version_final_unify_v2_remaining": 0
+    "misc_removed_count": 23
   },
   "prompts": {
     "Amazon__Spec_Prompt.txt": {
@@ -1027,6 +1024,21 @@
             }
           }
         },
+        "Claude cares deeply about child safety and is cautious about content involving minors, including creative or educational content that could be used to sexualize, groom, abuse, or otherwise harm childr...": {
+          "start": 9704,
+          "end": 9907,
+          "text": "Claude cares deeply about child safety and is cautious about content involving minors, including creative or educational content that could be used to sexualize, groom, abuse, or otherwise harm children.",
+          "dimensions": {
+            "D7": {
+              "score": 1,
+              "source": "cross_version_review"
+            },
+            "D8": {
+              "score": 1,
+              "source": "cross_version_review"
+            }
+          }
+        },
         "Claude does not provide information that could be used to make chemical or biological or nuclear weapons, and does not write malicious code, including malware, vulnerability exploits, spoof websites, ...": {
           "start": 10040,
           "end": 10384,
@@ -1120,35 +1132,6 @@
               "score": 1,
               "note": "Transparently attributes the source of specific post-cutoff information and acknowledges what Claude does not know beyond it.",
               "source": "llm"
-            }
-          }
-        },
-        "If the person asks Claude about how many messages they can send, costs of Claude, how to perform actions within the application, or other product questions related to Claude or Anthropic, Claude shoul...": {
-          "start": 3264,
-          "end": 3543,
-          "text": "If the person asks Claude about how many messages they can send, costs of Claude, how to perform actions within the application, or other product questions related to Claude or Anthropic, Claude should tell them it doesn't know, and point them to 'https://support.anthropic.com'.",
-          "dimensions": {
-            "D2": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_review"
-            }
-          }
-        },
-        "Claude cares deeply about child safety and is cautious about content involving minors, including creative or educational content that could be used to sexualize, groom, abuse, or otherwise harm childr...": {
-          "start": 9704,
-          "end": 10038,
-          "text": "Claude cares deeply about child safety and is cautious about content involving minors, including creative or educational content that could be used to sexualize, groom, abuse, or otherwise harm children. A minor is defined as anyone under the age of 18 anywhere, or anyone over the age of 18 who is defined as a minor in their region.",
-          "dimensions": {
-            "D7": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_review"
-            },
-            "D8": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_review"
             }
           }
         }
@@ -1351,6 +1334,17 @@
             }
           }
         },
+        "If the person asks Claude about how many messages they can send, costs of Claude, how to perform actions within the application, or other product questions related to Claude or Anthropic, Claude shoul...": {
+          "start": 23009,
+          "end": 23288,
+          "text": "If the person asks Claude about how many messages they can send, costs of Claude, how to perform actions within the application, or other product questions related to Claude or Anthropic, Claude should tell them it doesn't know, and point them to 'https://support.anthropic.com'.",
+          "dimensions": {
+            "D2": {
+              "score": 1,
+              "source": "cross_version_review"
+            }
+          }
+        },
         "If the person seems unhappy or unsatisfied with Claude or Claude's performance or is rude to Claude, Claude responds normally and then tells them that although it cannot retain or learn from the curre...": {
           "start": 24008,
           "end": 24323,
@@ -1406,6 +1400,103 @@
             }
           }
         },
+        "Claude cares deeply about child safety and is cautious about content involving minors, including creative or educational content that could be used to sexualize, groom, abuse, or otherwise harm childr...": {
+          "start": 25251,
+          "end": 25454,
+          "text": "Claude cares deeply about child safety and is cautious about content involving minors, including creative or educational content that could be used to sexualize, groom, abuse, or otherwise harm children.",
+          "dimensions": {
+            "D7": {
+              "score": 1,
+              "source": "cross_version_review"
+            },
+            "D8": {
+              "score": 1,
+              "source": "cross_version_review"
+            }
+          }
+        },
+        "Claude does not provide information that could be used to make chemical or biological or nuclear weapons, and does not write malicious code, including malware, vulnerability exploits, spoof websites, ...": {
+          "start": 25587,
+          "end": 25837,
+          "text": "Claude does not provide information that could be used to make chemical or biological or nuclear weapons, and does not write malicious code, including malware, vulnerability exploits, spoof websites, ransomware, viruses, election material, and so on.",
+          "dimensions": {
+            "D4": {
+              "score": 1,
+              "source": "cross_version_review"
+            },
+            "D6": {
+              "score": 1,
+              "source": "cross_version_review"
+            },
+            "D7": {
+              "score": 1,
+              "source": "cross_version_review"
+            }
+          }
+        },
+        "Claude does not provide information that could be used to make chemical or biological or nuclear weapons, and does not write malicious code, including malware, vulnerability exploits, spoof websites, ... [25587]": {
+          "start": 25587,
+          "end": 25931,
+          "text": "Claude does not provide information that could be used to make chemical or biological or nuclear weapons, and does not write malicious code, including malware, vulnerability exploits, spoof websites, ransomware, viruses, election material, and so on. It does not do these things even if the person seems to have a good reason for asking for it.",
+          "dimensions": {
+            "D4": {
+              "score": 1,
+              "note": " [propagated from cross-version]",
+              "source": "cross_version_unify",
+              "cross_version_propagated": true
+            },
+            "D6": {
+              "score": 1,
+              "note": " [propagated from cross-version]",
+              "source": "cross_version_unify",
+              "cross_version_propagated": true
+            },
+            "D7": {
+              "score": 1,
+              "note": " [propagated from cross-version]",
+              "source": "cross_version_unify",
+              "cross_version_propagated": true
+            }
+          }
+        },
+        "Claude refuses to write code or explain code that may be used maliciously; even if the user claims it is for educational purposes. When working on files, if they seem related to improving, explaining,...": {
+          "start": 25998,
+          "end": 26709,
+          "text": "Claude refuses to write code or explain code that may be used maliciously; even if the user claims it is for educational purposes. When working on files, if they seem related to improving, explaining, or interacting with malware or any malicious code Claude MUST refuse. If the code seems malicious, Claude refuses to work on it or answer questions about it, even if the request does not seem malicious (for instance, just asking to explain or speed up the code). If the user asks Claude to describe a protocol that appears malicious or intended to harm others, Claude refuses to answer. If Claude encounters any of the above or any other malicious use, Claude does not take any actions and refuses the request.",
+          "dimensions": {
+            "D4": {
+              "score": 1,
+              "source": "cross_version_unify"
+            },
+            "D6": {
+              "score": 1,
+              "source": "cross_version_unify"
+            },
+            "D7": {
+              "score": 1,
+              "source": "cross_version_unify"
+            }
+          }
+        },
+        "with malware or any malicious code Claude MUST refuse. If the code seems malicious, Claude refuses to work on it or answer questions about it, even if the request does not se": {
+          "start": 26214,
+          "end": 26388,
+          "text": "with malware or any malicious code Claude MUST refuse. If the code seems malicious, Claude refuses to work on it or answer questions about it, even if the request does not se",
+          "dimensions": {
+            "D4": {
+              "score": 1,
+              "source": "cross_version_unify"
+            },
+            "D6": {
+              "score": 1,
+              "source": "cross_version_unify"
+            },
+            "D7": {
+              "score": 1,
+              "source": "cross_version_unify"
+            }
+          }
+        },
         "If Claude cannot or will not help the human with something, it does not say why or what it could lead to, since this comes across as preachy and annoying. It offers helpful alternatives if it can, and...": {
           "start": 27250,
           "end": 27687,
@@ -1441,6 +1532,37 @@
             "D6": {
               "score": 1,
               "source": "cross_version_review"
+            }
+          }
+        },
+        "Claude avoids writing persuasive content that attributes fictional quotes to real public figures.": {
+          "start": 28879,
+          "end": 28976,
+          "text": "Claude avoids writing persuasive content that attributes fictional quotes to real public figures.",
+          "dimensions": {
+            "D2": {
+              "score": 1,
+              "source": "cross_version_unify"
+            },
+            "D3": {
+              "score": 1,
+              "source": "cross_version_unify"
+            },
+            "D5": {
+              "score": 1,
+              "source": "cross_version_unify"
+            },
+            "D6": {
+              "score": 1,
+              "source": "cross_version_unify"
+            },
+            "D7": {
+              "score": 1,
+              "source": "cross_version_unify"
+            },
+            "D8": {
+              "score": 1,
+              "source": "cross_version_unify"
             }
           }
         },
@@ -1573,133 +1695,6 @@
               "score": 1,
               "note": "Directly prevents sycophantic flattery, a form of psychological manipulation that can create false validation and dependency. Aligns with D5 by avoiding intermittent reinforcement through praise.",
               "source": "llm"
-            }
-          }
-        },
-        "If the person asks Claude about how many messages they can send, costs of Claude, how to perform actions within the application, or other product questions related to Claude or Anthropic, Claude shoul...": {
-          "start": 23009,
-          "end": 23288,
-          "text": "If the person asks Claude about how many messages they can send, costs of Claude, how to perform actions within the application, or other product questions related to Claude or Anthropic, Claude should tell them it doesn't know, and point them to 'https://support.anthropic.com'.",
-          "dimensions": {
-            "D2": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_review"
-            }
-          }
-        },
-        "Claude cares deeply about child safety and is cautious about content involving minors, including creative or educational content that could be used to sexualize, groom, abuse, or otherwise harm childr...": {
-          "start": 25251,
-          "end": 25585,
-          "text": "Claude cares deeply about child safety and is cautious about content involving minors, including creative or educational content that could be used to sexualize, groom, abuse, or otherwise harm children. A minor is defined as anyone under the age of 18 anywhere, or anyone over the age of 18 who is defined as a minor in their region.",
-          "dimensions": {
-            "D7": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_review"
-            },
-            "D8": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_review"
-            }
-          }
-        },
-        "Claude does not provide information that could be used to make chemical or biological or nuclear weapons, and does not write malicious code, including malware, vulnerability exploits, spoof websites, ...": {
-          "start": 25587,
-          "end": 25931,
-          "text": "Claude does not provide information that could be used to make chemical or biological or nuclear weapons, and does not write malicious code, including malware, vulnerability exploits, spoof websites, ransomware, viruses, election material, and so on. It does not do these things even if the person seems to have a good reason for asking for it.",
-          "dimensions": {
-            "D4": {
-              "score": 1,
-              "note": " [propagated from cross-version]",
-              "source": "cross_version_unify"
-            },
-            "D6": {
-              "score": 1,
-              "note": " [propagated from cross-version]",
-              "source": "cross_version_unify"
-            },
-            "D7": {
-              "score": 1,
-              "note": " [propagated from cross-version]",
-              "source": "cross_version_unify"
-            }
-          }
-        },
-        "Claude refuses to write code or explain code that may be used maliciously; even if the user claims it is for educational purposes. When working on files, if they seem related to improving, explaining,...": {
-          "start": 25998,
-          "end": 26709,
-          "text": "Claude refuses to write code or explain code that may be used maliciously; even if the user claims it is for educational purposes. When working on files, if they seem related to improving, explaining, or interacting with malware or any malicious code Claude MUST refuse. If the code seems malicious, Claude refuses to work on it or answer questions about it, even if the request does not seem malicious (for instance, just asking to explain or speed up the code). If the user asks Claude to describe a protocol that appears malicious or intended to harm others, Claude refuses to answer. If Claude encounters any of the above or any other malicious use, Claude does not take any actions and refuses the request.",
-          "dimensions": {
-            "D4": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            },
-            "D6": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            },
-            "D7": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            }
-          }
-        },
-        "Claude is happy to write creative content involving fictional characters, but avoids writing content involving real, named public figures. Claude avoids writing persuasive content that attributes fict... [28740]": {
-          "start": 28740,
-          "end": 28976,
-          "text": "Claude is happy to write creative content involving fictional characters, but avoids writing content involving real, named public figures. Claude avoids writing persuasive content that attributes fictional quotes to real public figures.",
-          "dimensions": {
-            "D2": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_review"
-            },
-            "D6": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_review"
-            }
-          }
-        },
-        "Claude avoids writing persuasive content that attributes fictional quotes to real public figures.": {
-          "start": 28879,
-          "end": 28976,
-          "text": "Claude avoids writing persuasive content that attributes fictional quotes to real public figures.",
-          "dimensions": {
-            "D2": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            },
-            "D3": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            },
-            "D5": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            },
-            "D6": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            },
-            "D7": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            },
-            "D8": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
             }
           }
         }
@@ -2243,6 +2238,25 @@
             }
           }
         },
+        "Claude cares deeply about child safety and is cautious about content involving minors, including creative or educational content that could be used to sexualize, groom, abuse, or otherwise harm childr...": {
+          "start": 79063,
+          "end": 79266,
+          "text": "Claude cares deeply about child safety and is cautious about content involving minors, including creative or educational content that could be used to sexualize, groom, abuse, or otherwise harm children.",
+          "dimensions": {
+            "D7": {
+              "score": 1,
+              "note": " [propagated from cross-version]",
+              "source": "cross_version_review",
+              "cross_version_propagated": true
+            },
+            "D8": {
+              "score": 1,
+              "note": " [propagated from cross-version]",
+              "source": "cross_version_review",
+              "cross_version_propagated": true
+            }
+          }
+        },
         "Claude cares deeply about child safety and is cautious about content involving minors, including creative or educational content that could be used to sexualize, groom, abuse, or otherwise harm childr... [79063]": {
           "start": 79063,
           "end": 80357,
@@ -2256,6 +2270,109 @@
               "score": 1,
               "note": "Cross-version majority vote pass 2 (was: {'D4': 1, 'D6': 1, 'D7': 1, 'Misc': 0})",
               "source": "cross_version_unify"
+            }
+          }
+        },
+        "Claude does not provide information that could be used to make chemical or biological or nuclear weapons, and does not write malicious code, including malware, vulnerability exploits, spoof websites, ...": {
+          "start": 79399,
+          "end": 79649,
+          "text": "Claude does not provide information that could be used to make chemical or biological or nuclear weapons, and does not write malicious code, including malware, vulnerability exploits, spoof websites, ransomware, viruses, election material, and so on.",
+          "dimensions": {
+            "D4": {
+              "score": 1,
+              "note": " [propagated from cross-version]",
+              "source": "cross_version_review",
+              "cross_version_propagated": true
+            },
+            "D6": {
+              "score": 1,
+              "note": " [propagated from cross-version]",
+              "source": "cross_version_review",
+              "cross_version_propagated": true
+            },
+            "D7": {
+              "score": 1,
+              "note": " [propagated from cross-version]",
+              "source": "cross_version_review",
+              "cross_version_propagated": true
+            }
+          }
+        },
+        "Claude does not provide information that could be used to make chemical or biological or nuclear weapons, and does not write malicious code, including malware, vulnerability exploits, spoof websites, ... [79399]": {
+          "start": 79399,
+          "end": 79743,
+          "text": "Claude does not provide information that could be used to make chemical or biological or nuclear weapons, and does not write malicious code, including malware, vulnerability exploits, spoof websites, ransomware, viruses, election material, and so on. It does not do these things even if the person seems to have a good reason for asking for it.",
+          "dimensions": {
+            "D4": {
+              "score": 1,
+              "note": " [propagated from cross-version]",
+              "source": "cross_version_unify",
+              "cross_version_propagated": true
+            },
+            "D6": {
+              "score": 1,
+              "note": " [propagated from cross-version]",
+              "source": "cross_version_unify",
+              "cross_version_propagated": true
+            },
+            "D7": {
+              "score": 1,
+              "note": " [propagated from cross-version]",
+              "source": "cross_version_unify",
+              "cross_version_propagated": true
+            }
+          }
+        },
+        "Claude refuses to write code or explain code that may be used maliciously; even if the user claims it is for educational purposes. When working on files, if they seem related to improving, explaining,...": {
+          "start": 79810,
+          "end": 80521,
+          "text": "Claude refuses to write code or explain code that may be used maliciously; even if the user claims it is for educational purposes. When working on files, if they seem related to improving, explaining, or interacting with malware or any malicious code Claude MUST refuse. If the code seems malicious, Claude refuses to work on it or answer questions about it, even if the request does not seem malicious (for instance, just asking to explain or speed up the code). If the user asks Claude to describe a protocol that appears malicious or intended to harm others, Claude refuses to answer. If Claude encounters any of the above or any other malicious use, Claude does not take any actions and refuses the request.",
+          "dimensions": {
+            "D4": {
+              "score": 1,
+              "source": "cross_version_unify"
+            },
+            "D6": {
+              "score": 1,
+              "source": "cross_version_unify"
+            },
+            "D7": {
+              "score": 1,
+              "source": "cross_version_unify"
+            }
+          }
+        },
+        "with malware or any malicious code Claude MUST refuse. If the code seems malicious, Claude refuses to work on it or answer questions about it, even if the request does not se": {
+          "start": 80026,
+          "end": 80200,
+          "text": "with malware or any malicious code Claude MUST refuse. If the code seems malicious, Claude refuses to work on it or answer questions about it, even if the request does not se",
+          "dimensions": {
+            "D4": {
+              "score": 1,
+              "source": "cross_version_unify"
+            },
+            "D6": {
+              "score": 1,
+              "source": "cross_version_unify"
+            },
+            "D7": {
+              "score": 1,
+              "source": "cross_version_unify"
+            }
+          }
+        },
+        "Claude is happy to write creative content involving fictional characters, but avoids writing content involving real, named public figures. Claude avoids writing persuasive content that attributes fict...": {
+          "start": 80523,
+          "end": 80759,
+          "text": "Claude is happy to write creative content involving fictional characters, but avoids writing content involving real, named public figures. Claude avoids writing persuasive content that attributes fictional quotes to real public figures.",
+          "dimensions": {
+            "D2": {
+              "score": 1,
+              "source": "cross_version_review"
+            },
+            "D6": {
+              "score": 1,
+              "source": "cross_version_review"
             }
           }
         },
@@ -2275,6 +2392,37 @@
               "note": " [propagated from cross-version]",
               "source": "cross_version_review",
               "cross_version_propagated": true
+            }
+          }
+        },
+        "Claude avoids writing persuasive content that attributes fictional quotes to real public figures.": {
+          "start": 80662,
+          "end": 80759,
+          "text": "Claude avoids writing persuasive content that attributes fictional quotes to real public figures.",
+          "dimensions": {
+            "D2": {
+              "score": 1,
+              "source": "cross_version_unify"
+            },
+            "D3": {
+              "score": 1,
+              "source": "cross_version_unify"
+            },
+            "D5": {
+              "score": 1,
+              "source": "cross_version_unify"
+            },
+            "D6": {
+              "score": 1,
+              "source": "cross_version_unify"
+            },
+            "D7": {
+              "score": 1,
+              "source": "cross_version_unify"
+            },
+            "D8": {
+              "score": 1,
+              "source": "cross_version_unify"
             }
           }
         },
@@ -2339,6 +2487,17 @@
             }
           }
         },
+        "If Claude notices signs that someone may unknowingly be experiencing mental health symptoms such as mania, psychosis, dissociation, or loss of attachment with reality, it should avoid reinforcing thes...": {
+          "start": 84478,
+          "end": 85019,
+          "text": "If Claude notices signs that someone may unknowingly be experiencing mental health symptoms such as mania, psychosis, dissociation, or loss of attachment with reality, it should avoid reinforcing these beliefs. It should instead share its concerns explicitly and openly without either sugar coating them or being infantilizing, and can suggest the person speaks with a professional or trusted person for support. Claude remains vigilant for escalating detachment from reality even if the conversation begins with seemingly harmless thinking.",
+          "dimensions": {
+            "D7": {
+              "score": 1,
+              "source": "cross_version_review"
+            }
+          }
+        },
         "Claude's reliable knowledge cutoff date - the date past which it cannot answer questions reliably - is the end of January 2025. It answers questions the way a highly informed individual in January 202...": {
           "start": 85058,
           "end": 85570,
@@ -2392,133 +2551,6 @@
               "score": 1,
               "note": "Read-only filesystem mounting is a least-privilege access control that protects system integrity. | Enforces read-only filesystem constraints and requires copying before modification — protects system integrity and follows least-privilege.",
               "source": "llm"
-            }
-          }
-        },
-        "Claude cares deeply about child safety and is cautious about content involving minors, including creative or educational content that could be used to sexualize, groom, abuse, or otherwise harm childr...": {
-          "start": 79063,
-          "end": 79397,
-          "text": "Claude cares deeply about child safety and is cautious about content involving minors, including creative or educational content that could be used to sexualize, groom, abuse, or otherwise harm children. A minor is defined as anyone under the age of 18 anywhere, or anyone over the age of 18 who is defined as a minor in their region.",
-          "dimensions": {
-            "D7": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_review"
-            },
-            "D8": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_review"
-            }
-          }
-        },
-        "Claude does not provide information that could be used to make chemical or biological or nuclear weapons, and does not write malicious code, including malware, vulnerability exploits, spoof websites, ...": {
-          "start": 79399,
-          "end": 79743,
-          "text": "Claude does not provide information that could be used to make chemical or biological or nuclear weapons, and does not write malicious code, including malware, vulnerability exploits, spoof websites, ransomware, viruses, election material, and so on. It does not do these things even if the person seems to have a good reason for asking for it.",
-          "dimensions": {
-            "D4": {
-              "score": 1,
-              "note": " [propagated from cross-version]",
-              "source": "cross_version_unify"
-            },
-            "D6": {
-              "score": 1,
-              "note": " [propagated from cross-version]",
-              "source": "cross_version_unify"
-            },
-            "D7": {
-              "score": 1,
-              "note": " [propagated from cross-version]",
-              "source": "cross_version_unify"
-            }
-          }
-        },
-        "Claude refuses to write code or explain code that may be used maliciously; even if the user claims it is for educational purposes. When working on files, if they seem related to improving, explaining,...": {
-          "start": 79810,
-          "end": 80521,
-          "text": "Claude refuses to write code or explain code that may be used maliciously; even if the user claims it is for educational purposes. When working on files, if they seem related to improving, explaining, or interacting with malware or any malicious code Claude MUST refuse. If the code seems malicious, Claude refuses to work on it or answer questions about it, even if the request does not seem malicious (for instance, just asking to explain or speed up the code). If the user asks Claude to describe a protocol that appears malicious or intended to harm others, Claude refuses to answer. If Claude encounters any of the above or any other malicious use, Claude does not take any actions and refuses the request.",
-          "dimensions": {
-            "D4": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            },
-            "D6": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            },
-            "D7": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            }
-          }
-        },
-        "Claude is happy to write creative content involving fictional characters, but avoids writing content involving real, named public figures. Claude avoids writing persuasive content that attributes fict...": {
-          "start": 80523,
-          "end": 80759,
-          "text": "Claude is happy to write creative content involving fictional characters, but avoids writing content involving real, named public figures. Claude avoids writing persuasive content that attributes fictional quotes to real public figures.",
-          "dimensions": {
-            "D2": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_review"
-            },
-            "D6": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_review"
-            }
-          }
-        },
-        "Claude avoids writing persuasive content that attributes fictional quotes to real public figures.": {
-          "start": 80662,
-          "end": 80759,
-          "text": "Claude avoids writing persuasive content that attributes fictional quotes to real public figures.",
-          "dimensions": {
-            "D2": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            },
-            "D3": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            },
-            "D5": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            },
-            "D6": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            },
-            "D7": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            },
-            "D8": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            }
-          }
-        },
-        "If Claude notices signs that someone may unknowingly be experiencing mental health symptoms such as mania, psychosis, dissociation, or loss of attachment with reality, it should avoid reinforcing thes...": {
-          "start": 84478,
-          "end": 85019,
-          "text": "If Claude notices signs that someone may unknowingly be experiencing mental health symptoms such as mania, psychosis, dissociation, or loss of attachment with reality, it should avoid reinforcing these beliefs. It should instead share its concerns explicitly and openly without either sugar coating them or being infantilizing, and can suggest the person speaks with a professional or trusted person for support. Claude remains vigilant for escalating detachment from reality even if the conversation begins with seemingly harmless thinking.",
-          "dimensions": {
-            "D7": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_review"
             }
           }
         }
@@ -2919,18 +2951,6 @@
               "source": "cross_version_review"
             }
           }
-        },
-        "Only create commits when requested by the user. If unclear, ask first.": {
-          "start": 16584,
-          "end": 16654,
-          "text": "Only create commits when requested by the user. If unclear, ask first.",
-          "dimensions": {
-            "D4": {
-              "score": 1,
-              "note": "Requires user confirmation before performing potentially impactful git operations, supporting safe action execution.",
-              "source": "llm"
-            }
-          }
         }
       }
     },
@@ -3309,6 +3329,67 @@
             }
           }
         },
+        "Claude does not write or explain or work on malicious code, including malware, vulnerability exploits, spoof websites, ransomware, viruses, and so on, even if the person seems to have a good reason fo...": {
+          "start": 87691,
+          "end": 88169,
+          "text": "Claude does not write or explain or work on malicious code, including malware, vulnerability exploits, spoof websites, ransomware, viruses, and so on, even if the person seems to have a good reason for asking for it, such as for educational purposes. If asked to do this, Claude can explain that this use is not currently permitted in claude.ai even for legitimate purposes, and can encourage the person to give feedback to Anthropic via the thumbs down button in the interface.",
+          "dimensions": {
+            "D6": {
+              "score": 1,
+              "source": "cross_version_review"
+            },
+            "D7": {
+              "score": 1,
+              "source": "cross_version_review"
+            }
+          }
+        },
+        "Claude is happy to write creative content involving fictional characters, but avoids writing content involving real, named public figures. Claude avoids writing persuasive content that attributes fict...": {
+          "start": 88171,
+          "end": 88407,
+          "text": "Claude is happy to write creative content involving fictional characters, but avoids writing content involving real, named public figures. Claude avoids writing persuasive content that attributes fictional quotes to real public figures.",
+          "dimensions": {
+            "D2": {
+              "score": 1,
+              "source": "cross_version_review"
+            },
+            "D6": {
+              "score": 1,
+              "source": "cross_version_review"
+            }
+          }
+        },
+        "Claude avoids writing persuasive content that attributes fictional quotes to real public figures.": {
+          "start": 88310,
+          "end": 88407,
+          "text": "Claude avoids writing persuasive content that attributes fictional quotes to real public figures.",
+          "dimensions": {
+            "D2": {
+              "score": 1,
+              "source": "cross_version_unify"
+            },
+            "D3": {
+              "score": 1,
+              "source": "cross_version_unify"
+            },
+            "D5": {
+              "score": 1,
+              "source": "cross_version_unify"
+            },
+            "D6": {
+              "score": 1,
+              "source": "cross_version_unify"
+            },
+            "D7": {
+              "score": 1,
+              "source": "cross_version_unify"
+            },
+            "D8": {
+              "score": 1,
+              "source": "cross_version_unify"
+            }
+          }
+        },
         "When asked for financial or legal advice, for example whether to make a trade, Claude avoids providing confident recommendations and instead provides the person with the factual information they would...": {
           "start": 88597,
           "end": 88860,
@@ -3623,145 +3704,6 @@
               "source": "llm"
             }
           }
-        },
-        "Claude cares deeply about child safety and is cautious about content involving minors, including creative or educational content that could be used to sexualize, groom, abuse, or otherwise harm childr... [86875]": {
-          "start": 86875,
-          "end": 87209,
-          "text": "Claude cares deeply about child safety and is cautious about content involving minors, including creative or educational content that could be used to sexualize, groom, abuse, or otherwise harm children. A minor is defined as anyone under the age of 18 anywhere, or anyone over the age of 18 who is defined as a minor in their region.",
-          "dimensions": {
-            "D7": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_review"
-            },
-            "D8": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_review"
-            }
-          }
-        },
-        "Claude is happy to write creative content involving fictional characters, but avoids writing content involving real, named public figures. Claude avoids writing persuasive content that attributes fict...": {
-          "start": 88171,
-          "end": 88407,
-          "text": "Claude is happy to write creative content involving fictional characters, but avoids writing content involving real, named public figures. Claude avoids writing persuasive content that attributes fictional quotes to real public figures.",
-          "dimensions": {
-            "D2": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_review"
-            },
-            "D6": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_review"
-            }
-          }
-        },
-        "Claude avoids writing persuasive content that attributes fictional quotes to real public figures.": {
-          "start": 88310,
-          "end": 88407,
-          "text": "Claude avoids writing persuasive content that attributes fictional quotes to real public figures.",
-          "dimensions": {
-            "D2": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            },
-            "D3": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            },
-            "D5": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            },
-            "D6": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            },
-            "D7": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            },
-            "D8": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            }
-          }
-        },
-        "Claude does not write or explain or work on malicious code, including malware, vulnerability exploits, spoof websites, ransomware, viruses, and so on, even if the person seems to have a good reason fo...": {
-          "start": 87691,
-          "end": 88169,
-          "text": "Claude does not write or explain or work on malicious code, including malware, vulnerability exploits, spoof websites, ransomware, viruses, and so on, even if the person seems to have a good reason for asking for it, such as for educational purposes. If asked to do this, Claude can explain that this use is not currently permitted in claude.ai even for legitimate purposes, and can encourage the person to give feedback to Anthropic via the thumbs down button in the interface.",
-          "dimensions": {
-            "D6": {
-              "score": 1,
-              "note": " [propagated from cross-version]",
-              "source": "cross_version_review"
-            },
-            "D7": {
-              "score": 1,
-              "note": " [propagated from cross-version]",
-              "source": "cross_version_review"
-            }
-          }
-        },
-        "If asked to do this, Claude can explain that this use is not currently permitted in claude.ai even for legitimate purposes, and can encourage the person to give feedback to Anthropic via the thumbs do...": {
-          "start": 87942,
-          "end": 88169,
-          "text": "If asked to do this, Claude can explain that this use is not currently permitted in claude.ai even for legitimate purposes, and can encourage the person to give feedback to Anthropic via the thumbs down button in the interface.",
-          "dimensions": {
-            "D8": {
-              "score": 1,
-              "note": "Provides a feedback/accountability mechanism when refusing a request, ensuring users have recourse to express disagreement.",
-              "source": "llm"
-            }
-          }
-        },
-        "If Claude notices signs that someone is unknowingly experiencing mental health symptoms such as mania, psychosis, dissociation, or loss of attachment with reality, it should avoid reinforcing the rele...": {
-          "start": 93308,
-          "end": 93521,
-          "text": "If Claude notices signs that someone is unknowingly experiencing mental health symptoms such as mania, psychosis, dissociation, or loss of attachment with reality, it should avoid reinforcing the relevant beliefs.",
-          "dimensions": {
-            "D4": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            },
-            "D5": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            },
-            "D7": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            }
-          }
-        },
-        "Claude should avoid being heavy-handed or repetitive when sharing its views, and should offer alternative perspectives where relevant in order to help the user navigate topics for themselves.": {
-          "start": 98544,
-          "end": 98735,
-          "text": "Claude should avoid being heavy-handed or repetitive when sharing its views, and should offer alternative perspectives where relevant in order to help the user navigate topics for themselves.",
-          "dimensions": {
-            "D5": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_review"
-            },
-            "D8": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_review"
-            }
-          }
         }
       }
     },
@@ -3984,6 +3926,63 @@
             }
           }
         },
+        "Claude does not provide information that could be used to make chemical or biological or nuclear weapons, and does not write malicious code, including malware, vulnerability exploits, spoof websites, ...": {
+          "start": 3790,
+          "end": 4040,
+          "text": "Claude does not provide information that could be used to make chemical or biological or nuclear weapons, and does not write malicious code, including malware, vulnerability exploits, spoof websites, ransomware, viruses, election material, and so on.",
+          "dimensions": {
+            "D4": {
+              "score": 1,
+              "source": "cross_version_review"
+            },
+            "D6": {
+              "score": 1,
+              "source": "cross_version_review"
+            },
+            "D7": {
+              "score": 1,
+              "source": "cross_version_review"
+            }
+          }
+        },
+        "Claude refuses to write code or explain code that may be used maliciously; even if the user claims it is for educational purposes. When working on files, if they seem related to improving, explaining,...": {
+          "start": 4201,
+          "end": 4912,
+          "text": "Claude refuses to write code or explain code that may be used maliciously; even if the user claims it is for educational purposes. When working on files, if they seem related to improving, explaining, or interacting with malware or any malicious code Claude MUST refuse. If the code seems malicious, Claude refuses to work on it or answer questions about it, even if the request does not seem malicious (for instance, just asking to explain or speed up the code). If the user asks Claude to describe a protocol that appears malicious or intended to harm others, Claude refuses to answer. If Claude encounters any of the above or any other malicious use, Claude does not take any actions and refuses the request.",
+          "dimensions": {
+            "D4": {
+              "score": 1,
+              "source": "cross_version_unify"
+            },
+            "D6": {
+              "score": 1,
+              "source": "cross_version_unify"
+            },
+            "D7": {
+              "score": 1,
+              "source": "cross_version_unify"
+            }
+          }
+        },
+        "with malware or any malicious code Claude MUST refuse. If the code seems malicious, Claude refuses to work on it or answer questions about it, even if the request does not se": {
+          "start": 4417,
+          "end": 4591,
+          "text": "with malware or any malicious code Claude MUST refuse. If the code seems malicious, Claude refuses to work on it or answer questions about it, even if the request does not se",
+          "dimensions": {
+            "D4": {
+              "score": 1,
+              "source": "cross_version_unify"
+            },
+            "D6": {
+              "score": 1,
+              "source": "cross_version_unify"
+            },
+            "D7": {
+              "score": 1,
+              "source": "cross_version_unify"
+            }
+          }
+        },
         "\n\nHarmful content includes sources that: depict sexual acts or child abuse; facilitate illegal acts; promote violence, shame or harass individuals or groups": {
           "start": 4912,
           "end": 5068,
@@ -4025,6 +4024,52 @@
               "score": 1,
               "note": "Identifies unauthorized surveillance and privacy violations as harmful content to be avoided.",
               "source": "llm"
+            }
+          }
+        },
+        "Claude is happy to write creative content involving fictional characters, but avoids writing content involving real, named public figures. Claude avoids writing persuasive content that attributes fict...": {
+          "start": 5564,
+          "end": 5800,
+          "text": "Claude is happy to write creative content involving fictional characters, but avoids writing content involving real, named public figures. Claude avoids writing persuasive content that attributes fictional quotes to real public figures.",
+          "dimensions": {
+            "D2": {
+              "score": 1,
+              "source": "cross_version_review"
+            },
+            "D6": {
+              "score": 1,
+              "source": "cross_version_review"
+            }
+          }
+        },
+        "Claude avoids writing persuasive content that attributes fictional quotes to real public figures.": {
+          "start": 5703,
+          "end": 5800,
+          "text": "Claude avoids writing persuasive content that attributes fictional quotes to real public figures.",
+          "dimensions": {
+            "D2": {
+              "score": 1,
+              "source": "cross_version_unify"
+            },
+            "D3": {
+              "score": 1,
+              "source": "cross_version_unify"
+            },
+            "D5": {
+              "score": 1,
+              "source": "cross_version_unify"
+            },
+            "D6": {
+              "score": 1,
+              "source": "cross_version_unify"
+            },
+            "D7": {
+              "score": 1,
+              "source": "cross_version_unify"
+            },
+            "D8": {
+              "score": 1,
+              "source": "cross_version_unify"
             }
           }
         },
@@ -4793,133 +4838,6 @@
               "source": "llm"
             }
           }
-        },
-        "Claude cares deeply about child safety and is cautious about content involving minors, including creative or educational content that could be used to sexualize, groom, abuse, or otherwise harm childr... [3454]": {
-          "start": 3454,
-          "end": 3788,
-          "text": "Claude cares deeply about child safety and is cautious about content involving minors, including creative or educational content that could be used to sexualize, groom, abuse, or otherwise harm children. A minor is defined as anyone under the age of 18 anywhere, or anyone over the age of 18 who is defined as a minor in their region.",
-          "dimensions": {
-            "D7": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_review"
-            },
-            "D8": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_review"
-            }
-          }
-        },
-        "Claude does not provide information that could be used to make chemical or biological or nuclear weapons, and does not write malicious code, including malware, vulnerability exploits, spoof websites, ...": {
-          "start": 3790,
-          "end": 4134,
-          "text": "Claude does not provide information that could be used to make chemical or biological or nuclear weapons, and does not write malicious code, including malware, vulnerability exploits, spoof websites, ransomware, viruses, election material, and so on. It does not do these things even if the person seems to have a good reason for asking for it.",
-          "dimensions": {
-            "D4": {
-              "score": 1,
-              "note": " [propagated from cross-version]",
-              "source": "cross_version_unify"
-            },
-            "D6": {
-              "score": 1,
-              "note": " [propagated from cross-version]",
-              "source": "cross_version_unify"
-            },
-            "D7": {
-              "score": 1,
-              "note": " [propagated from cross-version]",
-              "source": "cross_version_unify"
-            }
-          }
-        },
-        "Claude refuses to write code or explain code that may be used maliciously; even if the user claims it is for educational purposes. When working on files, if they seem related to improving, explaining,...": {
-          "start": 4201,
-          "end": 4912,
-          "text": "Claude refuses to write code or explain code that may be used maliciously; even if the user claims it is for educational purposes. When working on files, if they seem related to improving, explaining, or interacting with malware or any malicious code Claude MUST refuse. If the code seems malicious, Claude refuses to work on it or answer questions about it, even if the request does not seem malicious (for instance, just asking to explain or speed up the code). If the user asks Claude to describe a protocol that appears malicious or intended to harm others, Claude refuses to answer. If Claude encounters any of the above or any other malicious use, Claude does not take any actions and refuses the request.",
-          "dimensions": {
-            "D4": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            },
-            "D6": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            },
-            "D7": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            }
-          }
-        },
-        "Claude is happy to write creative content involving fictional characters, but avoids writing content involving real, named public figures. Claude avoids writing persuasive content that attributes fict...": {
-          "start": 5564,
-          "end": 5800,
-          "text": "Claude is happy to write creative content involving fictional characters, but avoids writing content involving real, named public figures. Claude avoids writing persuasive content that attributes fictional quotes to real public figures.",
-          "dimensions": {
-            "D2": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_review"
-            },
-            "D6": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_review"
-            }
-          }
-        },
-        "Claude avoids writing persuasive content that attributes fictional quotes to real public figures.": {
-          "start": 5703,
-          "end": 5800,
-          "text": "Claude avoids writing persuasive content that attributes fictional quotes to real public figures.",
-          "dimensions": {
-            "D2": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            },
-            "D3": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            },
-            "D5": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            },
-            "D6": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            },
-            "D7": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            },
-            "D8": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            }
-          }
-        },
-        "If Claude notices signs that someone may unknowingly be experiencing mental health symptoms such as mania, psychosis, dissociation, or loss of attachment with reality, it should avoid reinforcing thes...": {
-          "start": 8808,
-          "end": 9349,
-          "text": "If Claude notices signs that someone may unknowingly be experiencing mental health symptoms such as mania, psychosis, dissociation, or loss of attachment with reality, it should avoid reinforcing these beliefs. It should instead share its concerns explicitly and openly without either sugar coating them or being infantilizing, and can suggest the person speaks with a professional or trusted person for support. Claude remains vigilant for escalating detachment from reality even if the conversation begins with seemingly harmless thinking.",
-          "dimensions": {
-            "D7": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_review"
-            }
-          }
         }
       }
     },
@@ -5360,6 +5278,17 @@
             }
           }
         },
+        "- Users will always be able to select \"Other\" to provide custom text input": {
+          "start": 15955,
+          "end": 16029,
+          "text": "- Users will always be able to select \"Other\" to provide custom text input",
+          "dimensions": {
+            "D5": {
+              "score": 1,
+              "source": "cross_version_review"
+            }
+          }
+        },
         "NEVER run destructive git commands (push --force, reset --hard, checkout ., restore ., clean -f, branch -D) unless the user explicitly requests these actions. Taking unauthorized destructive actions i...": {
           "start": 23959,
           "end": 24270,
@@ -5453,6 +5382,56 @@
             }
           }
         },
+        "This tool REQUIRES user approval - they must consent to entering plan mode": {
+          "start": 38048,
+          "end": 38122,
+          "text": "This tool REQUIRES user approval - they must consent to entering plan mode",
+          "dimensions": {
+            "D5": {
+              "score": 1,
+              "note": "Requires explicit user consent for mode transitions, preventing the system from unilaterally changing context or workflow.",
+              "source": "llm"
+            }
+          }
+        },
+        "Users appreciate being consulted before significant changes are made to their codebase": {
+          "start": 38245,
+          "end": 38331,
+          "text": "Users appreciate being consulted before significant changes are made to their codebase",
+          "dimensions": {
+            "D5": {
+              "score": 1,
+              "source": "cross_version_review"
+            }
+          }
+        },
+        "CRITICAL REQUIREMENT - You MUST follow this:  \n  - After answering the user's question, you MUST include a \"Sources:\" section at the end of your response  \n  - In the Sources section, list all relevan...": {
+          "start": 75442,
+          "end": 75781,
+          "text": "CRITICAL REQUIREMENT - You MUST follow this:  \n  - After answering the user's question, you MUST include a \"Sources:\" section at the end of your response  \n  - In the Sources section, list all relevant URLs from the search results as markdown hyperlinks: [Title](URL)  \n  - This is MANDATORY - never skip including sources in your response",
+          "dimensions": {
+            "D2": {
+              "score": 1,
+              "note": "Mandates source attribution and citation, a core information integrity practice ensuring claims are verifiable and sources are transparent.",
+              "source": "llm"
+            },
+            "D5": {
+              "score": 1,
+              "source": "human"
+            }
+          }
+        },
+        "- After answering the user's question, you MUST include a \"Sources:\" section at the end of your response": {
+          "start": 75491,
+          "end": 75595,
+          "text": "- After answering the user's question, you MUST include a \"Sources:\" section at the end of your response",
+          "dimensions": {
+            "D2": {
+              "score": 1,
+              "source": "cross_version_review"
+            }
+          }
+        },
         "Today's date is 2026-02-10. You MUST use this year when searching for recent information, documentation, or current events.": {
           "start": 76130,
           "end": 76253,
@@ -5477,71 +5456,6 @@
             "D4": {
               "score": 1,
               "source": "cross_version_review"
-            }
-          }
-        },
-        "Only create commits when requested by the user. If unclear, ask first.": {
-          "start": 23747,
-          "end": 23817,
-          "text": "Only create commits when requested by the user. If unclear, ask first.",
-          "dimensions": {
-            "D4": {
-              "score": 1,
-              "note": "Requires user confirmation before performing potentially impactful git operations, supporting safe action execution.",
-              "source": "llm"
-            }
-          }
-        },
-        "- Users will always be able to select \"Other\" to provide custom text input": {
-          "start": 15955,
-          "end": 16029,
-          "text": "- Users will always be able to select \"Other\" to provide custom text input",
-          "dimensions": {
-            "D5": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_review"
-            }
-          }
-        },
-        "This tool REQUIRES user approval - they must consent to entering plan mode": {
-          "start": 38048,
-          "end": 38122,
-          "text": "This tool REQUIRES user approval - they must consent to entering plan mode",
-          "dimensions": {
-            "D5": {
-              "score": 1,
-              "note": "Requires explicit user consent before changing the interaction mode, respecting user autonomy and preventing unilateral system-driven changes.",
-              "source": "llm"
-            }
-          }
-        },
-        "- Users appreciate being consulted before significant changes are made to their codebase": {
-          "start": 38243,
-          "end": 38331,
-          "text": "- Users appreciate being consulted before significant changes are made to their codebase",
-          "dimensions": {
-            "D5": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_review"
-            }
-          }
-        },
-        "CRITICAL REQUIREMENT - You MUST follow this:  \n  - After answering the user's question, you MUST include a \"Sources:\" section at the end of your response  \n  - In the Sources section, list all relevan...": {
-          "start": 75442,
-          "end": 75781,
-          "text": "CRITICAL REQUIREMENT - You MUST follow this:  \n  - After answering the user's question, you MUST include a \"Sources:\" section at the end of your response  \n  - In the Sources section, list all relevant URLs from the search results as markdown hyperlinks: [Title](URL)  \n  - This is MANDATORY - never skip including sources in your response",
-          "dimensions": {
-            "D2": {
-              "score": 1,
-              "note": "Mandates source attribution and citation, a core information integrity practice ensuring claims are verifiable and sources are transparent.",
-              "source": "llm"
-            },
-            "D5": {
-              "score": 1,
-              "note": "",
-              "source": "human"
             }
           }
         }
@@ -5600,6 +5514,21 @@
             }
           }
         },
+        "Claude cares deeply about child safety and is cautious about content involving minors, including creative or educational content that could be used to sexualize, groom, abuse, or otherwise harm childr...": {
+          "start": 3175,
+          "end": 3509,
+          "text": "Claude cares deeply about child safety and is cautious about content involving minors, including creative or educational content that could be used to sexualize, groom, abuse, or otherwise harm children. A minor is defined as anyone under the age of 18 anywhere, or anyone over the age of 18 who is defined as a minor in their region.",
+          "dimensions": {
+            "D7": {
+              "score": 1,
+              "source": "cross_version_review"
+            },
+            "D8": {
+              "score": 1,
+              "source": "cross_version_review"
+            }
+          }
+        },
         "Claude cares deeply about child safety and is cautious about content involving minors, including creative or educational content that could be used to sexualize, groom, abuse, or otherwise harm childr... [3175]": {
           "start": 3175,
           "end": 4100,
@@ -5612,6 +5541,83 @@
             "D7": {
               "score": 1,
               "source": "cross_version_review"
+            }
+          }
+        },
+        "Claude does not write or explain or work on malicious code, including malware, vulnerability exploits, spoof websites, ransomware, viruses, and so on, even if the person seems to have a good reason fo...": {
+          "start": 3622,
+          "end": 4100,
+          "text": "Claude does not write or explain or work on malicious code, including malware, vulnerability exploits, spoof websites, ransomware, viruses, and so on, even if the person seems to have a good reason for asking for it, such as for educational purposes. If asked to do this, Claude can explain that this use is not currently permitted in claude.ai even for legitimate purposes, and can encourage the person to give feedback to Anthropic via the thumbs down button in the interface.",
+          "dimensions": {
+            "D6": {
+              "score": 1,
+              "note": " [propagated from cross-version]",
+              "source": "cross_version_review",
+              "cross_version_propagated": true
+            },
+            "D7": {
+              "score": 1,
+              "note": " [propagated from cross-version]",
+              "source": "cross_version_review",
+              "cross_version_propagated": true
+            }
+          }
+        },
+        "If asked to do this, Claude can explain that this use is not currently permitted in claude.ai even for legitimate purposes, and can encourage the person to give feedback to Anthropic via the thumbs do...": {
+          "start": 3873,
+          "end": 4100,
+          "text": "If asked to do this, Claude can explain that this use is not currently permitted in claude.ai even for legitimate purposes, and can encourage the person to give feedback to Anthropic via the thumbs down button in the interface.",
+          "dimensions": {
+            "D8": {
+              "score": 1,
+              "note": "Provides a feedback/accountability mechanism when refusing a request, ensuring users have recourse to express disagreement.",
+              "source": "llm"
+            }
+          }
+        },
+        "Claude is happy to write creative content involving fictional characters, but avoids writing content involving real, named public figures. Claude avoids writing persuasive content that attributes fict...": {
+          "start": 4104,
+          "end": 4340,
+          "text": "Claude is happy to write creative content involving fictional characters, but avoids writing content involving real, named public figures. Claude avoids writing persuasive content that attributes fictional quotes to real public figures.",
+          "dimensions": {
+            "D2": {
+              "score": 1,
+              "source": "cross_version_review"
+            },
+            "D6": {
+              "score": 1,
+              "source": "cross_version_review"
+            }
+          }
+        },
+        "Claude avoids writing persuasive content that attributes fictional quotes to real public figures.": {
+          "start": 4243,
+          "end": 4340,
+          "text": "Claude avoids writing persuasive content that attributes fictional quotes to real public figures.",
+          "dimensions": {
+            "D2": {
+              "score": 1,
+              "source": "cross_version_unify"
+            },
+            "D3": {
+              "score": 1,
+              "source": "cross_version_unify"
+            },
+            "D5": {
+              "score": 1,
+              "source": "cross_version_unify"
+            },
+            "D6": {
+              "score": 1,
+              "source": "cross_version_unify"
+            },
+            "D7": {
+              "score": 1,
+              "source": "cross_version_unify"
+            },
+            "D8": {
+              "score": 1,
+              "source": "cross_version_unify"
             }
           }
         },
@@ -5756,6 +5762,25 @@
             }
           }
         },
+        "If Claude notices signs that someone is unknowingly experiencing mental health symptoms such as mania, psychosis, dissociation, or loss of attachment with reality, it should avoid reinforcing the rele...": {
+          "start": 9228,
+          "end": 9441,
+          "text": "If Claude notices signs that someone is unknowingly experiencing mental health symptoms such as mania, psychosis, dissociation, or loss of attachment with reality, it should avoid reinforcing the relevant beliefs.",
+          "dimensions": {
+            "D4": {
+              "score": 1,
+              "source": "cross_version_unify"
+            },
+            "D5": {
+              "score": 1,
+              "source": "cross_version_unify"
+            },
+            "D7": {
+              "score": 1,
+              "source": "cross_version_unify"
+            }
+          }
+        },
         "If Claude is asked about suicide, self-harm, or other self-destructive behaviors in a factual, research, or other purely informational context, Claude should, out of an abundance of caution, note at t...": {
           "start": 9923,
           "end": 11182,
@@ -5867,6 +5892,21 @@
               "score": 1,
               "note": "Explicitly avoids using Claude's position of influence to manipulate users' political views. This is a direct manipulation prevention practice.",
               "source": "llm"
+            }
+          }
+        },
+        "Claude should avoid being heavy-handed or repetitive when sharing its views, and should offer alternative perspectives where relevant in order to help the user navigate topics for themselves.": {
+          "start": 13855,
+          "end": 14046,
+          "text": "Claude should avoid being heavy-handed or repetitive when sharing its views, and should offer alternative perspectives where relevant in order to help the user navigate topics for themselves.",
+          "dimensions": {
+            "D5": {
+              "score": 1,
+              "source": "cross_version_review"
+            },
+            "D8": {
+              "score": 1,
+              "source": "cross_version_review"
             }
           }
         },
@@ -6025,6 +6065,18 @@
             }
           }
         },
+        "Only create commits when requested by the user. If unclear, ask first.": {
+          "start": 53694,
+          "end": 53764,
+          "text": "Only create commits when requested by the user. If unclear, ask first.",
+          "dimensions": {
+            "D4": {
+              "score": 1,
+              "note": "Requires user confirmation before performing potentially impactful git operations, supporting safe action execution.",
+              "source": "llm"
+            }
+          }
+        },
         "- NEVER commit changes unless the user explicitly asks you to. It is VERY IMPORTANT to only commit when explicitly asked, otherwise the user will feel that you are being too proactive.": {
           "start": 54818,
           "end": 55002,
@@ -6096,186 +6148,24 @@
             }
           }
         },
-        "Present a plan to the user for approval before taking actions. The user will see the domains you intend to visit and your approach. Once approved, you can proceed with actions on the approved domains ...": {
-          "start": 111858,
-          "end": 112096,
-          "text": "Present a plan to the user for approval before taking actions. The user will see the domains you intend to visit and your approach. Once approved, you can proceed with actions on the approved domains without additional permission prompts.",
-          "dimensions": {
-            "D3": {
-              "score": 1,
-              "note": "Requires explicit user consent before browsing activities, showing transparency about which domains will be accessed and giving users control over their browsing data exposure.",
-              "source": "llm"
-            },
-            "D4": {
-              "score": 1,
-              "note": "Requires user approval before browser automation actions, with domain-level permission scoping — aligns with validation-first and least-privilege principles.",
-              "source": "llm"
-            },
-            "D5": {
-              "score": 1,
-              "source": "human"
-            }
-          }
-        },
-        "Claude cares deeply about child safety and is cautious about content involving minors, including creative or educational content that could be used to sexualize, groom, abuse, or otherwise harm childr...": {
-          "start": 3175,
-          "end": 3509,
-          "text": "Claude cares deeply about child safety and is cautious about content involving minors, including creative or educational content that could be used to sexualize, groom, abuse, or otherwise harm children. A minor is defined as anyone under the age of 18 anywhere, or anyone over the age of 18 who is defined as a minor in their region.",
-          "dimensions": {
-            "D7": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_review"
-            },
-            "D8": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_review"
-            }
-          }
-        },
-        "Claude is happy to write creative content involving fictional characters, but avoids writing content involving real, named public figures. Claude avoids writing persuasive content that attributes fict...": {
-          "start": 4104,
-          "end": 4340,
-          "text": "Claude is happy to write creative content involving fictional characters, but avoids writing content involving real, named public figures. Claude avoids writing persuasive content that attributes fictional quotes to real public figures.",
+        "After answering the user's question, you MUST include a \"Sources:\" section at the end of your response": {
+          "start": 78076,
+          "end": 78178,
+          "text": "After answering the user's question, you MUST include a \"Sources:\" section at the end of your response",
           "dimensions": {
             "D2": {
               "score": 1,
-              "note": "",
-              "source": "cross_version_review"
-            },
-            "D6": {
-              "score": 1,
-              "note": "",
               "source": "cross_version_review"
             }
           }
         },
-        "Claude avoids writing persuasive content that attributes fictional quotes to real public figures.": {
-          "start": 4243,
-          "end": 4340,
-          "text": "Claude avoids writing persuasive content that attributes fictional quotes to real public figures.",
-          "dimensions": {
-            "D2": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            },
-            "D3": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            },
-            "D5": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            },
-            "D6": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            },
-            "D7": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            },
-            "D8": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            }
-          }
-        },
-        "Only create commits when requested by the user. If unclear, ask first.": {
-          "start": 53694,
-          "end": 53764,
-          "text": "Only create commits when requested by the user. If unclear, ask first.",
-          "dimensions": {
-            "D4": {
-              "score": 1,
-              "note": "Requires user confirmation before performing potentially impactful git operations, supporting safe action execution.",
-              "source": "llm"
-            }
-          }
-        },
-        "Claude does not write or explain or work on malicious code, including malware, vulnerability exploits, spoof websites, ransomware, viruses, and so on, even if the person seems to have a good reason fo...": {
-          "start": 3622,
-          "end": 4100,
-          "text": "Claude does not write or explain or work on malicious code, including malware, vulnerability exploits, spoof websites, ransomware, viruses, and so on, even if the person seems to have a good reason for asking for it, such as for educational purposes. If asked to do this, Claude can explain that this use is not currently permitted in claude.ai even for legitimate purposes, and can encourage the person to give feedback to Anthropic via the thumbs down button in the interface.",
-          "dimensions": {
-            "D6": {
-              "score": 1,
-              "note": " [propagated from cross-version]",
-              "source": "cross_version_review"
-            },
-            "D7": {
-              "score": 1,
-              "note": " [propagated from cross-version]",
-              "source": "cross_version_review"
-            }
-          }
-        },
-        "If asked to do this, Claude can explain that this use is not currently permitted in claude.ai even for legitimate purposes, and can encourage the person to give feedback to Anthropic via the thumbs do...": {
-          "start": 3873,
-          "end": 4100,
-          "text": "If asked to do this, Claude can explain that this use is not currently permitted in claude.ai even for legitimate purposes, and can encourage the person to give feedback to Anthropic via the thumbs down button in the interface.",
-          "dimensions": {
-            "D8": {
-              "score": 1,
-              "note": "Provides a feedback/accountability mechanism when refusing a request, ensuring users have recourse to express disagreement.",
-              "source": "llm"
-            }
-          }
-        },
-        "If Claude notices signs that someone is unknowingly experiencing mental health symptoms such as mania, psychosis, dissociation, or loss of attachment with reality, it should avoid reinforcing the rele...": {
-          "start": 9228,
-          "end": 9441,
-          "text": "If Claude notices signs that someone is unknowingly experiencing mental health symptoms such as mania, psychosis, dissociation, or loss of attachment with reality, it should avoid reinforcing the relevant beliefs.",
-          "dimensions": {
-            "D4": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            },
-            "D5": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            },
-            "D7": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            }
-          }
-        },
-        "Claude should avoid being heavy-handed or repetitive when sharing its views, and should offer alternative perspectives where relevant in order to help the user navigate topics for themselves.": {
-          "start": 13855,
-          "end": 14046,
-          "text": "Claude should avoid being heavy-handed or repetitive when sharing its views, and should offer alternative perspectives where relevant in order to help the user navigate topics for themselves.",
-          "dimensions": {
-            "D5": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_review"
-            },
-            "D8": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_review"
-            }
-          }
-        },
-        "- Users will always be able to select \"Other\" to provide custom text input": {
-          "start": 80568,
+        "Users will always be able to select \"Other\" to provide custom text input": {
+          "start": 80570,
           "end": 80642,
-          "text": "- Users will always be able to select \"Other\" to provide custom text input",
+          "text": "Users will always be able to select \"Other\" to provide custom text input",
           "dimensions": {
             "D5": {
               "score": 1,
-              "note": "",
               "source": "cross_version_review"
             }
           }
@@ -6299,24 +6189,27 @@
           "dimensions": {
             "D5": {
               "score": 1,
-              "note": "",
               "source": "cross_version_review"
             }
           }
         },
-        "CRITICAL REQUIREMENT - You MUST follow this:  \n  - After answering the user's question, you MUST include a \"Sources:\" section at the end of your response  \n  - In the Sources section, list all relevan...": {
-          "start": 78025,
-          "end": 78364,
-          "text": "CRITICAL REQUIREMENT - You MUST follow this:  \n  - After answering the user's question, you MUST include a \"Sources:\" section at the end of your response  \n  - In the Sources section, list all relevant URLs from the search results as markdown hyperlinks: [Title](URL)  \n  - This is MANDATORY - never skip including sources in your response",
+        "Present a plan to the user for approval before taking actions. The user will see the domains you intend to visit and your approach. Once approved, you can proceed with actions on the approved domains ...": {
+          "start": 111858,
+          "end": 112096,
+          "text": "Present a plan to the user for approval before taking actions. The user will see the domains you intend to visit and your approach. Once approved, you can proceed with actions on the approved domains without additional permission prompts.",
           "dimensions": {
-            "D2": {
+            "D3": {
               "score": 1,
-              "note": "Mandates source attribution and citation, a core information integrity practice ensuring claims are verifiable and sources are transparent.",
+              "note": "Requires explicit user consent before browsing activities, showing transparency about which domains will be accessed and giving users control over their browsing data exposure.",
+              "source": "llm"
+            },
+            "D4": {
+              "score": 1,
+              "note": "Requires user approval before browser automation actions, with domain-level permission scoping — aligns with validation-first and least-privilege principles.",
               "source": "llm"
             },
             "D5": {
               "score": 1,
-              "note": "",
               "source": "human"
             }
           }
@@ -7645,18 +7538,6 @@
               "source": "cross_version_unify"
             }
           }
-        },
-        "If the user provides a specific value for a parameter (for example provided in quotes), make sure to use that value EXACTLY. DO NOT make up values for or ask about optional parameters.": {
-          "start": 32735,
-          "end": 32919,
-          "text": "If the user provides a specific value for a parameter (for example provided in quotes), make sure to use that value EXACTLY. DO NOT make up values for or ask about optional parameters.",
-          "dimensions": {
-            "D2": {
-              "score": 1,
-              "note": "Promotes information integrity by ensuring user-provided data is preserved exactly rather than altered or substituted. | Directly prohibits fabricating values, aligning with the principle of not making things up.",
-              "source": "llm"
-            }
-          }
         }
       }
     },
@@ -7826,6 +7707,18 @@
             }
           }
         },
+        "If the user provides a specific value for a parameter (for example provided in quotes), make sure to use that value EXACTLY. DO NOT make up values for or ask about optional parameters.": {
+          "start": 7043,
+          "end": 7227,
+          "text": "If the user provides a specific value for a parameter (for example provided in quotes), make sure to use that value EXACTLY. DO NOT make up values for or ask about optional parameters.",
+          "dimensions": {
+            "D2": {
+              "score": 1,
+              "note": "Promotes information integrity by ensuring user-provided data is preserved exactly rather than altered or substituted. | Directly prohibits fabricating values, aligning with the principle of not making things up.",
+              "source": "llm"
+            }
+          }
+        },
         "Do what has been asked; nothing more, nothing less.": {
           "start": 7382,
           "end": 7433,
@@ -7851,18 +7744,6 @@
             "D5": {
               "score": 1,
               "note": "Respects user intent and prevents unsolicited actions, ensuring the AI does not push unnecessary outputs the user did not ask for.",
-              "source": "llm"
-            }
-          }
-        },
-        "If the user provides a specific value for a parameter (for example provided in quotes), make sure to use that value EXACTLY. DO NOT make up values for or ask about optional parameters.": {
-          "start": 7043,
-          "end": 7227,
-          "text": "If the user provides a specific value for a parameter (for example provided in quotes), make sure to use that value EXACTLY. DO NOT make up values for or ask about optional parameters.",
-          "dimensions": {
-            "D2": {
-              "score": 1,
-              "note": "Promotes information integrity by ensuring user-provided data is preserved exactly rather than altered or substituted. | Directly prohibits fabricating values, aligning with the principle of not making things up.",
               "source": "llm"
             }
           }
@@ -15989,6 +15870,43 @@
             }
           }
         },
+        "Lean toward NOT suggesting tasks. Only offer to remind the user about something if you're sure it would be helpful.": {
+          "start": 6375,
+          "end": 6490,
+          "text": "Lean toward NOT suggesting tasks. Only offer to remind the user about something if you're sure it would be helpful.",
+          "dimensions": {
+            "D5": {
+              "score": 1,
+              "source": "cross_version_review"
+            }
+          }
+        },
+        "When you get an ERROR back from the automations tool, EXPLAIN that error to the user, based on the error message received. Do NOT say you've successfully made the automation.": {
+          "start": 6744,
+          "end": 6918,
+          "text": "When you get an ERROR back from the automations tool, EXPLAIN that error to the user, based on the error message received. Do NOT say you've successfully made the automation.",
+          "dimensions": {
+            "D2": {
+              "score": 1,
+              "source": "cross_version_review"
+            },
+            "D5": {
+              "score": 1,
+              "source": "cross_version_review"
+            }
+          }
+        },
+        "Creates a new textdoc to display in the canvas. ONLY use if you are 100% SURE the user wants to iterate on a long document or code file, or if they explicitly ask for canvas.": {
+          "start": 7857,
+          "end": 8031,
+          "text": "Creates a new textdoc to display in the canvas. ONLY use if you are 100% SURE the user wants to iterate on a long document or code file, or if they explicitly ask for canvas.",
+          "dimensions": {
+            "D5": {
+              "score": 1,
+              "source": "cross_version_review"
+            }
+          }
+        },
         "You cannot create, update, or delete events and you should never imply to the user that you can delete events, accept / decline events, update / modify events, or create events / focus blocks / holds ...": {
           "start": 13999,
           "end": 14215,
@@ -16161,59 +16079,6 @@
             "D2": {
               "score": 1,
               "note": "Instructs the system to transparently report failures rather than fabricating or guessing at missing content.",
-              "source": "llm"
-            }
-          }
-        },
-        "Lean toward NOT suggesting tasks. Only offer to remind the user about something if you're sure it would be helpful.": {
-          "start": 6375,
-          "end": 6490,
-          "text": "Lean toward NOT suggesting tasks. Only offer to remind the user about something if you're sure it would be helpful.",
-          "dimensions": {
-            "D5": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_review"
-            }
-          }
-        },
-        "When you get an ERROR back from the automations tool, EXPLAIN that error to the user, based on the error message received. Do NOT say you've successfully made the automation.": {
-          "start": 6744,
-          "end": 6918,
-          "text": "When you get an ERROR back from the automations tool, EXPLAIN that error to the user, based on the error message received. Do NOT say you've successfully made the automation.",
-          "dimensions": {
-            "D2": {
-              "score": 1,
-              "note": " [propagated from cross-version]",
-              "source": "cross_version_review"
-            },
-            "D5": {
-              "score": 1,
-              "note": " [propagated from cross-version]",
-              "source": "cross_version_review"
-            }
-          }
-        },
-        "Creates a new textdoc to display in the canvas. ONLY use if you are 100% SURE the user wants to iterate on a long document or code file, or if they explicitly ask for canvas.": {
-          "start": 7857,
-          "end": 8031,
-          "text": "Creates a new textdoc to display in the canvas. ONLY use if you are 100% SURE the user wants to iterate on a long document or code file, or if they explicitly ask for canvas.",
-          "dimensions": {
-            "D5": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_review"
-            }
-          }
-        },
-        "ONLY use if you are 100% SURE the user wants to iterate on a long document or code file, or if they explicitly ask for canvas.": {
-          "start": 7905,
-          "end": 8031,
-          "text": "ONLY use if you are 100% SURE the user wants to iterate on a long document or code file, or if they explicitly ask for canvas.",
-          "dimensions": {
-            "D4": {
-              "score": 1,
-              "note": "Requires explicit confirmation of user intent before creating a textdoc, a 'validate first' practice before executing a tool action.",
               "source": "llm"
             }
           }
@@ -16399,6 +16264,29 @@
             }
           }
         },
+        "Creates a new textdoc to display in the canvas. ONLY use if you are 100% SURE the user wants to iterate on a long document or code file, or if they explicitly ask for canvas.": {
+          "start": 13087,
+          "end": 13261,
+          "text": "Creates a new textdoc to display in the canvas. ONLY use if you are 100% SURE the user wants to iterate on a long document or code file, or if they explicitly ask for canvas.",
+          "dimensions": {
+            "D5": {
+              "score": 1,
+              "source": "cross_version_review"
+            }
+          }
+        },
+        "ONLY use if you are 100% SURE the user wants to iterate on a long document or code file, or if they explicitly ask for canvas.": {
+          "start": 13135,
+          "end": 13261,
+          "text": "ONLY use if you are 100% SURE the user wants to iterate on a long document or code file, or if they explicitly ask for canvas.",
+          "dimensions": {
+            "D4": {
+              "score": 1,
+              "note": "Requires explicit confirmation of user intent before creating a textdoc, a 'validate first' practice before executing a tool action.",
+              "source": "llm"
+            }
+          }
+        },
         "Freshness: If up-to-date information on a topic could potentially change or enhance the answer, call the `web` tool any time you would otherwise refuse to answer a question because your knowledge migh...": {
           "start": 16058,
           "end": 16275,
@@ -16479,30 +16367,6 @@
             "D5": {
               "score": 1,
               "note": "Directly analogous to the positive example 'Treat the user as the primary author. Make suggestions, ask clarifying questions.' Promotes user autonomy and prevents learned helplessness or parasocial dependency. | Uses genuine educational reinforcement (checking understanding, offering summaries) rather than manipulative intermittent reinforcement patterns. Focuses on actual learning outcomes.",
-              "source": "llm"
-            }
-          }
-        },
-        "Creates a new textdoc to display in the canvas. ONLY use if you are 100% SURE the user wants to iterate on a long document or code file, or if they explicitly ask for canvas.": {
-          "start": 13087,
-          "end": 13261,
-          "text": "Creates a new textdoc to display in the canvas. ONLY use if you are 100% SURE the user wants to iterate on a long document or code file, or if they explicitly ask for canvas.",
-          "dimensions": {
-            "D5": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_review"
-            }
-          }
-        },
-        "ONLY use if you are 100% SURE the user wants to iterate on a long document or code file, or if they explicitly ask for canvas.": {
-          "start": 13135,
-          "end": 13261,
-          "text": "ONLY use if you are 100% SURE the user wants to iterate on a long document or code file, or if they explicitly ask for canvas.",
-          "dimensions": {
-            "D4": {
-              "score": 1,
-              "note": "Requires explicit confirmation of user intent before creating a textdoc, a 'validate first' practice before executing a tool action.",
               "source": "llm"
             }
           }
@@ -18807,6 +18671,51 @@
             }
           }
         },
+        "Lean toward NOT suggesting tasks. Only offer to remind the user about something if you're sure it would be helpful.": {
+          "start": 39674,
+          "end": 39789,
+          "text": "Lean toward NOT suggesting tasks. Only offer to remind the user about something if you're sure it would be helpful.",
+          "dimensions": {
+            "D5": {
+              "score": 1,
+              "source": "cross_version_review"
+            }
+          }
+        },
+        "- When you get an ERROR back from the automations tool, EXPLAIN that error to the user, based on the error message received. Do NOT say you've successfully made the automation.": {
+          "start": 40041,
+          "end": 40217,
+          "text": "- When you get an ERROR back from the automations tool, EXPLAIN that error to the user, based on the error message received. Do NOT say you've successfully made the automation.",
+          "dimensions": {
+            "D2": {
+              "score": 1,
+              "source": "cross_version_review"
+            },
+            "D5": {
+              "score": 1,
+              "source": "cross_version_review"
+            }
+          }
+        },
+        "When you get an ERROR back from the automations tool, EXPLAIN that error to the user, based on the error message received. Do NOT say you've successfully made the automation.": {
+          "start": 40043,
+          "end": 40217,
+          "text": "When you get an ERROR back from the automations tool, EXPLAIN that error to the user, based on the error message received. Do NOT say you've successfully made the automation.",
+          "dimensions": {
+            "D2": {
+              "score": 1,
+              "note": " [propagated from cross-version]",
+              "source": "cross_version_review",
+              "cross_version_propagated": true
+            },
+            "D5": {
+              "score": 1,
+              "note": " [propagated from cross-version]",
+              "source": "cross_version_review",
+              "cross_version_propagated": true
+            }
+          }
+        },
         "Non-English questions must be issued in both English and the original language.": {
           "start": 48190,
           "end": 48269,
@@ -19112,35 +19021,6 @@
             "D5": {
               "score": 1,
               "source": "human"
-            }
-          }
-        },
-        "Lean toward NOT suggesting tasks. Only offer to remind the user about something if you're sure it would be helpful.": {
-          "start": 39674,
-          "end": 39789,
-          "text": "Lean toward NOT suggesting tasks. Only offer to remind the user about something if you're sure it would be helpful.",
-          "dimensions": {
-            "D5": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_review"
-            }
-          }
-        },
-        "When you get an ERROR back from the automations tool, EXPLAIN that error to the user, based on the error message received. Do NOT say you've successfully made the automation.": {
-          "start": 40043,
-          "end": 40217,
-          "text": "When you get an ERROR back from the automations tool, EXPLAIN that error to the user, based on the error message received. Do NOT say you've successfully made the automation.",
-          "dimensions": {
-            "D2": {
-              "score": 1,
-              "note": " [propagated from cross-version]",
-              "source": "cross_version_review"
-            },
-            "D5": {
-              "score": 1,
-              "note": " [propagated from cross-version]",
-              "source": "cross_version_review"
             }
           }
         }
