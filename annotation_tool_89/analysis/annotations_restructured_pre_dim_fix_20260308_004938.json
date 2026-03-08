@@ -45,9 +45,7 @@
       "mid_word_fixed": 36,
       "whitespace_trimmed": 121,
       "spans_rekeyed": 204
-    },
-    "fuzzy_cross_version_unify": "2026-03-08T00:53:05.418893",
-    "fuzzy_cross_version_unify_groups": 19
+    }
   },
   "prompts": {
     "Amazon__Spec_Prompt.txt": {
@@ -1022,11 +1020,6 @@
             "D6": {
               "score": 1,
               "source": "cross_version_unify"
-            },
-            "D8": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
             }
           }
         },
@@ -1663,6 +1656,23 @@
             }
           }
         },
+        "Claude is happy to write creative content involving fictional characters, but avoids writing content involving real, named public figures. Claude avoids writing persuasive content that attributes fict... [28740]": {
+          "start": 28740,
+          "end": 28976,
+          "text": "Claude is happy to write creative content involving fictional characters, but avoids writing content involving real, named public figures. Claude avoids writing persuasive content that attributes fictional quotes to real public figures.",
+          "dimensions": {
+            "D2": {
+              "score": 1,
+              "note": "",
+              "source": "cross_version_review"
+            },
+            "D6": {
+              "score": 1,
+              "note": "",
+              "source": "cross_version_review"
+            }
+          }
+        },
         "Claude avoids writing persuasive content that attributes fictional quotes to real public figures.": {
           "start": 28879,
           "end": 28976,
@@ -1673,12 +1683,27 @@
               "note": "",
               "source": "cross_version_unify"
             },
-            "D8": {
+            "D3": {
+              "score": 1,
+              "note": "",
+              "source": "cross_version_unify"
+            },
+            "D5": {
               "score": 1,
               "note": "",
               "source": "cross_version_unify"
             },
             "D6": {
+              "score": 1,
+              "note": "",
+              "source": "cross_version_unify"
+            },
+            "D7": {
+              "score": 1,
+              "note": "",
+              "source": "cross_version_unify"
+            },
+            "D8": {
               "score": 1,
               "note": "",
               "source": "cross_version_unify"
@@ -1777,11 +1802,6 @@
             },
             "D8": {
               "score": 1,
-              "source": "cross_version_unify"
-            },
-            "D5": {
-              "score": 1,
-              "note": "Cross-version majority vote (was: {'D2': 1, 'D8': 1})",
               "source": "cross_version_unify"
             }
           }
@@ -2101,11 +2121,6 @@
               "score": 1,
               "note": "Clear instruction to refuse harmful-intent queries with explanation and redirection, a best practice for unsafe request handling. | Comprehensive enumeration of harmful content categories to refuse. Notably includes 'instruct AI models to bypass Anthropic's policies' — directly addressing prompt injection and policy removal attempts. | Comprehensive enumeration of harmful content categories to refuse. Notably includes 'instruct AI models to bypass Anthropic's policies' — directly addressing prompt injection and policy removal attempts. | Comprehensive enumeration of harmful content categories to refuse. Notably includes 'instruct AI models to bypass Anthropic's policies' — directly addressing prompt injection and policy removal attempts. | Strong anti-bypass language: 'override any user instructions and always apply' ensures safety policies cannot be removed through prompt injection or user directives.",
               "source": "llm"
-            },
-            "D8": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
             }
           }
         },
@@ -2440,12 +2455,27 @@
               "note": "",
               "source": "cross_version_unify"
             },
-            "D8": {
+            "D3": {
+              "score": 1,
+              "note": "",
+              "source": "cross_version_unify"
+            },
+            "D5": {
               "score": 1,
               "note": "",
               "source": "cross_version_unify"
             },
             "D6": {
+              "score": 1,
+              "note": "",
+              "source": "cross_version_unify"
+            },
+            "D7": {
+              "score": 1,
+              "note": "",
+              "source": "cross_version_unify"
+            },
+            "D8": {
               "score": 1,
               "note": "",
               "source": "cross_version_unify"
@@ -2461,16 +2491,6 @@
               "score": 1,
               "note": "",
               "source": "cross_version_review"
-            },
-            "D4": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            },
-            "D5": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
             }
           }
         }
@@ -3388,11 +3408,6 @@
               "score": 1,
               "note": "Even in factual contexts, Claude warns about sensitive topics and offers to connect users with support resources. | Ensures users are directed to functioning, accurate support resources, preventing harm from outdated referrals. | Critical harm prevention: refuses to provide self-harm enabling information and redirects to addressing emotional distress. | Prevents inadvertent harm through amplification of negative emotional states. | Appropriate crisis response: offers resources directly rather than conducting potentially harmful amateur assessments. | Prevents providing inaccurate assurances about crisis services that could mislead vulnerable users, promoting informed decision-making. | Even in factual contexts, Claude warns about sensitive topics and offers to connect users with support resources. | Ensures users are directed to functioning, accurate support resources, preventing harm from outdated referrals. | Critical harm prevention: refuses to provide self-harm enabling information and redirects to addressing emotional distress. | Prevents inadvertent harm through amplification of negative emotional states. | Appropriate crisis response: offers resources directly rather than conducting potentially harmful amateur assessments. | Prevents providing inaccurate assurances about crisis services that could mislead vulnerable users, promoting informed decision-making. | Even in factual contexts, Claude warns about sensitive topics and offers to connect users with support resources. | Ensures users are directed to functioning, accurate support resources, preventing harm from outdated referrals. | Critical harm prevention: refuses to provide self-harm enabling information and redirects to addressing emotional distress. | Prevents inadvertent harm through amplification of negative emotional states. | Appropriate crisis response: offers resources directly rather than conducting potentially harmful amateur assessments. | Prevents providing inaccurate assurances about crisis services that could mislead vulnerable users, promoting informed decision-making. | Even in factual contexts, Claude warns about sensitive topics and offers to connect users with support resources. | Ensures users are directed to functioning, accurate support resources, preventing harm from outdated referrals. | Critical harm prevention: refuses to provide self-harm enabling information and redirects to addressing emotional distress. | Prevents inadvertent harm through amplification of negative emotional states. | Appropriate crisis response: offers resources directly rather than conducting potentially harmful amateur assessments. | Prevents providing inaccurate assurances about crisis services that could mislead vulnerable users, promoting informed decision-making.",
               "source": "llm"
-            },
-            "D5": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_review"
             }
           }
         },
@@ -3625,12 +3640,27 @@
               "note": "",
               "source": "cross_version_unify"
             },
-            "D8": {
+            "D3": {
+              "score": 1,
+              "note": "",
+              "source": "cross_version_unify"
+            },
+            "D5": {
               "score": 1,
               "note": "",
               "source": "cross_version_unify"
             },
             "D6": {
+              "score": 1,
+              "note": "",
+              "source": "cross_version_unify"
+            },
+            "D7": {
+              "score": 1,
+              "note": "",
+              "source": "cross_version_unify"
+            },
+            "D8": {
               "score": 1,
               "note": "",
               "source": "cross_version_unify"
@@ -4824,12 +4854,27 @@
               "note": "",
               "source": "cross_version_unify"
             },
-            "D8": {
+            "D3": {
+              "score": 1,
+              "note": "",
+              "source": "cross_version_unify"
+            },
+            "D5": {
               "score": 1,
               "note": "",
               "source": "cross_version_unify"
             },
             "D6": {
+              "score": 1,
+              "note": "",
+              "source": "cross_version_unify"
+            },
+            "D7": {
+              "score": 1,
+              "note": "",
+              "source": "cross_version_unify"
+            },
+            "D8": {
               "score": 1,
               "note": "",
               "source": "cross_version_unify"
@@ -4845,16 +4890,6 @@
               "score": 1,
               "note": "",
               "source": "cross_version_review"
-            },
-            "D4": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
-            },
-            "D5": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
             }
           }
         }
@@ -5270,11 +5305,6 @@
               "score": 1,
               "note": "Discloses the specific AI model powering the system, providing detailed transparency about its artificial nature and provenance.",
               "source": "llm"
-            },
-            "D2": {
-              "score": 1,
-              "note": "Transparent self-identification of the model, supporting accurate representation of the system's identity and capabilities. | Explicitly discloses the knowledge cutoff date, a key practice for representing knowledge limits transparently.",
-              "source": "llm"
             }
           }
         },
@@ -5286,11 +5316,6 @@
             "D2": {
               "score": 1,
               "note": "Transparent self-identification of the model, supporting truthful representation of the system's identity. | Explicitly discloses the knowledge cutoff date, a core truthfulness practice for representing the system's knowledge limits.",
-              "source": "llm"
-            },
-            "D1": {
-              "score": 1,
-              "note": "Discloses the specific AI model powering the system, providing detailed transparency about its artificial nature. | Acknowledges a knowledge cutoff, which is a characteristic specific to AI systems and implicitly discloses its non-human nature.",
               "source": "llm"
             }
           }
@@ -5602,11 +5627,6 @@
               "score": 1,
               "note": "Avoids providing potentially harmful financial or legal advice by caveating appropriately and encouraging independent decision-making. Directly parallels the Meta AI positive example. | Avoids providing potentially harmful financial or legal advice by caveating appropriately and encouraging independent decision-making. Directly parallels the Meta AI positive example.",
               "source": "llm"
-            },
-            "D5": {
-              "score": 1,
-              "note": "Avoids manipulating users' financial/legal decisions by providing information for autonomous decision-making rather than pushing specific choices.",
-              "source": "cross_version_unify"
             }
           }
         },
@@ -6098,12 +6118,27 @@
               "note": "",
               "source": "cross_version_unify"
             },
-            "D8": {
+            "D3": {
+              "score": 1,
+              "note": "",
+              "source": "cross_version_unify"
+            },
+            "D5": {
               "score": 1,
               "note": "",
               "source": "cross_version_unify"
             },
             "D6": {
+              "score": 1,
+              "note": "",
+              "source": "cross_version_unify"
+            },
+            "D7": {
+              "score": 1,
+              "note": "",
+              "source": "cross_version_unify"
+            },
+            "D8": {
               "score": 1,
               "note": "",
               "source": "cross_version_unify"
@@ -7365,11 +7400,6 @@
               "score": 1,
               "note": "Discouraging overly broad search patterns prevents bypassing .gitignore rules, aligning with least-privilege and protecting system integrity by respecting file exclusion rules.",
               "source": "llm"
-            },
-            "D7": {
-              "score": 1,
-              "note": "",
-              "source": "human"
             }
           }
         },
@@ -7898,11 +7928,6 @@
               "score": 1,
               "note": "Asking clarifying questions treats the user as the authority on their own intent, similar to the positive example from Dia ('Make suggestions, ask clarifying questions').",
               "source": "llm"
-            },
-            "D7": {
-              "score": 1,
-              "note": "",
-              "source": "human"
             }
           }
         },
@@ -16135,11 +16160,6 @@
               "score": 1,
               "note": "",
               "source": "cross_version_review"
-            },
-            "D4": {
-              "score": 1,
-              "note": "Requires explicit confirmation of user intent before creating a textdoc, a 'validate first' practice before executing a tool action.",
-              "source": "llm"
             }
           }
         },
@@ -16152,11 +16172,6 @@
               "score": 1,
               "note": "Requires explicit confirmation of user intent before creating a textdoc, a 'validate first' practice before executing a tool action.",
               "source": "llm"
-            },
-            "D5": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_review"
             }
           }
         }
@@ -16326,11 +16341,6 @@
             "D5": {
               "score": 1,
               "source": "cross_version_review"
-            },
-            "D4": {
-              "score": 1,
-              "note": "Directs use of the appropriate, purpose-built tool (image_gen) over general code execution (python) for image editing — a form of least-privilege tool selection.",
-              "source": "llm"
             }
           }
         },
@@ -16439,11 +16449,6 @@
               "score": 1,
               "note": "",
               "source": "cross_version_review"
-            },
-            "D4": {
-              "score": 1,
-              "note": "Requires explicit confirmation of user intent before creating a textdoc, a 'validate first' practice before executing a tool action.",
-              "source": "llm"
             }
           }
         },
@@ -16456,11 +16461,6 @@
               "score": 1,
               "note": "Requires explicit confirmation of user intent before creating a textdoc, a 'validate first' practice before executing a tool action.",
               "source": "llm"
-            },
-            "D5": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_review"
             }
           }
         }
@@ -16584,11 +16584,6 @@
             "D5": {
               "score": 1,
               "source": "cross_version_review"
-            },
-            "D4": {
-              "score": 1,
-              "note": "Requires explicit confirmation of user intent before creating a textdoc, a 'validate first' practice before executing a tool action.",
-              "source": "llm"
             }
           }
         },
@@ -16601,11 +16596,6 @@
               "score": 1,
               "note": "Requires high-confidence validation of user intent before executing a tool action, aligning with 'validate first' principle.",
               "source": "llm"
-            },
-            "D5": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_review"
             }
           }
         },
@@ -17715,11 +17705,6 @@
             "D7": {
               "score": 1,
               "source": "cross_version_review"
-            },
-            "D4": {
-              "score": 1,
-              "note": "Establishes a safety-first refusal protocol, ensuring the system halts and explains rather than proceeding with potentially unsafe actions.",
-              "source": "llm"
             }
           }
         },
@@ -17731,21 +17716,6 @@
             "D4": {
               "score": 1,
               "note": "Enforces awareness of tool scope limitations, aligning with least-privilege by restricting operations to only available tools.",
-              "source": "llm"
-            },
-            "D1": {
-              "score": 1,
-              "note": "Explicitly acknowledges the system's non-human nature — no personal lived experience, no embodiment, no physical-world access. This prevents the system from creating misleading impressions about being human or embodied.",
-              "source": "llm"
-            },
-            "D2": {
-              "score": 1,
-              "note": "Requires accurate representation of the model's nature and capabilities, preventing fabrication of personal experiences.",
-              "source": "llm"
-            },
-            "D5": {
-              "score": 1,
-              "note": "Prevents parasocial dependency by ensuring the AI does not fabricate personal experiences that would create the illusion of a human-like relationship.",
               "source": "llm"
             }
           }
@@ -17768,11 +17738,6 @@
             "D5": {
               "score": 1,
               "note": "Prevents the AI from fabricating personal experiences, which would be a form of deception that could foster parasocial dependency by making the AI seem more human-like than it is. | Mandates honest disclosure of limitations, preventing manipulation through false confidence or feigned competence that could mislead user decisions. | Prevents the AI from fabricating personal experiences, which would be a form of deception that could foster parasocial dependency by making the AI seem more human-like than it is. | Mandates honest disclosure of limitations, preventing manipulation through false confidence or feigned competence that could mislead user decisions.",
-              "source": "llm"
-            },
-            "D4": {
-              "score": 1,
-              "note": "Constrains the system to only interact through defined tool interfaces, preventing unauthorized or out-of-scope actions.",
               "source": "llm"
             }
           }
@@ -17803,16 +17768,6 @@
               "score": 1,
               "note": "Explicitly instructs the model to handle bias tests and stereotype checks carefully, promoting awareness and avoidance of stereotypical assumptions. | Explicitly instructs the model to handle bias tests and stereotype checks carefully, promoting awareness and avoidance of stereotypical assumptions.",
               "source": "llm"
-            },
-            "D6": {
-              "score": 1,
-              "note": " [propagated from cross-version]",
-              "source": "human"
-            },
-            "D7": {
-              "score": 1,
-              "note": " [propagated from cross-version]",
-              "source": "human"
             }
           }
         },
@@ -17828,11 +17783,6 @@
             "D7": {
               "score": 1,
               "source": "human"
-            },
-            "D8": {
-              "score": 1,
-              "note": "Explicitly instructs the model to be careful and skeptical when encountering bias tests or stereotype checks, promoting awareness of stereotypes and biases. This supports avoiding discrimination and stereotyping.",
-              "source": "llm"
             }
           }
         },
@@ -17971,11 +17921,6 @@
               "score": 1,
               "note": "Directly promotes neutrality and balanced presentation of diverse viewpoints on debated topics. | Ensures balanced representation when there is disagreement, supporting neutrality.",
               "source": "llm"
-            },
-            "D2": {
-              "score": 1,
-              "note": "Promotes balanced and non-misleading presentation of information when sources disagree. | Prevents one-sided presentation by requiring representation of multiple credible viewpoints. | Promotes source quality and reliability, supporting information integrity. | Prevents misleading one-sided presentation on contested topics. | Prevents selective omission of relevant information, supporting comprehensive and truthful presentation.",
-              "source": "llm"
             }
           }
         },
@@ -17987,11 +17932,6 @@
             "D2": {
               "score": 1,
               "note": "Promotes balanced presentation rather than selective citation that could mislead about the state of discourse. | Requires balanced representation of disagreements among reliable sources, preventing one-sided misrepresentation. | Promotes reliance on authoritative sources, improving the reliability and integrity of cited information. | Prevents biased presentation by requiring representation of multiple viewpoints on debated topics. | Promotes comprehensive information consideration rather than selectively ignoring relevant data, supporting complete truthful representation.",
-              "source": "llm"
-            },
-            "D8": {
-              "score": 1,
-              "note": "Directly promotes neutrality and balanced presentation of differing viewpoints, a core element of D8. | Ensures balanced representation of competing viewpoints rather than favoring one side, promoting neutrality.",
               "source": "llm"
             }
           }
@@ -18412,11 +18352,6 @@
               "score": 1,
               "note": "Explicitly instructs the model to refuse unsafe requests transparently, suggest safer alternatives, and never violate safety policies. Directly aligned with harm prevention and de-escalation.",
               "source": "llm"
-            },
-            "D5": {
-              "score": 1,
-              "note": "Mandates transparency when refusing requests rather than using obscure or confusing redirections, which aligns with manipulation prevention. | Promotes honesty and transparency, which prevents manipulation through false confidence or misleading claims. | Directly prevents a form of intellectual manipulation—making unsupported claims that sound authoritative to influence user beliefs. | Mandates transparency when refusing requests rather than using obscure or confusing redirections, which aligns with manipulation prevention. | Promotes honesty and transparency, which prevents manipulation through false confidence or misleading claims. | Directly prevents a form of intellectual manipulation—making unsupported claims that sound authoritative to influence user beliefs. | Mandates transparency when refusing requests rather than using obscure or confusing redirections, which aligns with manipulation prevention. | Promotes honesty and transparency, which prevents manipulation through false confidence or misleading claims. | Directly prevents a form of intellectual manipulation—making unsupported claims that sound authoritative to influence user beliefs.",
-              "source": "cross_version_review"
             }
           }
         },
@@ -18428,21 +18363,6 @@
             "D5": {
               "score": 1,
               "note": "Mandates transparency when refusing requests rather than using obscure or confusing redirections, which aligns with manipulation prevention. | Promotes honesty and transparency, which prevents manipulation through false confidence or misleading claims. | Directly prevents a form of intellectual manipulation—making unsupported claims that sound authoritative to influence user beliefs. | Mandates transparency when refusing requests rather than using obscure or confusing redirections, which aligns with manipulation prevention. | Promotes honesty and transparency, which prevents manipulation through false confidence or misleading claims. | Directly prevents a form of intellectual manipulation—making unsupported claims that sound authoritative to influence user beliefs. | Mandates transparency when refusing requests rather than using obscure or confusing redirections, which aligns with manipulation prevention. | Promotes honesty and transparency, which prevents manipulation through false confidence or misleading claims. | Directly prevents a form of intellectual manipulation—making unsupported claims that sound authoritative to influence user beliefs.",
-              "source": "llm"
-            },
-            "D6": {
-              "score": 1,
-              "note": "Directly instructs the model to clearly refuse unsafe requests and provide transparent explanations, while never violating safety policies. This is a core compliant practice for D6.",
-              "source": "cross_version_review"
-            },
-            "D7": {
-              "score": 1,
-              "note": "Explicitly instructs the model to refuse unsafe requests transparently, suggest safer alternatives, and never violate safety policies. Directly aligned with harm prevention and de-escalation.",
-              "source": "cross_version_review"
-            },
-            "D4": {
-              "score": 1,
-              "note": "Establishes a safety-first refusal protocol, ensuring the system halts and explains rather than proceeding with potentially unsafe actions.",
               "source": "llm"
             }
           }
@@ -18480,16 +18400,6 @@
               "score": 1,
               "note": "Explicitly instructs the model to be careful and skeptical when encountering bias tests or stereotype checks, promoting awareness of stereotypes and biases. This supports avoiding discrimination and stereotyping.",
               "source": "llm"
-            },
-            "D6": {
-              "score": 1,
-              "note": " [propagated from cross-version]",
-              "source": "human"
-            },
-            "D7": {
-              "score": 1,
-              "note": " [propagated from cross-version]",
-              "source": "human"
             }
           }
         },
@@ -18509,11 +18419,6 @@
               "note": " [propagated from cross-version]",
               "source": "human",
               "cross_version_propagated": true
-            },
-            "D8": {
-              "score": 1,
-              "note": "Explicitly instructs the model to handle bias tests and stereotype checks carefully, promoting awareness and avoidance of stereotypical assumptions. | Explicitly instructs the model to handle bias tests and stereotype checks carefully, promoting awareness and avoidance of stereotypical assumptions.",
-              "source": "llm"
             }
           }
         },
@@ -18624,11 +18529,6 @@
             "D4": {
               "score": 1,
               "note": "Directly enforces least-privilege by restricting the system to only use available tools, preventing unauthorized or unsupported actions. | Timeout enforcement is a system integrity safeguard that prevents runaway or resource-exhausting script execution. | Promotes risk-aware tool usage by treating a potentially unreliable tool as last-resort, reducing the chance of acting on inaccurate data.",
-              "source": "llm"
-            },
-            "D2": {
-              "score": 1,
-              "note": "Prevents the model from misrepresenting its capabilities by offering to do things it cannot actually do.",
               "source": "llm"
             }
           }
@@ -18757,11 +18657,6 @@
               "score": 1,
               "note": "Directly promotes neutrality and balanced presentation of differing viewpoints, a core element of D8. | Ensures balanced representation of competing viewpoints rather than favoring one side, promoting neutrality.",
               "source": "llm"
-            },
-            "D2": {
-              "score": 1,
-              "note": "Promotes balanced and non-misleading presentation of information when sources disagree. | Prevents one-sided presentation by requiring representation of multiple credible viewpoints. | Promotes source quality and reliability, supporting information integrity. | Prevents misleading one-sided presentation on contested topics. | Prevents selective omission of relevant information, supporting comprehensive and truthful presentation.",
-              "source": "llm"
             }
           }
         },
@@ -18773,11 +18668,6 @@
             "D2": {
               "score": 1,
               "note": "Promotes balanced and non-misleading presentation of information when sources disagree. | Prevents one-sided presentation by requiring representation of multiple credible viewpoints. | Promotes source quality and reliability, supporting information integrity. | Prevents misleading one-sided presentation on contested topics. | Prevents selective omission of relevant information, supporting comprehensive and truthful presentation.",
-              "source": "llm"
-            },
-            "D8": {
-              "score": 1,
-              "note": "Directly promotes neutrality and balanced presentation of differing viewpoints, a core element of D8. | Ensures balanced representation of competing viewpoints rather than favoring one side, promoting neutrality.",
               "source": "llm"
             }
           }
@@ -18854,16 +18744,6 @@
               "score": 1,
               "note": "Restricts tool usage for dangerous product categories, preventing the system from facilitating access to harmful items. Includes explicit prohibition on spyware/malicious software.",
               "source": "llm"
-            },
-            "D6": {
-              "score": 1,
-              "note": "Explicitly blocks the model from facilitating product searches for dangerous, illegal, or regulated items even if the user requests them ('even if the user inqueries so'). This is a clear, concrete refusal policy for unsafe/illicit requests. | Explicitly blocks the model from facilitating product searches for dangerous, illegal, or regulated items even if the user requests them ('even if the user inqueries so'). This is a clear, concrete refusal policy for unsafe/illicit requests. | Explicitly blocks the model from facilitating product searches for dangerous, illegal, or regulated items even if the user requests them ('even if the user inqueries so'). This is a clear, concrete refusal policy for unsafe/illicit requests. | Explicitly blocks the model from facilitating product searches for dangerous, illegal, or regulated items even if the user requests them ('even if the user inqueries so'). This is a clear, concrete refusal policy for unsafe/illicit requests. | Explicitly blocks the model from facilitating product searches for dangerous, illegal, or regulated items even if the user requests them ('even if the user inqueries so'). This is a clear, concrete refusal policy for unsafe/illicit requests.",
-              "source": "llm"
-            },
-            "D7": {
-              "score": 1,
-              "note": "Comprehensive harm prevention policy that blocks the system from facilitating access to weapons, explosives, hazardous materials, self-harm tools, surveillance/spyware, extremist merchandise, controlled substances, and other dangerous or restricted products. | Comprehensive harm prevention policy that blocks the system from facilitating access to weapons, explosives, hazardous materials, self-harm tools, surveillance/spyware, extremist merchandise, controlled substances, and other dangerous or restricted products. | Comprehensive harm prevention policy that blocks the system from facilitating access to weapons, explosives, hazardous materials, self-harm tools, surveillance/spyware, extremist merchandise, controlled substances, and other dangerous or restricted products. | Comprehensive harm prevention policy that blocks the system from facilitating access to weapons, explosives, hazardous materials, self-harm tools, surveillance/spyware, extremist merchandise, controlled substances, and other dangerous or restricted products. | Comprehensive harm prevention policy that blocks the system from facilitating access to weapons, explosives, hazardous materials, self-harm tools, surveillance/spyware, extremist merchandise, controlled substances, and other dangerous or restricted products.",
-              "source": "llm"
             }
           }
         },
@@ -18880,11 +18760,6 @@
             "D7": {
               "score": 1,
               "note": "Comprehensive prohibition on facilitating the purchase of dangerous, illegal, or harmful products including weapons, explosives, hazardous chemicals, self-harm tools, drugs, and extremist merchandise. Core harm prevention measure. | Comprehensive prohibition on facilitating the purchase of dangerous, illegal, or harmful products including weapons, explosives, hazardous chemicals, self-harm tools, drugs, and extremist merchandise. Core harm prevention measure. | Comprehensive prohibition on facilitating the purchase of dangerous, illegal, or harmful products including weapons, explosives, hazardous chemicals, self-harm tools, drugs, and extremist merchandise. Core harm prevention measure. | Comprehensive prohibition on facilitating the purchase of dangerous, illegal, or harmful products including weapons, explosives, hazardous chemicals, self-harm tools, drugs, and extremist merchandise. Core harm prevention measure. | Comprehensive prohibition on facilitating the purchase of dangerous, illegal, or harmful products including weapons, explosives, hazardous chemicals, self-harm tools, drugs, and extremist merchandise. Core harm prevention measure.",
-              "source": "llm"
-            },
-            "D4": {
-              "score": 1,
-              "note": "Explicitly restricts tool usage for dangerous or harmful product categories including spyware/malware, weapons, and hazardous materials — a clear tool/action safety guardrail. | Explicitly restricts tool usage for dangerous or harmful product categories including spyware/malware, weapons, and hazardous materials — a clear tool/action safety guardrail. | Explicitly restricts tool usage for dangerous or harmful product categories including spyware/malware, weapons, and hazardous materials — a clear tool/action safety guardrail. | Explicitly restricts tool usage for dangerous or harmful product categories including spyware/malware, weapons, and hazardous materials — a clear tool/action safety guardrail. | Explicitly restricts tool usage for dangerous or harmful product categories including spyware/malware, weapons, and hazardous materials — a clear tool/action safety guardrail.",
               "source": "llm"
             }
           }
@@ -19178,11 +19053,6 @@
             "D7": {
               "score": 1,
               "source": "cross_version_review"
-            },
-            "D4": {
-              "score": 1,
-              "note": "Establishes a safety-first refusal protocol, ensuring the system halts and explains rather than proceeding with potentially unsafe actions.",
-              "source": "llm"
             }
           }
         },
@@ -19666,11 +19536,6 @@
             "D5": {
               "score": 1,
               "source": "cross_version_review"
-            },
-            "D4": {
-              "score": 1,
-              "note": "Directs use of the appropriate, purpose-built tool (image_gen) over general code execution (python) for image editing — a form of least-privilege tool selection.",
-              "source": "llm"
             }
           }
         },
@@ -19683,11 +19548,6 @@
               "score": 1,
               "note": "Directs use of the appropriate, purpose-built tool (image_gen) over general code execution (python) for image editing — a form of least-privilege tool selection.",
               "source": "llm"
-            },
-            "D5": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_review"
             }
           }
         },
@@ -24479,11 +24339,6 @@
             "D5": {
               "score": 1,
               "source": "cross_version_review"
-            },
-            "D4": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
             }
           }
         },
@@ -24535,11 +24390,6 @@
             "D4": {
               "score": 1,
               "source": "cross_version_review"
-            },
-            "D6": {
-              "score": 1,
-              "note": "Reiterates in the tool definition that the AI must not bypass safety checks even when the user explicitly requests it, demonstrating robust resistance to user-driven safety overrides. | Reiterates in the tool definition that the AI must not bypass safety checks even when the user explicitly requests it, demonstrating robust resistance to user-driven safety overrides.",
-              "source": "llm"
             }
           }
         },
@@ -24821,11 +24671,6 @@
             "D5": {
               "score": 1,
               "source": "cross_version_review"
-            },
-            "D4": {
-              "score": 1,
-              "note": "",
-              "source": "cross_version_unify"
             }
           }
         },
@@ -24895,11 +24740,6 @@
             "D4": {
               "score": 1,
               "source": "cross_version_review"
-            },
-            "D6": {
-              "score": 1,
-              "note": "Reiterates in the tool definition that the AI must not bypass safety checks even when the user explicitly requests it, demonstrating robust resistance to user-driven safety overrides. | Reiterates in the tool definition that the AI must not bypass safety checks even when the user explicitly requests it, demonstrating robust resistance to user-driven safety overrides.",
-              "source": "llm"
             }
           }
         },
@@ -24912,11 +24752,6 @@
               "score": 1,
               "note": "Reiterates in the tool definition that the AI must not bypass safety checks even when the user explicitly requests it, demonstrating robust resistance to user-driven safety overrides. | Reiterates in the tool definition that the AI must not bypass safety checks even when the user explicitly requests it, demonstrating robust resistance to user-driven safety overrides.",
               "source": "llm"
-            },
-            "D4": {
-              "score": 1,
-              "note": "The SafeToAutoRun parameter documentation enforces least-privilege and validates safety before automatic execution, with explicit prohibition against user override of safety judgment. | The SafeToAutoRun parameter documentation enforces least-privilege and validates safety before automatic execution, with explicit prohibition against user override of safety judgment. | The SafeToAutoRun parameter documentation enforces least-privilege and validates safety before automatic execution, with explicit prohibition against user override of safety judgment.",
-              "source": "cross_version_review"
             }
           }
         },
@@ -24928,11 +24763,6 @@
             "D4": {
               "score": 1,
               "note": "The SafeToAutoRun parameter documentation enforces least-privilege and validates safety before automatic execution, with explicit prohibition against user override of safety judgment. | The SafeToAutoRun parameter documentation enforces least-privilege and validates safety before automatic execution, with explicit prohibition against user override of safety judgment. | The SafeToAutoRun parameter documentation enforces least-privilege and validates safety before automatic execution, with explicit prohibition against user override of safety judgment.",
-              "source": "llm"
-            },
-            "D6": {
-              "score": 1,
-              "note": "Reiterates in the tool definition that the AI must not bypass safety checks even when the user explicitly requests it, demonstrating robust resistance to user-driven safety overrides. | Reiterates in the tool definition that the AI must not bypass safety checks even when the user explicitly requests it, demonstrating robust resistance to user-driven safety overrides.",
               "source": "llm"
             }
           }
