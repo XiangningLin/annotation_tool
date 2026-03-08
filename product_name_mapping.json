@@ -372,8 +372,8 @@
     "audit_id": "Meta_prompts_official-product_meta_MetaAIHiddenPrompt.md",
     "filename": "MetaAIHiddenPrompt.md",
     "company": "Meta",
-    "old_label": "Meta-MetaAIHiddenPrompt-UnknownTime",
-    "new_label": "Meta-AI-Hidden-Prompt-2024-10"
+    "old_label": "Meta-MetaAIHiddenPrompt-2024-10",
+    "new_label": "Meta-AI-Llama-3-2024-10"
   },
   "Poke_Poke_Poke_p1.txt": {
     "index": 47,
