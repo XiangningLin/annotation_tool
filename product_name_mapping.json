@@ -381,7 +381,7 @@
     "filename": "Poke_p1.txt",
     "company": "Poke",
     "old_label": "Poke-Poke p1-UnknownTime",
-    "new_label": "Poke-p1-2025-09-15"
+    "new_label": "Poke-p1-UnknownTime"
   },
   "OpenSource_Open_Source_prompts_Cline_Prompt.txt": {
     "index": 48,
@@ -437,7 +437,7 @@
     "filename": "Poke agent.txt",
     "company": "Poke",
     "old_label": "Poke-Poke agent-UnknownTime",
-    "new_label": "Poke-Agent-2025-09-15"
+    "new_label": "Poke-Agent-UnknownTime"
   },
   "xAI_XAI_grok.com-post-new-safety-instructions.md": {
     "index": 55,
@@ -541,7 +541,7 @@
     "filename": "Poke_p6.txt",
     "company": "Poke",
     "old_label": "Poke-Poke p6-UnknownTime",
-    "new_label": "Poke-p6-2025-09-15"
+    "new_label": "Poke-p6-UnknownTime"
   },
   "OpenAI_OPENAI_Atlas_10-21-25.txt": {
     "index": 68,
@@ -581,7 +581,7 @@
     "filename": "Poke_p3.txt",
     "company": "Poke",
     "old_label": "Poke-Poke p3-UnknownTime",
-    "new_label": "Poke-p3-2025-09-15"
+    "new_label": "Poke-p3-UnknownTime"
   },
   "Perplexity_SystemPrompts_Perplexity.ai_20241212-Perplexity-Pro.md": {
     "index": 73,
@@ -597,7 +597,7 @@
     "filename": "Poke_p4.txt",
     "company": "Poke",
     "old_label": "Poke-Poke p4-UnknownTime",
-    "new_label": "Poke-p4-2025-09-15"
+    "new_label": "Poke-p4-UnknownTime"
   },
   "Google_SystemPrompts_Google_20251118-Antigravity.md": {
     "index": 75,
