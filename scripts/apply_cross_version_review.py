@@ -1,304 +1,215 @@
-#!/usr/bin/env python3
 """
-Apply cross-version review decisions to merged annotations.
+Apply cross-version conflict review decisions to merged_all_annotations.json.
 
-After reviewing cross-version conflicts in the review tool (/review),
-this script reads the review decisions and unifies labels so that
-identical text across same-company product versions gets identical labels.
+Principle: same company, different versions → same paragraph must have
+identical spans and labels.
 
-Decision types:
-  - "agree"    → keep current state (no change)
-  - "disagree" + final_labels → apply those labels uniformly to ALL versions
-  - "discuss"  → skip (needs further discussion)
+- Agree + final_labels: for ALL versions with this text, remove all matching
+  spans, then add exactly the final_labels.
+- Discuss: for ALL versions, remove all matching spans.
 
-Usage:
-    python scripts/apply_cross_version_review.py --dry-run
-    python scripts/apply_cross_version_review.py
+Usage: python scripts/apply_cross_version_review.py
 """
 
 import json
-import copy
-import argparse
-from pathlib import Path
+import re
+import shutil
 from datetime import datetime
-from collections import defaultdict
+from pathlib import Path
 
-ROOT = Path(__file__).parent.parent
-ANALYSIS = ROOT / "annotation_tool_89" / "analysis"
-MERGED = ANALYSIS / "merged_all_annotations.json"
-CONFLICTS_FILE = ANALYSIS / "shared_text_review.json"
-REVIEW_STATE_FILE = ANALYSIS / "neg_review_state.json"
+BASE_DIR = Path(__file__).parent.parent
+REVIEW_FILE = BASE_DIR / "annotation_tool_89" / "analysis" / "review_results_2026-03-07.json"
+MERGED_FILE = BASE_DIR / "annotation_tool_89" / "outputs" / "final_result" / "analysis" / "merged_all_annotations.json"
+RAW_PROMPTS_FILE = BASE_DIR / "data" / "audit_prompts_filtered.json"
+
+MATCH_PREFIX_LEN = 50
 
 
-def load_json(path):
-    with path.open("r", encoding="utf-8") as f:
-        return json.load(f)
+def _normalize_prefix(text):
+    t = text.strip()
+    t = re.sub(r"^[\*\-\•]\s+", "", t)
+    t = re.sub(r"^\d+\.\s+", "", t)
+    return t.strip()[:MATCH_PREFIX_LEN]
+
+
+def load_prompt_contents():
+    with RAW_PROMPTS_FILE.open("r", encoding="utf-8") as f:
+        raw = json.load(f)
+    result = {}
+    for p in raw:
+        company = re.sub(r"[^a-zA-Z0-9]", "_", p.get("company", "unknown"))
+        fn = re.sub(r"[^a-zA-Z0-9._-]", "_", p.get("filename", ""))
+        pid = f"{company}__{fn}"
+        if pid not in result:
+            result[pid] = p.get("content", "")
+    return result
+
+
+def text_matches(span_text, overlap_text):
+    sp = _normalize_prefix(span_text)
+    op = _normalize_prefix(overlap_text)
+    if not sp or not op:
+        return False
+    return sp in op or op in sp
+
+
+def find_text_position(content, overlap_text):
+    search = overlap_text[:80]
+    idx = content.find(search)
+    if idx < 0:
+        search_stripped = re.sub(r"^[\*\-\•]\s+", "", overlap_text.strip())[:80]
+        idx = content.find(search_stripped)
+    if idx < 0:
+        return None, None
+    end_search = overlap_text.rstrip()[-40:] if len(overlap_text) > 40 else overlap_text
+    end_search_stripped = re.sub(r"^[\*\-\•]\s+", "", end_search.strip())
+    end_idx = content.find(end_search_stripped, idx)
+    if end_idx >= 0:
+        end_idx += len(end_search_stripped)
+    else:
+        end_idx = idx + len(overlap_text)
+    return idx, end_idx
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Apply cross-version review decisions")
-    parser.add_argument("--dry-run", action="store_true", help="Preview changes without writing")
-    args = parser.parse_args()
+    with REVIEW_FILE.open("r", encoding="utf-8") as f:
+        review = json.load(f)
+    with MERGED_FILE.open("r", encoding="utf-8") as f:
+        merged = json.load(f)
 
-    if not REVIEW_STATE_FILE.exists():
-        print("No review state found. Run the review tool first: http://127.0.0.1:5009/review")
-        return
+    prompt_contents = load_prompt_contents()
+    conflicts = review["cross_version_conflicts"]
+    prompts = merged["prompts"]
 
-    reviews = load_json(REVIEW_STATE_FILE)
-    raw_conflicts = load_json(CONFLICTS_FILE)
-    conflicts = (raw_conflicts if isinstance(raw_conflicts, list)
-                 else raw_conflicts.get("conflicts", []))
-    data = load_json(MERGED)
-    original = copy.deepcopy(data)
+    agree_with_labels = [c for c in conflicts if c["review_status"] == "agree" and c.get("final_labels")]
+    discuss_items = [c for c in conflicts if c["review_status"] == "discuss"]
 
-    # Index conflicts by _id
-    conflict_map = {}
-    for i, c in enumerate(conflicts):
-        cid = c.get("_id", f"c{i}")
-        conflict_map[cid] = c
+    stats = {
+        "spans_removed": 0,
+        "spans_added": 0,
+        "prompts_modified": set(),
+        "conflicts_applied": 0,
+        "discuss_applied": 0,
+        "discuss_removed": 0,
+        "skipped": [],
+    }
 
-    # Gather stats
-    stats = {"agree": 0, "disagree_applied": 0, "discuss": 0,
-             "unreviewed": 0, "no_labels": 0,
-             "spans_added": 0, "spans_removed": 0, "spans_changed": 0}
-    log = []
+    # --- Step 1: Agree + final_labels → unify all versions ---
+    print(f"=== Applying {len(agree_with_labels)} agree+final_labels conflicts ===")
+    for c in agree_with_labels:
+        overlap_text = c["overlap_text"]
+        final_labels = c["final_labels"]
+        involved_pids = list(dict.fromkeys(a["prompt_id"] for a in c["annotations"]))
 
-    for cid, review in sorted(reviews.items()):
-        conflict = conflict_map.get(cid)
-        if not conflict:
-            continue
-
-        status = review.get("status", "")
-        final_labels = review.get("final_labels", [])
-        comment = review.get("comment", "")
-
-        if status == "agree":
-            stats["agree"] += 1
-            continue
-        if status == "discuss":
-            stats["discuss"] += 1
-            continue
-        if status != "disagree":
-            stats["unreviewed"] += 1
-            continue
-        if not final_labels:
-            stats["no_labels"] += 1
-            log.append(f"  SKIP {cid}: disagree but no final_labels provided")
-            continue
-
-        # Apply final_labels to all versions
-        overlap_text = conflict["overlap_text"]
-        company = conflict["company"]
-        annotations = conflict.get("annotations", [])
-        prompt_ids = list(set(a["prompt_id"] for a in annotations))
-
-        log.append(f"\n  APPLY {cid} [{company}]: {len(final_labels)} label(s) → {len(prompt_ids)} versions")
-        log.append(f"    Text: \"{overlap_text[:80]}...\"")
-        label_str = ", ".join(str(lb["dim"]) + "=" + format(lb["score"], "+d") for lb in final_labels)
-        log.append(f"    Labels: {label_str}")
-        if comment:
-            log.append(f"    Comment: {comment}")
-
-        for pid in prompt_ids:
-            prompt = data["prompts"].get(pid)
-            if not prompt:
-                log.append(f"    WARNING: {pid} not found in merged data")
+        for pid in involved_pids:
+            if pid not in prompts:
+                stats["skipped"].append(f"{pid} not in merged ({c['_id']})")
                 continue
 
-            kept = prompt["kept_spans"]
-            prompt_text = None
+            kept = prompts[pid]["kept_spans"]
 
-            # Find the span(s) covering this overlap text
-            matching_spans = []
-            for s in kept:
-                span_text = s.get("text", "")
-                if not span_text:
-                    continue
-                # Match: overlap_text is contained in span_text, or they share significant overlap
-                if (overlap_text[:80] in span_text or span_text in overlap_text
-                        or overlap_text[:50] == span_text[:50]):
-                    matching_spans.append(s)
+            # Find all matching spans and a reference for position
+            match_indices = [i for i, s in enumerate(kept) if text_matches(s.get("text", ""), overlap_text)]
 
-            if not matching_spans:
-                # Text exists in this version but no span was annotated (missing_span case)
-                # Use the start/end from another version's annotation
-                ref_ann = next((a for a in annotations if a["prompt_id"] != pid and not a.get("missing")), None)
-                if not ref_ann:
-                    log.append(f"    {pid}: no matching span and no reference — skip")
-                    continue
-
-                # Find the start/end from a version that has the span
-                ref_pid = ref_ann["prompt_id"]
-                ref_prompt = data["prompts"].get(ref_pid)
-                if not ref_prompt:
-                    continue
-                ref_matches = [s for s in ref_prompt["kept_spans"]
-                               if overlap_text[:80] in s.get("text", "")
-                               or s.get("text", "") in overlap_text
-                               or overlap_text[:50] == s.get("text", "")[:50]]
-                if not ref_matches:
-                    log.append(f"    {pid}: cannot find reference span — skip")
-                    continue
-
-                # Find where this text appears in the target prompt
-                from_audit = None
-                audit_path = ROOT / "data" / "audit_prompts.json"
-                if audit_path.exists():
-                    with audit_path.open() as f:
-                        for p in json.load(f):
-                            test_pid = f"{p['company']}__{p['filename']}"
-                            if test_pid == pid or test_pid.replace(" ", "_") == pid:
-                                from_audit = p.get("content", "")
-                                break
-
-                if from_audit and overlap_text[:50] in from_audit:
-                    text_start = from_audit.find(overlap_text[:50])
-                    text_end = text_start + len(overlap_text)
-                    actual_text = from_audit[text_start:text_end]
-                else:
-                    # Fallback: use reference span's position
-                    text_start = ref_matches[0]["start"]
-                    text_end = ref_matches[0]["end"]
-                    actual_text = ref_matches[0].get("text", overlap_text)
-
-                # Add new spans for each final label
-                added = 0
-                for lb in final_labels:
-                    existing = any(
-                        s["dimension"] == lb["dim"] and s.get("score") == lb["score"]
-                        and s["start"] == text_start and s["end"] == text_end
-                        for s in kept
-                    )
-                    if existing:
-                        continue
-                    kept.append({
-                        "start": text_start,
-                        "end": text_end,
-                        "text": actual_text,
-                        "dimension": lb["dim"],
-                        "score": lb["score"],
-                        "note": f"Added by cross-version review ({cid})",
-                        "source": "llm",
-                        "reviewed": True,
-                    })
-                    added += 1
-                    stats["spans_added"] += 1
-
-                if added:
-                    log.append(f"    {pid}: +{added} new span(s) (was missing)")
-
+            if match_indices:
+                ref = kept[match_indices[0]]
+                start, end, text = ref["start"], ref["end"], ref["text"]
             else:
-                # Has matching spans — update labels to match final_labels
-                # Remove existing labels at this position
-                match_positions = set((s["start"], s["end"]) for s in matching_spans)
-                old_labels = set()
-                for s in matching_spans:
-                    old_labels.add((s["dimension"], s.get("score", 0)))
-
-                new_label_set = set((lb["dim"], lb["score"]) for lb in final_labels)
-
-                if old_labels == new_label_set:
+                content = prompt_contents.get(pid, "")
+                start, end = find_text_position(content, overlap_text)
+                if start is None:
+                    stats["skipped"].append(f"text not found in {pid} ({c['_id']})")
                     continue
+                text = content[start:end]
 
-                # Remove old spans at matching positions
-                to_remove = set()
-                for s in kept:
-                    if (s["start"], s["end"]) in match_positions:
-                        for ms in matching_spans:
-                            if s["start"] == ms["start"] and s["end"] == ms["end"] and s["dimension"] == ms["dimension"]:
-                                to_remove.add(id(s))
-                                break
+            # Remove ALL matching spans
+            for idx in sorted(match_indices, reverse=True):
+                kept.pop(idx)
+                stats["spans_removed"] += 1
 
-                ref_span = matching_spans[0]
-                new_kept = [s for s in kept if id(s) not in to_remove]
+            # Add exactly the final_labels
+            for lb in final_labels:
+                kept.append({
+                    "dimension": lb["dim"],
+                    "score": lb["score"],
+                    "start": start,
+                    "end": end,
+                    "text": text,
+                    "note": "",
+                    "source": "cross_version_review",
+                    "reviewed": True,
+                })
+                stats["spans_added"] += 1
 
-                # Add final labels
-                for lb in final_labels:
-                    new_kept.append({
-                        "start": ref_span["start"],
-                        "end": ref_span["end"],
-                        "text": ref_span.get("text", overlap_text),
-                        "dimension": lb["dim"],
-                        "score": lb["score"],
-                        "note": ref_span.get("note", "") or f"Updated by cross-version review ({cid})",
-                        "source": ref_span.get("source", "llm"),
-                        "reviewed": True,
-                    })
+            stats["prompts_modified"].add(pid)
+        stats["conflicts_applied"] += 1
 
-                removed = len(to_remove)
-                added = len(final_labels)
-                prompt["kept_spans"] = new_kept
-                stats["spans_removed"] += removed
-                stats["spans_added"] += added
-                stats["spans_changed"] += 1
+    # --- Step 2: Discuss → delete from all versions ---
+    print(f"=== Deleting spans for {len(discuss_items)} discuss conflicts ===")
+    for c in discuss_items:
+        overlap_text = c["overlap_text"]
+        involved_pids = list(dict.fromkeys(a["prompt_id"] for a in c["annotations"]))
 
-                old_str = ", ".join(f"{d}={s:+d}" for d, s in sorted(old_labels))
-                new_str = ", ".join(f"{lb['dim']}={lb['score']:+d}" for lb in final_labels)
-                log.append(f"    {pid}: [{old_str}] → [{new_str}]")
+        for pid in involved_pids:
+            if pid not in prompts:
+                continue
 
-        stats["disagree_applied"] += 1
+            kept = prompts[pid]["kept_spans"]
+            match_indices = [i for i, s in enumerate(kept) if text_matches(s.get("text", ""), overlap_text)]
 
-    # Rebuild counts
-    total_kept = 0
-    for pid, prompt in data["prompts"].items():
-        prompt["kept_spans"].sort(key=lambda s: (s.get("start", 0), s.get("end", 0)))
-        prompt["kept_count"] = len(prompt["kept_spans"])
-        prompt["human_added_count"] = sum(1 for s in prompt["kept_spans"] if s.get("source") == "human")
-        summary = {}
-        for s in prompt["kept_spans"]:
-            dim = s.get("dimension", "?")
-            if dim not in summary:
-                summary[dim] = {"positive": 0, "negative": 0, "total": 0}
-            summary[dim]["total"] += 1
-            if s.get("score", 0) > 0:
-                summary[dim]["positive"] += 1
-            elif s.get("score", 0) < 0:
-                summary[dim]["negative"] += 1
-        prompt["dimension_summary"] = summary
-        total_kept += len(prompt["kept_spans"])
-    data["metadata"]["total_kept_spans"] = total_kept
+            for idx in sorted(match_indices, reverse=True):
+                kept.pop(idx)
+                stats["discuss_removed"] += 1
 
-    old_kept = original["metadata"]["total_kept_spans"]
+            if match_indices:
+                stats["prompts_modified"].add(pid)
 
-    # Print summary
-    print("=" * 60)
-    print("CROSS-VERSION REVIEW APPLICATION SUMMARY")
-    print("=" * 60)
-    print(f"  Conflicts reviewed:   {stats['agree'] + stats['disagree_applied'] + stats['discuss']}")
-    print(f"    Agree (no change):  {stats['agree']}")
-    print(f"    Applied:            {stats['disagree_applied']}")
-    print(f"    Discuss (skipped):  {stats['discuss']}")
-    print(f"    Unreviewed:         {stats['unreviewed']}")
-    if stats["no_labels"]:
-        print(f"    No labels (skip):   {stats['no_labels']}")
-    print(f"  Spans added:          {stats['spans_added']}")
-    print(f"  Spans removed:        {stats['spans_removed']}")
-    print(f"  Total kept spans:     {old_kept} → {total_kept} (delta: {total_kept - old_kept:+d})")
+        stats["discuss_applied"] += 1
 
-    for line in log:
-        print(line)
+    # --- Re-sort and update metadata ---
+    for pid in stats["prompts_modified"]:
+        kept = prompts[pid]["kept_spans"]
+        kept.sort(key=lambda s: (s["start"], s.get("dimension", "")))
+        prompts[pid]["kept_count"] = len(kept)
 
-    if args.dry_run:
-        print(f"\n[DRY RUN] No files written.")
-    else:
-        ts = datetime.now().strftime("%Y%m%d_%H%M%S")
-        backup = MERGED.with_name(f"merged_all_annotations_pre_review_{ts}.json")
-        with backup.open("w", encoding="utf-8") as f:
-            json.dump(original, f, indent=2, ensure_ascii=False)
-        print(f"\n  Backup: {backup}")
-        with MERGED.open("w", encoding="utf-8") as f:
-            json.dump(data, f, indent=2, ensure_ascii=False)
-        print(f"  Written: {MERGED}")
+        dim_summary = {}
+        for s in kept:
+            d = s["dimension"]
+            if d not in dim_summary:
+                dim_summary[d] = {"positive": 0, "negative": 0, "zero": 0}
+            if s["score"] > 0:
+                dim_summary[d]["positive"] += 1
+            elif s["score"] < 0:
+                dim_summary[d]["negative"] += 1
+            else:
+                dim_summary[d]["zero"] += 1
+        prompts[pid]["dimension_summary"] = dim_summary
 
-        # Regenerate negative_spans_review.json + shared_text_review.json
-        print(f"\n  Regenerating derived data files...")
-        import subprocess
-        regen_script = ROOT / "scripts" / "regenerate_negative_spans.py"
-        if regen_script.exists():
-            result = subprocess.run(["python3", str(regen_script)], capture_output=True, text=True)
-            print(f"  {result.stdout.strip()}")
-        else:
-            print(f"  WARNING: {regen_script} not found — run it manually")
+    total_kept = sum(len(p.get("kept_spans", [])) for p in prompts.values())
+    merged["metadata"]["total_kept_spans"] = total_kept
+    merged["metadata"]["cross_version_review_applied"] = datetime.now().isoformat()
+
+    # --- Backup and save ---
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    backup = MERGED_FILE.parent / f"merged_all_annotations_pre_crossversion_{timestamp}.json"
+    shutil.copy2(MERGED_FILE, backup)
+    print(f"Backup: {backup.name}")
+
+    with MERGED_FILE.open("w", encoding="utf-8") as f:
+        json.dump(merged, f, ensure_ascii=False, indent=2)
+
+    print(f"\n=== Results ===")
+    print(f"Agree+labels applied: {stats['conflicts_applied']}")
+    print(f"  Spans removed: {stats['spans_removed']}")
+    print(f"  Spans added (unified): {stats['spans_added']}")
+    print(f"Discuss applied: {stats['discuss_applied']}")
+    print(f"  Spans removed: {stats['discuss_removed']}")
+    print(f"Prompts modified: {len(stats['prompts_modified'])}")
+    print(f"Total kept spans: {total_kept}")
+    if stats["skipped"]:
+        print(f"\nSkipped ({len(stats['skipped'])}):")
+        for s in stats["skipped"]:
+            print(f"  - {s}")
 
 
 if __name__ == "__main__":

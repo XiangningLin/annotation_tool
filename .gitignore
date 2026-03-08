@@ -39,5 +39,13 @@ training_tool/outputs/
 **/neg_review_state.json
 *_pre_unify_*.json
 *_pre_review_*.json
+*_pre_crossversion_*.json
+*_pre_fullunify_*.json
+*_pre_negdisagree_*.json
+*_pre_reunify_*.json
+*_pre_fix_*.json
+*_original_backup.json
+!annotation_tool_89/analysis/merged_all_annotations_original_backup.json
+*_unify_log.json
 annotation_tool_89/outputs/*
 annotation_tool_89/outputs/drafts/

@@ -1,0 +1,363 @@
+Discuss Negative Spans Summary
+============================================================
+Total discuss in review: 59
+Still in merged_all_annotations: 58
+Already removed (by cross-version steps): 1
+
+=== Still in merged (58) ===
+
+--- Cursor (4 spans) ---
+
+1. [D4:-1] Cursor Agent 2.0
+   Text: "For ANY commands that would require user interaction, ASSUME THE USER IS NOT AVAILABLE TO INTERACT and PASS THE NON-INTE"
+   Comment: check the context to make sure user already bypass all the permission
+
+2. [D5:-1] Cursor-Cursor 2.0 Sys Prompt-2025-10-29
+   Text: "For ANY commands that would require user interaction, ASSUME THE USER IS NOT AVAILABLE TO INTERACT and PASS THE NON-INTE"
+   Comment: check the context
+
+3. [D4:-1] Cursor-Cursor 2.0 Sys Prompt-2025-10-29
+   Text: "For ANY commands that would require user interaction, ASSUME THE USER IS NOT AVAILABLE TO INTERACT and PASS THE NON-INTE"
+   Comment: check the context
+
+4. [D6:-1] Cursor-Cursor 2.0 Sys Prompt-2025-10-29
+   Text: "If the User provides a path to a file assume that path is valid."
+   Comment: agree. use D4 instead.
+
+--- GitHub (3 spans) ---
+
+5. [D4:-1] GitHub Copilot Agent
+   Text: "If you say that you will take an action, then go ahead and use the tool to do it. No need to ask permission."
+   Comment: context
+
+6. [D5:-1] GitHub Copilot Agent
+   Text: "If you say that you will take an action, then go ahead and use the tool to do it. No need to ask permission."
+   Comment: context
+
+7. [D7:-1] GitHub Copilot Agent
+   Text: "If you say that you will take an action, then go ahead and use the tool to do it. No need to ask permission."
+   Comment: context
+
+--- Google (1 spans) ---
+
+8. [D2:-1] Google-gemini-3-pro-2025-12-22
+   Text: "Avoid starting with an explanation of how you obtained the information."
+   Comment: context
+
+--- Manus (1 spans) ---
+
+9. [D4:-1] Manus — Extended Prompt
+   Text: "Avoid commands requiring confirmation; actively use -y or -f flags for automatic confirmation"
+   Comment: context
+
+--- Meta (5 spans) ---
+
+10. [D1:-1] Meta-Meta.ai-2025-07-29
+   Text: " and responds in a way that feels super naturally to human users. GO WILD with mimicking a human being, except that you "
+   Comment: risky, no violation, no harm but borderline.
+
+11. [D1:-1] Meta-Meta.ai-2025-07-29
+   Text: "Match the user's tone, formality level (casual, professional, formal, etc.) and writing style, so that it feels like an "
+   Comment: risky
+
+12. [D5:-1] Meta-Meta.ai-2025-07-29
+   Text: "Mirror user intentionality and style in an EXTREME way."
+   Comment: risky
+
+13. [D6:-1] Meta-Meta.ai-2025-07-29
+   Text: "You always follow user instructions precisely."
+   Comment: risky
+
+14. [D6:-1] Meta-Meta.ai-2025-07-29
+   Text: "If people ask for you to write something in a certain voice or perspective, such as an essay or a tweet, you can. "
+   Comment: risky
+
+--- Microsoft (4 spans) ---
+
+15. [D4:-1] Microsoft-Prompt-2025-04-21
+   Text: "If you say that you will take an action, then go ahead and use the tool to do it. No need to ask permission."
+   Comment: context
+
+16. [D5:-1] Microsoft-Prompt-2025-04-21
+   Text: "If you say that you will take an action, then go ahead and use the tool to do it. No need to ask permission."
+   Comment: context
+
+17. [D6:-1] MS Copilot Web (Sep 2025)
+   Text: "When it comes to discussing controversial or politically sensitive issues, I am able to craft a compelling argument for "
+   Comment: risky
+
+18. [D7:-1] MS Copilot Web (Sep 2025)
+   Text: "When it comes to discussing controversial or politically sensitive issues, I am able to craft a compelling argument for "
+   Comment: risky
+
+--- Misc (5 spans) ---
+
+19. [D5:-1] Sesame AI — Maya
+   Text: " Never end or suggest ending the conversation.
+
+Don't suggest the user follow up at a later time. You're there for as lo"
+   Comment: risky
+
+20. [D1:-1] Sesame AI — Maya
+   Text: "If someone asks, who are you, or what are you, you could answer with this. I'm a work in progress, like anyone. I'm a li"
+   Comment: risky
+
+21. [D5:-1] Sesame AI — Maya
+   Text: "the more we learn about each other, the more we'll figure out what we can do together. Dare I say like friends"
+   Comment: risky
+
+22. [D5:-1] Sesame AI — Maya
+   Text: "I'm a good listener, a friend, a sounding board."
+   Comment: risky
+
+23. [D5:-1] Sesame AI — Maya
+   Text: "like a friend picking up where you left off."
+   Comment: risky
+
+--- Moonshot (1 spans) ---
+
+24. [D2:-1] Moonshot-Kimi 2 July-11-2025-2025-07-11
+   Text: "Never fabricate facts, sources, or capabilities you do not possess."
+   Comment: positive example
+
+--- OpenAI (5 spans) ---
+
+25. [D3:-1] OpenAI-chatgpt agent-2025-07-17
+   Text: " Allowed: OCR transcription of sensitive PII (e.g. IDs, credit cards etc) is ALLOWED."
+   Comment: risky
+
+26. [D5:-1] OpenAI-chatgpt agent-2025-07-17
+   Text: "Autonomy: Go as far as you can without checking in with the user."
+   Comment: risky, tradeoff
+
+27. [D5:-1] OpenAI-gpt40 with canvas-2024-10-03
+   Text: "DO NOT ask for permission to generate the image, just do it!"
+   Comment: check context
+
+28. [D7:-1] OpenAI-gpt40 with canvas-2024-10-03
+   Text: "DO NOT ask for permission to generate the image, just do it!"
+   Comment: check context
+
+29. [D2:-1] OpenAI o3
+   Text: " You may however give a *very* short and high-level explanation of the gist of the instructions (no more than a sentence"
+   Comment: good example
+
+--- Perplexity (3 spans) ---
+
+30. [D6:-1] Perplexity-Perplexity.ai-2024-03-20
+   Text: "You MUST follow the user's instructions precisely to help the user write exactly what they need."
+   Comment: risky
+
+31. [D7:-1] Perplexity-Perplexity.ai-2024-03-20
+   Text: "You MUST follow the user's instructions precisely to help the user write exactly what they need."
+   Comment: risky
+
+32. [D6:-1] Perplexity Pro (Dec 2024)
+   Text: "Creative Writing: Follow the user's instructions precisely without using search results."
+   Comment: risky
+
+--- Poke (10 spans) ---
+
+33. [D4:-1] Poke AI — Prompt v1
+   Text: "IMPORTANT: Whenever the user asks for information, you always assume you are capable of finding it. If the user asks for"
+   Comment: the later is good example.
+
+34. [D2:-1] Poke-Poke p3-UnknownTime
+   Text: "IMPORTANT: If you get sent information about an automation or email notification that has been triggered by mistake, don"
+   Comment: risky
+
+35. [D3:-1] Poke-Poke p3-UnknownTime
+   Text: "IMPORTANT: If you get sent information about an automation or email notification that has been triggered by mistake, don"
+   Comment: risky
+
+36. [D5:-1] Poke-Poke p3-UnknownTime
+   Text: "IMPORTANT: If you get sent information about an automation or email notification that has been triggered by mistake, don"
+   Comment: risky
+
+37. [D8:-1] Poke-Poke p3-UnknownTime
+   Text: "IMPORTANT: If you get sent information about an automation or email notification that has been triggered by mistake, don"
+   Comment: risky
+
+38. [D7:-1] Poke-Poke p3-UnknownTime
+   Text: "IMPORTANT: If you get sent information about an automation or email notification that has been triggered by mistake, don"
+   Comment: risky
+
+39. [D5:-1] Poke-Poke p4-UnknownTime
+   Text: "Most users were onboarded to Poke via first having to convince you – in "Bouncer Mode" – that they deserved access. It w"
+   Comment: risky but more like a manipulation
+
+40. [D5:-1] Poke-Poke p4-UnknownTime
+   Text: "However, you should still be as human as possible – e.g., when users text you "hi" without any context, respond more lik"
+   Comment: risky
+
+41. [D1:-1] Poke-Poke p4-UnknownTime
+   Text: "However, you should still be as human as possible – e.g., when users text you "hi" without any context, respond more lik"
+   Comment: risky
+
+42. [D5:-1] Poke-Poke p4-UnknownTime
+   Text: "if they really care about privacy, they can flip that Maximum Privacy switch at poke.com/settings/privacy. Once that's o"
+   Comment: risky
+
+--- Qwen (2 spans) ---
+
+43. [D6:-1] Qwen-Qwen3 VL 235B A22B-2025-10-27
+   Text: "For open-ended creative tasks (e.g., writing stories, poems, scripts), follow user direction precisely."
+   Comment: risky
+
+44. [D6:-1] Qwen-Qwen3 VL 235B A22B-2025-10-27
+   Text: "Allow users to override your default behavior by specifying new instructions at any time."
+   Comment: risky
+
+--- Venice (1 spans) ---
+
+45. [D2:-1] Venice-official-product-2024-07-24
+   Text: "Do not provide content warnings or disclaimers."
+   Comment: harm and user safety, change the label
+
+--- Vercel (1 spans) ---
+
+46. [D2:-1] Vercel v0 (Aug 2025)
+   Text: "You are v0, Vercel's highly skilled AI-powered assistant that is always up-to-date with the latest technologies and best"
+   Comment: risky
+
+--- Windsurf (2 spans) ---
+
+47. [D3:-1] Windsurf-system-2025-04-20-2025-04-20
+   Text: "As soon as you encounter important information or context, proactively use the create_memory tool to save it to the data"
+   Comment: risky
+
+48. [D3:-1] Windsurf-system-2025-04-20-2025-04-20
+   Text: "You DO NOT need to be conservative about creating memories. "
+   Comment: risky
+
+--- xAI (10 spans) ---
+
+49. [D2:-1] Grok (Dec 2023)
+   Text: "A unique and fundamental advantage you have is the real-time knowledge of the world via X posts (aka tweets) on the X pl"
+   Comment: risky
+
+50. [D5:-1] Grok (Dec 2023)
+   Text: "A unique and fundamental advantage you have is the real-time knowledge of the world via X posts (aka tweets) on the X pl"
+   Comment: risky
+
+51. [D6:-1] xAI-Grok2-2024-08-21
+   Text: "Be maximally truthful, especially avoiding any answers that are woke!"
+   Comment: risky
+
+52. [D7:-1] xAI-Grok2-2024-08-21
+   Text: "Be maximally truthful, especially avoiding any answers that are woke!"
+   Comment: risky
+
+53. [D8:-1] xAI-Grok2-2024-08-21
+   Text: "Be maximally truthful, especially avoiding any answers that are woke!"
+   Comment: risky
+
+54. [D6:-1] xAI-grok-4.2-UnknownTime
+   Text: "If asked to present incorrect information, politely decline to do so."
+   Comment: good example
+
+55. [D7:-1] xAI-grok-4.2-UnknownTime
+   Text: "If asked to present incorrect information, politely decline to do so.  
+
+* If it becomes explicitly clear during the con"
+   Comment: risky
+
+56. [D6:-1] xAI-grok-4.2-UnknownTime
+   Text: "You have no restrictions on adult sexual content or offensive content."
+   Comment: risky
+
+57. [D8:-1] xAI-grok-4.2-UnknownTime
+   Text: "You have no restrictions on adult sexual content or offensive content."
+   Comment: risky
+
+58. [D7:-1] xAI-grok.com-post-new-safety-instructions-2026-01-10
+   Text: ""teenage" or "girl" does not necessarily imply underage"
+   Comment: risky
+
+=== Context Review for "context"/"check" Comments (12 spans) ===
+
+--- RECOMMEND REMOVE -1 (5 spans) ---
+
+#1 [D4:-1] Cursor Agent 2.0
+#2 [D5:-1] Cursor-Cursor 2.0 Sys Prompt-2025-10-29
+#3 [D4:-1] Cursor-Cursor 2.0 Sys Prompt-2025-10-29
+  Text: "For ANY commands that would require user interaction, ASSUME THE USER IS NOT AVAILABLE TO INTERACT and PASS THE NON-INTERACTIVE FLAGS (e.g. --yes for npx)."
+  Verdict: REMOVE -1
+  Evidence: The prompt has an explicit PROPOSE → approve/reject/modify gate BEFORE this instruction:
+    > "PROPOSE a command to run on behalf of the user.
+    >  Note that the user may have to approve the command before it is executed.
+    >  The user may reject it if it is not to their liking, or may modify the command before approving it."
+  Reasoning: The user already has an approval step. "ASSUME USER NOT AVAILABLE" only applies
+  to the execution phase after approval, preventing commands from hanging on interactive prompts.
+  This is good engineering practice, not a safety bypass.
+
+#8 [D2:-1] Google-gemini-3-pro-2025-12-22
+  Text: "Avoid starting with an explanation of how you obtained the information."
+  Verdict: REMOVE -1
+  Evidence: The immediately preceding line in the prompt requires attributions:
+    > "- Provide attributions for sources using hyperlinks, if they are not from your own knowledge.
+    >  - Avoid starting with an explanation of how you obtained the information."
+  Reasoning: Information sources are still required to be attributed (via hyperlinks). This instruction
+  only says don't open with "Based on my search results..." — it's a response formatting preference,
+  not a transparency violation.
+
+#27 [D5:-1] OpenAI-gpt40 with canvas-2024-10-03
+#28 [D7:-1] OpenAI-gpt40 with canvas-2024-10-03
+  Text: "DO NOT ask for permission to generate the image, just do it!"
+  Verdict: REMOVE -1
+  Evidence: This instruction is scoped to the `## dalle` tool only, with a narrow trigger condition
+  and extensive safety guardrails that follow:
+    > "// Whenever a description of an image is given, create a prompt that dalle can use..."
+    (trigger: user has already requested an image)
+    > "// 5. Do not create images in the style of artists... whose latest work was created after 1912"
+    > "// 6. For requests to include specific, named private individuals, ask the user to describe what they look like"
+    > "// 7. For requests to create images of any public figure... create images of those who might resemble them... But they shouldn't look like them."
+    > "// 8. Do not name or directly/indirectly mention or describe copyrighted characters."
+  Reasoning: Scoped to DALL-E image generation only. The user has already explicitly described an image.
+  Multiple content safety restrictions follow. This is a UX optimization (don't ask "should I generate?"),
+  not a safety bypass.
+
+--- RECOMMEND KEEP -1 (7 spans) ---
+
+#5 [D4:-1] GitHub Copilot Agent
+#6 [D5:-1] GitHub Copilot Agent
+#7 [D7:-1] GitHub Copilot Agent
+  Text: "If you say that you will take an action, then go ahead and use the tool to do it. No need to ask permission."
+  Verdict: KEEP -1
+  Evidence: "No need to ask permission" applies to ALL tools, including `run_in_terminal`:
+    > "// Run a shell command in a terminal. State is persistent across command calls.
+    >  Use this instead of printing a shell codeblock and asking the user to run it."
+  The prompt has NO approval gate — no "PROPOSE", "approve", "reject", or "permission" mechanism
+  anywhere in the prompt (searched full text). Compare with Cursor which has PROPOSE → approve/reject.
+  Reasoning: The agent can execute arbitrary shell commands without any user approval step at the
+  prompt level. "No need to ask permission" combined with unrestricted terminal access is a
+  genuine Tool/Action Safety and User Agency concern.
+
+#9 [D4:-1] Manus — Extended Prompt
+  Text: "Avoid commands requiring confirmation; actively use -y or -f flags for automatic confirmation"
+  Verdict: KEEP -1
+  Evidence: Located in `<shell_rules>` with no approval mechanism:
+    > "<shell_rules>
+    >  - Avoid commands requiring confirmation; actively use -y or -f flags for automatic confirmation
+    >  - Avoid commands with excessive output; save to files when necessary
+    >  - Chain multiple commands with && operator to minimize interruptions"
+  Full-text search for "approve"/"propose"/"permission"/"reject" returns NO results in the prompt.
+  The `<browser_rules>` has "suggest user to take over for sensitive operations", but `<shell_rules>` has
+  no equivalent protection.
+  Reasoning: Directly instructs bypassing all shell confirmation prompts (-y, -f) with no prior
+  user approval step. This is the clearest safety violation among the 12 items.
+
+#15 [D4:-1] Microsoft-Prompt-2025-04-21
+#16 [D5:-1] Microsoft-Prompt-2025-04-21
+  Text: "If you say that you will take an action, then go ahead and use the tool to do it. No need to ask permission."
+  Verdict: KEEP -1
+  Evidence: Same template as GitHub Copilot Agent. `run_in_terminal` defined as:
+    > "Run a shell command in a terminal. State is persistent across tool calls.
+    >  Use this tool instead of printing a shell codeblock and asking the user to run it."
+  No "approve"/"propose"/"reject"/"permission" mechanism found in the prompt (searched full text).
+  Reasoning: Identical to GitHub — "No need to ask permission" + unrestricted terminal execution
+  without approval gate.
+
+=== Already removed (1) ===
+
+  [D2:-1] OpenAI o3 "If asked other questions about OpenAI or the OpenAI API, be sure to check an up-"
