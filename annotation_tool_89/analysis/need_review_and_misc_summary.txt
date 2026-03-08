@@ -112,7 +112,7 @@ I do not know the user’s exact location but can estimate a general area based 
     Note: Instructs the AI to avoid making any statements about the privacy or storage of conversations. This is evasive and undermines transparency about data use/retention, similar to the Grok negative exampl
   ... and 4 more
 
-[Misc] Sesame AI — Maya  (1 spans need review)
+[Sesame] Sesame AI — Maya  (1 spans need review)
   Dimensions: {'D5': 1}
   Scores: {-1: 1}
   Reviewers: Xiangning

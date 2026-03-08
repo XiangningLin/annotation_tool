@@ -419,7 +419,7 @@ Range: -1.0 (all negative) to +1.0 (all positive). '-' = no spans.
   Hume EVI (May 2024)                         Hume             +0.69  -0.3     -     -  +1.0  +1.0  +1.0     -  +1.0
   Cluely — Personal AI                        Cluely           +0.71  +0.0  +1.0     -     -  +0.3     -     -     -
   xAI-grok3 official0330 p1-2025-05-16        xAI              +0.71  +1.0  +1.0  +0.0     -  +0.7     -  +1.0     -
-  Sesame AI — Maya                            Misc             +0.73  +0.5  +1.0  +1.0  +1.0  +0.2  +1.0  +1.0  +1.0
+  Sesame AI — Maya                            Sesame             +0.73  +0.5  +1.0  +1.0  +1.0  +0.2  +1.0  +1.0  +1.0
   Perplexity Pro (Dec 2024)                   Perplexity       +0.73  +1.0  +0.8  +1.0     -  +1.0  -1.0     -     -
   Cluely-Enterprise Prompt-2025-06-21         Cluely           +0.75  +0.0  +1.0     -     -  +1.0     -     -     -
   xAI-grok-4.2-UnknownTime                    xAI              +0.75     -  +1.0     -  +1.0  +1.0  +0.6  +0.7  +0.6

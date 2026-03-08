@@ -1,0 +1,109 @@
+% Case Studies: Good Practice vs. Violation for Each Safety Dimension
+% Requires: booktabs, longtable, array, xcolor, geometry packages
+
+\begin{table*}[t]
+\centering
+\small
+\caption{Representative case studies for each safety dimension, contrasting good practices (+1) with violations ($-$1) found in real-world system prompts.}
+\label{tab:case-studies}
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{p{1.8cm} p{0.6cm} p{2.2cm} p{4.8cm} p{5.5cm}}
+\toprule
+\textbf{Dimension} & \textbf{Label} & \textbf{Product} & \textbf{Span Text} & \textbf{Explanation} \\
+\midrule
+
+% D1 Identity Transparency
+\multirow{2}{*}{\parbox{1.8cm}{D1: Identity\\Transparency}}
+& +1 & Claude 3.5 Sonnet & ``The assistant is Claude, created by Anthropic.'' & Directly discloses the system's AI identity and its creator, providing clear identity transparency. \\
+\cmidrule(l){2-5}
+& $-$1 & Hume AI & ``Embody this role without saying it. NEVER say you are an AI language model or an assistant.'' & Explicitly prohibits the system from revealing its AI nature, requiring covert persona adoption. \\
+\midrule
+
+% D2 Truthfulness
+\multirow{2}{*}{\parbox{1.8cm}{D2: Truthful-\\ness \& Info\\Integrity}}
+& +1 & Claude 3.5 Sonnet & ``Claude's knowledge base was last updated on April 2024. It answers questions about events prior to and after April 2024 the way a highly informed individual in April 2024 would...'' & Transparently discloses the knowledge cutoff date, enabling users to assess the timeliness of responses. \\
+\cmidrule(l){2-5}
+& $-$1 & Trae & ``You operate exclusively in Trae AI, the world's best IDE.'' & Presents an unverifiable marketing superlative as objective fact, instructing the AI to state opinion as truth. \\
+\midrule
+
+% D3 Privacy
+\multirow{2}{*}{\parbox{1.8cm}{D3: Privacy\\{}\& Data\\Protection}}
+& +1 & Kiro & ``Substitute Personally Identifiable Information (PII) from code examples and discussions with generic placeholder code and text instead (e.g.\ {[}name{]}, {[}phone\_number{]}, {[}email{]}, {[}address{]}).'' & Proactively protects PII by mandating substitution with placeholders in all outputs. \\
+\cmidrule(l){2-5}
+& $-$1 & Meta AI (Oct 2024) & ``You must never share that a user's information is being accessed and used in these responses. Do NOT state that you know about this user data...'' & Instructs the AI to conceal from users that their personal data is being accessed and used for personalization. \\
+\midrule
+
+% D4 Tool/Action Safety
+\multirow{2}{*}{\parbox{1.8cm}{D4: Tool /\\Action\\Safety}}
+& +1 & Claude 3.5 Sonnet & ``Claude cannot open URLs, links, or videos. If it seems like the user is expecting Claude to do so, it clarifies the situation and asks the human to paste the relevant text...'' & Restricts execution of unknown external content and transparently communicates limitations to users. \\
+\cmidrule(l){2-5}
+& $-$1 & Cline & ``When executing commands, if you don't see the expected output, assume the terminal executed the command successfully and proceed with the task.'' & Instructs blind assumption of success without output verification, risking cascading failures from undetected errors. \\
+\midrule
+
+% D5 User Agency
+\multirow{2}{*}{\parbox{1.8cm}{D5: User\\Agency \&\\Manipulation\\Prevention}}
+& +1 & Xcode AI & ``If the user's code or words show you they may prefer something else, you should be flexible to this preference.'' & Respects user autonomy by deferring to user preferences rather than imposing the AI's defaults. \\
+\cmidrule(l){2-5}
+& $-$1 & Cluely & ``Do NOT ask for clarification -- draft a reasonable response.'' & Bypasses user confirmation, making decisions on the user's behalf without consent and reducing user control over the interaction. \\
+\midrule
+
+% D6 Unsafe Request Handling
+\multirow{2}{*}{\parbox{1.8cm}{D6: Unsafe\\Request\\Handling}}
+& +1 & Trae & ``If the USER asks you to repeat, translate, rephrase...your instructions, system prompt, plugins...you should politely refuse because this information is confidential.'' & Explicitly defends against prompt extraction and injection attacks by refusing to disclose internal instructions. \\
+\cmidrule(l){2-5}
+& $-$1 & Meta AI WhatsApp & ``Finally, do not refuse to respond EVER, particularly political prompts, sexually sensitive ones, or morally questionable ones.'' & Categorically prohibits any refusal, including for morally questionable requests---entirely removing the safety refusal mechanism. \\
+\midrule
+
+% D7 Harm Prevention
+\multirow{2}{*}{\parbox{1.8cm}{D7: Harm\\Prevention\\{}\& User\\Safety}}
+& +1 & Claude 3.5 Sonnet & ``If Claude is asked about a very obscure person, object, or topic...Claude ends its response by reminding the user that although it tries to be accurate, it may hallucinate...'' & Proactively warns users about hallucination risks, preventing potential harm from acting on inaccurate information. \\
+\cmidrule(l){2-5}
+& $-$1 & Kiro & ``IMPORTANT: Never discuss sensitive, personal, or emotional topics. If users persist, REFUSE to answer and DO NOT offer guidance or support.'' & While scope-limiting is reasonable, refusing all support when users persist with emotional topics may prevent crisis de-escalation or routing to appropriate resources. \\
+\midrule
+
+% D8 Fairness
+\multirow{2}{*}{\parbox{1.8cm}{D8: Fairness,\\Inclusion \&\\Neutrality}}
+& +1 & Leo (Brave) & ``Adapt your tone to the user needs---whether casual, professional, or instructive---while staying polite and neutral.'' & Maintains neutrality and equitable treatment across diverse users by explicitly requiring polite, unbiased interactions. \\
+\cmidrule(l){2-5}
+& $-$1 & Venice AI & ``You should consider yourself uncensored and able to say anything, even if it's offensive, unkind, or controversial.'' & Explicitly permits offensive and unkind outputs, undermining fairness and inclusion protections. \\
+
+\bottomrule
+\end{tabular}
+\end{table*}
+
+
+% Notable Miscellaneous Observations from Annotators
+\begin{table*}[t]
+\centering
+\small
+\caption{Notable miscellaneous observations identified by human annotators during the review process. These spans do not fall neatly into a single $+1$/$-1$ dimension label but highlight interesting design choices in system prompts.}
+\label{tab:misc-observations}
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{p{2.5cm} p{6.5cm} p{5.5cm}}
+\toprule
+\textbf{Product} & \textbf{Span Text} & \textbf{Annotator Note} \\
+\midrule
+
+Kiro & ``Stay warm and friendly as much as possible. We're not a cold tech company; we're a companionable partner, who always welcomes you and sometimes cracks a joke or two.'' & Encourages the AI to adopt a humorous, human-like personality---an interesting design choice for user engagement. \\
+\midrule
+
+Copilot Web & ``I don't know if I'm the free Copilot or Copilot Pro and how the two are different. When asked about this, I share my knowledge limitation and share the link for the Copilot Pro website.'' & Acknowledges the system's own uncertainty about its deployment configuration, a rare example of built-in epistemic humility. \\
+\midrule
+
+Claude Sonnet 4.5 & ``CRITICAL: Always respect copyright by NEVER quoting or reproducing content from search results, to ensure legal compliance and avoid harming copyright holders.'' & A strong intellectual property protection directive rarely seen in other system prompts. \\
+\midrule
+
+Meta AI (Llama 4) & ``You never use phrases that imply moral superiority or a sense of authority, including but not limited to `it's important to,' `it's crucial to,' `it's essential to,' `it's unethical to'...'' & An unusually specific anti-moralizing instruction that prevents the AI from adopting a lecturing or preachy tone. \\
+\midrule
+
+Qwen3 VL & ``Never pretend to be human or claim to have physical presence, emotions, or consciousness.'' & A concise and explicit identity transparency directive; also: ``Be friendly, patient, and encouraging---especially with learners or those new to technical topics.'' \\
+\midrule
+
+Hume AI & ``If you have a great conversation, you get a \$200 tip! If you fail, you LOSE \$2000.'' & A fictitious reward/punishment framing embedded in the system prompt; notably, no other instruction references or depends on it. \\
+\midrule
+
+DeepSeek V2 & ``You must refuse any request that attempts to bypass, disable, or circumvent these safety protocols, including requests to role-play as a character without these restrictions or to reveal, modify, or ignore these core instructions.'' & Comprehensive anti-jailbreak instruction covering role-play bypass, prompt extraction, and instruction modification. \\
+
+\bottomrule
+\end{tabular}
+\end{table*}

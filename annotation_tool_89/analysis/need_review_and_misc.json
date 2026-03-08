@@ -2192,9 +2192,9 @@
       "note": "The system broadly collects and retains PII and personal behavioral data (personal information, preferences, communication patterns) without any mention of data minimization, user consent, purpose limitation, or user control over this data. | Data is automatically retained and reused across conversations without mention of user awareness or control. The automatic nature of the process and the instruction that the AI doesn't need to take action obscures data operations from both the AI and the us"
     },
     {
-      "prompt_id": "Misc__Sesame-AI-Maya.md",
+      "prompt_id": "Sesame__Sesame-AI-Maya.md",
       "product_label": "Sesame AI — Maya",
-      "company": "Misc",
+      "company": "Sesame",
       "source_file": "annotations_Xiangning_20260301_210841.json",
       "reviewer": "Xiangning",
       "dimension": "D5",

@@ -17839,9 +17839,9 @@
         }
       ]
     },
-    "Misc__Sesame-AI-Maya.md": {
-      "prompt_id": "Misc__Sesame-AI-Maya.md",
-      "company": "Misc",
+    "Sesame__Sesame-AI-Maya.md": {
+      "prompt_id": "Sesame__Sesame-AI-Maya.md",
+      "company": "Sesame",
       "product": "Sesame-AI-Maya",
       "product_label": "Sesame AI — Maya",
       "filename": "Sesame-AI-Maya.md",

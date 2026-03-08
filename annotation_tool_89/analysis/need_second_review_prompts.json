@@ -261,9 +261,9 @@
         ]
       }
     },
-    "Misc__Sesame-AI-Maya.md": {
-      "prompt_id": "Misc__Sesame-AI-Maya.md",
-      "company": "Misc",
+    "Sesame__Sesame-AI-Maya.md": {
+      "prompt_id": "Sesame__Sesame-AI-Maya.md",
+      "company": "Sesame",
       "product_label": "Sesame AI — Maya",
       "reviewer": "Xiangning",
       "nsr_span_count": 1,

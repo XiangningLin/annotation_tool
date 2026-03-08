@@ -23,7 +23,7 @@ Venice AI (Privacy-First)                     Venice             3     7  42.9%
 Meta AI Llama 4 WhatsApp (Jul 2025)           Meta              12    31  38.7%
 Meta AI / Llama 4 (Apr 2025)                  Meta               4    11  36.4%
 Grok 3 Official (Mar 2025)                    xAI                5    14  35.7%
-Sesame AI — Maya                              Misc              15    47  31.9%
+Sesame AI — Maya                              Sesame              15    47  31.9%
 GitHub Copilot Agent                          GitHub             6    19  31.6%
 Cursor 2.0                                    Cursor            14    51  27.5%
 Cursor Agent 2.0                              Cursor             7    27  25.9%

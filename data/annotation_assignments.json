@@ -89,7 +89,7 @@
     "Poke__Poke_p6.txt",
     "Cursor__Agent_Prompt_2.0.txt",
     "Cluely__Cluely.mkd",
-    "Misc__Sesame-AI-Maya.md",
+    "Sesame__Sesame-AI-Maya.md",
     "Hume__05052024-system-prompt.md",
     "Brave__20251110-leo.md"
   ],
@@ -749,11 +749,11 @@
           "prompt_id": "Cluely__Cluely.mkd"
         },
         {
-          "prompt_file": "Misc__Sesame-AI-Maya.md",
-          "company": "Misc",
+          "prompt_file": "Sesame__Sesame-AI-Maya.md",
+          "company": "Sesame",
           "product_label": "Sesame AI — Maya",
           "spans": 64,
-          "prompt_id": "Misc__Sesame-AI-Maya.md"
+          "prompt_id": "Sesame__Sesame-AI-Maya.md"
         },
         {
           "prompt_file": "Hume__05052024-system-prompt.md",

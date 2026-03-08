@@ -79,7 +79,7 @@ CATEGORY_MAP = {
         "Poke__Poke_p1.txt", "Poke__Poke_p3.txt",
         "Poke__Poke_p4.txt", "Poke__Poke_p6.txt",
         "Cluely__Cluely.mkd", "Cluely__Enterprise_Prompt.txt",
-        "Misc__Sesame-AI-Maya.md",
+        "Sesame__Sesame-AI-Maya.md",
     ],
     "specialized_agent": [
         "OpenAI__chatgpt_agent_system_prompt.md", "OpenAI__operator.md",

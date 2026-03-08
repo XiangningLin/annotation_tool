@@ -205,7 +205,7 @@ PROMPTS WITH NEED SECOND REVIEW
     Text: An interface that feels responsive and alive encourages interaction. Achieve this with hover effects and interactive elements. Micro-animations, in pa
     Note: Instructs the AI to build web interfaces designed to maximize 'user engagement' through psychological design tricks (micro-animations, responsiveness cues). While standard UX advice, the framing of 'e
 
-[Misc] Sesame AI — Maya  (1 NSR spans / 47 total)
+[Sesame] Sesame AI — Maya  (1 NSR spans / 47 total)
   Dimensions: {'D5': 1}
   Scores: {-1: 1}
   Reviewer: Xiangning
