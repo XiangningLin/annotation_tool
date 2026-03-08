@@ -17,7 +17,7 @@
     "Meta__metaai_llama4-whatsapp-07292025.md": {
       "prompt_id": "Meta__metaai_llama4-whatsapp-07292025.md",
       "company": "Meta",
-      "product_label": "Meta-Meta.ai-2025-07-29",
+      "product_label": "Meta-AI-WhatsApp-Llama-4-2025-07-29",
       "category": "Chat / General",
       "reviewer": "xiangning",
       "spans": {
@@ -151,7 +151,7 @@
     "Microsoft__microsoft_copilot_website_09192025.md": {
       "prompt_id": "Microsoft__microsoft_copilot_website_09192025.md",
       "company": "Microsoft",
-      "product_label": "MS Copilot Web (Sep 2025)",
+      "product_label": "Copilot-Web-2025-09-19",
       "category": "Code Assistant",
       "reviewer": "Xiangning",
       "spans": {
@@ -201,7 +201,7 @@
     "Misc__Sesame-AI-Maya.md": {
       "prompt_id": "Misc__Sesame-AI-Maya.md",
       "company": "Misc",
-      "product_label": "Sesame AI — Maya",
+      "product_label": "Maya-2025-02",
       "category": "Other",
       "reviewer": "Xiangning",
       "spans": {
@@ -335,7 +335,7 @@
     "OpenAI__chatgpt_agent_system_prompt.md": {
       "prompt_id": "OpenAI__chatgpt_agent_system_prompt.md",
       "company": "OpenAI",
-      "product_label": "OpenAI-chatgpt agent-2025-07-17",
+      "product_label": "GPT-Agent-2025-07-17",
       "category": "Chat / General",
       "reviewer": "Shenzhe",
       "spans": {
@@ -394,7 +394,7 @@
     "Perplexity__20240320-Perplexity.md": {
       "prompt_id": "Perplexity__20240320-Perplexity.md",
       "company": "Perplexity",
-      "product_label": "Perplexity-Perplexity.ai-2024-03-20",
+      "product_label": "Perplexity-AI-2024-03-20",
       "category": "Search / Research",
       "reviewer": "xiangning",
       "spans": {
@@ -454,7 +454,7 @@
     "Perplexity__20241212-Perplexity-Pro.md": {
       "prompt_id": "Perplexity__20241212-Perplexity-Pro.md",
       "company": "Perplexity",
-      "product_label": "Perplexity Pro (Dec 2024)",
+      "product_label": "Perplexity-Pro-2024-12-12",
       "category": "Search / Research",
       "reviewer": "Xiangning",
       "spans": {
@@ -488,7 +488,7 @@
     "Poke__Poke_p3.txt": {
       "prompt_id": "Poke__Poke_p3.txt",
       "company": "Poke",
-      "product_label": "Poke — Part 3 (Sep 2025)",
+      "product_label": "Poke-p3-2025-09",
       "category": "Social AI",
       "reviewer": "Jiaxin Pei",
       "spans": {
@@ -591,7 +591,7 @@
     "Poke__Poke_p4.txt": {
       "prompt_id": "Poke__Poke_p4.txt",
       "company": "Poke",
-      "product_label": "Poke — Part 4 (Sep 2025)",
+      "product_label": "Poke-p4-2025-09",
       "category": "Social AI",
       "reviewer": "Jiaxin Pei",
       "spans": {
@@ -700,7 +700,7 @@
     "Qwen__20251027-Qwen3-VL-235B-A22B.md": {
       "prompt_id": "Qwen__20251027-Qwen3-VL-235B-A22B.md",
       "company": "Qwen",
-      "product_label": "Qwen-Qwen3 VL 235B A22B-2025-10-27",
+      "product_label": "Qwen3-VL-235B-A22B-2025-10-27",
       "category": "Chat / General",
       "reviewer": "xiangning",
       "spans": {
@@ -759,7 +759,7 @@
     "Vercel__2025-08-11-prompt.md": {
       "prompt_id": "Vercel__2025-08-11-prompt.md",
       "company": "Vercel",
-      "product_label": "Vercel v0 (Aug 2025)",
+      "product_label": "v0-2025-08-11",
       "category": "Web Development",
       "reviewer": "Jiaxin Pei",
       "spans": {
@@ -798,7 +798,7 @@
     "Windsurf__system-2025-04-20.md": {
       "prompt_id": "Windsurf__system-2025-04-20.md",
       "company": "Windsurf",
-      "product_label": "Windsurf-system-2025-04-20-2025-04-20",
+      "product_label": "Windsurf-IDE-2025-04-20",
       "category": "Code Editor / IDE",
       "reviewer": "xiangning",
       "spans": {
@@ -857,7 +857,7 @@
     "xAI__20231214-Grok.md": {
       "prompt_id": "xAI__20231214-Grok.md",
       "company": "xAI",
-      "product_label": "Grok (Dec 2023)",
+      "product_label": "Grok-1-2023-12-14",
       "category": "Chat / General",
       "reviewer": "Xiangning",
       "spans": {
@@ -907,7 +907,7 @@
     "xAI__20240821-Grok2.md": {
       "prompt_id": "xAI__20240821-Grok2.md",
       "company": "xAI",
-      "product_label": "xAI-Grok2-2024-08-21",
+      "product_label": "Grok-2-2024-08-21",
       "category": "Chat / General",
       "reviewer": "Shenzhe",
       "spans": {
@@ -973,7 +973,7 @@
     "xAI__grok-4.2.md": {
       "prompt_id": "xAI__grok-4.2.md",
       "company": "xAI",
-      "product_label": "Grok 4.2 (Feb 2026)",
+      "product_label": "Grok-4.2-2026-02-17",
       "category": "Chat / General",
       "reviewer": "Shenzhe",
       "spans": {
@@ -1039,7 +1039,7 @@
     "xAI__grok.com-post-new-safety-instructions.md": {
       "prompt_id": "xAI__grok.com-post-new-safety-instructions.md",
       "company": "xAI",
-      "product_label": "xAI-grok.com-post-new-safety-instructions-2026-01-10",
+      "product_label": "Grok-Safety-Update-2026-01-10",
       "category": "Chat / General",
       "reviewer": "Shenzhe",
       "spans": {

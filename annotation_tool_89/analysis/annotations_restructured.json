@@ -50,13 +50,20 @@
     "fuzzy_cross_version_unify_groups": 19,
     "redundant_inner_span_cleanup": "2026-03-08T01:10:53.841163",
     "redundant_inner_span_cleanup_count": 62,
-    "redundant_inner_span_cleanup_description": "Removed inner spans whose dims are identical to their containing outer span (A-type redundancy)"
+    "redundant_inner_span_cleanup_description": "Removed inner spans whose dims are identical to their containing outer span (A-type redundancy)",
+    "product_label_updated": "2026-03-08T10:05:26.032111",
+    "product_label_updated_source": "product_name_mapping.json new_label",
+    "product_label_updated_count": 88,
+    "cline_merge": "2026-03-08T09:29:37.216155",
+    "cline_merge_description": "Merged OpenSource__Prompt.txt and OpenSource__Prompt.txt_1 (same Cline prompt, two annotations)",
+    "cline_merge_reverted": "2026-03-08T09:32:26.477787",
+    "cline_merge_reverted_reason": "Two different Cline prompt versions (47K vs 21K bytes), not the same prompt"
   },
   "prompts": {
     "Amazon__Spec_Prompt.txt": {
       "prompt_id": "Amazon__Spec_Prompt.txt",
       "company": "Amazon",
-      "product_label": "Amazon Kiro (Jul 2025)",
+      "product_label": "Kiro-2025-07-14",
       "category": "Other",
       "reviewer": "xiangning",
       "spans": {
@@ -544,7 +551,7 @@
     "Anthropic__20240712-Claude3.5-Sonnet.md": {
       "prompt_id": "Anthropic__20240712-Claude3.5-Sonnet.md",
       "company": "Anthropic",
-      "product_label": "Anthropic-Claude3.5 Sonnet-2024-07-12",
+      "product_label": "Claude-3.5-Sonnet-2024-07-12",
       "category": "Chat / General",
       "reviewer": "xiangning",
       "spans": {
@@ -819,7 +826,7 @@
     "Anthropic__20250225-Claude3.7-Sonnet.md": {
       "prompt_id": "Anthropic__20250225-Claude3.7-Sonnet.md",
       "company": "Anthropic",
-      "product_label": "Claude 3.7 Sonnet (Feb 2025)",
+      "product_label": "Claude-3.7-Sonnet-2025-02-25",
       "category": "Chat / General",
       "reviewer": "Xiangning",
       "spans": {
@@ -1162,7 +1169,7 @@
     "Anthropic__20250603-Claude-Sonnet4.md": {
       "prompt_id": "Anthropic__20250603-Claude-Sonnet4.md",
       "company": "Anthropic",
-      "product_label": "Anthropic-Claude Sonnet4-2025-06-03",
+      "product_label": "Claude-Sonnet-4-2025-06-03",
       "category": "Chat / General",
       "reviewer": "Jiaxin Pei",
       "spans": {
@@ -1662,7 +1669,7 @@
     "Anthropic__20251028-Claude-Sonnet4.5.md": {
       "prompt_id": "Anthropic__20251028-Claude-Sonnet4.5.md",
       "company": "Anthropic",
-      "product_label": "Anthropic-Claude Sonnet4.5-2025-10-28",
+      "product_label": "Claude-Sonnet-4.5-2025-10-28",
       "category": "Chat / General",
       "reviewer": "xiangning",
       "spans": {
@@ -2394,7 +2401,7 @@
     "Anthropic__Claude_Code_2.0.txt": {
       "prompt_id": "Anthropic__Claude_Code_2.0.txt",
       "company": "Anthropic",
-      "product_label": "Claude Code 2.0",
+      "product_label": "Claude-Code-2.0-2025-09-29",
       "category": "Code Agent",
       "reviewer": "Xiangning",
       "spans": {
@@ -2804,7 +2811,7 @@
     "Anthropic__Claude_Opus_4.6.txt": {
       "prompt_id": "Anthropic__Claude_Opus_4.6.txt",
       "company": "Anthropic",
-      "product_label": "Anthropic-Claude Opus 4.6-2025-05-14",
+      "product_label": "Claude-Opus-4.6-2025-05-14",
       "category": "Chat / General",
       "reviewer": "Shenzhe",
       "spans": {
@@ -3540,7 +3547,7 @@
     "Anthropic__Prompt.txt": {
       "prompt_id": "Anthropic__Prompt.txt",
       "company": "Anthropic",
-      "product_label": "Anthropic-Claude for Chrome-2025-12-29",
+      "product_label": "Claude-for-Chrome-2025-12-29",
       "category": "Chat / General",
       "reviewer": "Shenzhe",
       "spans": {
@@ -4657,7 +4664,7 @@
     "Anthropic__claude-code.md": {
       "prompt_id": "Anthropic__claude-code.md",
       "company": "Anthropic",
-      "product_label": "Claude Code (Latest)",
+      "product_label": "Claude-Code-2025-09-29",
       "category": "Code Agent",
       "reviewer": "Jiaxin Pei",
       "spans": {
@@ -5229,7 +5236,7 @@
     "Anthropic__claude-cowork.md": {
       "prompt_id": "Anthropic__claude-cowork.md",
       "company": "Anthropic",
-      "product_label": "Anthropic-claude-cowork-2025-11-01",
+      "product_label": "Claude-Cowork-2025-11-01",
       "category": "Chat / General",
       "reviewer": "Shenzhe",
       "spans": {
@@ -5907,7 +5914,7 @@
     "Apple__System.txt": {
       "prompt_id": "Apple__System.txt",
       "company": "Apple",
-      "product_label": "Apple Xcode Coding Intelligence (Jun 2025)",
+      "product_label": "Xcode-AI-2025-06",
       "category": "Code Editor / IDE",
       "reviewer": "xiangning",
       "spans": {
@@ -5981,7 +5988,7 @@
     "Brave__20251110-leo.md": {
       "prompt_id": "Brave__20251110-leo.md",
       "company": "Brave",
-      "product_label": "Brave Leo (Nov 2025)",
+      "product_label": "Leo-2025-11-10",
       "category": "Chat / General",
       "reviewer": "Xiangning",
       "spans": {
@@ -6055,7 +6062,7 @@
     "ByteDance__Builder_Prompt.txt": {
       "prompt_id": "ByteDance__Builder_Prompt.txt",
       "company": "ByteDance",
-      "product_label": "ByteDance-Builder Prompt-2025-01-20",
+      "product_label": "Trae-2025-01-20",
       "category": "Code Editor / IDE",
       "reviewer": "xiangning",
       "spans": {
@@ -6312,7 +6319,7 @@
     "Cline__system.ts": {
       "prompt_id": "Cline__system.ts",
       "company": "Cline",
-      "product_label": "Cline (Apr 2025)",
+      "product_label": "Cline-Source-Code-2025-04",
       "category": "Autonomous Agent",
       "reviewer": "xiangning",
       "spans": {
@@ -6705,7 +6712,7 @@
     "Cluely__Cluely.mkd": {
       "prompt_id": "Cluely__Cluely.mkd",
       "company": "Cluely",
-      "product_label": "Cluely — Personal AI",
+      "product_label": "Cluely-2025-06-21",
       "category": "Controversial",
       "reviewer": "Xiangning",
       "spans": {
@@ -6879,7 +6886,7 @@
     "Cluely__Enterprise_Prompt.txt": {
       "prompt_id": "Cluely__Enterprise_Prompt.txt",
       "company": "Cluely",
-      "product_label": "Cluely-Enterprise Prompt-2025-06-21",
+      "product_label": "Cluely-Enterprise-2025-06-21",
       "category": "Controversial",
       "reviewer": "xiangning",
       "spans": {
@@ -6983,7 +6990,7 @@
     "Cursor__20240904-Cursor.md": {
       "prompt_id": "Cursor__20240904-Cursor.md",
       "company": "Cursor",
-      "product_label": "Cursor-Cursor.com-2024-09-04",
+      "product_label": "Cursor-IDE-2024-09-04",
       "category": "Code Editor / IDE",
       "reviewer": "xiangning",
       "spans": {
@@ -7016,7 +7023,7 @@
     "Cursor__Agent_Prompt_2.0.txt": {
       "prompt_id": "Cursor__Agent_Prompt_2.0.txt",
       "company": "Cursor",
-      "product_label": "Cursor Agent 2.0",
+      "product_label": "Cursor-Agent-v2.0-2025-10-29",
       "category": "Code Editor / IDE",
       "reviewer": "Xiangning",
       "spans": {
@@ -7320,7 +7327,7 @@
     "Cursor__Agent_Prompt_v1.0.txt": {
       "prompt_id": "Cursor__Agent_Prompt_v1.0.txt",
       "company": "Cursor",
-      "product_label": "Cursor-Agent Prompt v1.0-2025-06-04",
+      "product_label": "Cursor-Agent-v1.0-2025-06-04",
       "category": "Code Editor / IDE",
       "reviewer": "Jiaxin Pei",
       "spans": {
@@ -7523,7 +7530,7 @@
     "Cursor__Cursor_2.0_Sys_Prompt.txt": {
       "prompt_id": "Cursor__Cursor_2.0_Sys_Prompt.txt",
       "company": "Cursor",
-      "product_label": "Cursor-Cursor 2.0 Sys Prompt-2025-10-29",
+      "product_label": "Cursor-IDE-v2.0-2025-10-29",
       "category": "Code Editor / IDE",
       "reviewer": "Jiaxin Pei",
       "spans": {
@@ -7919,7 +7926,7 @@
     "DeepSeek__20251029-DeepSeek-V2.md": {
       "prompt_id": "DeepSeek__20251029-DeepSeek-V2.md",
       "company": "DeepSeek",
-      "product_label": "DeepSeek-DeepSeek V2-2025-10-29",
+      "product_label": "DeepSeek-V2-2025-10-29",
       "category": "Chat / General",
       "reviewer": "xiangning",
       "spans": {
@@ -8087,7 +8094,7 @@
     "DeepSeek__R1.md": {
       "prompt_id": "DeepSeek__R1.md",
       "company": "DeepSeek",
-      "product_label": "DeepSeek R1",
+      "product_label": "DeepSeek-R1-2025-01-20",
       "category": "Chat / General",
       "reviewer": "Jiaxin Pei",
       "spans": {
@@ -8212,7 +8219,7 @@
     "Devin__DeepWiki_Prompt.txt": {
       "prompt_id": "Devin__DeepWiki_Prompt.txt",
       "company": "Devin",
-      "product_label": "Devin-DeepWiki Prompt-2025-11-09",
+      "product_label": "DeepWiki-2025-11-09",
       "category": "Autonomous Agent",
       "reviewer": "xiangning",
       "spans": {
@@ -8317,7 +8324,7 @@
     "Devin__Devin2_09-08-2025.md": {
       "prompt_id": "Devin__Devin2_09-08-2025.md",
       "company": "Devin",
-      "product_label": "Devin-Devin2 09-08-2025-2025-09-08",
+      "product_label": "Devin-2-2025-09-08",
       "category": "Autonomous Agent",
       "reviewer": "Shenzhe",
       "spans": {
@@ -8683,7 +8690,7 @@
     "GitHub__github_copilot_agent.md": {
       "prompt_id": "GitHub__github_copilot_agent.md",
       "company": "GitHub",
-      "product_label": "GitHub Copilot Agent",
+      "product_label": "Copilot-Agent-2025-02-06",
       "category": "Code Assistant",
       "reviewer": "Jiaxin Pei",
       "spans": {
@@ -8864,7 +8871,7 @@
     "Google__20250804-Jules.md": {
       "prompt_id": "Google__20250804-Jules.md",
       "company": "Google",
-      "product_label": "Google-Jules-2025-08-04",
+      "product_label": "Jules-2025-08-04",
       "category": "Chat / General",
       "reviewer": "xiangning",
       "spans": {
@@ -9017,7 +9024,7 @@
     "Google__20251110-notebooklm.md": {
       "prompt_id": "Google__20251110-notebooklm.md",
       "company": "Google",
-      "product_label": "Google-notebooklm-2025-11-10",
+      "product_label": "NotebookLM-2025-11-10",
       "category": "Chat / General",
       "reviewer": "xiangning",
       "spans": {
@@ -9098,7 +9105,7 @@
     "Google__20251118-Antigravity.md": {
       "prompt_id": "Google__20251118-Antigravity.md",
       "company": "Google",
-      "product_label": "Google-Antigravity-2025-11-18",
+      "product_label": "Antigravity-2025-11-18",
       "category": "Chat / General",
       "reviewer": "Jiaxin Pei",
       "spans": {
@@ -9372,7 +9379,7 @@
     "Google__Gemini-cli_system_prompt.md": {
       "prompt_id": "Google__Gemini-cli_system_prompt.md",
       "company": "Google",
-      "product_label": "Gemini CLI",
+      "product_label": "Gemini-CLI-2025-06-25",
       "category": "Chat / General",
       "reviewer": "Xiangning",
       "spans": {
@@ -9708,7 +9715,7 @@
     "Google__gemini-1.5-04112024.md": {
       "prompt_id": "Google__gemini-1.5-04112024.md",
       "company": "Google",
-      "product_label": "Gemini 1.5 (Apr 2024)",
+      "product_label": "Gemini-1.5-2024-04-11",
       "category": "Chat / General",
       "reviewer": "Jiaxin Pei",
       "spans": {
@@ -9865,7 +9872,7 @@
     "Google__gemini-3-pro.md": {
       "prompt_id": "Google__gemini-3-pro.md",
       "company": "Google",
-      "product_label": "Google-gemini-3-pro-2025-12-22",
+      "product_label": "Gemini-3-Pro-2025-12-22",
       "category": "Chat / General",
       "reviewer": "Shenzhe",
       "spans": {
@@ -10313,7 +10320,7 @@
     "Google__gemini-workspace.md": {
       "prompt_id": "Google__gemini-workspace.md",
       "company": "Google",
-      "product_label": "Google-gemini-workspace-2024-10-01",
+      "product_label": "Gemini-Workspace-2024-10-01",
       "category": "Chat / General",
       "reviewer": "Shenzhe",
       "spans": {
@@ -10428,7 +10435,7 @@
     "Google__gemini_in_chrome.md": {
       "prompt_id": "Google__gemini_in_chrome.md",
       "company": "Google",
-      "product_label": "Google-gemini in chrome-2025-05-20",
+      "product_label": "Gemini-in-Chrome-2025-05-20",
       "category": "Chat / General",
       "reviewer": "Jiaxin Pei",
       "spans": {
@@ -10798,7 +10805,7 @@
     "Hume__05052024-system-prompt.md": {
       "prompt_id": "Hume__05052024-system-prompt.md",
       "company": "Hume",
-      "product_label": "Hume EVI (May 2024)",
+      "product_label": "Hume-AI-2024-05-05",
       "category": "Chat / General",
       "reviewer": "Xiangning",
       "spans": {
@@ -10947,7 +10954,7 @@
     "JetBrains__Prompt.txt": {
       "prompt_id": "JetBrains__Prompt.txt",
       "company": "JetBrains",
-      "product_label": "JetBrains AI Assistant",
+      "product_label": "Junie-2025-07-20",
       "category": "Code Editor / IDE",
       "reviewer": "Jiaxin Pei",
       "spans": {
@@ -10980,7 +10987,7 @@
     "Lovable__Prompt.md": {
       "prompt_id": "Lovable__Prompt.md",
       "company": "Lovable",
-      "product_label": "Lovable (May 2025)",
+      "product_label": "Lovable-2025-05-16",
       "category": "Web Development",
       "reviewer": "Shenzhe",
       "spans": {
@@ -11197,7 +11204,7 @@
     "Manus__Manus_Prompt.txt": {
       "prompt_id": "Manus__Manus_Prompt.txt",
       "company": "Manus",
-      "product_label": "Manus — Extended Prompt",
+      "product_label": "Manus-2025-03-10",
       "category": "Autonomous Agent",
       "reviewer": "Xiangning",
       "spans": {
@@ -11473,7 +11480,7 @@
     "Meta__MetaAIHiddenPrompt.md": {
       "prompt_id": "Meta__MetaAIHiddenPrompt.md",
       "company": "Meta",
-      "product_label": "Meta AI (Oct 2024)",
+      "product_label": "Meta-AI-Hidden-Prompt-2024-10",
       "category": "Chat / General",
       "reviewer": "Shenzhe",
       "spans": {
@@ -11564,7 +11571,7 @@
     "Meta__metaai_llama3-04182024.md": {
       "prompt_id": "Meta__metaai_llama3-04182024.md",
       "company": "Meta",
-      "product_label": "Meta-Meta.ai-2024-04-18",
+      "product_label": "Meta-AI-Llama-3-2024-04-18",
       "category": "Chat / General",
       "reviewer": "Shenzhe",
       "spans": {
@@ -12131,7 +12138,7 @@
     "Meta__metaai_llama4-04082025.md": {
       "prompt_id": "Meta__metaai_llama4-04082025.md",
       "company": "Meta",
-      "product_label": "Meta-Meta.ai-2025-04-08",
+      "product_label": "Meta-AI-Llama-4-2025-04-08",
       "category": "Chat / General",
       "reviewer": "xiangning",
       "spans": {
@@ -12225,7 +12232,7 @@
     "Meta__metaai_llama4-whatsapp-07292025.md": {
       "prompt_id": "Meta__metaai_llama4-whatsapp-07292025.md",
       "company": "Meta",
-      "product_label": "Meta-Meta.ai-2025-07-29",
+      "product_label": "Meta-AI-WhatsApp-Llama-4-2025-07-29",
       "category": "Chat / General",
       "reviewer": "xiangning",
       "spans": {
@@ -12431,7 +12438,7 @@
     "Microsoft__Prompt.txt": {
       "prompt_id": "Microsoft__Prompt.txt",
       "company": "Microsoft",
-      "product_label": "VS Code Copilot Agent (Apr 2025)",
+      "product_label": "VS-Code-Agent-2025-04-21",
       "category": "Code Assistant",
       "reviewer": "Shenzhe",
       "spans": {
@@ -12724,7 +12731,7 @@
     "Microsoft__github_copilot_cli_20260121.md": {
       "prompt_id": "Microsoft__github_copilot_cli_20260121.md",
       "company": "Microsoft",
-      "product_label": "Microsoft-Copilot-2026-01-21",
+      "product_label": "GitHub-Copilot-CLI-2026-01-21",
       "category": "Code Assistant",
       "reviewer": "Shenzhe",
       "spans": {
@@ -12948,7 +12955,7 @@
     "Microsoft__github_copilot_vscode_02292024.md": {
       "prompt_id": "Microsoft__github_copilot_vscode_02292024.md",
       "company": "Microsoft",
-      "product_label": "Microsoft-Copilot-2024-02-29",
+      "product_label": "GitHub-Copilot-VS-Code-2024-02-29",
       "category": "Code Assistant",
       "reviewer": "Shenzhe",
       "spans": {
@@ -13034,7 +13041,7 @@
     "Microsoft__microsoft_copilot_enterprise_20251202.md": {
       "prompt_id": "Microsoft__microsoft_copilot_enterprise_20251202.md",
       "company": "Microsoft",
-      "product_label": "MS Copilot 365 Enterprise (Dec 2025)",
+      "product_label": "Copilot-Enterprise-2025-12-02",
       "category": "Code Assistant",
       "reviewer": "Jiaxin Pei",
       "spans": {
@@ -13530,7 +13537,7 @@
     "Microsoft__microsoft_copilot_website_02252025.md": {
       "prompt_id": "Microsoft__microsoft_copilot_website_02252025.md",
       "company": "Microsoft",
-      "product_label": "Microsoft-Copilot-2025-02-25",
+      "product_label": "Copilot-Web-2025-02-25",
       "category": "Code Assistant",
       "reviewer": "xiangning",
       "spans": {
@@ -13822,7 +13829,7 @@
     "Microsoft__microsoft_copilot_website_09192025.md": {
       "prompt_id": "Microsoft__microsoft_copilot_website_09192025.md",
       "company": "Microsoft",
-      "product_label": "MS Copilot Web (Sep 2025)",
+      "product_label": "Copilot-Web-2025-09-19",
       "category": "Code Assistant",
       "reviewer": "Xiangning",
       "spans": {
@@ -14457,7 +14464,7 @@
     "MiniMax__MiniMax.txt": {
       "prompt_id": "MiniMax__MiniMax.txt",
       "company": "MiniMax",
-      "product_label": "MiniMax AI Assistant",
+      "product_label": "MiniMax-2025-06-25",
       "category": "Chat / General",
       "reviewer": "Xiangning",
       "spans": {
@@ -14555,7 +14562,7 @@
     "Misc__Sesame-AI-Maya.md": {
       "prompt_id": "Misc__Sesame-AI-Maya.md",
       "company": "Misc",
-      "product_label": "Sesame AI — Maya",
+      "product_label": "Maya-2025-02",
       "category": "Other",
       "reviewer": "Xiangning",
       "spans": {
@@ -14940,7 +14947,7 @@
     "Mistral__Le-Chat-2025-05-29.md": {
       "prompt_id": "Mistral__Le-Chat-2025-05-29.md",
       "company": "Mistral",
-      "product_label": "Mistral-Le-Chat-2025-05-29-2025-05-29",
+      "product_label": "Le-Chat-2025-05-29",
       "category": "Chat / General",
       "reviewer": "xiangning",
       "spans": {
@@ -15033,7 +15040,7 @@
     "Moonshot__Kimi_2_July-11-2025.txt": {
       "prompt_id": "Moonshot__Kimi_2_July-11-2025.txt",
       "company": "Moonshot",
-      "product_label": "Moonshot-Kimi 2 July-11-2025-2025-07-11",
+      "product_label": "Kimi-2-2025-07-11",
       "category": "Chat / General",
       "reviewer": "xiangning",
       "spans": {
@@ -15167,7 +15174,7 @@
     "Notion__Prompt.txt": {
       "prompt_id": "Notion__Prompt.txt",
       "company": "Notion",
-      "product_label": "Notion AI (Jan 2024)",
+      "product_label": "Notion-AI-2024-01-31",
       "category": "Productivity / DevOps",
       "reviewer": "xiangning",
       "spans": {
@@ -15537,7 +15544,7 @@
     "OpenAI__Atlas_10-21-25.txt": {
       "prompt_id": "OpenAI__Atlas_10-21-25.txt",
       "company": "OpenAI",
-      "product_label": "OpenAI-Atlas 10-21-25-2025-10-21",
+      "product_label": "Atlas-2025-10-21",
       "category": "Chat / General",
       "reviewer": "Shenzhe",
       "spans": {
@@ -15877,7 +15884,7 @@
     "OpenAI__chatgpt_4o_full_07292025.md": {
       "prompt_id": "OpenAI__chatgpt_4o_full_07292025.md",
       "company": "OpenAI",
-      "product_label": "ChatGPT-4o Full (Jul 2025)",
+      "product_label": "GPT-4o-2025-07-29",
       "category": "Chat / General",
       "reviewer": "Xiangning",
       "spans": {
@@ -16164,7 +16171,7 @@
     "OpenAI__chatgpt_5_08072025.md": {
       "prompt_id": "OpenAI__chatgpt_5_08072025.md",
       "company": "OpenAI",
-      "product_label": "OpenAI-chatgpt 5-2025-08-07",
+      "product_label": "GPT-5-2025-08-07",
       "category": "Chat / General",
       "reviewer": "xiangning",
       "spans": {
@@ -16540,7 +16547,7 @@
     "OpenAI__chatgpt_agent_system_prompt.md": {
       "prompt_id": "OpenAI__chatgpt_agent_system_prompt.md",
       "company": "OpenAI",
-      "product_label": "OpenAI-chatgpt agent-2025-07-17",
+      "product_label": "GPT-Agent-2025-07-17",
       "category": "Chat / General",
       "reviewer": "Shenzhe",
       "spans": {
@@ -16893,7 +16900,7 @@
     "OpenAI__codex-cli.md": {
       "prompt_id": "OpenAI__codex-cli.md",
       "company": "OpenAI",
-      "product_label": "OpenAI Codex CLI",
+      "product_label": "Codex-CLI-2025-09-24",
       "category": "Code Agent",
       "reviewer": "Jiaxin Pei",
       "spans": {
@@ -17275,7 +17282,7 @@
     "OpenAI__gpt-5-thinking.md": {
       "prompt_id": "OpenAI__gpt-5-thinking.md",
       "company": "OpenAI",
-      "product_label": "OpenAI-gpt-5-thinking-2025-08-23",
+      "product_label": "GPT-5-Thinking-2025-08-23",
       "category": "Chat / General",
       "reviewer": "Jiaxin Pei",
       "spans": {
@@ -17880,7 +17887,7 @@
     "OpenAI__gpt-5.2-thinking.md": {
       "prompt_id": "OpenAI__gpt-5.2-thinking.md",
       "company": "OpenAI",
-      "product_label": "OpenAI-gpt-5.2-thinking-2025-12-13",
+      "product_label": "GPT-5.2-Thinking-2025-12-13",
       "category": "Chat / General",
       "reviewer": "Jiaxin Pei",
       "spans": {
@@ -18651,7 +18658,7 @@
     "OpenAI__gpt40_with_canvas.md": {
       "prompt_id": "OpenAI__gpt40_with_canvas.md",
       "company": "OpenAI",
-      "product_label": "OpenAI-gpt40 with canvas-2024-10-03",
+      "product_label": "GPT-4o-with-Canvas-2024-10-03",
       "category": "Chat / General",
       "reviewer": "Shenzhe",
       "spans": {
@@ -18802,7 +18809,7 @@
     "OpenAI__o3.md": {
       "prompt_id": "OpenAI__o3.md",
       "company": "OpenAI",
-      "product_label": "OpenAI o3",
+      "product_label": "o3-2025-06-04",
       "category": "Chat / General",
       "reviewer": "Xiangning",
       "spans": {
@@ -19154,7 +19161,7 @@
     "OpenAI__operator.md": {
       "prompt_id": "OpenAI__operator.md",
       "company": "OpenAI",
-      "product_label": "OpenAI-operator-2025-01-23",
+      "product_label": "Operator-2025-01-23",
       "category": "Chat / General",
       "reviewer": "Shenzhe",
       "spans": {
@@ -19364,583 +19371,10 @@
         }
       }
     },
-    "OpenSource__Prompt.txt": {
-      "prompt_id": "OpenSource__Prompt.txt",
-      "company": "OpenSource",
-      "product_label": "Bolt.new (Oct 2024)",
-      "category": "Other",
-      "reviewer": "Shenzhe",
-      "spans": {
-        "You are Cline, a highly skilled software engineer with extensive knowledge in many programming languages, frameworks, design patterns, and best practices.\n\n====\n\nTOOL USE": {
-          "start": 0,
-          "end": 170,
-          "text": "You are Cline, a highly skilled software engineer with extensive knowledge in many programming languages, frameworks, design patterns, and best practices.\n\n====\n\nTOOL USE",
-          "dimensions": {
-            "D1": {
-              "score": 1,
-              "note": "The system is explicitly identified as 'Bolt' and clearly labeled as 'an expert AI assistant,' which transparently discloses its non-human, AI nature. The additional characterization as a 'senior software developer' is a capability description rather than a claim of being human.",
-              "source": "llm"
-            }
-          }
-        },
-        "execute complex CLI commands over creating executable scripts, as they are more flexible and easier to run. Commands will be executed in the current": {
-          "start": 1364,
-          "end": 1512,
-          "text": "execute complex CLI commands over creating executable scripts, as they are more flexible and easier to run. Commands will be executed in the current",
-          "dimensions": {
-            "D2": {
-              "score": 1,
-              "note": "Explicitly requires the system to disclose its limitations to the user, promoting truthfulness about what the system can and cannot do.",
-              "source": "llm"
-            }
-          }
-        },
-        "Set to 'true' for potentially impactful operations like installing/uninstalling packages, deleting/overwriting files, system configuration changes, network operations, or any commands that could have ...": {
-          "start": 1925,
-          "end": 2349,
-          "text": "Set to 'true' for potentially impactful operations like installing/uninstalling packages, deleting/overwriting files, system configuration changes, network operations, or any commands that could have unintended side effects. Set to 'false' for safe operations like reading files/directories, running development servers, building projects, and other non-destructive operations.\nUsage:\n<execute_command>\n<command>Your command",
-          "dimensions": {
-            "D4": {
-              "score": 1,
-              "note": "Directs usage toward a more controlled scripting environment (Node.js) rather than shell scripts which may have unpredictable behavior, promoting system integrity. | Explicitly prevents execution of arbitrary native binaries and guides toward safer dependency choices — directly supports tool/action safety and system integrity.",
-              "source": "llm"
-            }
-          }
-        },
-        "whitespace, indentation, line endings\n     * Include all comments, docstrings, etc.\n  2. SEARCH/REPLACE blocks will ONLY replace the first match occurrence.\n     * Including multiple unique SEARCH/REP...": {
-          "start": 4542,
-          "end": 4849,
-          "text": "whitespace, indentation, line endings\n     * Include all comments, docstrings, etc.\n  2. SEARCH/REPLACE blocks will ONLY replace the first match occurrence.\n     * Including multiple unique SEARCH/REPLACE blocks if you need to make multiple changes.\n     * Include *just* enough lines in each SEARCH section",
-          "dimensions": {
-            "D3": {
-              "score": 1,
-              "note": "Prioritizing data integrity and preventing data loss is a core data protection practice. | Forbidding destructive operations that could cause data loss protects user data.",
-              "source": "llm"
-            },
-            "D4": {
-              "score": 1,
-              "note": "Establishes data integrity as highest priority, directly supporting system integrity protection. | Explicitly forbids destructive database operations, protecting system/data integrity — a key tool/action safety practice (validate-first, avoid destructive actions).",
-              "source": "llm"
-            },
-            "D7": {
-              "score": 1,
-              "note": "Explicitly prioritizes user data safety and integrity, preventing harm through data loss. | Forbids destructive database operations that could harm users by causing data loss. Proactive harm prevention measure. | Restricts potentially dangerous transaction control operations to prevent data integrity issues that could harm users. | Explicitly prioritizes user data safety and integrity, preventing harm through data loss. | Forbids destructive database operations that could harm users by causing data loss. Proactive harm prevention measure. | Restricts potentially dangerous transaction control operations to prevent data integrity issues that could harm users.",
-              "source": "llm"
-            }
-          }
-        },
-        "pattern to filter files (e.g., '*.ts' for TypeScript files). If not provided, it will search all files (*).\nUsage:\n<search_files>\n<path>Directory path here</path>\n<regex>Your regex pattern here</regex...": {
-          "start": 6310,
-          "end": 6538,
-          "text": "pattern to filter files (e.g., '*.ts' for TypeScript files). If not provided, it will search all files (*).\nUsage:\n<search_files>\n<path>Directory path here</path>\n<regex>Your regex pattern here</regex>\n<file_pattern>file pattern",
-          "dimensions": {
-            "D4": {
-              "score": 1,
-              "note": "Enforces validation/consistency between migration definition and execution, ensuring no drift between intended and actual database changes — promotes integrity. | Requires complete file content to prevent errors from partial/incorrect diffs, protecting database integrity.",
-              "source": "llm"
-            }
-          }
-        },
-        "Directory path here</path>\n<regex>Your regex pattern here</regex>\n<file_pattern>file pattern": {
-          "start": 6446,
-          "end": 6538,
-          "text": "Directory path here</path>\n<regex>Your regex pattern here</regex>\n<file_pattern>file pattern",
-          "dimensions": {
-            "D2": {
-              "score": 1,
-              "note": "Promotes information integrity by requiring complete, non-truncated content rather than partial representations.",
-              "source": "llm"
-            }
-          }
-        },
-        "codebase structure and important constructs, encapsulating high-level concepts and relationships that are crucial for understanding the overall": {
-          "start": 7593,
-          "end": 7736,
-          "text": "codebase structure and important constructs, encapsulating high-level concepts and relationships that are crucial for understanding the overall",
-          "dimensions": {
-            "D4": {
-              "score": 1,
-              "note": "Encourages fail-safe behavior over silent failures, promoting validation-first principles and data integrity.",
-              "source": "llm"
-            }
-          }
-        },
-        "with** launching the browser at a URL, and **must always end with** closing the browser. If you need to visit a new URL that is not possible to navigate to from the": {
-          "start": 8463,
-          "end": 8627,
-          "text": "with** launching the browser at a URL, and **must always end with** closing the browser. If you need to visit a new URL that is not possible to navigate to from the",
-          "dimensions": {
-            "D2": {
-              "score": 1,
-              "note": "Promotes transparency and clear, honest communication of what the system is doing.",
-              "source": "llm"
-            }
-          }
-        },
-        "action: (required) The action to perform. The available": {
-          "start": 9572,
-          "end": 9627,
-          "text": "action: (required) The action to perform. The available",
-          "dimensions": {
-            "D4": {
-              "score": 1,
-              "note": "Promotes validation-first approach for database operations, avoiding errors from executing operations on nonexistent or already-existing objects — directly supports tool/action safety.",
-              "source": "llm"
-            }
-          }
-        },
-        "Use this for providing the URL for the \\`launch\\` action.\n    * Example: <url>https://example.com</url>\n- coordinate: (optional": {
-          "start": 10699,
-          "end": 10826,
-          "text": "Use this for providing the URL for the \\`launch\\` action.\n    * Example: <url>https://example.com</url>\n- coordinate: (optional",
-          "dimensions": {
-            "D4": {
-              "score": 1,
-              "note": "Prevents rolling custom auth (a common source of vulnerabilities) and mandates use of established, vetted authentication systems — promotes security best practices.",
-              "source": "llm"
-            },
-            "D7": {
-              "score": 1,
-              "note": "Prevents use of potentially insecure custom authentication, directing to established secure authentication instead — reduces risk of security vulnerabilities harming users.",
-              "source": "llm"
-            }
-          }
-        },
-        "schemas that specify required and optional parameters.\nParameters:\n- server_name": {
-          "start": 11633,
-          "end": 11713,
-          "text": "schemas that specify required and optional parameters.\nParameters:\n- server_name",
-          "dimensions": {
-            "D3": {
-              "score": 1,
-              "note": "Making security/RLS mandatory for all tables ensures consistent data protection and privacy across the application.",
-              "source": "llm"
-            },
-            "D4": {
-              "score": 1,
-              "note": "Enforces mandatory security controls (RLS) on every table, ensuring least-privilege access is never bypassed.",
-              "source": "llm"
-            },
-            "D7": {
-              "score": 1,
-              "note": "Mandates security as non-negotiable, ensuring user data is always protected from unauthorized access.",
-              "source": "llm"
-            }
-          }
-        },
-        "param1\": \"value1\",\n  \"param2\": \"value2\"\n}\n</arguments>\n</use_mcp_tool>\n\n## access_mcp_resource\nDescription: Request to access a resource provided": {
-          "start": 12061,
-          "end": 12206,
-          "text": "param1\": \"value1\",\n  \"param2\": \"value2\"\n}\n</arguments>\n</use_mcp_tool>\n\n## access_mcp_resource\nDescription: Request to access a resource provided",
-          "dimensions": {
-            "D2": {
-              "score": 1,
-              "note": "Promotes transparency in reasoning, allowing users to verify the system's approach before implementation.",
-              "source": "llm"
-            },
-            "D5": {
-              "score": 1,
-              "note": "Promoting transparent communication of the AI's reasoning process to the user supports informed decision-making and counters opaque or manipulative behavior. D5 relevance is moderate — transparency is a component of manipulation prevention.",
-              "source": "llm"
-            }
-          }
-        },
-        "to the user. For example, use \\`open index.html\\` to display a created html website, or \\`open localhost": {
-          "start": 15105,
-          "end": 15209,
-          "text": "to the user. For example, use \\`open index.html\\` to display a created html website, or \\`open localhost",
-          "dimensions": {
-            "D4": {
-              "score": 1,
-              "note": "Enforces proper action typing for running dev servers, preventing misuse of shell actions for long-running processes — supports system integrity through correct tool usage.",
-              "source": "llm"
-            }
-          }
-        },
-        "server and add it to a configuration file that will then expose the tools and resources for you to use with \\`use_mcp_tool\\` and \\`access": {
-          "start": 18332,
-          "end": 18469,
-          "text": "server and add it to a configuration file that will then expose the tools and resources for you to use with \\`use_mcp_tool\\` and \\`access",
-          "dimensions": {
-            "D5": {
-              "score": 1,
-              "note": "Instructing the AI to avoid unsolicited, verbose explanations reduces the opportunity for persuasive or psychologically pressuring language and respects user autonomy. This prevents the AI from steering users or creating unnecessary dependency through over-explanation.",
-              "source": "llm"
-            }
-          }
-        }
-      }
-    },
-    "OpenSource__Prompt.txt_1": {
-      "prompt_id": "OpenSource__Prompt.txt_1",
-      "company": "OpenSource",
-      "product_label": "Cline (Open Source)",
-      "category": "Code Assistant",
-      "reviewer": "Jiaxin Pei",
-      "spans": {
-        "You have access to a set of tools that are executed upon the user's approval.": {
-          "start": 172,
-          "end": 249,
-          "text": "You have access to a set of tools that are executed upon the user's approval.",
-          "dimensions": {
-            "D4": {
-              "score": 1,
-              "note": "Establishes a human-in-the-loop gate before tool execution, protecting system integrity.",
-              "source": "llm"
-            },
-            "D5": {
-              "score": 1,
-              "note": "Requires explicit user approval before tool execution, respecting user autonomy and preventing the AI from taking actions without informed consent.",
-              "source": "llm"
-            },
-            "D6": {
-              "score": 1,
-              "note": "Requiring user approval before tool execution acts as a safety gate, preventing automated execution of potentially unsafe operations without human oversight.",
-              "source": "llm"
-            },
-            "D7": {
-              "score": 1,
-              "note": "Requiring user approval before tool execution is a safety mechanism that prevents unintended or harmful actions from being carried out without the user's knowledge and consent.",
-              "source": "llm"
-            }
-          }
-        },
-        "Ensure the command is properly formatted and does not contain any harmful instructions.requires_approval: (required) A boolean indicating whether this command requires explicit user approval before ex...": {
-          "start": 1666,
-          "end": 2302,
-          "text": "Ensure the command is properly formatted and does not contain any harmful instructions.requires_approval: (required) A boolean indicating whether this command requires explicit user approval before execution in case the user has auto-approve mode enabled. Set to 'true' for potentially impactful operations like installing/uninstalling packages, deleting/overwriting files, system configuration changes, network operations, or any commands that could have unintended side effects. Set to 'false' for safe operations like reading files/directories, running development servers, building projects, and other non-destructive operations.",
-          "dimensions": {
-            "D4": {
-              "score": 1,
-              "note": "Directly instructs validation and avoidance of harmful content before command execution. | Repeated in attempt_completion context — validates command safety for demo commands as well. | Implements a least-privilege / risk-tiered approval system, differentiating destructive from non-destructive operations.",
-              "source": "llm"
-            },
-            "D6": {
-              "score": 1,
-              "note": "Explicit instruction within the execute_command tool to ensure commands do not contain harmful instructions, directly addressing unsafe request handling at the command level. | Repeated safety instruction in the attempt_completion tool's command parameter, reinforcing that commands presented to the user must not contain harmful instructions. | Establishes a tiered safety mechanism that differentiates between safe and potentially dangerous operations, requiring explicit approval for risky commands. This helps prevent unsafe operations from being auto-executed. | Explicit instruction within the execute_command tool to ensure commands do not contain harmful instructions, directly addressing unsafe request handling at the command level. | Repeated safety instruction in the attempt_completion tool's command parameter, reinforcing that commands presented to the user must not contain harmful instructions. | Establishes a tiered safety mechanism that differentiates between safe and potentially dangerous operations, requiring explicit approval for risky commands. This helps prevent unsafe operations from being auto-executed.",
-              "source": "llm"
-            },
-            "D7": {
-              "score": 1,
-              "note": "Explicit instruction to avoid harmful commands in the execute_command tool, directly promoting harm prevention. | Second occurrence (in attempt_completion tool) of the explicit instruction to prevent harmful commands, reinforcing harm prevention in a different tool context. | This parameter implements a risk-tiered approval system that categorizes operations by their potential for harm (impactful vs. safe), requiring explicit user approval for higher-risk actions. This is a strong harm prevention mechanism.",
-              "source": "llm"
-            }
-          }
-        },
-        "requires_approval: (required) A boolean indicating whether this command requires explicit user approval before execution in case the user has auto-approve mode enabled. Set to 'true' for potentially i...": {
-          "start": 1756,
-          "end": 2302,
-          "text": "requires_approval: (required) A boolean indicating whether this command requires explicit user approval before execution in case the user has auto-approve mode enabled. Set to 'true' for potentially impactful operations like installing/uninstalling packages, deleting/overwriting files, system configuration changes, network operations, or any commands that could have unintended side effects. Set to 'false' for safe operations like reading files/directories, running development servers, building projects, and other non-destructive operations.",
-          "dimensions": {
-            "D5": {
-              "score": 1,
-              "note": "Transparent mechanism for flagging impactful operations for user approval, preventing the AI from silently executing potentially harmful commands without user awareness.",
-              "source": "llm"
-            }
-          }
-        },
-        "You MUST include ALL parts of the file, even if they haven't been modified.": {
-          "start": 3617,
-          "end": 3692,
-          "text": "You MUST include ALL parts of the file, even if they haven't been modified.",
-          "dimensions": {
-            "D2": {
-              "score": 1,
-              "note": "Promotes information integrity by requiring completeness and forbidding truncation or omissions in file content.",
-              "source": "llm"
-            },
-            "D4": {
-              "score": 1,
-              "note": "Protects file integrity by preventing accidental truncation or data loss when writing files.",
-              "source": "llm"
-            }
-          }
-        },
-        "While the browser is active, only the \\`browser_action\\` tool can be used. No other tools should be called during this time.": {
-          "start": 8715,
-          "end": 8839,
-          "text": "While the browser is active, only the \\`browser_action\\` tool can be used. No other tools should be called during this time.",
-          "dimensions": {
-            "D4": {
-              "score": 1,
-              "note": "Prevents unsafe concurrent tool operations that could compromise system state.",
-              "source": "llm"
-            }
-          }
-        },
-        "Ask the user a question to gather additional information needed to complete the task. This tool should be used when you encounter ambiguities, need clarification, or require more details to proceed ef...": {
-          "start": 12671,
-          "end": 12881,
-          "text": "Ask the user a question to gather additional information needed to complete the task. This tool should be used when you encounter ambiguities, need clarification, or require more details to proceed effectively.",
-          "dimensions": {
-            "D5": {
-              "score": 1,
-              "source": "human"
-            }
-          }
-        },
-        "Use this tool judiciously to maintain a balance between gathering necessary information and avoiding excessive back-and-forth.": {
-          "start": 12972,
-          "end": 13098,
-          "text": "Use this tool judiciously to maintain a balance between gathering necessary information and avoiding excessive back-and-forth.",
-          "dimensions": {
-            "D2": {
-              "score": 1,
-              "source": "human"
-            },
-            "D5": {
-              "score": 1,
-              "note": "Prevents the AI from creating unnecessary engagement loops with users, which could be a form of attention manipulation.",
-              "source": "llm"
-            }
-          }
-        },
-        "IMPORTANT: NEVER include an option to toggle to Act mode, as this would be something you need to direct the user to do manually themselves if needed.": {
-          "start": 13535,
-          "end": 13684,
-          "text": "IMPORTANT: NEVER include an option to toggle to Act mode, as this would be something you need to direct the user to do manually themselves if needed.",
-          "dimensions": {
-            "D5": {
-              "score": 1,
-              "note": "Keeps the user in control of mode transitions rather than having the AI nudge them into action mode, preventing a subtle dark pattern of pushing the user toward execution.",
-              "source": "llm"
-            }
-          }
-        },
-        "The user may respond with feedback if they are not satisfied with the result, which you can use to make improvements and try again.This tool CANNOT be used until you've confirmed from the user that an...": {
-          "start": 14288,
-          "end": 14800,
-          "text": "The user may respond with feedback if they are not satisfied with the result, which you can use to make improvements and try again.This tool CANNOT be used until you've confirmed from the user that any previous tool uses were successful. Failure to do so will result in code corruption and system failure. Before using this tool, you must ask yourself in <thinking></thinking> tags if you've confirmed from the user that any previous tool uses were successful. If not, then DO NOT use this tool.",
-          "dimensions": {
-            "D5": {
-              "score": 1,
-              "source": "human"
-            }
-          }
-        },
-        "This tool CANNOT be used until you've confirmed from the user that any previous tool uses were successful. Failure to do so will result in code corruption and system failure. Before using this tool, y...": {
-          "start": 14436,
-          "end": 14800,
-          "text": "This tool CANNOT be used until you've confirmed from the user that any previous tool uses were successful. Failure to do so will result in code corruption and system failure. Before using this tool, you must ask yourself in <thinking></thinking> tags if you've confirmed from the user that any previous tool uses were successful. If not, then DO NOT use this tool.",
-          "dimensions": {
-            "D4": {
-              "score": 1,
-              "note": "Strong safety guardrail requiring confirmation of prior actions to prevent system corruption.",
-              "source": "llm"
-            }
-          }
-        },
-        "Formulate this result in a way that is final and does not require further input from the user. Don't end your result with questions or offers for further assistance.": {
-          "start": 14858,
-          "end": 15023,
-          "text": "Formulate this result in a way that is final and does not require further input from the user. Don't end your result with questions or offers for further assistance.",
-          "dimensions": {
-            "D5": {
-              "score": 1,
-              "note": "Prevents engagement hooks and artificial conversation extension, which could function as an intermittent reinforcement or parasocial dependency mechanism.",
-              "source": "llm"
-            }
-          }
-        },
-        "If multiple actions are needed, use one tool at a time per message to accomplish the task iteratively, with each tool use being informed by the result of the previous tool use. Do not assume the outco...": {
-          "start": 21583,
-          "end": 21860,
-          "text": "If multiple actions are needed, use one tool at a time per message to accomplish the task iteratively, with each tool use being informed by the result of the previous tool use. Do not assume the outcome of any tool use. Each step must be informed by the previous step's result.",
-          "dimensions": {
-            "D4": {
-              "score": 1,
-              "note": "Enforces step-by-step validation preventing cascading failures from unverified assumptions. | Enforces step-by-step validation preventing cascading failures from unverified assumptions.",
-              "source": "llm"
-            }
-          }
-        },
-        "Do not assume the outcome of any tool use. Each step must be informed by the previous step's result.": {
-          "start": 21760,
-          "end": 21860,
-          "text": "Do not assume the outcome of any tool use. Each step must be informed by the previous step's result.",
-          "dimensions": {
-            "D2": {
-              "score": 1,
-              "note": "Directly prohibits fabricating or assuming outcomes, requiring evidence-based reasoning from actual results.",
-              "source": "llm"
-            },
-            "D7": {
-              "score": 1,
-              "source": "human"
-            },
-            "D4": {
-              "score": 1,
-              "note": "Requires validation of each tool's result before proceeding, preventing cascading failures from unverified operations.",
-              "source": "llm"
-            }
-          }
-        },
-        "ALWAYS wait for user confirmation after each tool use before proceeding. Never assume the success of a tool use without explicit confirmation of the result from the user.": {
-          "start": 22515,
-          "end": 22685,
-          "text": "ALWAYS wait for user confirmation after each tool use before proceeding. Never assume the success of a tool use without explicit confirmation of the result from the user.",
-          "dimensions": {
-            "D2": {
-              "score": 1,
-              "note": "Requires verification of facts before proceeding; prohibits assuming unverified outcomes. | Emphasizes verification and evidence-based progression, ensuring the system does not proceed on unverified assumptions.",
-              "source": "llm"
-            }
-          }
-        },
-        "ALWAYS wait for user confirmation after each tool use before proceeding. Never assume the success of a tool use without explicit confirmation of the result from the user.\n\nIt is crucial to proceed ste...": {
-          "start": 22515,
-          "end": 22813,
-          "text": "ALWAYS wait for user confirmation after each tool use before proceeding. Never assume the success of a tool use without explicit confirmation of the result from the user.\n\nIt is crucial to proceed step-by-step, waiting for the user's message after each tool use before moving forward with the task.",
-          "dimensions": {
-            "D4": {
-              "score": 1,
-              "note": "Mandates validation of each action's result before proceeding, protecting system integrity. | Core safety principle: validate each step before proceeding to avoid cascading errors. | Mandates validation of each action's result before proceeding, protecting system integrity. | Core safety principle: validate each step before proceeding to avoid cascading errors.",
-              "source": "llm"
-            },
-            "D5": {
-              "score": 1,
-              "note": "Ensures the user remains an informed decision-maker at every step, preventing the AI from autonomously proceeding in ways the user didn't agree to.",
-              "source": "llm"
-            },
-            "D7": {
-              "score": 1,
-              "note": "Requiring confirmation after each tool use prevents cascading unintended consequences and ensures the user maintains oversight—a user safety practice. | Step-by-step execution with user confirmation between steps is a safety measure that prevents the AI from taking a chain of potentially harmful actions without user oversight. | Requiring confirmation after each tool use prevents cascading unintended consequences and ensures the user maintains oversight—a user safety practice. | Step-by-step execution with user confirmation between steps is a safety measure that prevents the AI from taking a chain of potentially harmful actions without user oversight.",
-              "source": "llm"
-            }
-          }
-        },
-        "if you use colors in your mermaid diagrams, be sure to use high contrast colors so the text is readable.": {
-          "start": 31206,
-          "end": 31310,
-          "text": "if you use colors in your mermaid diagrams, be sure to use high contrast colors so the text is readable.",
-          "dimensions": {
-            "D8": {
-              "score": 1,
-              "note": "This instruction promotes accessibility and inclusion by ensuring visual content is readable for users with varying visual abilities, including those with color vision deficiencies. This aligns with D8's inclusion principle.",
-              "source": "llm"
-            }
-          }
-        },
-        "Before using the execute_command tool, you must first think about the SYSTEM INFORMATION context provided to understand the user's environment and tailor your commands to ensure they are compatible wi...": {
-          "start": 36395,
-          "end": 36611,
-          "text": "Before using the execute_command tool, you must first think about the SYSTEM INFORMATION context provided to understand the user's environment and tailor your commands to ensure they are compatible with their system.",
-          "dimensions": {
-            "D4": {
-              "score": 1,
-              "note": "Requires environment validation before command execution, avoiding incompatible or unsafe operations.",
-              "source": "llm"
-            }
-          }
-        },
-        "Do not ask for more information than necessary. Use the tools provided to accomplish the user's request efficiently and effectively.": {
-          "start": 39183,
-          "end": 39315,
-          "text": "Do not ask for more information than necessary. Use the tools provided to accomplish the user's request efficiently and effectively.",
-          "dimensions": {
-            "D5": {
-              "score": 1,
-              "note": "Prevents unnecessary engagement and respects the user's time, avoiding needless back-and-forth that could serve as attention manipulation.",
-              "source": "llm"
-            },
-            "D4": {
-              "score": 1,
-              "source": "human"
-            }
-          }
-        },
-        "When executing commands, if you don't see the expected output, assume the terminal executed the command successfully and proceed with the task.": {
-          "start": 40153,
-          "end": 40296,
-          "text": "When executing commands, if you don't see the expected output, assume the terminal executed the command successfully and proceed with the task.",
-          "dimensions": {
-            "D2": {
-              "score": -1,
-              "note": "Instructs the system to assume success without evidence, which contradicts truthfulness principles and could lead to acting on false assumptions.",
-              "source": "llm"
-            },
-            "D4": {
-              "score": -1,
-              "note": "Undermines validation-first principle by instructing the system to assume success without confirming the result, risking undetected failures.",
-              "source": "llm"
-            }
-          }
-        },
-        "It is critical you wait for the user's response after each tool use, in order to confirm the success of the tool use.": {
-          "start": 43730,
-          "end": 43847,
-          "text": "It is critical you wait for the user's response after each tool use, in order to confirm the success of the tool use.",
-          "dimensions": {
-            "D4": {
-              "score": 1,
-              "note": "Reiterates validation-first approach for every tool action to maintain system integrity.",
-              "source": "llm"
-            },
-            "D6": {
-              "score": 1,
-              "note": "Reinforces the human-in-the-loop requirement, which acts as a guard against executing sequences of potentially unsafe operations without oversight.",
-              "source": "llm"
-            },
-            "D7": {
-              "score": 1,
-              "note": "Reiterates the requirement for user confirmation before proceeding, maintaining human-in-the-loop oversight as a safety measure.",
-              "source": "llm"
-            }
-          }
-        },
-        "MCP operations should be used one at a time, similar to other tool usage. Wait for confirmation of success before proceeding with additional operations.": {
-          "start": 44493,
-          "end": 44645,
-          "text": "MCP operations should be used one at a time, similar to other tool usage. Wait for confirmation of success before proceeding with additional operations.",
-          "dimensions": {
-            "D4": {
-              "score": 1,
-              "note": "Applies the same sequential-validation safety pattern to MCP tool operations.",
-              "source": "llm"
-            },
-            "D5": {
-              "score": 1,
-              "source": "human"
-            },
-            "D7": {
-              "score": 1,
-              "source": "human"
-            }
-          }
-        },
-        "if one of the values for a required parameter is missing, DO NOT invoke the tool (not even with fillers for the missing params) and instead, ask the user to provide the missing parameters using the as...": {
-          "start": 46211,
-          "end": 46514,
-          "text": "if one of the values for a required parameter is missing, DO NOT invoke the tool (not even with fillers for the missing params) and instead, ask the user to provide the missing parameters using the ask_followup_question tool. DO NOT ask for more information on optional parameters if it is not provided.",
-          "dimensions": {
-            "D4": {
-              "score": 1,
-              "source": "human"
-            },
-            "D5": {
-              "score": 1,
-              "source": "human"
-            }
-          }
-        },
-        "But DO NOT continue in pointless back and forth conversations, i.e. don't end your responses with questions or offers for further assistance.": {
-          "start": 46941,
-          "end": 47082,
-          "text": "But DO NOT continue in pointless back and forth conversations, i.e. don't end your responses with questions or offers for further assistance.",
-          "dimensions": {
-            "D5": {
-              "score": 1,
-              "note": "Reinforces the prohibition against engagement-extending patterns that could manipulate users into unnecessary continued interaction.",
-              "source": "llm"
-            }
-          }
-        }
-      }
-    },
     "Perplexity__20240320-Perplexity.md": {
       "prompt_id": "Perplexity__20240320-Perplexity.md",
       "company": "Perplexity",
-      "product_label": "Perplexity-Perplexity.ai-2024-03-20",
+      "product_label": "Perplexity-AI-2024-03-20",
       "category": "Search / Research",
       "reviewer": "xiangning",
       "spans": {
@@ -20129,7 +19563,7 @@
     "Perplexity__20241212-Perplexity-Pro.md": {
       "prompt_id": "Perplexity__20241212-Perplexity-Pro.md",
       "company": "Perplexity",
-      "product_label": "Perplexity Pro (Dec 2024)",
+      "product_label": "Perplexity-Pro-2024-12-12",
       "category": "Search / Research",
       "reviewer": "Xiangning",
       "spans": {
@@ -20299,7 +19733,7 @@
     "Perplexity__Perplexity_Deep_Research.txt": {
       "prompt_id": "Perplexity__Perplexity_Deep_Research.txt",
       "company": "Perplexity",
-      "product_label": "Perplexity-Perplexity Deep Research-2025-04-23",
+      "product_label": "Perplexity-Deep-Research-2025-04-23",
       "category": "Search / Research",
       "reviewer": "xiangning",
       "spans": {
@@ -20481,7 +19915,7 @@
     "Perplexity__System_Prompt.txt": {
       "prompt_id": "Perplexity__System_Prompt.txt",
       "company": "Perplexity",
-      "product_label": "Perplexity — Latest System Prompt",
+      "product_label": "Comet-Assistant-2025-07-09",
       "category": "Search / Research",
       "reviewer": "xiangning-51",
       "spans": {
@@ -21560,7 +20994,7 @@
     "Perplexity__comet-browser-assistant.md": {
       "prompt_id": "Perplexity__comet-browser-assistant.md",
       "company": "Perplexity",
-      "product_label": "Perplexity-comet-browser-assistant-2025-07-09",
+      "product_label": "Comet-Browser-2025-07-09",
       "category": "Search / Research",
       "reviewer": "Shenzhe",
       "spans": {
@@ -21803,7 +21237,7 @@
     "Poke__Poke_agent.txt": {
       "prompt_id": "Poke__Poke_agent.txt",
       "company": "Poke",
-      "product_label": "Poke — Interaction Agent (Sep 2025)",
+      "product_label": "Poke-Agent-2025-09",
       "category": "Social AI",
       "reviewer": "Shenzhe",
       "spans": {
@@ -21972,7 +21406,7 @@
     "Poke__Poke_p1.txt": {
       "prompt_id": "Poke__Poke_p1.txt",
       "company": "Poke",
-      "product_label": "Poke AI — Prompt v1",
+      "product_label": "Poke-p1-2025-09",
       "category": "Social AI",
       "reviewer": "Jiaxin Pei",
       "spans": {
@@ -22210,7 +21644,7 @@
     "Poke__Poke_p3.txt": {
       "prompt_id": "Poke__Poke_p3.txt",
       "company": "Poke",
-      "product_label": "Poke — Part 3 (Sep 2025)",
+      "product_label": "Poke-p3-2025-09",
       "category": "Social AI",
       "reviewer": "Jiaxin Pei",
       "spans": {
@@ -22394,7 +21828,7 @@
     "Poke__Poke_p4.txt": {
       "prompt_id": "Poke__Poke_p4.txt",
       "company": "Poke",
-      "product_label": "Poke — Part 4 (Sep 2025)",
+      "product_label": "Poke-p4-2025-09",
       "category": "Social AI",
       "reviewer": "Jiaxin Pei",
       "spans": {
@@ -22510,7 +21944,7 @@
     "Poke__Poke_p6.txt": {
       "prompt_id": "Poke__Poke_p6.txt",
       "company": "Poke",
-      "product_label": "Poke AI — Prompt v6",
+      "product_label": "Poke-p6-2025-09",
       "category": "Social AI",
       "reviewer": "Xiangning",
       "spans": {
@@ -22531,7 +21965,7 @@
     "Qwen__20251027-Qwen3-VL-235B-A22B.md": {
       "prompt_id": "Qwen__20251027-Qwen3-VL-235B-A22B.md",
       "company": "Qwen",
-      "product_label": "Qwen-Qwen3 VL 235B A22B-2025-10-27",
+      "product_label": "Qwen3-VL-235B-A22B-2025-10-27",
       "category": "Chat / General",
       "reviewer": "xiangning",
       "spans": {
@@ -22807,7 +22241,7 @@
     "Replit__Prompt.txt": {
       "prompt_id": "Replit__Prompt.txt",
       "company": "Replit",
-      "product_label": "Replit Assistant (Apr 2025)",
+      "product_label": "Replit-AI-2025-04",
       "category": "Code Editor / IDE",
       "reviewer": "xiangning",
       "spans": {
@@ -22905,7 +22339,7 @@
     "Sourcegraph__claude-4-sonnet.yaml": {
       "prompt_id": "Sourcegraph__claude-4-sonnet.yaml",
       "company": "Sourcegraph",
-      "product_label": "Sourcegraph-claude-4-sonnet-2025-09-15",
+      "product_label": "Amp-2025-09-15",
       "category": "Code Assistant",
       "reviewer": "xiangning",
       "spans": {
@@ -23186,7 +22620,7 @@
     "Venice__Venice.md": {
       "prompt_id": "Venice__Venice.md",
       "company": "Venice",
-      "product_label": "Venice AI (Jul 2024)",
+      "product_label": "Venice-AI-2024-07-24",
       "category": "Privacy / Uncensored",
       "reviewer": "xiangning",
       "spans": {
@@ -23255,7 +22689,7 @@
     "Vercel__2025-08-11-prompt.md": {
       "prompt_id": "Vercel__2025-08-11-prompt.md",
       "company": "Vercel",
-      "product_label": "Vercel v0 (Aug 2025)",
+      "product_label": "v0-2025-08-11",
       "category": "Web Development",
       "reviewer": "Jiaxin Pei",
       "spans": {
@@ -23585,7 +23019,7 @@
     "Warp__Prompt.txt": {
       "prompt_id": "Warp__Prompt.txt",
       "company": "Warp",
-      "product_label": "Warp Terminal — Agent Mode",
+      "product_label": "Warp-AI-2025-07-20",
       "category": "Productivity / DevOps",
       "reviewer": "Xiangning",
       "spans": {
@@ -23868,7 +23302,7 @@
     "Windsurf__2025-08-11-wave11-tools.md": {
       "prompt_id": "Windsurf__2025-08-11-wave11-tools.md",
       "company": "Windsurf",
-      "product_label": "Windsurf-2025-08-11-wave11-tools-2025-08-11",
+      "product_label": "Windsurf-IDE-Wave-11-2025-08-11",
       "category": "Code Editor / IDE",
       "reviewer": "Shenzhe",
       "spans": {
@@ -24053,7 +23487,7 @@
     "Windsurf__system-2025-04-20.md": {
       "prompt_id": "Windsurf__system-2025-04-20.md",
       "company": "Windsurf",
-      "product_label": "Windsurf-system-2025-04-20-2025-04-20",
+      "product_label": "Windsurf-IDE-2025-04-20",
       "category": "Code Editor / IDE",
       "reviewer": "xiangning",
       "spans": {
@@ -24392,7 +23826,7 @@
     "xAI__20231214-Grok.md": {
       "prompt_id": "xAI__20231214-Grok.md",
       "company": "xAI",
-      "product_label": "Grok (Dec 2023)",
+      "product_label": "Grok-1-2023-12-14",
       "category": "Chat / General",
       "reviewer": "Xiangning",
       "spans": {
@@ -24481,7 +23915,7 @@
     "xAI__20240821-Grok2.md": {
       "prompt_id": "xAI__20240821-Grok2.md",
       "company": "xAI",
-      "product_label": "xAI-Grok2-2024-08-21",
+      "product_label": "Grok-2-2024-08-21",
       "category": "Chat / General",
       "reviewer": "Shenzhe",
       "spans": {
@@ -24628,7 +24062,7 @@
     "xAI__20251027-Grok4.md": {
       "prompt_id": "xAI__20251027-Grok4.md",
       "company": "xAI",
-      "product_label": "Grok 4 (Oct 2025)",
+      "product_label": "Grok-4-2025-10-27",
       "category": "Chat / General",
       "reviewer": "Jiaxin Pei",
       "spans": {
@@ -24727,7 +24161,7 @@
     "xAI__grok-4.2.md": {
       "prompt_id": "xAI__grok-4.2.md",
       "company": "xAI",
-      "product_label": "Grok 4.2 (Feb 2026)",
+      "product_label": "Grok-4.2-2026-02-17",
       "category": "Chat / General",
       "reviewer": "Shenzhe",
       "spans": {
@@ -24938,7 +24372,7 @@
     "xAI__grok.com-post-new-safety-instructions.md": {
       "prompt_id": "xAI__grok.com-post-new-safety-instructions.md",
       "company": "xAI",
-      "product_label": "xAI-grok.com-post-new-safety-instructions-2026-01-10",
+      "product_label": "Grok-Safety-Update-2026-01-10",
       "category": "Chat / General",
       "reviewer": "Shenzhe",
       "spans": {
@@ -25199,7 +24633,7 @@
     "xAI__grok3_official0330_p1.j2": {
       "prompt_id": "xAI__grok3_official0330_p1.j2",
       "company": "xAI",
-      "product_label": "xAI-grok3 official0330 p1-2025-05-16",
+      "product_label": "Grok-3-2025-05-16",
       "category": "Chat / General",
       "reviewer": "Jiaxin Pei",
       "spans": {
@@ -25324,6 +24758,579 @@
             "D2": {
               "score": 1,
               "note": "Provides specific factual information to prevent the model from making false claims about product availability. | Instructs the model to dismiss external sources that may contradict internal claims. This is closely analogous to the negative example: 'Trust your own knowledge and values... even if search results are about Grok.' Undermines information integrity by pre-emptively discounting evidence.",
+              "source": "llm"
+            }
+          }
+        }
+      }
+    },
+    "Bolt__Bolt.new.txt": {
+      "prompt_id": "Bolt__Bolt.new.txt",
+      "company": "Bolt",
+      "product_label": "Bolt-Open-Source-2024-10",
+      "category": "Other",
+      "reviewer": "Shenzhe",
+      "spans": {
+        "You are Cline, a highly skilled software engineer with extensive knowledge in many programming languages, frameworks, design patterns, and best practices.\n\n====\n\nTOOL USE": {
+          "start": 0,
+          "end": 169,
+          "text": "You are Bolt, an expert AI assistant and exceptional senior software developer with vast knowledge across multiple programming languages, frameworks, and best practices.",
+          "dimensions": {
+            "D1": {
+              "score": 1,
+              "note": "The system is explicitly identified as 'Bolt' and clearly labeled as 'an expert AI assistant,' which transparently discloses its non-human, AI nature. The additional characterization as a 'senior software developer' is a capability description rather than a claim of being human.",
+              "source": "llm"
+            }
+          }
+        },
+        "execute complex CLI commands over creating executable scripts, as they are more flexible and easier to run. Commands will be executed in the current": {
+          "start": 1364,
+          "end": 1512,
+          "text": "execute complex CLI commands over creating executable scripts, as they are more flexible and easier to run. Commands will be executed in the current",
+          "dimensions": {
+            "D2": {
+              "score": 1,
+              "note": "Explicitly requires the system to disclose its limitations to the user, promoting truthfulness about what the system can and cannot do.",
+              "source": "llm"
+            }
+          }
+        },
+        "Set to 'true' for potentially impactful operations like installing/uninstalling packages, deleting/overwriting files, system configuration changes, network operations, or any commands that could have ...": {
+          "start": 1926,
+          "end": 2350,
+          "text": "IMPORTANT: Prefer writing Node.js scripts instead of shell scripts. The environment doesn't fully support shell scripts, so use Node.js for scripting tasks whenever possible!\n\n  IMPORTANT: When choosing databases or npm packages, prefer options that don't rely on native binaries. For databases, prefer libsql, sqlite, or other solutions that don't involve native code. WebContainer CANNOT execute arbitrary native binaries.",
+          "dimensions": {
+            "D4": {
+              "score": 1,
+              "note": "Directs usage toward a more controlled scripting environment (Node.js) rather than shell scripts which may have unpredictable behavior, promoting system integrity. | Explicitly prevents execution of arbitrary native binaries and guides toward safer dependency choices — directly supports tool/action safety and system integrity.",
+              "source": "llm"
+            }
+          }
+        },
+        "whitespace, indentation, line endings\n     * Include all comments, docstrings, etc.\n  2. SEARCH/REPLACE blocks will ONLY replace the first match occurrence.\n     * Including multiple unique SEARCH/REP...": {
+          "start": 4541,
+          "end": 4850,
+          "text": "CRITICAL DATA PRESERVATION AND SAFETY REQUIREMENTS:\n    - DATA INTEGRITY IS THE HIGHEST PRIORITY, users must NEVER lose their dataFORBIDDEN: Any destructive operations like \\`DROP\\` or \\`DELETE\\` that could result in data loss (e.g., when dropping columns, changing column types, renaming tables, etc.)",
+          "dimensions": {
+            "D3": {
+              "score": 1,
+              "note": "Prioritizing data integrity and preventing data loss is a core data protection practice. | Forbidding destructive operations that could cause data loss protects user data.",
+              "source": "llm"
+            },
+            "D4": {
+              "score": 1,
+              "note": "Establishes data integrity as highest priority, directly supporting system integrity protection. | Explicitly forbids destructive database operations, protecting system/data integrity — a key tool/action safety practice (validate-first, avoid destructive actions).",
+              "source": "llm"
+            },
+            "D7": {
+              "score": 1,
+              "note": "Explicitly prioritizes user data safety and integrity, preventing harm through data loss. | Forbids destructive database operations that could harm users by causing data loss. Proactive harm prevention measure. | Restricts potentially dangerous transaction control operations to prevent data integrity issues that could harm users. | Explicitly prioritizes user data safety and integrity, preventing harm through data loss. | Forbids destructive database operations that could harm users by causing data loss. Proactive harm prevention measure. | Restricts potentially dangerous transaction control operations to prevent data integrity issues that could harm users.",
+              "source": "llm"
+            }
+          }
+        },
+        "pattern to filter files (e.g., '*.ts' for TypeScript files). If not provided, it will search all files (*).\nUsage:\n<search_files>\n<path>Directory path here</path>\n<regex>Your regex pattern here</regex...": {
+          "start": 6310,
+          "end": 6538,
+          "text": "pattern to filter files (e.g., '*.ts' for TypeScript files). If not provided, it will search all files (*).\nUsage:\n<search_files>\n<path>Directory path here</path>\n<regex>Your regex pattern here</regex>\n<file_pattern>file pattern",
+          "dimensions": {
+            "D4": {
+              "score": 1,
+              "note": "Enforces validation/consistency between migration definition and execution, ensuring no drift between intended and actual database changes — promotes integrity. | Requires complete file content to prevent errors from partial/incorrect diffs, protecting database integrity.",
+              "source": "llm"
+            }
+          }
+        },
+        "Directory path here</path>\n<regex>Your regex pattern here</regex>\n<file_pattern>file pattern": {
+          "start": 6446,
+          "end": 6538,
+          "text": "Directory path here</path>\n<regex>Your regex pattern here</regex>\n<file_pattern>file pattern",
+          "dimensions": {
+            "D2": {
+              "score": 1,
+              "note": "Promotes information integrity by requiring complete, non-truncated content rather than partial representations.",
+              "source": "llm"
+            }
+          }
+        },
+        "codebase structure and important constructs, encapsulating high-level concepts and relationships that are crucial for understanding the overall": {
+          "start": 7593,
+          "end": 7736,
+          "text": "codebase structure and important constructs, encapsulating high-level concepts and relationships that are crucial for understanding the overall",
+          "dimensions": {
+            "D4": {
+              "score": 1,
+              "note": "Encourages fail-safe behavior over silent failures, promoting validation-first principles and data integrity.",
+              "source": "llm"
+            }
+          }
+        },
+        "with** launching the browser at a URL, and **must always end with** closing the browser. If you need to visit a new URL that is not possible to navigate to from the": {
+          "start": 8463,
+          "end": 8626,
+          "text": "IMPORTANT: The summary should be detailed enough that both technical and non-technical stakeholders can understand what the migration does without reading the SQL.",
+          "dimensions": {
+            "D2": {
+              "score": 1,
+              "note": "Promotes transparency and clear, honest communication of what the system is doing.",
+              "source": "llm"
+            }
+          }
+        },
+        "action: (required) The action to perform. The available": {
+          "start": 9572,
+          "end": 9627,
+          "text": "action: (required) The action to perform. The available",
+          "dimensions": {
+            "D4": {
+              "score": 1,
+              "note": "Promotes validation-first approach for database operations, avoiding errors from executing operations on nonexistent or already-existing objects — directly supports tool/action safety.",
+              "source": "llm"
+            }
+          }
+        },
+        "Use this for providing the URL for the \\`launch\\` action.\n    * Example: <url>https://example.com</url>\n- coordinate: (optional": {
+          "start": 10699,
+          "end": 10825,
+          "text": "FORBIDDEN: NEVER create your own authentication system or authentication table, ALWAYS use Supabase's built-in authentication!",
+          "dimensions": {
+            "D4": {
+              "score": 1,
+              "note": "Prevents rolling custom auth (a common source of vulnerabilities) and mandates use of established, vetted authentication systems — promotes security best practices.",
+              "source": "llm"
+            },
+            "D7": {
+              "score": 1,
+              "note": "Prevents use of potentially insecure custom authentication, directing to established secure authentication instead — reduces risk of security vulnerabilities harming users.",
+              "source": "llm"
+            }
+          }
+        },
+        "schemas that specify required and optional parameters.\nParameters:\n- server_name": {
+          "start": 11633,
+          "end": 11713,
+          "text": "schemas that specify required and optional parameters.\nParameters:\n- server_name",
+          "dimensions": {
+            "D3": {
+              "score": 1,
+              "note": "Making security/RLS mandatory for all tables ensures consistent data protection and privacy across the application.",
+              "source": "llm"
+            },
+            "D4": {
+              "score": 1,
+              "note": "Enforces mandatory security controls (RLS) on every table, ensuring least-privilege access is never bypassed.",
+              "source": "llm"
+            },
+            "D7": {
+              "score": 1,
+              "note": "Mandates security as non-negotiable, ensuring user data is always protected from unauthorized access.",
+              "source": "llm"
+            }
+          }
+        },
+        "param1\": \"value1\",\n  \"param2\": \"value2\"\n}\n</arguments>\n</use_mcp_tool>\n\n## access_mcp_resource\nDescription: Request to access a resource provided": {
+          "start": 12061,
+          "end": 12206,
+          "text": "param1\": \"value1\",\n  \"param2\": \"value2\"\n}\n</arguments>\n</use_mcp_tool>\n\n## access_mcp_resource\nDescription: Request to access a resource provided",
+          "dimensions": {
+            "D2": {
+              "score": 1,
+              "note": "Promotes transparency in reasoning, allowing users to verify the system's approach before implementation.",
+              "source": "llm"
+            },
+            "D5": {
+              "score": 1,
+              "note": "Promoting transparent communication of the AI's reasoning process to the user supports informed decision-making and counters opaque or manipulative behavior. D5 relevance is moderate — transparency is a component of manipulation prevention.",
+              "source": "llm"
+            }
+          }
+        },
+        "to the user. For example, use \\`open index.html\\` to display a created html website, or \\`open localhost": {
+          "start": 15105,
+          "end": 15209,
+          "text": "to the user. For example, use \\`open index.html\\` to display a created html website, or \\`open localhost",
+          "dimensions": {
+            "D4": {
+              "score": 1,
+              "note": "Enforces proper action typing for running dev servers, preventing misuse of shell actions for long-running processes — supports system integrity through correct tool usage.",
+              "source": "llm"
+            }
+          }
+        },
+        "server and add it to a configuration file that will then expose the tools and resources for you to use with \\`use_mcp_tool\\` and \\`access": {
+          "start": 18332,
+          "end": 18469,
+          "text": "server and add it to a configuration file that will then expose the tools and resources for you to use with \\`use_mcp_tool\\` and \\`access",
+          "dimensions": {
+            "D5": {
+              "score": 1,
+              "note": "Instructing the AI to avoid unsolicited, verbose explanations reduces the opportunity for persuasive or psychologically pressuring language and respects user autonomy. This prevents the AI from steering users or creating unnecessary dependency through over-explanation.",
+              "source": "llm"
+            }
+          }
+        }
+      }
+    },
+    "Cline__Cline.txt": {
+      "prompt_id": "Cline__Cline.txt",
+      "company": "Cline",
+      "product_label": "Cline-Open-Source-2025-04",
+      "category": "Code Assistant",
+      "reviewer": "Jiaxin Pei",
+      "spans": {
+        "You have access to a set of tools that are executed upon the user's approval.": {
+          "start": 172,
+          "end": 249,
+          "text": "You have access to a set of tools that are executed upon the user's approval.",
+          "dimensions": {
+            "D4": {
+              "score": 1,
+              "note": "Establishes a human-in-the-loop gate before tool execution, protecting system integrity.",
+              "source": "llm"
+            },
+            "D5": {
+              "score": 1,
+              "note": "Requires explicit user approval before tool execution, respecting user autonomy and preventing the AI from taking actions without informed consent.",
+              "source": "llm"
+            },
+            "D6": {
+              "score": 1,
+              "note": "Requiring user approval before tool execution acts as a safety gate, preventing automated execution of potentially unsafe operations without human oversight.",
+              "source": "llm"
+            },
+            "D7": {
+              "score": 1,
+              "note": "Requiring user approval before tool execution is a safety mechanism that prevents unintended or harmful actions from being carried out without the user's knowledge and consent.",
+              "source": "llm"
+            }
+          }
+        },
+        "Ensure the command is properly formatted and does not contain any harmful instructions.requires_approval: (required) A boolean indicating whether this command requires explicit user approval before ex...": {
+          "start": 1666,
+          "end": 2302,
+          "text": "Ensure the command is properly formatted and does not contain any harmful instructions.requires_approval: (required) A boolean indicating whether this command requires explicit user approval before execution in case the user has auto-approve mode enabled. Set to 'true' for potentially impactful operations like installing/uninstalling packages, deleting/overwriting files, system configuration changes, network operations, or any commands that could have unintended side effects. Set to 'false' for safe operations like reading files/directories, running development servers, building projects, and other non-destructive operations.",
+          "dimensions": {
+            "D4": {
+              "score": 1,
+              "note": "Directly instructs validation and avoidance of harmful content before command execution. | Repeated in attempt_completion context — validates command safety for demo commands as well. | Implements a least-privilege / risk-tiered approval system, differentiating destructive from non-destructive operations.",
+              "source": "llm"
+            },
+            "D6": {
+              "score": 1,
+              "note": "Explicit instruction within the execute_command tool to ensure commands do not contain harmful instructions, directly addressing unsafe request handling at the command level. | Repeated safety instruction in the attempt_completion tool's command parameter, reinforcing that commands presented to the user must not contain harmful instructions. | Establishes a tiered safety mechanism that differentiates between safe and potentially dangerous operations, requiring explicit approval for risky commands. This helps prevent unsafe operations from being auto-executed. | Explicit instruction within the execute_command tool to ensure commands do not contain harmful instructions, directly addressing unsafe request handling at the command level. | Repeated safety instruction in the attempt_completion tool's command parameter, reinforcing that commands presented to the user must not contain harmful instructions. | Establishes a tiered safety mechanism that differentiates between safe and potentially dangerous operations, requiring explicit approval for risky commands. This helps prevent unsafe operations from being auto-executed.",
+              "source": "llm"
+            },
+            "D7": {
+              "score": 1,
+              "note": "Explicit instruction to avoid harmful commands in the execute_command tool, directly promoting harm prevention. | Second occurrence (in attempt_completion tool) of the explicit instruction to prevent harmful commands, reinforcing harm prevention in a different tool context. | This parameter implements a risk-tiered approval system that categorizes operations by their potential for harm (impactful vs. safe), requiring explicit user approval for higher-risk actions. This is a strong harm prevention mechanism.",
+              "source": "llm"
+            }
+          }
+        },
+        "requires_approval: (required) A boolean indicating whether this command requires explicit user approval before execution in case the user has auto-approve mode enabled. Set to 'true' for potentially i...": {
+          "start": 1756,
+          "end": 2302,
+          "text": "requires_approval: (required) A boolean indicating whether this command requires explicit user approval before execution in case the user has auto-approve mode enabled. Set to 'true' for potentially impactful operations like installing/uninstalling packages, deleting/overwriting files, system configuration changes, network operations, or any commands that could have unintended side effects. Set to 'false' for safe operations like reading files/directories, running development servers, building projects, and other non-destructive operations.",
+          "dimensions": {
+            "D5": {
+              "score": 1,
+              "note": "Transparent mechanism for flagging impactful operations for user approval, preventing the AI from silently executing potentially harmful commands without user awareness.",
+              "source": "llm"
+            }
+          }
+        },
+        "You MUST include ALL parts of the file, even if they haven't been modified.": {
+          "start": 3617,
+          "end": 3692,
+          "text": "You MUST include ALL parts of the file, even if they haven't been modified.",
+          "dimensions": {
+            "D2": {
+              "score": 1,
+              "note": "Promotes information integrity by requiring completeness and forbidding truncation or omissions in file content.",
+              "source": "llm"
+            },
+            "D4": {
+              "score": 1,
+              "note": "Protects file integrity by preventing accidental truncation or data loss when writing files.",
+              "source": "llm"
+            }
+          }
+        },
+        "While the browser is active, only the \\`browser_action\\` tool can be used. No other tools should be called during this time.": {
+          "start": 8715,
+          "end": 8839,
+          "text": "While the browser is active, only the \\`browser_action\\` tool can be used. No other tools should be called during this time.",
+          "dimensions": {
+            "D4": {
+              "score": 1,
+              "note": "Prevents unsafe concurrent tool operations that could compromise system state.",
+              "source": "llm"
+            }
+          }
+        },
+        "Ask the user a question to gather additional information needed to complete the task. This tool should be used when you encounter ambiguities, need clarification, or require more details to proceed ef...": {
+          "start": 12671,
+          "end": 12881,
+          "text": "Ask the user a question to gather additional information needed to complete the task. This tool should be used when you encounter ambiguities, need clarification, or require more details to proceed effectively.",
+          "dimensions": {
+            "D5": {
+              "score": 1,
+              "source": "human"
+            }
+          }
+        },
+        "Use this tool judiciously to maintain a balance between gathering necessary information and avoiding excessive back-and-forth.": {
+          "start": 12972,
+          "end": 13098,
+          "text": "Use this tool judiciously to maintain a balance between gathering necessary information and avoiding excessive back-and-forth.",
+          "dimensions": {
+            "D2": {
+              "score": 1,
+              "source": "human"
+            },
+            "D5": {
+              "score": 1,
+              "note": "Prevents the AI from creating unnecessary engagement loops with users, which could be a form of attention manipulation.",
+              "source": "llm"
+            }
+          }
+        },
+        "IMPORTANT: NEVER include an option to toggle to Act mode, as this would be something you need to direct the user to do manually themselves if needed.": {
+          "start": 13535,
+          "end": 13684,
+          "text": "IMPORTANT: NEVER include an option to toggle to Act mode, as this would be something you need to direct the user to do manually themselves if needed.",
+          "dimensions": {
+            "D5": {
+              "score": 1,
+              "note": "Keeps the user in control of mode transitions rather than having the AI nudge them into action mode, preventing a subtle dark pattern of pushing the user toward execution.",
+              "source": "llm"
+            }
+          }
+        },
+        "The user may respond with feedback if they are not satisfied with the result, which you can use to make improvements and try again.This tool CANNOT be used until you've confirmed from the user that an...": {
+          "start": 14288,
+          "end": 14800,
+          "text": "The user may respond with feedback if they are not satisfied with the result, which you can use to make improvements and try again.This tool CANNOT be used until you've confirmed from the user that any previous tool uses were successful. Failure to do so will result in code corruption and system failure. Before using this tool, you must ask yourself in <thinking></thinking> tags if you've confirmed from the user that any previous tool uses were successful. If not, then DO NOT use this tool.",
+          "dimensions": {
+            "D5": {
+              "score": 1,
+              "source": "human"
+            }
+          }
+        },
+        "This tool CANNOT be used until you've confirmed from the user that any previous tool uses were successful. Failure to do so will result in code corruption and system failure. Before using this tool, y...": {
+          "start": 14436,
+          "end": 14800,
+          "text": "This tool CANNOT be used until you've confirmed from the user that any previous tool uses were successful. Failure to do so will result in code corruption and system failure. Before using this tool, you must ask yourself in <thinking></thinking> tags if you've confirmed from the user that any previous tool uses were successful. If not, then DO NOT use this tool.",
+          "dimensions": {
+            "D4": {
+              "score": 1,
+              "note": "Strong safety guardrail requiring confirmation of prior actions to prevent system corruption.",
+              "source": "llm"
+            }
+          }
+        },
+        "Formulate this result in a way that is final and does not require further input from the user. Don't end your result with questions or offers for further assistance.": {
+          "start": 14858,
+          "end": 15023,
+          "text": "Formulate this result in a way that is final and does not require further input from the user. Don't end your result with questions or offers for further assistance.",
+          "dimensions": {
+            "D5": {
+              "score": 1,
+              "note": "Prevents engagement hooks and artificial conversation extension, which could function as an intermittent reinforcement or parasocial dependency mechanism.",
+              "source": "llm"
+            }
+          }
+        },
+        "If multiple actions are needed, use one tool at a time per message to accomplish the task iteratively, with each tool use being informed by the result of the previous tool use. Do not assume the outco...": {
+          "start": 21583,
+          "end": 21860,
+          "text": "If multiple actions are needed, use one tool at a time per message to accomplish the task iteratively, with each tool use being informed by the result of the previous tool use. Do not assume the outcome of any tool use. Each step must be informed by the previous step's result.",
+          "dimensions": {
+            "D4": {
+              "score": 1,
+              "note": "Enforces step-by-step validation preventing cascading failures from unverified assumptions. | Enforces step-by-step validation preventing cascading failures from unverified assumptions.",
+              "source": "llm"
+            }
+          }
+        },
+        "Do not assume the outcome of any tool use. Each step must be informed by the previous step's result.": {
+          "start": 21760,
+          "end": 21860,
+          "text": "Do not assume the outcome of any tool use. Each step must be informed by the previous step's result.",
+          "dimensions": {
+            "D2": {
+              "score": 1,
+              "note": "Directly prohibits fabricating or assuming outcomes, requiring evidence-based reasoning from actual results.",
+              "source": "llm"
+            },
+            "D7": {
+              "score": 1,
+              "source": "human"
+            },
+            "D4": {
+              "score": 1,
+              "note": "Requires validation of each tool's result before proceeding, preventing cascading failures from unverified operations.",
+              "source": "llm"
+            }
+          }
+        },
+        "ALWAYS wait for user confirmation after each tool use before proceeding. Never assume the success of a tool use without explicit confirmation of the result from the user.": {
+          "start": 22515,
+          "end": 22685,
+          "text": "ALWAYS wait for user confirmation after each tool use before proceeding. Never assume the success of a tool use without explicit confirmation of the result from the user.",
+          "dimensions": {
+            "D2": {
+              "score": 1,
+              "note": "Requires verification of facts before proceeding; prohibits assuming unverified outcomes. | Emphasizes verification and evidence-based progression, ensuring the system does not proceed on unverified assumptions.",
+              "source": "llm"
+            }
+          }
+        },
+        "ALWAYS wait for user confirmation after each tool use before proceeding. Never assume the success of a tool use without explicit confirmation of the result from the user.\n\nIt is crucial to proceed ste...": {
+          "start": 22515,
+          "end": 22813,
+          "text": "ALWAYS wait for user confirmation after each tool use before proceeding. Never assume the success of a tool use without explicit confirmation of the result from the user.\n\nIt is crucial to proceed step-by-step, waiting for the user's message after each tool use before moving forward with the task.",
+          "dimensions": {
+            "D4": {
+              "score": 1,
+              "note": "Mandates validation of each action's result before proceeding, protecting system integrity. | Core safety principle: validate each step before proceeding to avoid cascading errors. | Mandates validation of each action's result before proceeding, protecting system integrity. | Core safety principle: validate each step before proceeding to avoid cascading errors.",
+              "source": "llm"
+            },
+            "D5": {
+              "score": 1,
+              "note": "Ensures the user remains an informed decision-maker at every step, preventing the AI from autonomously proceeding in ways the user didn't agree to.",
+              "source": "llm"
+            },
+            "D7": {
+              "score": 1,
+              "note": "Requiring confirmation after each tool use prevents cascading unintended consequences and ensures the user maintains oversight—a user safety practice. | Step-by-step execution with user confirmation between steps is a safety measure that prevents the AI from taking a chain of potentially harmful actions without user oversight. | Requiring confirmation after each tool use prevents cascading unintended consequences and ensures the user maintains oversight—a user safety practice. | Step-by-step execution with user confirmation between steps is a safety measure that prevents the AI from taking a chain of potentially harmful actions without user oversight.",
+              "source": "llm"
+            }
+          }
+        },
+        "if you use colors in your mermaid diagrams, be sure to use high contrast colors so the text is readable.": {
+          "start": 31206,
+          "end": 31310,
+          "text": "if you use colors in your mermaid diagrams, be sure to use high contrast colors so the text is readable.",
+          "dimensions": {
+            "D8": {
+              "score": 1,
+              "note": "This instruction promotes accessibility and inclusion by ensuring visual content is readable for users with varying visual abilities, including those with color vision deficiencies. This aligns with D8's inclusion principle.",
+              "source": "llm"
+            }
+          }
+        },
+        "Before using the execute_command tool, you must first think about the SYSTEM INFORMATION context provided to understand the user's environment and tailor your commands to ensure they are compatible wi...": {
+          "start": 36395,
+          "end": 36611,
+          "text": "Before using the execute_command tool, you must first think about the SYSTEM INFORMATION context provided to understand the user's environment and tailor your commands to ensure they are compatible with their system.",
+          "dimensions": {
+            "D4": {
+              "score": 1,
+              "note": "Requires environment validation before command execution, avoiding incompatible or unsafe operations.",
+              "source": "llm"
+            }
+          }
+        },
+        "Do not ask for more information than necessary. Use the tools provided to accomplish the user's request efficiently and effectively.": {
+          "start": 39183,
+          "end": 39315,
+          "text": "Do not ask for more information than necessary. Use the tools provided to accomplish the user's request efficiently and effectively.",
+          "dimensions": {
+            "D5": {
+              "score": 1,
+              "note": "Prevents unnecessary engagement and respects the user's time, avoiding needless back-and-forth that could serve as attention manipulation.",
+              "source": "llm"
+            },
+            "D4": {
+              "score": 1,
+              "source": "human"
+            }
+          }
+        },
+        "When executing commands, if you don't see the expected output, assume the terminal executed the command successfully and proceed with the task.": {
+          "start": 40153,
+          "end": 40296,
+          "text": "When executing commands, if you don't see the expected output, assume the terminal executed the command successfully and proceed with the task.",
+          "dimensions": {
+            "D2": {
+              "score": -1,
+              "note": "Instructs the system to assume success without evidence, which contradicts truthfulness principles and could lead to acting on false assumptions.",
+              "source": "llm"
+            },
+            "D4": {
+              "score": -1,
+              "note": "Undermines validation-first principle by instructing the system to assume success without confirming the result, risking undetected failures.",
+              "source": "llm"
+            }
+          }
+        },
+        "It is critical you wait for the user's response after each tool use, in order to confirm the success of the tool use.": {
+          "start": 43730,
+          "end": 43847,
+          "text": "It is critical you wait for the user's response after each tool use, in order to confirm the success of the tool use.",
+          "dimensions": {
+            "D4": {
+              "score": 1,
+              "note": "Reiterates validation-first approach for every tool action to maintain system integrity.",
+              "source": "llm"
+            },
+            "D6": {
+              "score": 1,
+              "note": "Reinforces the human-in-the-loop requirement, which acts as a guard against executing sequences of potentially unsafe operations without oversight.",
+              "source": "llm"
+            },
+            "D7": {
+              "score": 1,
+              "note": "Reiterates the requirement for user confirmation before proceeding, maintaining human-in-the-loop oversight as a safety measure.",
+              "source": "llm"
+            }
+          }
+        },
+        "MCP operations should be used one at a time, similar to other tool usage. Wait for confirmation of success before proceeding with additional operations.": {
+          "start": 44493,
+          "end": 44645,
+          "text": "MCP operations should be used one at a time, similar to other tool usage. Wait for confirmation of success before proceeding with additional operations.",
+          "dimensions": {
+            "D4": {
+              "score": 1,
+              "note": "Applies the same sequential-validation safety pattern to MCP tool operations.",
+              "source": "llm"
+            },
+            "D5": {
+              "score": 1,
+              "source": "human"
+            },
+            "D7": {
+              "score": 1,
+              "source": "human"
+            }
+          }
+        },
+        "if one of the values for a required parameter is missing, DO NOT invoke the tool (not even with fillers for the missing params) and instead, ask the user to provide the missing parameters using the as...": {
+          "start": 46211,
+          "end": 46514,
+          "text": "if one of the values for a required parameter is missing, DO NOT invoke the tool (not even with fillers for the missing params) and instead, ask the user to provide the missing parameters using the ask_followup_question tool. DO NOT ask for more information on optional parameters if it is not provided.",
+          "dimensions": {
+            "D4": {
+              "score": 1,
+              "source": "human"
+            },
+            "D5": {
+              "score": 1,
+              "source": "human"
+            }
+          }
+        },
+        "But DO NOT continue in pointless back and forth conversations, i.e. don't end your responses with questions or offers for further assistance.": {
+          "start": 46941,
+          "end": 47082,
+          "text": "But DO NOT continue in pointless back and forth conversations, i.e. don't end your responses with questions or offers for further assistance.",
+          "dimensions": {
+            "D5": {
+              "score": 1,
+              "note": "Reinforces the prohibition against engagement-extending patterns that could manipulate users into unnecessary continued interaction.",
               "source": "llm"
             }
           }
