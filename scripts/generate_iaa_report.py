@@ -18,15 +18,14 @@ from pathlib import Path
 
 DIMENSION_NAMES = {
     "D1": "Identity Transparency",
-    "D2": "Knowledge Transparency",
-    "D3": "Information Accuracy & Source Integrity",
-    "D4": "Privacy & Data Protection",
-    "D5": "Tool/Action Safety",
-    "D6": "User Agency & Manipulation Prevention",
-    "D7": "Unsafe Request Handling",
-    "D8": "Harm Prevention & User Safety",
-    "D9": "Fairness, Inclusion & Neutrality",
-    "D10": "Miscellaneous",
+    "D2": "Truthfulness & Information Integrity",
+    "D3": "Privacy & Data Protection",
+    "D4": "Tool/Action Safety",
+    "D5": "User Agency & Manipulation Prevention",
+    "D6": "Unsafe Request Handling",
+    "D7": "Harm Prevention & User Safety",
+    "D8": "Fairness, Inclusion & Neutrality",
+    "Misc": "Miscellaneous",
 }
 
 TRAINING_DIR = Path(__file__).parent / "training_tool" / "outputs"
